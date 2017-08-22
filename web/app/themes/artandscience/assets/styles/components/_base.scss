@@ -13,6 +13,9 @@ body {
   overflow-x: hidden;
   font-family: $sans;
   background: $white;
+  @include media-md {
+    @include clearfix;
+  }
 }
 
 p {
@@ -63,5 +66,12 @@ img {
   position: relative;
   @include clearfix();
   @include media-md {
+  }
+}
+
+.site-wrap {
+  @include media-md {
+    float: left;
+    width: calc(100% - 325px);
   }
 }

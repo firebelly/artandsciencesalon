@@ -9,4 +9,27 @@
       ?>
     </nav>
   </div>
+
+  <div id="book-appointment" class="book-appointment">
+    <button>Book an appointment</button>
+    <ul class="location-list">
+      
+      <?php
+        $args = array(
+          'numberposts' => -1,
+          'post_type' => 'location',
+          'orderby' => 'menu_order',
+        );
+
+        $location_posts = get_posts($args);
+
+        foreach ( $location_posts as $post ):
+          echo '<li>';
+          include(locate_template('templates/location-contact.php'));
+          echo '</li>';
+        endforeach;
+      ?>
+
+    </ul>
+  </div>
 </header>

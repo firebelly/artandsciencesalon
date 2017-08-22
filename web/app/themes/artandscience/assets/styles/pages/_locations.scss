@@ -1,0 +1,21 @@
+// Locations Page
+
+.page.locations {
+  
+  .location {
+    .banner {
+      height: 0;
+      width: 100%;
+      position: relative;
+      padding-bottom: 37.5%;
+      background-size: cover;
+      background-position: center center;
+      a {
+        right: 0;
+        bottom: 0;
+        position: absolute;
+      }
+    }
+  }
+
+}

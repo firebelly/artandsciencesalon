@@ -28,9 +28,12 @@
     },
     "svg4everybody.js": {
       "bower": ["svg4everybody"]
+    },
+    "isotope.js": {
+      "bower": ["isotope"]
     }
   },
   "config": {
-    "devUrl": "http://fb-sage.dev"
+    "devUrl": "http://artandsciencesalon.dev"
   }
 }

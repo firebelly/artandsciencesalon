@@ -1,10 +1,16 @@
 // Footer
 
 .site-footer {
+  padding-top: 200px;
+
   .contact {
     @include media-sm {
 
     }
+  }
+
+  .social {
+    list-style: none;
   }
 
   .secondary-nav {

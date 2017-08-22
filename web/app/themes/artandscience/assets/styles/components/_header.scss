@@ -5,5 +5,39 @@
   }
 
   @include media-md {
+    float: left;
+    width: 325px;
+  }
+}
+
+// Book An Appointment Module
+.book-appointment {
+  top: 0;
+  z-index: 1;
+  right: 100px;
+  position: fixed;
+  .location-list {
+    display: none;
+  }
+  &.-active {
+    .location-list {
+      display: block;
+    }
+  }
+}
+
+// Page Header
+.page-header {
+  position: relative;
+
+  .header-text {
+
+  }
+
+  @include media-md {
+    min-height: 575px;
+    background-size: cover;
+    background-color: rgba(0,0,0,.25);
+    background-position: center center;
   }
 }

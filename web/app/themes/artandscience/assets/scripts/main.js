@@ -26,16 +26,15 @@ var FBSage = (function($) {
     _resize();
 
     // Fit them vids!
-    $('main').fitVids();
+    // $('main').fitVids();
 
+    _initBookAppointment();
+    _initStylistsSort();
     // _initNav();
-    // _initSearch();
-    // _initLoadMore();
 
     // Esc handlers
     $(document).keyup(function(e) {
       if (e.keyCode === 27) {
-        _hideSearch();
         _hideMobileNav();
       }
     });
@@ -69,26 +68,6 @@ var FBSage = (function($) {
     }, "easeOutSine");
   }
 
-  function _initSearch() {
-    $('.search-form:not(.mobile-search) .search-submit').on('click', function (e) {
-      if ($('.search-form').hasClass('active')) {
-
-      } else {
-        e.preventDefault();
-        $('.search-form').addClass('active');
-        $('.search-field:first').focus();
-      }
-    });
-    $('.search-form .close-button').on('click', function() {
-      _hideSearch();
-      _hideMobileNav();
-    });
-  }
-
-  function _hideSearch() {
-    $('.search-form').removeClass('active');
-  }
-
   // Handles main nav
   function _initNav() {
     // SEO-useless nav toggler
@@ -101,6 +80,22 @@ var FBSage = (function($) {
     mobileSearch.prependTo('.site-nav');
   }
 
+  function _initBookAppointment() {
+    var $bAModule = $('#book-appointment');
+
+    $bAModule.on('click', 'button', function() {
+      if ($bAModule.is('.-active')) {
+        $bAModule.removeClass('-active');
+      } else {
+        $bAModule.addClass('-active');
+      }
+    });
+  }
+
+  function _initStylistsSort() {
+    $('.people-container').isotope();
+  }
+
   function _showMobileNav() {
     $('.menu-toggle').addClass('menu-open');
     $('.site-nav').addClass('active');
@@ -109,45 +104,6 @@ var FBSage = (function($) {
   function _hideMobileNav() {
     $('.menu-toggle').removeClass('menu-open');
     $('.site-nav').removeClass('active');
-  }
-
-  function _initLoadMore() {
-    $document.on('click', '.load-more a', function(e) {
-      e.preventDefault();
-      var $load_more = $(this).closest('.load-more');
-      var post_type = $load_more.attr('data-post-type') ? $load_more.attr('data-post-type') : 'news';
-      var page = parseInt($load_more.attr('data-page-at'));
-      var per_page = parseInt($load_more.attr('data-per-page'));
-      var category = $load_more.attr('data-category');
-      var more_container = $load_more.parents('section,main').find('.load-more-container');
-      loadingTimer = setTimeout(function() { more_container.addClass('loading'); }, 500);
-
-      $.ajax({
-          url: wp_ajax_url,
-          method: 'post',
-          data: {
-              action: 'load_more_posts',
-              post_type: post_type,
-              page: page+1,
-              per_page: per_page,
-              category: category
-          },
-          success: function(data) {
-            var $data = $(data);
-            if (loadingTimer) { clearTimeout(loadingTimer); }
-            more_container.append($data).removeClass('loading');
-            if (breakpoint_medium) {
-              more_container.masonry('appended', $data, true);
-            }
-            $load_more.attr('data-page-at', page+1);
-
-            // Hide load more if last page
-            if ($load_more.attr('data-total-pages') <= page + 1) {
-                $load_more.addClass('hide');
-            }
-          }
-      });
-    });
   }
 
   // Track ajax pages in Analytics

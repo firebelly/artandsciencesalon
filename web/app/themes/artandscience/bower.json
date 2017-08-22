@@ -15,11 +15,16 @@
     "respond": "~1.4.2",
     "svg4everybody": "~1.0.0",
     "velocity": "~1.2.2",
-    "fastclick": "~1.0.6"
+    "fastclick": "~1.0.6",
+    "isotope": "^3.0.4"
   },
   "overrides": {
     "modernizr": {
       "main": "./modernizr.js"
+    },
+    "isotope": {
+      "main": ["./dist/isotope.pkgd.min.js"],
+      "dependencies": {}
     }
   }
 }

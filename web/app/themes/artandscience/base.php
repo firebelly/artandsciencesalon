@@ -3,6 +3,9 @@
 use Roots\Sage\Setup;
 use Roots\Sage\Wrapper;
 
+$location_image = get_the_post_thumbnail_url($post);
+$header_text = get_post_meta($post->ID, '_cmb2_header_text', true);
+
 ?>
 
 <!doctype html>
@@ -21,16 +24,14 @@ use Roots\Sage\Wrapper;
       get_template_part('templates/header');
     ?>
     <div class="site-wrap container" role="document">
-      <div class="content row">
-        <main class="site-main" role="main">
-          <?php include Wrapper\template_path(); ?>
-        </main><!-- /.main -->
-        <?php if (Setup\display_sidebar()) : ?>
-          <aside class="sidebar">
-            <?php include Wrapper\sidebar_path(); ?>
-          </aside><!-- /.sidebar -->
-        <?php endif; ?>
-      </div><!-- /.content -->
+      <div class="page-header" style="background-image:url('<?= $location_image ?>');">
+        <div class="header-text user-content">
+          <?= $header_text ?>
+        </div>
+      </div>
+      <main class="site-main" role="main">
+        <?php include Wrapper\template_path(); ?>
+      </main><!-- /.main -->
     </div><!-- /.site-wrap -->
     <?php
       do_action('get_footer');

@@ -25,9 +25,13 @@ $firebelly_includes = [
   'lib/media.php',                     // FB media
   'lib/ajax.php',                      // AJAX functions
   'lib/custom-functions.php',          // Rando utility functions and miscellany
+  'lib/site-options.php',              // Custon site options
   'lib/cmb2-custom-fields.php',        // Custom CMB2
   'lib/page-meta-boxes.php',           // Various tweaks for multiple post types
   'lib/post-meta-boxes.php',           // Various tweaks for multiple post types
+  'lib/location-post-type.php',        // Locations
+  'lib/person-post-type.php',          // People
+  // 'lib/service-post-type.php',         // Services
 ];
 
 $sage_includes = array_merge($sage_includes, $firebelly_includes);

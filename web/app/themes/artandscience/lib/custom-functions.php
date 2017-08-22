@@ -106,3 +106,40 @@ function get_page_blocks($post) {
   }
   return $output;
 }
+
+/**
+ * Register custom taxonomies
+ */
+function custom_taxonomies() {
+  register_taxonomy(
+    'locations',
+    'person',
+    array(
+      'labels' => array(
+        'name' => 'Locations',
+        'add_new_item' => 'Add New Location',
+        'new_item_name' => "New Location"
+        ),
+      'show_ui' => true,
+      'show_tagcloud' => false,
+      'show_admin_column' => true,
+      'hierarchical' => true
+    )
+  );
+  register_taxonomy(
+    'person_type',
+    'person',
+    array(
+      'labels' => array(
+        'name' => 'Position Types',
+        'add_new_item' => 'Add New Position Type',
+        'new_item_name' => "New Position Type"
+        ),
+      'show_ui' => true,
+      'show_tagcloud' => false,
+      'show_admin_column' => true,
+      'hierarchical' => true
+    )
+  );
+}
+add_action( 'init', __NAMESPACE__ . '\\custom_taxonomies', 0 );
