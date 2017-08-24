@@ -93,7 +93,23 @@ var FBSage = (function($) {
   }
 
   function _initStylistsSort() {
-    $('.people-container').isotope();
+    if ($('.page.stylists').length) {
+
+      var $stylistsNav = $('.stylists-nav');
+
+      // Show related location when toggled from nav
+      $stylistsNav.on('click', '.location a', function(e) {
+        e.preventDefault();
+        var targetLocation = $(this).attr('href'),
+            thisListItem = $(this).closest();
+
+        if ($(this).closest('.location')) {
+          $(this).closest('.location').addClass('-active');
+        }
+
+      });
+
+    }
   }
 
   function _showMobileNav() {

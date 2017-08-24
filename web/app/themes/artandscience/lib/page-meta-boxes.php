@@ -30,7 +30,7 @@ function metaboxes( array $meta_boxes ) {
 
   $meta_boxes['header_text'] = array(
     'id'            => 'header_text',
-    'title'         => __( 'Heaer Text', 'cmb2' ),
+    'title'         => __( 'Header Text', 'cmb2' ),
     'object_types'  => array( 'page', ), // Post type
     'context'       => 'normal',
     'priority'      => 'high',

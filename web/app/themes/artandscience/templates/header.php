@@ -15,19 +15,19 @@
     <ul class="location-list">
       
       <?php
-        $args = array(
+        $location_args = array(
           'numberposts' => -1,
           'post_type' => 'location',
           'orderby' => 'menu_order',
         );
 
-        $location_posts = get_posts($args);
+        $location_posts = get_posts($location_args);
 
-        foreach ( $location_posts as $post ):
+        foreach ($location_posts as $location_post) {
           echo '<li>';
           include(locate_template('templates/location-contact.php'));
           echo '</li>';
-        endforeach;
+        }
       ?>
 
     </ul>

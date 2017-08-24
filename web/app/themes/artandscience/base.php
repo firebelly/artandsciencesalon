@@ -3,7 +3,7 @@
 use Roots\Sage\Setup;
 use Roots\Sage\Wrapper;
 
-$location_image = get_the_post_thumbnail_url($post);
+$header_image = get_the_post_thumbnail_url($post);
 $header_text = get_post_meta($post->ID, '_cmb2_header_text', true);
 
 ?>
@@ -24,7 +24,7 @@ $header_text = get_post_meta($post->ID, '_cmb2_header_text', true);
       get_template_part('templates/header');
     ?>
     <div class="site-wrap container" role="document">
-      <div class="page-header" style="background-image:url('<?= $location_image ?>');">
+      <div class="page-header" style="background-image:url('<?= $header_image ?>');">
         <div class="header-text user-content">
           <?= $header_text ?>
         </div>
