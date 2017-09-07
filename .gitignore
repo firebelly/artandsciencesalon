@@ -32,3 +32,10 @@ bin
 
 # Mac crap
 .DS_Store
+
+# Premium Fonts - Writing these out fully so there is a "checklist" of what's missing.
+dietdidot-italic.eot
+dietdidot-italic.svg
+dietdidot-italic.ttf
+dietdidot-italic.woff
+dietdidot-italic.woff2
