@@ -8,11 +8,10 @@ html {
 }
 
 body {
+  @include font-paragraph;
   color: $black;
-  font-size: 16px;
   overflow-x: hidden;
-  font-family: $sans;
-  background: $white;
+  background: $cream;
   @include media-md {
     @include clearfix;
   }
@@ -69,7 +68,7 @@ img {
   }
 }
 
-.site-wrap {
+.main-wrap {
   @include media-md {
     float: left;
     width: calc(100% - 325px);

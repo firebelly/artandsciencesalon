@@ -19,20 +19,22 @@ $header_text = get_post_meta($post->ID, '_cmb2_header_text', true);
         <?php _e('You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.', 'sage'); ?>
       </div>
     <![endif]-->
-    <?php
-      do_action('get_header');
-      get_template_part('templates/header');
-    ?>
-    <div class="site-wrap container" role="document">
-      <div class="page-header" style="background-image:url('<?= $header_image ?>');">
-        <div class="header-text user-content">
-          <?= $header_text ?>
+    <div class="site-wrap container">
+      <?php
+        do_action('get_header');
+        get_template_part('templates/header');
+      ?>
+      <div class="main-wrap container" role="document">
+        <div class="page-header" style="background-image:url('<?= $header_image ?>');">
+          <div class="header-text user-content">
+            <?= $header_text ?>
+          </div>
         </div>
-      </div>
-      <main class="site-main" role="main">
-        <?php include Wrapper\template_path(); ?>
-      </main><!-- /.main -->
-    </div><!-- /.site-wrap -->
+        <main class="site-main" role="main">
+          <?php include Wrapper\template_path(); ?>
+        </main><!-- /.main -->
+      </div><!-- /.site-wrap -->
+    </div>
     <?php
       do_action('get_footer');
       get_template_part('templates/footer');

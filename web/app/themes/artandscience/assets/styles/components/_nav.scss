@@ -4,6 +4,18 @@
 .admin-bar {}
 
 #menu-main-nav {
+  @include font-caption-bold;
+
+  .menu-item {
+    color: $dark-cream;
+    list-style: none;
+    a {
+      text-decoration: none;
+    }
+    &.current-menu-item {
+      color: $orange;
+    }
+  }
 }
 
 // mobile menu toggle

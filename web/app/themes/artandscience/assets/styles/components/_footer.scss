@@ -1,12 +1,25 @@
 // Footer
 
 .site-footer {
+  @include font-caption-thin;  
+  color: $gray-lite;
   padding-top: 200px;
+  text-transform: none;
+  background: $gray-dark;
 
   .contact {
     @include media-sm {
 
     }
+  }
+
+  .grid-item {
+    list-style: none;
+  }
+
+  .location-name {
+    @include font-caption-bold;
+    color: $orange;
   }
 
   .social {
@@ -16,5 +29,16 @@
   .secondary-nav {
     @include media-sm {}
     @include media-md {}
+  }
+
+  #menu-footer-nav {
+    .menu-item {
+      @include font-caption-bold;
+      color: $cream;
+      list-style: none;
+      a {
+        text-decoration: none;
+      }
+    }
   }
 }
