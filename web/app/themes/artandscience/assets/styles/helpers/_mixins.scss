@@ -15,17 +15,17 @@
 }
 
 // Responsive mixins by Andy Richardson (@andimal): https://github.com/andimal/sass-responsive-mixin-madness
-@mixin media-xs() {
+@mixin media-xs() { // Mobile 
   @media screen and (max-width: $breakpoint-small - 1) {
     @content;
   }
 }
-@mixin media-sm() {
+@mixin media-sm() { // Tablet
   @media screen and (min-width: $breakpoint-small) {
     @content;
   }
 }
-@mixin media-md() {
+@mixin media-md() { // Desktop
   @media screen and (min-width: $breakpoint-medium) {
     @content;
   }
