@@ -1,11 +1,12 @@
 // Footer
 
 .site-footer {
-  @include font-caption-thin;  
+  @include font-caption-thin;
   color: $gray-lite;
   padding-top: 200px;
   text-transform: none;
   background: $gray-dark;
+  float: right;
 
   .contact {
     @include media-sm {

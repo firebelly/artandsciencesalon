@@ -61,16 +61,17 @@ img {
 .container {
   width: 100%;
   margin: 0 auto;
-  padding: 0 10px;
+  padding: 0;
   position: relative;
   @include clearfix();
   @include media-md {
   }
 }
 
-.main-wrap {
+.site-wrap {
   @include media-md {
-    float: left;
+    float: right;
     width: calc(100% - 325px);
   }
 }
+

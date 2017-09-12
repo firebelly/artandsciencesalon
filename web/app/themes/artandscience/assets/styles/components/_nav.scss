@@ -5,6 +5,7 @@
 
 #menu-main-nav {
   @include font-caption-bold;
+  background: $brown;
 
   .menu-item {
     color: $dark-cream;
