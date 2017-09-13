@@ -32,14 +32,14 @@ $glacial: 'GlacialIndifference', sans-serif;
 
 
   // Tablet
-  @include media-sm { 
+  @include media-md {
     font-size: 36px;
     letter-spacing: .1em;
     line-height: ( 45 / 36 );
-  } 
+  }
 
   // Desktop
-  @include media-md { 
+  @include media-lg {
     font-size: 48px;
     letter-spacing: .15em;
     line-height: ( 60 / 48 );
@@ -60,7 +60,7 @@ $glacial: 'GlacialIndifference', sans-serif;
   // Tablet -- No change
 
   // Desktop
-  @include media-md { 
+  @include media-lg {
     font-size: 32px;
     letter-spacing: .15em;
     line-height: ( 48 / 32 );
@@ -81,7 +81,7 @@ $glacial: 'GlacialIndifference', sans-serif;
   // Tablet -- No change
 
   // Desktop
-  @include media-md { 
+  @include media-lg {
     font-size: 20px;
     letter-spacing: .2em;
     line-height: ( 36 / 20 );
@@ -89,7 +89,7 @@ $glacial: 'GlacialIndifference', sans-serif;
 }
 
 // I suspect this one was left in P styles in error and doesn't exist in the wild...
-// @mixin font-h4 { 
+// @mixin font-h4 {
 //   font-style: normal;
 //   font-weight: normal;
 //   font-family: $glacial;
@@ -125,7 +125,7 @@ $glacial: 'GlacialIndifference', sans-serif;
   font-style: normal;
   font-family: $glacial;
   text-transform: uppercase;
-  
+
 
   // Mobile
   font-size: 12px;
@@ -146,6 +146,23 @@ $glacial: 'GlacialIndifference', sans-serif;
   // Mobile
   font-size: 12px;
   letter-spacing: .15em;
+  line-height: ( 24 / 12 );
+
+  // Tablet -- No change
+  // Desktop -- No change
+  // Note: the footer is this mixin with no text-transform
+}
+
+
+@mixin font-footer { // Not in design file, but appears in footer
+  font-style: normal;
+  font-family: $glacial;
+  font-weight: normal;
+  text-transform: none;
+
+  // Mobile
+  font-size: 12px;
+  letter-spacing: .05em;
   line-height: ( 24 / 12 );
 
   // Tablet -- No change

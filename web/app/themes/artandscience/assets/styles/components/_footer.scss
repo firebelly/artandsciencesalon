@@ -1,30 +1,163 @@
 // Footer
 
+$two-col-buffer: 24px;
+$dash-distance-md: 40px;
+
 .site-footer {
-  @include font-caption-thin;
-  color: $gray-lite;
-  padding-top: 200px;
-  text-transform: none;
-  background: $gray-dark;
+  @include font-footer;
   float: right;
+  color: $gray-lite;
+  background: $gray-dark;
+  width: calc(100% - #{$padding});
+  padding: ($padding*1.33) $padding ($padding*1.75);
 
-  .contact {
-    @include media-sm {
+  @include media-md {
+    width: 75%;
+    padding: ($padding-md*1.5) $padding-md ($padding-md*1.5);
+  }
 
+  // Locations
+  .locations-grid {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    @include clearfix;
+
+    @include min-screen($breakpoint-footer-three-col) {
+      float: left;
+      width: calc(100% - 54px);
+    }
+
+    .grid-item{
+      padding: 2em 0 0;
+
+      // Split locations div into 2 columns for the two-col and three-col footer
+      @include min-screen($breakpoint-footer-two-col) {
+        width: 50%;
+        float: left;
+      }
+
+      // In the 2 columns scenario, let's buffer the columns a little bit
+      &:nth-of-type(2n) {
+
+        @include min-screen($breakpoint-footer-two-col) {
+          padding-left: $two-col-buffer;
+        }
+
+        @include min-screen($breakpoint-footer-three-col) {
+          padding-left: 0;
+        }
+      }
+
+      // Dashes above location columns
+      &:nth-of-type(1) {
+        @include big-dash;
+
+        @include media-md {
+          padding-top: $dash-distance-md;
+        }
+
+        @include min-screen($breakpoint-footer-two-col) {
+          padding-top: $dash-distance-md;
+        }
+      }
+      // The second dash when there are 2 or more columns
+      &:nth-of-type(2) {
+
+        @include min-screen($breakpoint-footer-two-col) {
+          padding-top: $dash-distance-md;
+
+          // Adjust for the buffer in 2 column scenario
+          @include big-dash {
+            left: $two-col-buffer;
+          }
+        }
+
+        // No need for buffer in 3 cols
+        @include min-screen($breakpoint-footer-three-col) {
+          @include big-dash {
+            left: 0;
+          }
+        }
+      }
     }
   }
 
-  .grid-item {
-    list-style: none;
-  }
+  .location {
 
-  .location-name {
-    @include font-caption-bold;
-    color: $orange;
+    .location-name, h4 {
+      @include font-caption-bold;
+      margin: 0;
+      color: $orange;
+    }
+
+    .location-address, .location-phone, .location-email, p {
+      margin: 0;
+    }
+
+    .location-hours {
+      margin: 1em 0 0;
+      padding: 1em 0 0;
+      list-style: none;
+      @include small-dash;
+    }
+
+    a {
+      text-decoration: none;
+    }
   }
 
   .social {
+    margin: 50px 0 0;
     list-style: none;
+    max-width: 224px;
+    padding: 30px 0 0;
+    @include big-dash;
+
+    li {
+      float: left;
+      width: calc((100% - 24px) / 3);
+      &:first-of-type {
+        width: 24px;
+      }
+    }
+
+    .icon {
+      float: right;
+      width: 24px;
+      height: 24px;
+      fill: $gray;
+    }
+
+    @include media-md {
+      padding: $dash-distance-md 0 0;
+    }
+
+    // In the three column scenario, this floats up to become its own column
+    @include min-screen($breakpoint-footer-three-col) {
+      margin: 0;
+      float: left;
+      width: 54px;
+      padding: $dash-distance-md 0 0;
+
+      li {
+        float: none;
+        width: 54px;
+        display: block;
+        text-align: center;
+        margin-bottom: 36px;
+
+        // Override the specificity from two-col scenario
+        &:first-of-type {
+          width: 54px;
+        }
+      }
+
+      .icon {
+        float: none;
+        display: inline-block;
+      }
+    }
   }
 
   .secondary-nav {
@@ -33,10 +166,13 @@
   }
 
   #menu-footer-nav {
+    display: none; // For now.
+
     .menu-item {
       @include font-caption-bold;
       color: $cream;
       list-style: none;
+
       a {
         text-decoration: none;
       }

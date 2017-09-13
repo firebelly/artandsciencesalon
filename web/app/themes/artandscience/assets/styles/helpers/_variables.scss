@@ -27,9 +27,15 @@ $brand-primary: $black;
 $brand-secondary: $white;
 
 // Breakpoints
-// Note: for interpreting ID file: xs = mobile, sm = tablet, md = desktop
-$breakpoint-small: 480px; 
+// Note: for interpreting ID file: xs = mobile, md = tablet, lg = desktop
+$breakpoint-small: 480px;
 $breakpoint-medium: 768px;
 $breakpoint-large: 1000px;
 $breakpoint-huge: 1200px;
 $breakpoint-nav: 1050px;
+$breakpoint-footer-two-col: 800px;
+$breakpoint-footer-three-col: 900px;
+
+// Global padding
+$padding: 32px;
+$padding-md: 54px;

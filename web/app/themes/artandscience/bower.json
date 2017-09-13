@@ -14,6 +14,7 @@
     "history.js": "~1.8.0",
     "respond": "~1.4.2",
     "svg4everybody": "~1.0.0",
+    "boomsvgloader": "~0.0.2",
     "velocity": "~1.2.2",
     "fastclick": "~1.0.6",
     "isotope": "^3.0.4"
@@ -25,6 +26,9 @@
     "isotope": {
       "main": ["./dist/isotope.pkgd.min.js"],
       "dependencies": {}
+    },
+    "boomsvgloader": {
+      "main": "./dist/js/boomsvgloader.js"
     }
   }
 }

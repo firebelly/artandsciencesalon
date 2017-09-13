@@ -5,11 +5,12 @@
 
 #menu-main-nav {
   @include font-caption-bold;
-  background: $brown;
+  padding: 0;
 
   .menu-item {
     color: $dark-cream;
     list-style: none;
+    text-align: center;
     a {
       text-decoration: none;
     }

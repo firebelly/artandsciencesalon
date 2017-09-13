@@ -247,10 +247,10 @@ function get_locations($options=[]) {
   $location_posts = get_posts($args);
   if (!$location_posts) return false;
 
-  $output = '<ul class="grid-items locations-grid';
+  $output = '<ul class="grid-items locations-grid">';
 
   foreach ( $location_posts as $post ):
-    $output .= '<li class="grid-item location">';
+    $output .= '<li class="grid-item">';
     ob_start();
     include(locate_template('templates/article-location.php'));
     $output .= ob_get_clean();

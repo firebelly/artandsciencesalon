@@ -1,5 +1,39 @@
 // Mixins
 
+// Dashes
+/* Usage examples:
+
+// Defaults a gray dash at the top left corner, using ::before element
+@include big-dash;
+
+// Override defaults and add own CSS rules to override
+@include big-dash($orange,after) { // Will be orange and use the ::after pseudo element
+  top: -2em; // top: 0 wouldn't work in this imaginary situation
+}
+*/
+@mixin big-dash($color: $gray, $pseudo: before) {
+  position: relative;
+  &::#{$pseudo}{ // By default will be ::before, unless before is specified
+    top: 0;
+    left: 0;
+    content: '';
+    height: 2px;
+    width: 52px;
+    background: $color;
+    position: absolute;
+    @content; // Allow overwriting (or adding) of properties, particulary position
+  }
+}
+
+// Modify big-dash to make small-dash
+@mixin small-dash($color: $gray, $pseudo: after) {
+  @include big-dash($color,$pseudo) {
+    height: 1px;
+    width: 27px;
+    @content; // Allow overwriting (or adding) of properties, particulary position
+  }
+}
+
 // Clearfix
 @mixin clearfix {
   *zoom: 1;
@@ -15,22 +49,22 @@
 }
 
 // Responsive mixins by Andy Richardson (@andimal): https://github.com/andimal/sass-responsive-mixin-madness
-@mixin media-xs() { // Mobile 
+@mixin media-xs() { // Mobile
   @media screen and (max-width: $breakpoint-small - 1) {
     @content;
   }
 }
-@mixin media-sm() { // Tablet
+@mixin media-sm() { // Larger Phone
   @media screen and (min-width: $breakpoint-small) {
     @content;
   }
 }
-@mixin media-md() { // Desktop
+@mixin media-md() { // Tablet
   @media screen and (min-width: $breakpoint-medium) {
     @content;
   }
 }
-@mixin media-lg() {
+@mixin media-lg() { // Desktop
   @media screen and (min-width: $breakpoint-large) {
     @content;
   }

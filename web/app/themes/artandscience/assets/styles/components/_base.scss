@@ -10,10 +10,41 @@ html {
 body {
   @include font-paragraph;
   color: $black;
+  min-height: 100%;
   overflow-x: hidden;
-  background: $cream;
-  @include media-md {
-    @include clearfix;
+  position: relative;
+  @include clearfix;
+}
+
+/*
+The background is an enormous raster image of mediocre quality.
+At usable sizes, even the png has ugly scaling artifacts.
+My thought was to try to blur it out with css filters.  Looks a lot better.
+But you can't blur the body element--or the whole site will be blurry!
+So use a seperate element.
+Also the blur bleeds at the edges, so we use a slightly oversized psuedo element.
+Clipping the overflow hides the bleed.
+*/
+.blurred-background {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  overflow: hidden;
+  position: absolute;
+  &::after{
+    content: '';
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: -20px;
+    filter: blur(8px);
+    position: absolute;
+    background-size: cover;
+    transform: translate3d(0, 0, 0);
+    background-image: url('../images/blended-background.png'); // There is also a slightly uglier 90k jpg of same name if the 300k png is too big
   }
 }
 
@@ -69,9 +100,9 @@ img {
 }
 
 .site-wrap {
-  @include media-md {
-    float: right;
-    width: calc(100% - 325px);
+  @include media-sm {
+    float: left;
+    width: 75%;
   }
 }
 

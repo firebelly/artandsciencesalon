@@ -31,6 +31,7 @@ var FBSage = (function($) {
     _initBookAppointment();
     _initStylistsSort();
     // _initNav();
+    _injectSvgSprite();
 
     // Esc handlers
     $(document).keyup(function(e) {
@@ -110,6 +111,10 @@ var FBSage = (function($) {
       });
 
     }
+  }
+
+  function _injectSvgSprite() {
+    boomsvgloader.load('/app/themes/artandscience/assets/svgs/build/svgs-defs.svg');
   }
 
   function _showMobileNav() {
