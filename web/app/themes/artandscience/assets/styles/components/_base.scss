@@ -26,7 +26,7 @@ So use a seperate element.
 Also the blur bleeds at the edges, so we use a slightly oversized psuedo element.
 Clipping the overflow hides the bleed.
 */
-.blurred-background {
+.background {
   top: 0;
   left: 0;
   right: 0;
@@ -34,7 +34,7 @@ Clipping the overflow hides the bleed.
   z-index: -1;
   overflow: hidden;
   position: absolute;
-  &::after{
+  &::before{
     content: '';
     top: 0;
     left: 0;

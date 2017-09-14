@@ -14,13 +14,12 @@ $header_text = get_post_meta($post->ID, '_cmb2_header_text', true);
 <!--[if gt IE 9]><!--> <html class="no-js" <?php language_attributes(); ?>> <!--<![endif]-->
   <?php get_template_part('templates/head'); ?>
   <body <?php body_class(); ?>>
-    <div class="blurred-background"></div>
+    <div class="background"></div>
     <!--[if lt IE 9]>
       <div class="alert alert-warning">
         <?php _e('You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.', 'sage'); ?>
       </div>
     <![endif]-->
-    <button aria-hidden="true" class="menu-toggle"><svg class="icon icon-nav"><use xlink:href="#icon-nav"/></svg></button>
     <?php
       do_action('get_header');
       get_template_part('templates/header');

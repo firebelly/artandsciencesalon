@@ -5,10 +5,10 @@
 var FBSage = (function($) {
 
   var screen_width = 0,
-      breakpoint_small = false,
-      breakpoint_medium = false,
-      breakpoint_large = false,
-      breakpoint_array = [480,1000,1200],
+      breakpoint_xs = false,
+      breakpoint_sm = false,
+      breakpoint_md = false,
+      breakpoint_lg = false,
       $document,
       $sidebar,
       loadingTimer,
@@ -69,20 +69,30 @@ var FBSage = (function($) {
     }, "easeOutSine");
   }
 
-  // Handles main nav
+  // Init main nav interactivity
   function _initNav() {
     // SEO-useless nav toggler
-    // $('<div class="menu-toggle"><div class="menu-bar"><span class="sr-only">Menu</span></div></div>')
-    //   .prependTo('header.banner')
-    //   .on('click', function(e) {
-    //     _showMobileNav();
-    //   });
-    $('.menu-toggle').click(function(e) {
+    $('<button aria-hidden="true" class="menu-toggle"><svg class="icon icon-nav"><use xlink:href="#icon-nav"/></svg></button>')
+      .prependTo('body');
+
+    $(document).on('click','.menu-toggle',function(e) {
       _toggleMobileNav();
     });
   }
+
+  // Nav behavior functions
   function _toggleMobileNav() {
-    $('body').toggleClass('-nav-open');
+    if ( $('body').hasClass('-nav-open') ) {
+      _hideMobileNav();
+    } else {
+      _showMobileNav();
+    }
+  }
+  function _showMobileNav() {
+    $('body').addClass('-nav-open');
+  }
+  function _hideMobileNav() {
+    $('body').removeClass('-nav-open');
   }
 
   function _initBookAppointment() {
@@ -134,9 +144,19 @@ var FBSage = (function($) {
   // Called in quick succession as window is resized
   function _resize() {
     screenWidth = document.documentElement.clientWidth;
-    breakpoint_small = (screenWidth > breakpoint_array[0]);
-    breakpoint_medium = (screenWidth > breakpoint_array[1]);
-    breakpoint_large = (screenWidth > breakpoint_array[2]);
+
+    // Check breakpoint indicator in DOM ( :after { content } is controlled by CSS media queries )
+    var breakpointIndicatorString = window.getComputedStyle(
+      document.querySelector('#breakpoint-indicator'), ':after'
+    ).getPropertyValue('content')
+    .replace(/['"]+/g, '');
+
+    breakpoint_lg = breakpointIndicatorString === 'lg';
+    breakpoint_md = breakpointIndicatorString === 'md' || breakpoint_lg;
+    breakpoint_sm = breakpointIndicatorString === 'sm' || breakpoint_md;
+    breakpoint_xs = breakpointIndicatorString === 'xs' || breakpoint_sm;
+
+    _hideMobileNav();
   }
 
   // Called on scroll

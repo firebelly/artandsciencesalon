@@ -13,6 +13,71 @@ $mobile-nav-width: 160px;
   width: $mobile-nav-width;
   padding: ($padding - 10px) 0;
   transform: translateX(-$mobile-nav-width);
+
+  @include media-md {
+    width: 100%;
+    transform: none;
+    position: relative;
+  }
+
+  // Shared styles between primary and secondary menus
+  #menu-main-nav, #menu-footer-nav {
+    @include font-caption-bold;
+    margin: 0;
+    padding: 1.25em 0;
+
+    .menu-item {
+      margin: 3px 0;
+      list-style: none;
+      text-align: center;
+      color: $dark-cream;
+
+      a {
+        display: block;
+        text-decoration: none;
+        padding: 5px $padding;
+      }
+      
+      &.current-menu-item {
+        color: $orange;
+      }
+    }
+  }
+
+  // Dashes around primary menu
+  #menu-main-nav {
+    @include media-md {
+      padding: 2em 0;
+    }
+
+    @include big-dash($orange,before) {
+      left: 50%;
+      width: 32px;
+      transform: translateX(-50%);
+
+      @include media-md {
+        width: $big-dash-width;
+      }
+    }
+    @include big-dash($orange,after) {
+      top: auto;
+      bottom: 0;
+      left: 50%;
+      width: 32px;
+      transform: translateX(-50%);
+
+      @include media-md {
+        width: $big-dash-width;
+      }
+    }
+  }
+  
+  // Hide secondary menu here on md+, a js injected duplicate in the footer will take over
+  #menu-footer-nav {
+    @include media-md {
+      display: none;
+    }
+  }
 }
 
 
@@ -49,33 +114,6 @@ $mobile-nav-width: 160px;
   }
 }
 
-#menu-main-nav, #menu-footer-nav {
-  @include font-caption-bold;
-  margin: 0;
-  padding: 1.25em 0;
-
-  @include big-dash($orange,before) {
-    left: 50%;
-    width: 32px;
-    transform: translateX(-50%);
-  }
-  .menu-item {
-    margin: 3px 0;
-    list-style: none;
-    text-align: center;
-    color: $dark-cream;
-
-    a {
-      display: block;
-      text-decoration: none;
-      padding: 5px $padding;
-    }
-    
-    &.current-menu-item {
-      color: $orange;
-    }
-  }
-}
 
 button.menu-toggle {
   left: 0;
@@ -97,27 +135,43 @@ button.menu-toggle {
     position: absolute;
     transform: translateX(-50%);
   }
+
+  @include media-md {
+    display: none;
+  }
 }
 
 // Nav open/close animation
-.site-wrap, .blurred-background, .site-banner, .site-header .site-nav {
-  transition: transform 0.3s 0.15s;
-}
-.menu-toggle {
-  transition: transform 0.3s 0.15s, height 0.15s; 
-}
-.blurred-background {
-  transform: none;
-}
-body.-nav-open {
-  .site-wrap, .blurred-background, .site-banner, .menu-toggle {
-    transform: translateX($mobile-nav-width);
-  }
-  .site-header .site-nav {
-    transform: none;
+@include max-screen($breakpoint-medium - 1px) {
+  .site-wrap, .blurred-background, .site-banner, .site-header .site-nav {
+    transition: transform 0.3s 0.15s;
   }
   .menu-toggle {
-    height: 100%;
+    transition: transform 0.3s 0.15s, height 0.15s; 
+  }
+  .blurred-background {
+    transform: none;
+  }
+  body.-nav-open {
+    .site-wrap, .blurred-background, .site-banner, .menu-toggle {
+      transform: translateX($mobile-nav-width);
+    }
+    .site-header .site-nav {
+      transform: none;
+    }
+    .menu-toggle {
+      height: 100%;
+
+      // Expand the button invisibly for a quick clickout overlay
+      &::after {
+        top: 0;
+        left: 0;
+        bottom: 0;
+        content: '';
+        width: 100vw;
+        position: absolute;
+      }
+    }
   }
 }
 

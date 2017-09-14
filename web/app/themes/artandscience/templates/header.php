@@ -1,7 +1,13 @@
 <header class="site-header" role="banner">
   <div class="container">
     <div class="site-banner">
-      <h1 class="brand"><a  href="<?= esc_url(home_url('/')); ?>"><svg class="icon icon-wordmark" aria-hidden="true" role="image"><use xlink:href="#icon-wordmark"/></svg><span class="visually-hidden"><?php bloginfo('name'); ?></span></a></h1>
+      <h1 class="brand">
+        <a  href="<?= esc_url(home_url('/')); ?>">
+          <svg class="icon icon-logo" aria-hidden="true" role="image"><use xlink:href="#icon-logo"/></svg>
+          <svg class="icon icon-wordmark" aria-hidden="true" role="image"><use xlink:href="#icon-wordmark"/></svg>
+          <span class="visually-hidden"><?php bloginfo('name'); ?></span>
+        </a>
+      </h1>
     </div>
     <nav class="site-nav" role="navigation">
 

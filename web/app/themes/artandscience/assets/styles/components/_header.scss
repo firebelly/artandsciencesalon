@@ -13,8 +13,55 @@
 
 .site-banner {
   height: 60px;
+
   .brand {
     margin: 0;
+    line-height: 0; // Prevent wierd sizing of elements -- there's only an svg here
+
+    a {
+      padding: $padding/2;
+      top: 50%;
+      left: $padding*1.5;
+      position: absolute;
+      transform: translateY(-50%);
+    }
+
+    .icon-logo {
+      display: none;
+    }
+
+    .icon-wordmark {
+      width: 160px;
+      height: 13.5px;
+      fill: $dark-cream;
+    }
+  }
+
+  @include media-md {
+    height: auto;
+
+    .brand {
+
+      a {
+        transform: none;
+        position: static;
+      }
+
+      .icon-logo {
+        margin: auto;
+        display: block;
+        width: 45.5px;
+        height: 50px;
+        fill: $dark-cream;
+      }
+
+      .icon-wordmark {
+        display: block;
+        margin: auto;
+        width: 125px;
+        height: 10.5px;
+      }
+    }
   }
 }
 
