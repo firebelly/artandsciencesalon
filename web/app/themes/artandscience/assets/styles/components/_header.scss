@@ -31,13 +31,24 @@
   position: relative;
 
   .header-text {
-
+    @include font-h1;
+    color: $dark-cream;
+    padding: $padding-md;
+    background: $gray-dark;
   }
 
   @include media-md {
+    display: flex;
     min-height: 575px;
+    flex-direction: column;
     background-size: cover;
+    justify-content: flex-end;
+    padding-right: $padding-md;
     background-color: rgba(0,0,0,.25);
     background-position: center center;
+
+    .header-text {
+      margin-bottom: -$padding-md;
+    }
   }
 }

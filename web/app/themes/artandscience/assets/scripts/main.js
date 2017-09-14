@@ -30,6 +30,7 @@ var FBSage = (function($) {
 
     _initBookAppointment();
     _initStylistsSort();
+    _initCareersNav();
     // _initNav();
     _injectSvgSprite();
 
@@ -110,6 +111,33 @@ var FBSage = (function($) {
 
       });
 
+    }
+  }
+
+  function _initCareersNav() {
+    var $careersNav = $('.careers-nav');
+
+    if ($careersNav.length) {
+      // Hide the careers section initially, except the first
+      $('.careers-nav li:eq(0)').find('a').addClass('-active');
+      $('.careers-child-page:eq(0)').addClass('-active');
+
+      $('.careers-nav a').on('click', function(e) {
+        e.preventDefault();
+        var target = $(this).attr('data-target');
+
+        $careersNav.find('a.-active').not($(this)).removeClass('-active');
+
+        if (!$(this).is('.-active')) {
+          $(this).addClass('-active');
+        }
+
+        console.log(target);
+
+        $('.careers-child-page.-active:not(#'+target+')').removeClass('-active');
+        $('#'+target).addClass('-active');
+
+      });
     }
   }
 
