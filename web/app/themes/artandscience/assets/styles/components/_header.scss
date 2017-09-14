@@ -2,8 +2,6 @@
 
 .site-header {
   padding: 0;
-  @include media-sm {
-  }
 
   @include media-md {
     float: left;
@@ -14,52 +12,55 @@
 .site-banner {
   height: 60px;
 
+  @include media-md {
+    height: auto;
+  }
+
   .brand {
     margin: 0;
     line-height: 0; // Prevent wierd sizing of elements -- there's only an svg here
 
     a {
-      padding: $padding/2;
       top: 50%;
       left: $padding*1.5;
       position: absolute;
+      padding: $padding/2;
       transform: translateY(-50%);
+
+      @include media-md {
+        transform: none;
+        position: static;
+      }
     }
 
     .icon-logo {
       display: none;
+
+      @include media-md {
+        margin: auto;
+        height: 50px;
+        width: 45.5px;
+        display: block;
+        margin-top: 50px;
+        fill: $dark-cream;
+      }
+
+      @include media-lg {
+        margin-top: 170px;
+      }
     }
 
     .icon-wordmark {
       width: 160px;
       height: 13.5px;
       fill: $dark-cream;
-    }
-  }
 
-  @include media-md {
-    height: auto;
-
-    .brand {
-
-      a {
-        transform: none;
-        position: static;
-      }
-
-      .icon-logo {
-        margin: auto;
-        display: block;
-        width: 45.5px;
-        height: 50px;
-        fill: $dark-cream;
-      }
-
-      .icon-wordmark {
-        display: block;
+      @include media-md {
         margin: auto;
         width: 125px;
         height: 10.5px;
+        display: block;
+        margin-top: 16px;
       }
     }
   }
