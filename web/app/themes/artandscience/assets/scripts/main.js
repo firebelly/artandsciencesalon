@@ -30,7 +30,7 @@ var FBSage = (function($) {
 
     _initBookAppointment();
     _initStylistsSort();
-    // _initNav();
+    _initNav();
     _injectSvgSprite();
 
     // Esc handlers
@@ -72,13 +72,17 @@ var FBSage = (function($) {
   // Handles main nav
   function _initNav() {
     // SEO-useless nav toggler
-    $('<div class="menu-toggle"><div class="menu-bar"><span class="sr-only">Menu</span></div></div>')
-      .prependTo('header.banner')
-      .on('click', function(e) {
-        _showMobileNav();
-      });
-    var mobileSearch = $('.search-form').clone().addClass('mobile-search');
-    mobileSearch.prependTo('.site-nav');
+    // $('<div class="menu-toggle"><div class="menu-bar"><span class="sr-only">Menu</span></div></div>')
+    //   .prependTo('header.banner')
+    //   .on('click', function(e) {
+    //     _showMobileNav();
+    //   });
+    $('.menu-toggle').click(function(e) {
+      _toggleMobileNav();
+    });
+  }
+  function _toggleMobileNav() {
+    $('body').toggleClass('-nav-open');
   }
 
   function _initBookAppointment() {
@@ -115,16 +119,6 @@ var FBSage = (function($) {
 
   function _injectSvgSprite() {
     boomsvgloader.load('/app/themes/artandscience/assets/svgs/build/svgs-defs.svg');
-  }
-
-  function _showMobileNav() {
-    $('.menu-toggle').addClass('menu-open');
-    $('.site-nav').addClass('active');
-  }
-
-  function _hideMobileNav() {
-    $('.menu-toggle').removeClass('menu-open');
-    $('.site-nav').removeClass('active');
   }
 
   // Track ajax pages in Analytics

@@ -1,6 +1,7 @@
 // Header
 
 .site-header {
+  padding: 0;
   @include media-sm {
   }
 
@@ -10,21 +11,13 @@
   }
 }
 
-// Book An Appointment Module
-.book-appointment {
-  top: 0;
-  z-index: 1;
-  right: 100px;
-  position: fixed;
-  .location-list {
-    display: none;
-  }
-  &.-active {
-    .location-list {
-      display: block;
-    }
+.site-banner {
+  height: 60px;
+  .brand {
+    margin: 0;
   }
 }
+
 
 // Page Header
 .page-header {

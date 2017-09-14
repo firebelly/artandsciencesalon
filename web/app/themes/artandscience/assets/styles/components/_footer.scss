@@ -12,7 +12,7 @@ $dash-distance-md: 40px;
   padding: ($padding*1.33) $padding ($padding*1.75);
 
   @include media-md {
-    width: 75%;
+    width: 100%;
     padding: ($padding-md*1.5) $padding-md ($padding-md*1.5);
   }
 
@@ -156,25 +156,6 @@ $dash-distance-md: 40px;
       .icon {
         float: none;
         display: inline-block;
-      }
-    }
-  }
-
-  .secondary-nav {
-    @include media-sm {}
-    @include media-md {}
-  }
-
-  #menu-footer-nav {
-    display: none; // For now.
-
-    .menu-item {
-      @include font-caption-bold;
-      color: $cream;
-      list-style: none;
-
-      a {
-        text-decoration: none;
       }
     }
   }

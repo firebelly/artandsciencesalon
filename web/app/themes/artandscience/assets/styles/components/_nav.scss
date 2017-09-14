@@ -1,25 +1,126 @@
 // Nav
 
+$mobile-nav-width: 160px;
+
 // wp admin bar push
 .admin-bar {}
 
-#menu-main-nav {
-  @include font-caption-bold;
-  padding: 0;
+.site-header .site-nav {
+  top: 0;
+  left: 0;
+  height: 100%;
+  position: absolute;
+  width: $mobile-nav-width;
+  padding: ($padding - 10px) 0;
+  transform: translateX(-$mobile-nav-width);
+}
 
+
+// Book An Appointment Module
+.book-appointment {
+  button {
+    @include font-caption-bold;
+    border: none;
+    display: block;
+    color: $orange;
+    appearance: none;
+    padding: 0 0 2em;
+    text-align: center;
+    line-height: (18 / 12);
+    background: transparent;
+  }
+
+  // Tablet and desktop this is a fixed position corner button
+  @include media-md {
+    top: 0;
+    z-index: 1;
+    right: 100px;
+    position: fixed;
+  }
+
+  // Location List
+  .location-list {
+    display: none;
+  }
+  &.-active {
+    .location-list {
+      display: block;
+    }
+  }
+}
+
+#menu-main-nav, #menu-footer-nav {
+  @include font-caption-bold;
+  margin: 0;
+  padding: 1.25em 0;
+
+  @include big-dash($orange,before) {
+    left: 50%;
+    width: 32px;
+    transform: translateX(-50%);
+  }
   .menu-item {
-    color: $dark-cream;
+    margin: 3px 0;
     list-style: none;
     text-align: center;
+    color: $dark-cream;
+
     a {
+      display: block;
       text-decoration: none;
+      padding: 5px $padding;
     }
+    
     &.current-menu-item {
       color: $orange;
     }
   }
 }
 
-// mobile menu toggle
-.menu-toggle {
+button.menu-toggle {
+  left: 0;
+  border: 0;
+  z-index: 10;
+  height: 60px;
+  outline: none;
+  width: $padding;
+  appearance: none;
+  background: $gold;
+  position: absolute;
+
+  .icon {
+    top: 24px;
+    left: 50%;
+    width: 17px;
+    height: 14px;
+    fill: $dark-cream;
+    position: absolute;
+    transform: translateX(-50%);
+  }
 }
+
+// Nav open/close animation
+.site-wrap, .blurred-background, .site-banner, .site-header .site-nav {
+  transition: transform 0.3s 0.15s;
+}
+.menu-toggle {
+  transition: transform 0.3s 0.15s, height 0.15s; 
+}
+.blurred-background {
+  transform: none;
+}
+body.-nav-open {
+  .site-wrap, .blurred-background, .site-banner, .menu-toggle {
+    transform: translateX($mobile-nav-width);
+  }
+  .site-header .site-nav {
+    transform: none;
+  }
+  .menu-toggle {
+    height: 100%;
+  }
+}
+
+
+
+

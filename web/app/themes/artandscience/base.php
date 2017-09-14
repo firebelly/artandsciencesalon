@@ -20,6 +20,7 @@ $header_text = get_post_meta($post->ID, '_cmb2_header_text', true);
         <?php _e('You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.', 'sage'); ?>
       </div>
     <![endif]-->
+    <button aria-hidden="true" class="menu-toggle"><svg class="icon icon-nav"><use xlink:href="#icon-nav"/></svg></button>
     <?php
       do_action('get_header');
       get_template_part('templates/header');
@@ -33,11 +34,11 @@ $header_text = get_post_meta($post->ID, '_cmb2_header_text', true);
       <main class="site-main" role="main">
         <?php include Wrapper\template_path(); ?>
       </main><!-- /.main -->
+      <?php
+        do_action('get_footer');
+        get_template_part('templates/footer');
+        wp_footer();
+      ?>
     </div><!-- /.site-wrap -->
-    <?php
-      do_action('get_footer');
-      get_template_part('templates/footer');
-      wp_footer();
-    ?>
   </body>
 </html>
