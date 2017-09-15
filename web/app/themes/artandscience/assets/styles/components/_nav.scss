@@ -117,7 +117,7 @@ $mobile-nav-width: 160px;
   }
 }
 
-
+// Nav toggle button
 button.menu-toggle {
   left: 0;
   border: 0;
@@ -144,17 +144,23 @@ button.menu-toggle {
   }
 }
 
-// Nav open/close animation
 @include max-screen($breakpoint-medium - 1px) {
-  .site-wrap, .site-background, .site-banner, .site-header .site-nav {
-    transition: transform 0.3s 0.15s;
+  // Transitions can ONLY happen when the javascript has verified with this class that 
+  // the change in CSS rules is a result of the user opening/closing the nav and not just 
+  // resizing the screen
+  body.-nav-transition-permitted {
+    .site-wrap, .site-background, .site-banner, .site-header .site-nav {
+      transition: transform 0.3s 0.15s;
+    }
+    .menu-toggle {
+      transition: transform 0.3s 0.15s, height 0.15s; 
+    }
+    .site-background {
+      transform: none;
+    }
   }
-  .menu-toggle {
-    transition: transform 0.3s 0.15s, height 0.15s; 
-  }
-  .site-background {
-    transform: none;
-  }
+
+  // Nav closed is default state, below are styles for nav-open
   body.-nav-open {
     .site-wrap, .site-background, .site-banner, .menu-toggle {
       transform: translateX($mobile-nav-width);

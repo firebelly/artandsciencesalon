@@ -11,18 +11,38 @@
 
 .site-banner {
   height: 60px;
-
+  position: relative;
+  margin-left: $padding;
+  @include ruler-edge;
   @include media-md {
     height: auto;
+    margin-left: 0;
+    &::after {
+      display: none;
+    }
+  }
+  @include media-lg {
+    &::before {
+      content: '';
+      position: absolute;
+      height: 303px;
+      width: 218px;
+      top: 60px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-image: url('../images/a-s.svg');
+      z-index: -1;
+    }
   }
 
   .brand {
     margin: 0;
     line-height: 0; // Prevent wierd sizing of elements -- there's only an svg here
 
+
     a {
       top: 50%;
-      left: $padding*1.5;
+      left: $padding*0.5;
       position: absolute;
       padding: $padding/2;
       transform: translateY(-50%);

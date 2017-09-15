@@ -39,6 +39,20 @@ $small-dash-width: 27px;
   }
 }
 
+// Adds the ruler edge to a div
+@mixin ruler-edge($pseudo: after) {
+  &::#{$pseudo} { // Will be after by default
+    top: 0;
+    left: 0;
+    bottom: 0;
+    content: '';
+    width: 15px;
+    position: absolute;
+    background-image: url('../images/ruler-edge.svg');
+    @content;
+  }
+}
+
 // Clearfix
 @mixin clearfix {
   *zoom: 1;

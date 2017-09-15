@@ -89,10 +89,14 @@ var FBSage = (function($) {
     }
   }
   function _showMobileNav() {
-    $('body').addClass('-nav-open');
+    $('body')
+      .addClass('-nav-open')
+      .addClass('-nav-transition-permitted');// Allows CSS transitions on nav -- this is off by default to prevent unwanted transitions on screen resize
   }
   function _hideMobileNav() {
-    $('body').removeClass('-nav-open');
+    $('body')
+      .removeClass('-nav-open')
+      .addClass('-nav-transition-permitted'); // Allows CSS transitions on nav -- this is off by default to prevent unwanted transitions on screen resize
   }
 
   function _initBookAppointment() {
@@ -156,7 +160,10 @@ var FBSage = (function($) {
     breakpoint_sm = breakpointIndicatorString === 'sm' || breakpoint_md;
     breakpoint_xs = breakpointIndicatorString === 'xs' || breakpoint_sm;
 
+    // Close the nav on resize and prevent transitions
     _hideMobileNav();
+    // Avoid unwanted CSS transitions that result from change from mobile nav CSS to desktop nav CSS
+    $('body').removeClass('-nav-transition-permitted'); 
   }
 
   // Called on scroll
