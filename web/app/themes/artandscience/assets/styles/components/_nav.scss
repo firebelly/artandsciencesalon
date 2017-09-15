@@ -15,10 +15,10 @@ $mobile-nav-width: 160px;
   transform: translateX(-$mobile-nav-width);
 
   @include media-md {
+    padding: 0;
     width: 100%;
     transform: none;
     margin-top: 60px;
-    padding: 0;
     position: relative;
   }
 
@@ -118,7 +118,7 @@ button.menu-toggle {
   // the change in CSS rules is a result of the user opening/closing the nav and not just 
   // resizing the screen
   body.-nav-transition-permitted {
-    .site-wrap, .site-background, .site-banner, .site-header .site-nav {
+    .site-wrap, .site-background, .site-banner, .site-header .site-nav, .site-footer {
       transition: transform 0.3s 0.15s;
     }
     .menu-toggle {
@@ -131,7 +131,7 @@ button.menu-toggle {
 
   // Nav closed is default state, below are styles for nav-open
   body.-nav-open {
-    .site-wrap, .site-background, .site-banner, .menu-toggle {
+    .site-wrap, .site-background, .site-banner, .menu-toggle, .site-footer {
       transform: translateX($mobile-nav-width);
     }
     .site-header .site-nav {

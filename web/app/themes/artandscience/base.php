@@ -33,11 +33,11 @@ $header_text = get_post_meta($post->ID, '_cmb2_header_text', true);
       <main class="site-main" role="main">
         <?php include Wrapper\template_path(); ?>
       </main><!-- /.main -->
-      <?php
-        do_action('get_footer');
-        get_template_part('templates/footer');
-        wp_footer();
-      ?>
-    </div><!-- /.site-wrap -->
+    </div><!-- /.site-wrap -->      
+    <?php
+      do_action('get_footer');
+      get_template_part('templates/footer');
+      wp_footer();
+    ?>
   </body>
 </html>

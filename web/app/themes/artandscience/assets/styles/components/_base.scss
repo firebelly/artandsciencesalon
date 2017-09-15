@@ -104,6 +104,7 @@ img {
 }
 
 .site-wrap {
+  border-top: 4px solid $orange;
   @include media-md {
     float: left;
     width: 75%;

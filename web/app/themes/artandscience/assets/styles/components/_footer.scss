@@ -12,12 +12,60 @@ $dash-distance-md: 40px;
   padding: ($padding*1.33) $padding ($padding*1.75);
 
   @include media-md {
-    width: 100%;
+    margin-left: 25%;
+    width: 75%;
     padding: ($padding-md*1.5) $padding-md ($padding-md*1.5);
   }
 
   a:hover {
     color: $cream;
+  }
+
+  // Secondary Menu tied to footer (duplicated from .site-nav via js)
+  .footer-menu {
+    display: none;
+
+    @include media-md {
+      @include big-dash{
+        left: 50%;
+        transform: translateX(-50%);
+      }
+      @include font-caption-bold;
+
+      margin: 0;
+      display: block;
+      position: absolute;
+      width: 33.33%;
+      left: -33.33%;
+      padding: 32px 0 0;
+
+      .nav {
+        margin: 0;
+        padding: 0;
+        margin: auto;
+        width: $mobile-nav-width;
+      }
+
+      .menu-item {
+        margin: 3px 0;
+        list-style: none;
+        text-align: center;
+        color: $cream;
+
+        a {
+          display: block;
+          text-decoration: none;
+          padding: 5px $padding;
+          &:hover {
+            color: $orange;
+          }
+        }
+        
+        &.current-menu-item {
+          color: $orange;
+        }
+      }
+    }
   }
 
   // Locations

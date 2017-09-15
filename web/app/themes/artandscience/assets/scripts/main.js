@@ -71,10 +71,17 @@ var FBSage = (function($) {
 
   // Init main nav interactivity
   function _initNav() {
-    // SEO-useless nav toggler
+    // Inject SEO-useless nav toggler
     $('<button aria-hidden="true" class="menu-toggle"><svg class="icon icon-nav"><use xlink:href="#icon-nav"/></svg></button>')
       .prependTo('body');
 
+    // Duplicate Secondary nav and inject into footer
+    $('#menu-footer-nav')
+      .clone()
+      .prependTo('.site-footer')
+      .wrap('<div class="footer-menu"></div>'); 
+
+    // Add interactivity to menu-toggle button
     $(document).on('click','.menu-toggle',function(e) {
       _toggleMobileNav();
     });
