@@ -12,17 +12,17 @@ use Firebelly\Utils;
 function post_type() {
 
   $labels = array(
-    'name'                => 'Locataions',
+    'name'                => 'Locations',
     'singular_name'       => 'Location',
     'menu_name'           => 'Locations',
     'parent_item_colon'   => '',
-    'all_items'           => 'All Locataions',
+    'all_items'           => 'All Locations',
     'view_item'           => 'View Location',
     'add_new_item'        => 'Add New Location',
     'add_new'             => 'Add New',
     'edit_item'           => 'Edit Location',
     'update_item'         => 'Update Location',
-    'search_items'        => 'Search Locataions',
+    'search_items'        => 'Search Locations',
     'not_found'           => 'Not found',
     'not_found_in_trash'  => 'Not found in Trash',
   );
@@ -99,6 +99,12 @@ function metaboxes( array $meta_boxes ) {
     'priority'      => 'high',
     'show_names'    => true, // Show field names on the left
     'fields'        => array(
+      array(
+        'name' => 'Abbreviate Title',
+        'id'   => $prefix . 'short_title',
+        'desc' => 'Ex: "Logan Square" instead of "Logan Square Barbershop"',
+        'type' => 'text',
+      ),
       array(
         'name' => 'Location Code',
         'id'   => $prefix . 'code',
@@ -194,6 +200,13 @@ function metaboxes( array $meta_boxes ) {
     'desc'     => 'Ex: appointment lines open',
   ) );
 
+  $hours_group->add_field( array(
+    'name'        => 'Abbreviated Hours',
+    'id'          => $prefix . 'hours_abbr',
+    'type'        => 'textarea_small',
+    'description' => __( 'An abbreviated version of the location hours for the footer (ideally 3 lines)', 'cmb2' ),
+  ) );
+
   /**
    * Services
    */
@@ -233,7 +246,7 @@ function metaboxes( array $meta_boxes ) {
 add_filter( 'cmb2_meta_boxes', __NAMESPACE__ . '\metaboxes' );
 
 /**
- * Get Locataions
+ * Get Locations
  */
 function get_locations($options=[]) {
   $output = '';

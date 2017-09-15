@@ -94,9 +94,9 @@ img {
 }
 
 .container {
+  padding: 0;
   width: 100%;
   margin: 0 auto;
-  padding: 0;
   position: relative;
   @include clearfix();
   @include media-md {
@@ -104,8 +104,8 @@ img {
 }
 
 .site-wrap {
-  border-top: 4px solid $orange;
   @include media-md {
+    border-top-width: 4px;
     float: left;
     width: 75%;
   }

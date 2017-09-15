@@ -169,16 +169,17 @@ $dash-distance-md: 40px;
     li {
       float: left;
       width: calc((100% - 24px) / 3);
+      
       &:first-of-type {
         width: 24px;
       }
     }
 
     .icon {
-      float: right;
-      width: 24px;
-      height: 24px;
       fill: $gray;
+      width: 24px;
+      float: right;
+      height: 24px;
     }
 
     a:hover {
