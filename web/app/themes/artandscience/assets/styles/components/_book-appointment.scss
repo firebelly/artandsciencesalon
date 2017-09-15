@@ -1,12 +1,14 @@
+$appointment-padding: 19px 24px;
+
 // Book An Appointment Module
 .book-appointment {
+  padding: 0 0 2em;
   button {
     @include font-caption-bold;
     border: none;
     display: block;
     color: $orange;
     appearance: none;
-    padding: 0 0 2em;
     text-align: center;
     line-height: (18 / 12);
     background: transparent;
@@ -20,7 +22,7 @@
     position: fixed;
     button {
       color: $dark-cream;
-      padding: 16px;
+      padding: $appointment-padding;
       @include big-dash($orange,after) {
         top: auto;
         left: 50%;
@@ -35,12 +37,44 @@
     display: none;
   }
   &.-active {
+
+    button {
+      background: $gold;
+      &::after {
+        opacity: 0;
+      }
+    }
+
     .location-list {
-      @include font-caption-bold;
+      @include font-footer;
       margin: 0;
-      color: $brown;
+      padding: 0;
+      color: $gold;
       display: block;
       list-style: none;
+      text-align: center;
+      padding: $appointment-padding;
+
+      p, h4 {
+        margin: 0;
+      }
+
+      h4 {
+        @include font-caption-bold;
+      }
+
+      li {
+        margin: 2em 0 0;
+        &:first-of-type {
+          margin: 0;
+        }
+      }
+
+      @include media-md {
+        color: $brown;
+        text-align: left;
+        background: rgba($dark-cream,0.7);
+      }
     }
   }
 }
