@@ -48,6 +48,8 @@ $small-dash-width: 27px;
     content: '';
     width: 15px;
     position: absolute;
+    background-size: 15px 24px;
+    background-repeat: repeat-y;
     background-image: url('../images/ruler-edge.svg');
     @content;
   }

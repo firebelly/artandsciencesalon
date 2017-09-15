@@ -41,11 +41,11 @@ Clipping the overflow hides the bleed.
     right: 0;
     bottom: 0;
     margin: -20px;
-    filter: blur(8px);
+    filter: blur(3px);
     position: absolute;
     background-size: cover;
     transform: translate3d(0, 0, 0);
-    background-image: url('../images/blended-background.png'); // There is also a slightly uglier 90k jpg of same name if the 300k png is too big
+    background-image: url('../images/blended-background.png'); // There is also a blended-background.jpg at ~100k
   }
   @include media-md {
     @include ruler-edge;
