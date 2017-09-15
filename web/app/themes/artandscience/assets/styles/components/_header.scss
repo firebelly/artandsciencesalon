@@ -51,6 +51,11 @@
         transform: none;
         position: static;
       }
+      &:hover {
+        .icon {
+          fill: $orange;
+        }
+      }
     }
 
     .icon-logo {

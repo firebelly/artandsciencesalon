@@ -16,6 +16,10 @@ $dash-distance-md: 40px;
     padding: ($padding-md*1.5) $padding-md ($padding-md*1.5);
   }
 
+  a:hover {
+    color: $cream;
+  }
+
   // Locations
   .locations-grid {
     margin: 0;
@@ -127,6 +131,12 @@ $dash-distance-md: 40px;
       width: 24px;
       height: 24px;
       fill: $gray;
+    }
+
+    a:hover {
+      .icon {
+        fill: $cream;
+      }
     }
 
     @include media-md {

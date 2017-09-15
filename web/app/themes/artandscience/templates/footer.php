@@ -1,4 +1,11 @@
 <footer class="site-footer container" role="contentinfo">
+  <div class="footer-nav">
+    <?php
+    if (has_nav_menu('secondary_navigation')) :
+      wp_nav_menu(['theme_location' => 'secondary_navigation', 'menu_class' => 'nav']);
+    endif;
+    ?>
+  </div>
   <div class="locations">
     <?= \Firebelly\PostTypes\Location\get_locations(); ?>
   </div>
