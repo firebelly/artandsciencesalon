@@ -79,7 +79,8 @@ var FBSage = (function($) {
     $('#menu-footer-nav')
       .clone()
       .prependTo('.site-footer')
-      .wrap('<div class="footer-menu"></div>'); 
+      .wrap('<div class="footer-menu"></div>')
+      .attr('id','#menu-footer-nav-duplicated'); 
 
     // Add interactivity to menu-toggle button
     $(document).on('click','.menu-toggle',function(e) {
