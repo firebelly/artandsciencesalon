@@ -23,15 +23,15 @@
   }
   @include media-lg {
     &::before {
-      content: '';
-      position: absolute;
-      height: 303px;
-      width: 218px;
+      z-index: -1;
       top: 60px;
       left: 50%;
+      content: '';
+      width: 218px;
+      height: 303px;
+      position: absolute;
       transform: translateX(-50%);
       background-image: url('../images/a-s.svg');
-      z-index: -1;
     }
   }
 

@@ -70,30 +70,34 @@ $appointment-padding: 19px 24px;
     }
   }
 
+  // Scrolled and active states
   @include media-md {
 
-    &.-scrolled, &.-active {
+    &.-button, &.-active {
       button {
         background: $gold;
-
-        &::after {
-          opacity: 0;
-        }
-      }
-    }
-
-    &.-active {
-      button {
         transition: background-color 0.2s;
 
         &::after {
+          opacity: 0;
           transition: opacity 0.2s;
         }
       }
     }
 
+    // &.-active {
+    //   button {
+    //     transition: background-color 0.2s;
+
+    //     &::after {
+    //       transition: opacity 0.2s;
+    //     }
+    //   }
+    // }
+
     &.-hide {
       opacity: 0;
+      pointer-events: none;
     }
   }
 }
