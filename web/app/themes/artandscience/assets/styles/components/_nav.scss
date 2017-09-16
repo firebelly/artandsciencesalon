@@ -101,11 +101,20 @@ button.menu-toggle {
   .icon {
     top: 24px;
     left: 50%;
-    width: 17px;
-    height: 14px;
     fill: $dark-cream;
     position: absolute;
+    transition: opacity 0.1s;
     transform: translateX(-50%);
+  }
+
+  .icon-nav {
+    width: 17px;
+    height: 14px;
+  }
+  .icon-x {
+    width: 14px;
+    height: 14px;
+    opacity: 0;
   }
 
   @include media-md {
@@ -129,6 +138,7 @@ button.menu-toggle {
     }
   }
 
+
   // Nav closed is default state, below are styles for nav-open
   body.-nav-open {
     .site-wrap, .site-background, .site-banner, .menu-toggle, .site-footer {
@@ -137,8 +147,16 @@ button.menu-toggle {
     .site-header .site-nav {
       transform: none;
     }
-    .menu-toggle {
+    button.menu-toggle {
       height: 100%;
+
+      .icon-nav {
+        opacity: 0;
+      }
+
+      .icon-x {
+        opacity: 1;
+      }
 
       // Expand the button invisibly for a quick clickout overlay
       &::after {

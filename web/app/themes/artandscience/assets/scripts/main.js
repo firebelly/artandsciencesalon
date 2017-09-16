@@ -72,7 +72,7 @@ var FBSage = (function($) {
   // Init main nav interactivity
   function _initNav() {
     // Inject SEO-useless nav toggler
-    $('<button aria-hidden="true" class="menu-toggle"><svg class="icon icon-nav"><use xlink:href="#icon-nav"/></svg></button>')
+    $('<button aria-hidden="true" class="menu-toggle"><svg class="icon icon-nav"><use xlink:href="#icon-nav"/></svg><svg class="icon icon-x"><use xlink:href="#icon-x"/></svg></button>')
       .prependTo('body');
 
     // Duplicate Secondary nav and inject into footer
