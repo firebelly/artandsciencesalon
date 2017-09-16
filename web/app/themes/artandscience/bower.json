@@ -24,7 +24,9 @@
       "main": "./modernizr.js"
     },
     "isotope": {
-      "main": ["./dist/isotope.pkgd.min.js"],
+      "main": [
+        "./dist/isotope.pkgd.min.js"
+      ],
       "dependencies": {}
     },
     "boomsvgloader": {

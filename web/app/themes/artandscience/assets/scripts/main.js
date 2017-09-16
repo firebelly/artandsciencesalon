@@ -108,15 +108,56 @@ var FBSage = (function($) {
   }
 
   function _initBookAppointment() {
-    var $bAModule = $('#book-appointment');
 
+    // JQuery selectors
+    var $bAModule = $('#book-appointment');
+    var $locationList = $bAModule.find('.location-list');
+
+    // Close the accordian from the getgo
+    $locationList.velocity("slideUp", { duration: 0 });
+
+    // Open and close the accordian
     $bAModule.on('click', 'button', function() {
+
+      // Based on state: Add class -active and velocity slide open OR remove class and slide close
       if ($bAModule.is('.-active')) {
         $bAModule.removeClass('-active');
+        $locationList.velocity("slideUp", { duration: 200 });
+
       } else {
         $bAModule.addClass('-active');
+        $locationList.velocity("slideDown", { duration: 200 });
       }
     });
+
+    // Scroll handling
+    var lastScrollTop = 0; // Used to keep track of scroll direction
+    $(window).scroll(function(e){
+
+      // Clear scrolling classes
+      $bAModule;
+
+      // Get scroll pos
+      var scrollTop = $(this).scrollTop();
+
+      // Have we scrolled?
+      if (scrollTop > 5) {
+        $bAModule.addClass('-scrolled');
+      } else {
+        $bAModule.removeClass('-scrolled');
+      }
+
+      // Did we scroll up or down?
+      if (scrollTop > lastScrollTop){
+        $bAModule.addClass('-hide');
+      } else {
+        $bAModule.removeClass('-hide');
+      }
+
+      // Pass the torch...
+      lastScrollTop = scrollTop;
+    });
+
   }
 
   function _initStylistsSort() {

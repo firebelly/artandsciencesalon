@@ -3,8 +3,11 @@ $appointment-padding: 19px 24px;
 // Book An Appointment Module
 .book-appointment {
   padding: 0 0 2em;
+  transition: opacity 0.3s 0.2s;
+  
   button {
     @include font-caption-bold;
+    outline: 0;
     border: none;
     display: block;
     color: $orange;
@@ -20,61 +23,77 @@ $appointment-padding: 19px 24px;
     z-index: 1;
     right: 100px;
     position: fixed;
+
     button {
       color: $dark-cream;
       padding: $appointment-padding;
+      transition: background-color 0.8s 0.2s;
+
       @include big-dash($orange,after) {
         top: auto;
         left: 50%;
         bottom: 0;
         transform: translateX(-50%);
+        transition: opacity 0.8s 0.2s;
       }
     }
   }
 
-  // Location List
   .location-list {
-    display: none;
-  }
-  &.-active {
+    @include font-footer;
+    margin: 0;
+    padding: 0;
+    color: $gold;
+    list-style: none;
+    text-align: center;
+    padding: $appointment-padding;
 
-    button {
-      background: $gold;
-      &::after {
-        opacity: 0;
-      }
+    p, h4 {
+      margin: 0;
     }
 
-    .location-list {
-      @include font-footer;
-      margin: 0;
-      padding: 0;
-      color: $gold;
-      display: block;
-      list-style: none;
-      text-align: center;
-      padding: $appointment-padding;
+    h4 {
+      @include font-caption-bold;
+    }
 
-      p, h4 {
+    li {
+      margin: 2em 0 0;
+      &:first-of-type {
         margin: 0;
       }
+    }
 
-      h4 {
-        @include font-caption-bold;
-      }
+    @include media-md {
+      color: $brown;
+      text-align: left;
+      background: rgba($dark-cream,0.7);
+    }
+  }
 
-      li {
-        margin: 2em 0 0;
-        &:first-of-type {
-          margin: 0;
+  @include media-md {
+
+    &.-scrolled, &.-active {
+      button {
+        background: $gold;
+
+        &::after {
+          opacity: 0;
         }
       }
+    }
 
-      @include media-md {
-        color: $brown;
-        text-align: left;
-        background: rgba($dark-cream,0.7);
+    &.-active {
+      button {
+        transition: background-color 0.2s;
+
+        &::after {
+          transition: opacity 0.2s;
+        }
       }
+    }
+
+    &.-hide {
+      opacity: 0;
     }
   }
 }
