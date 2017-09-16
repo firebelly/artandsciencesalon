@@ -133,7 +133,7 @@ var FBSage = (function($) {
     // Scroll variables
     var lastScrollTop = 0; // Used to house last scroll point to calculate scroll direction
     var scrollScore = 0; // Used to keep track of whether we've been scrolling in one direction for multiple scroll events
-    var threshold = 5; // If scrollScore hits threshold or -threshold we trigger DOWN and UP scroll behaviors
+    var threshold = 10; // If scrollScore hits threshold or -threshold we trigger DOWN and UP scroll behaviors
 
     // Are we starting past the top of the page.  If so, we want the button look
     if ($(window).scrollTop() >= 30) {
@@ -156,6 +156,11 @@ var FBSage = (function($) {
       // Limit score to range [-threshold, threshold]
       scrollScore = Math.max(scrollScore, -threshold);
       scrollScore = Math.min(scrollScore, threshold);
+
+      // The score is held at zero while the button is active
+      if ( $bAModule.is('.-active') ) {
+        scrollScore = 0;
+      }
 
       // If we hit -threshold it means we've been scrolling UP for a while
       if ( scrollScore === -threshold ) {

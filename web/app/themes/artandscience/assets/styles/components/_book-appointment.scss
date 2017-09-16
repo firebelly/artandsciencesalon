@@ -70,7 +70,7 @@ $appointment-padding: 19px 24px;
     }
   }
 
-  // Scrolled and active states
+  // Various states triggered by scroll events in js
   @include media-md {
 
     &.-button, &.-active {
@@ -84,16 +84,6 @@ $appointment-padding: 19px 24px;
         }
       }
     }
-
-    // &.-active {
-    //   button {
-    //     transition: background-color 0.2s;
-
-    //     &::after {
-    //       transition: opacity 0.2s;
-    //     }
-    //   }
-    // }
 
     &.-hide {
       opacity: 0;
