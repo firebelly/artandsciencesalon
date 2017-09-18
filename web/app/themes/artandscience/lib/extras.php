@@ -33,7 +33,7 @@ function excerpt_more() {
 add_filter('excerpt_more', __NAMESPACE__ . '\\excerpt_more');
 
 /**
- * Prevent '/admin' to redirect to '/careers/administrative-jobs/'
+ * Prevent '/admin' from redirecting to '/careers/administrative-jobs/'
  */
 function redirect_exceptions($redirect_url, $requested_url) {
 
