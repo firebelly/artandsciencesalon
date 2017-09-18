@@ -91,3 +91,16 @@ $appointment-padding: 19px 24px;
     }
   }
 }
+
+// Avoid collision with wp admin bar when fixed position
+body.admin-bar {
+  .book-appointment {
+
+    @include media-md {
+      top: $wp-admin-bar-height;
+    }
+    @include min-screen($breakpoint-wp-admin-bar) {
+      top: $wp-admin-bar-height-destop;
+    }
+  }
+}
