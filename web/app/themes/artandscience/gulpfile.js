@@ -244,11 +244,11 @@ gulp.task('svgs', function() {
     .pipe(gulp.dest(path.source + 'svgs/build'));
 });
 // convert to png for fallback
-gulp.task('svgfallback', function() {
-  return gulp.src(path.source + 'svgs/*.svg')
-    .pipe(svg2png())
-    .pipe(gulp.dest('assets/images'));
-});
+// gulp.task('svgfallback', function() {
+//   return gulp.src(path.source + 'svgs/*.svg')
+//     .pipe(svg2png())
+//     .pipe(gulp.dest('assets/images'));
+// });
 
 // ### JSHint
 // `gulp jshint` - Lints configuration JSON and project JS.
@@ -285,7 +285,7 @@ gulp.task('watch', ['styles', 'scripts'], function() {
   gulp.watch([path.source + 'scripts/**/*'], ['jshint', 'scripts']);
   gulp.watch([path.source + 'fonts/**/*'], ['fonts']);
   gulp.watch([path.source + 'images/**/*'], ['images']);
-  gulp.watch([path.source + 'svgs/*.svg'], ['svgs', 'svgfallback']);
+  gulp.watch([path.source + 'svgs/*.svg'], ['svgs']);
   gulp.watch(['bower.json', 'assets/manifest.json'], ['build']);
 });
 

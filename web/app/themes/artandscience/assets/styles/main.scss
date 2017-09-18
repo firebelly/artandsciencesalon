@@ -15,6 +15,7 @@
 @import "helpers/animations";
 @import "helpers/accessibility";
 @import "helpers/ie";
+@import "helpers/breakpoint-indicator";
 
 // Vendor
 
@@ -26,6 +27,7 @@
 @import "components/search";
 @import "components/forms";
 @import "components/footer";
+@import "components/book-appointment";
 
 // Pages
 @import "pages/home";

@@ -11,6 +11,9 @@
   top: -2em; // top: 0 wouldn't work in this imaginary situation
 }
 */
+
+$big-dash-width: 52px;
+
 @mixin big-dash($color: $gray, $pseudo: before) {
   position: relative;
   &::#{$pseudo}{ // By default will be ::before, unless before is specified
@@ -18,19 +21,38 @@
     left: 0;
     content: '';
     height: 2px;
-    width: 52px;
     background: $color;
     position: absolute;
+    width: $big-dash-width;
     @content; // Allow overwriting (or adding) of properties, particulary position
   }
 }
+
+$small-dash-width: 27px;
 
 // Modify big-dash to make small-dash
 @mixin small-dash($color: $gray, $pseudo: after) {
   @include big-dash($color,$pseudo) {
     height: 1px;
-    width: 27px;
+    width: $small-dash-width;
     @content; // Allow overwriting (or adding) of properties, particulary position
+  }
+}
+
+// Adds the ruler edge to a div
+@mixin ruler-edge($pseudo: after) {
+  &::#{$pseudo} { // Will be after by default
+    top: 0;
+    left: 0;
+    bottom: 0;
+    content: '';
+    width: 15px;
+    position: absolute;
+    background-size: 15px 24px;
+    background-repeat: repeat-y;
+    background-position: 0px -10px;
+    background-image: url('../images/ruler-edge.svg');
+    @content;
   }
 }
 

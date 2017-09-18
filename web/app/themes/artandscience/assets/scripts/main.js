@@ -5,10 +5,10 @@
 var FBSage = (function($) {
 
   var screen_width = 0,
-      breakpoint_small = false,
-      breakpoint_medium = false,
-      breakpoint_large = false,
-      breakpoint_array = [480,1000,1200],
+      breakpoint_xs = false,
+      breakpoint_sm = false,
+      breakpoint_md = false,
+      breakpoint_lg = false,
       $document,
       $sidebar,
       loadingTimer,
@@ -31,7 +31,7 @@ var FBSage = (function($) {
     _initBookAppointment();
     _initStylistsSort();
     _initCareersNav();
-    // _initNav();
+    _initNav();
     _injectSvgSprite();
 
     // Esc handlers
@@ -70,28 +70,119 @@ var FBSage = (function($) {
     }, "easeOutSine");
   }
 
-  // Handles main nav
+  // Init main nav interactivity
   function _initNav() {
-    // SEO-useless nav toggler
-    $('<div class="menu-toggle"><div class="menu-bar"><span class="sr-only">Menu</span></div></div>')
-      .prependTo('header.banner')
-      .on('click', function(e) {
-        _showMobileNav();
-      });
-    var mobileSearch = $('.search-form').clone().addClass('mobile-search');
-    mobileSearch.prependTo('.site-nav');
+    // Inject SEO-useless nav toggler
+    $('<button aria-hidden="true" class="menu-toggle"><svg class="icon icon-nav"><use xlink:href="#icon-nav"/></svg><svg class="icon icon-x"><use xlink:href="#icon-x"/></svg></button>')
+      .prependTo('body');
+
+    // Duplicate Secondary nav and inject into footer
+    $('#menu-footer-nav')
+      .clone()
+      .prependTo('.site-footer')
+      .wrap('<div class="footer-menu"></div>')
+      .attr('id','#menu-footer-nav-duplicated'); 
+
+    // Add interactivity to menu-toggle button
+    $(document).on('click','.menu-toggle',function(e) {
+      _toggleMobileNav();
+    });
+  }
+
+  // Nav behavior functions
+  function _toggleMobileNav() {
+    if ( $('body').hasClass('-nav-open') ) {
+      _hideMobileNav();
+    } else {
+      _showMobileNav();
+    }
+  }
+  function _showMobileNav() {
+    $('body')
+      .addClass('-nav-open')
+      .addClass('-nav-transition-permitted');// Allows CSS transitions on nav -- this is off by default to prevent unwanted transitions on screen resize
+  }
+  function _hideMobileNav() {
+    $('body')
+      .removeClass('-nav-open')
+      .addClass('-nav-transition-permitted'); // Allows CSS transitions on nav -- this is off by default to prevent unwanted transitions on screen resize
   }
 
   function _initBookAppointment() {
-    var $bAModule = $('#book-appointment');
 
+    // JQuery selectors
+    var $bAModule = $('#book-appointment');
+    var $locationList = $bAModule.find('.location-list');
+
+    // Close the accordian from the getgo
+    $locationList.velocity("slideUp", { duration: 0 });
+
+    // Open and close the accordian
     $bAModule.on('click', 'button', function() {
+
+      // Based on state: Add class -active and velocity slide open OR remove class and slide close
       if ($bAModule.is('.-active')) {
         $bAModule.removeClass('-active');
+        $locationList.velocity("slideUp", { duration: 200 });
+
       } else {
         $bAModule.addClass('-active');
+        $locationList.velocity("slideDown", { duration: 200 });
       }
     });
+
+    // Scroll variables
+    var lastScrollTop = 0; // Used to house last scroll point to calculate scroll direction
+    var scrollScore = 0; // Used to keep track of whether we've been scrolling in one direction for multiple scroll events
+    var threshold = 10; // If scrollScore hits threshold or -threshold we trigger DOWN and UP scroll behaviors
+
+    // Are we starting past the top of the page.  If so, we want the button look
+    if ($(window).scrollTop() >= 30) {
+      $bAModule.addClass('-button');
+    }
+
+    // On scroll
+    $(window).scroll(function(e){
+
+      // Get scroll pos
+      var scrollTop = $(this).scrollTop();
+
+      // OK.  So we don't want the hiding and showing to respond RAPIDLY to scroll events
+      // We want to establish the user has scrolled enough to indicate intentional scrolling rather than a mouse jitter
+      // So we're going to keep score.
+
+      // If we scroll down add one point.  If we scroll up, subract 2.
+      scrollScore += (scrollTop > lastScrollTop) ? 1 : -2;
+
+      // Limit score to range [-threshold, threshold]
+      scrollScore = Math.max(scrollScore, -threshold);
+      scrollScore = Math.min(scrollScore, threshold);
+
+      // The score is held at zero while the button is active
+      if ( $bAModule.is('.-active') ) {
+        scrollScore = 0;
+      }
+
+      // If we hit -threshold it means we've been scrolling UP for a while
+      if ( scrollScore === -threshold ) {
+        $bAModule.removeClass('-hide');
+        $bAModule.addClass('-button');
+      } 
+
+      // If we hit +threshold it means we've been scrolling DOWN for a while
+      if ( scrollScore === threshold ) {
+        $bAModule.addClass('-hide');
+      } 
+
+      // Are we at the top of the page?
+      if (scrollTop < 30) {
+        $bAModule.removeClass('-button');
+      }
+
+      // Save current scroll position to reference next event
+      lastScrollTop = scrollTop;
+    });
+
   }
 
   function _initStylistsSort() {
@@ -145,16 +236,6 @@ var FBSage = (function($) {
     boomsvgloader.load('/app/themes/artandscience/assets/svgs/build/svgs-defs.svg');
   }
 
-  function _showMobileNav() {
-    $('.menu-toggle').addClass('menu-open');
-    $('.site-nav').addClass('active');
-  }
-
-  function _hideMobileNav() {
-    $('.menu-toggle').removeClass('menu-open');
-    $('.site-nav').removeClass('active');
-  }
-
   // Track ajax pages in Analytics
   function _trackPage() {
     if (typeof ga !== 'undefined') { ga('send', 'pageview', document.location.href); }
@@ -168,9 +249,22 @@ var FBSage = (function($) {
   // Called in quick succession as window is resized
   function _resize() {
     screenWidth = document.documentElement.clientWidth;
-    breakpoint_small = (screenWidth > breakpoint_array[0]);
-    breakpoint_medium = (screenWidth > breakpoint_array[1]);
-    breakpoint_large = (screenWidth > breakpoint_array[2]);
+
+    // Check breakpoint indicator in DOM ( :after { content } is controlled by CSS media queries )
+    var breakpointIndicatorString = window.getComputedStyle(
+      document.querySelector('#breakpoint-indicator'), ':after'
+    ).getPropertyValue('content')
+    .replace(/['"]+/g, '');
+
+    breakpoint_lg = breakpointIndicatorString === 'lg';
+    breakpoint_md = breakpointIndicatorString === 'md' || breakpoint_lg;
+    breakpoint_sm = breakpointIndicatorString === 'sm' || breakpoint_md;
+    breakpoint_xs = breakpointIndicatorString === 'xs' || breakpoint_sm;
+
+    // Close the nav on resize and prevent transitions
+    _hideMobileNav();
+    // Avoid unwanted CSS transitions that result from change from mobile nav CSS to desktop nav CSS
+    $('body').removeClass('-nav-transition-permitted'); 
   }
 
   // Called on scroll

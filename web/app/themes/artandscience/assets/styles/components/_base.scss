@@ -8,12 +8,13 @@ html {
 }
 
 body {
-  @include font-paragraph;
   color: $black;
-  min-height: 100%;
+  height: 100%;
+  @include clearfix;
   overflow-x: hidden;
   position: relative;
-  @include clearfix;
+  background: $gray-dark;
+  @include font-paragraph;
 }
 
 /*
@@ -25,7 +26,7 @@ So use a seperate element.
 Also the blur bleeds at the edges, so we use a slightly oversized psuedo element.
 Clipping the overflow hides the bleed.
 */
-.blurred-background {
+.site-background {
   top: 0;
   left: 0;
   right: 0;
@@ -33,18 +34,20 @@ Clipping the overflow hides the bleed.
   z-index: -1;
   overflow: hidden;
   position: absolute;
-  &::after{
+  &::before{
     content: '';
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
     margin: -20px;
-    filter: blur(8px);
+    filter: blur(3px);
     position: absolute;
     background-size: cover;
-    transform: translate3d(0, 0, 0);
-    background-image: url('../images/blended-background.png'); // There is also a slightly uglier 90k jpg of same name if the 300k png is too big
+    background-image: url('../images/blended-background.png'); // There is also a blended-background.jpg at ~100k
+  }
+  @include media-md {
+    @include ruler-edge;
   }
 }
 
@@ -90,9 +93,9 @@ img {
 }
 
 .container {
+  padding: 0;
   width: 100%;
   margin: 0 auto;
-  padding: 0;
   position: relative;
   @include clearfix();
   @include media-md {
@@ -100,7 +103,8 @@ img {
 }
 
 .site-wrap {
-  @include media-sm {
+  @include media-md {
+    border-top-width: 4px;
     float: left;
     width: 75%;
   }

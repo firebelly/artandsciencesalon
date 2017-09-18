@@ -1,25 +1,176 @@
 // Nav
 
+$mobile-nav-width: 160px;
+
 // wp admin bar push
 .admin-bar {}
 
-#menu-main-nav {
-  @include font-caption-bold;
-  padding: 0;
+.site-header .site-nav {
+  top: 0;
+  left: 0;
+  height: 100%;
+  position: absolute;
+  width: $mobile-nav-width;
+  padding: ($padding - 10px) 0;
+  transform: translateX(-$mobile-nav-width);
 
-  .menu-item {
-    color: $dark-cream;
-    list-style: none;
-    text-align: center;
-    a {
-      text-decoration: none;
+  @include media-md {
+    padding: 0;
+    width: 100%;
+    transform: none;
+    margin-top: 60px;
+    position: relative;
+  }
+
+  // Shared styles between primary and secondary menus
+  #menu-main-nav, #menu-footer-nav {
+    @include font-caption-bold;
+    margin: 0;
+    padding: 1.25em 0;
+
+    .menu-item {
+      margin: 3px 0;
+      list-style: none;
+      text-align: center;
+      color: $dark-cream;
+
+      a {
+        display: block;
+        text-decoration: none;
+        padding: 5px $padding;
+        &:hover {
+          color: $orange;
+        }
+      }
+      
+      &.current-menu-item {
+        color: $orange;
+      }
     }
-    &.current-menu-item {
-      color: $orange;
+  }
+
+  // Dashes around primary menu
+  #menu-main-nav {
+    @include media-md {
+      padding: 2em 0;
+    }
+
+    @include big-dash($orange,before) {
+      left: 50%;
+      width: 32px;
+      transform: translateX(-50%);
+
+      @include media-md {
+        width: $big-dash-width;
+      }
+    }
+
+    @include big-dash($orange,after) {
+      top: auto;
+      bottom: 0;
+      left: 50%;
+      width: 32px;
+      transform: translateX(-50%);
+
+      @include media-md {
+        width: $big-dash-width;
+      }
+    }
+  }
+  
+  // Hide secondary menu here on md+, a js injected duplicate in the footer will take over
+  #menu-footer-nav {
+    @include media-md {
+      display: none;
     }
   }
 }
 
-// mobile menu toggle
-.menu-toggle {
+// Nav toggle button
+button.menu-toggle {
+  left: 0;
+  border: 0;
+  z-index: 10;
+  height: 60px;
+  outline: none;
+  width: $padding;
+  appearance: none;
+  background: $gold;
+  position: absolute;
+
+  .icon {
+    top: 24px;
+    left: 50%;
+    fill: $dark-cream;
+    position: absolute;
+    transition: opacity 0.1s;
+    transform: translateX(-50%);
+  }
+
+  .icon-nav {
+    width: 17px;
+    height: 14px;
+  }
+  .icon-x {
+    width: 14px;
+    height: 14px;
+    opacity: 0;
+  }
+
+  @include media-md {
+    display: none;
+  }
 }
+
+@include max-screen($breakpoint-medium - 1px) {
+  // Transitions can ONLY happen when the javascript has verified with this class that 
+  // the change in CSS rules is a result of the user opening/closing the nav and not just 
+  // resizing the screen
+  body.-nav-transition-permitted {
+    .site-wrap, .site-background, .site-banner, .site-header .site-nav, .site-footer {
+      transition: transform 0.3s 0.15s;
+    }
+    .menu-toggle {
+      transition: transform 0.3s 0.15s, height 0.15s; 
+    }
+    .site-background {
+      transform: none;
+    }
+  }
+
+
+  // Nav closed is default state, below are styles for nav-open
+  body.-nav-open {
+    .site-wrap, .site-background, .site-banner, .menu-toggle, .site-footer {
+      transform: translateX($mobile-nav-width);
+    }
+    .site-header .site-nav {
+      transform: none;
+    }
+    button.menu-toggle {
+      height: 100%;
+
+      .icon-nav {
+        opacity: 0;
+      }
+
+      .icon-x {
+        opacity: 1;
+      }
+
+      // Expand the button invisibly for a quick clickout overlay
+      &::after {
+        top: 0;
+        left: 0;
+        bottom: 0;
+        content: '';
+        width: 100vw;
+        position: absolute;
+      }
+    }
+  }
+}
+
+
+
+

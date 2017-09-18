@@ -1,8 +1,7 @@
 // Header
 
 .site-header {
-  @include media-sm {
-  }
+  padding: 0;
 
   @include media-md {
     float: left;
@@ -10,21 +9,88 @@
   }
 }
 
-// Book An Appointment Module
-.book-appointment {
-  top: 0;
-  z-index: 1;
-  right: 100px;
-  position: fixed;
-  .location-list {
-    display: none;
+.site-banner {
+  height: 60px;
+  position: relative;
+  margin-left: $padding;
+  @include ruler-edge;
+  @include media-md {
+    height: auto;
+    margin-left: 0;
+    &::after {
+      display: none;
+    }
   }
-  &.-active {
-    .location-list {
-      display: block;
+  @include media-lg {
+    &::before {
+      z-index: -1;
+      top: 60px;
+      left: 50%;
+      content: '';
+      width: 218px;
+      height: 303px;
+      position: absolute;
+      transform: translateX(-50%);
+      background-image: url('../images/a-s.svg');
+    }
+  }
+
+  .brand {
+    margin: 0;
+    line-height: 0; // Prevent wierd sizing of elements -- there's only an svg here
+
+
+    a {
+      top: 50%;
+      left: $padding*0.5;
+      position: absolute;
+      padding: $padding/2;
+      transform: translateY(-50%);
+
+      @include media-md {
+        transform: none;
+        position: static;
+      }
+      &:hover {
+        .icon {
+          fill: $orange;
+        }
+      }
+    }
+
+    .icon-logo {
+      display: none;
+
+      @include media-md {
+        margin: auto;
+        height: 50px;
+        width: 45.5px;
+        display: block;
+        margin-top: 50px;
+        fill: $dark-cream;
+      }
+
+      @include media-lg {
+        margin-top: 170px;
+      }
+    }
+
+    .icon-wordmark {
+      width: 160px;
+      height: 13.5px;
+      fill: $dark-cream;
+
+      @include media-md {
+        margin: auto;
+        width: 125px;
+        height: 10.5px;
+        display: block;
+        margin-top: 16px;
+      }
     }
   }
 }
+
 
 // Page Header
 .page-header {
