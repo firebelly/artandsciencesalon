@@ -132,12 +132,12 @@
 
   .header-text {
     @include font-h1;
+    bottom: 0;
     background: $gold;
     color: $dark-cream;
-    padding: ($padding - 6px) $padding ($padding - 8px); // (intended - correction)
-    margin-right: $padding;
     position: absolute;
-    bottom: 0;
+    margin-right: $padding;
+    padding: ($padding - 6px) $padding ($padding - 8px); // (intended - correction)
 
     @include media-md {
       margin-right: $padding-md/2;
