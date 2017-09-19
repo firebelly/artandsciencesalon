@@ -95,26 +95,59 @@
 // Page Header
 .page-header {
   position: relative;
+  padding-bottom: 120px;
+
+  @include media-sm {
+    padding-bottom: 50px;
+  }
+  @include media-md {
+    border-top: $orange 4px solid;
+    padding-bottom: 96px;
+  }
+  @include media-lg {
+    padding-bottom: 60px;
+  }
+
+  .header-image-wrap {
+    position: relative;
+    padding-bottom: 100%;
+
+    @include media-sm { 
+      padding-bottom: #{$breakpoint-small}px;
+    }
+    @include media-md {
+      padding-bottom: 60%;
+    }
+  }
+
+  .header-image {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: absolute;
+    background-size: cover;
+    background-position: center center;
+  }
 
   .header-text {
     @include font-h1;
+    background: $gold;
     color: $dark-cream;
-    padding: $padding-md;
-    background: $gray-dark;
-  }
+    padding: ($padding - 6px) $padding ($padding - 8px); // (intended - correction)
+    margin-right: $padding;
+    position: absolute;
+    bottom: 0;
 
-  @include media-md {
-    display: flex;
-    min-height: 575px;
-    flex-direction: column;
-    background-size: cover;
-    justify-content: flex-end;
-    padding-right: $padding-md;
-    background-color: rgba(0,0,0,.25);
-    background-position: center center;
+    @include media-md {
+      margin-right: $padding-md/2;
+      border-bottom: 2px solid $orange;
+      padding: (36px - 5px) 40px (46px - 15px); // (intended - correction)
+    }
 
-    .header-text {
-      margin-bottom: -$padding-md;
+    @include media-lg {
+      margin-right: $padding-md*2;
+      padding: ($padding-md - 5px) $padding-md (60px - 15px); // (intended - correction)
     }
   }
 }

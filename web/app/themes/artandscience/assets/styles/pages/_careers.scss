@@ -2,10 +2,17 @@
 
 .page.careers {
 
+  .page-header {
+    background: $gold;
+    .header-text {
+      background: $gray-dark;
+    }
+  }
+
   .top-section {
     color: $white;
     background: $gold;
-    padding: #{$padding-md * 2} $padding-md $padding-md;
+    padding: #{$padding-md/2} $padding-md $padding-md;
 
     .body-content {
       @include font-caption-bold;

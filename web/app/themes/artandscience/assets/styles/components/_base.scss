@@ -8,8 +8,9 @@ html {
 }
 
 body {
-  color: $black;
   height: 100%;
+  color: $black;
+  min-width: 320px; // Don't allow window to be sized smaller than iphone 4
   @include clearfix;
   overflow-x: hidden;
   position: relative;
@@ -104,7 +105,6 @@ img {
 
 .site-wrap {
   @include media-md {
-    border-top-width: 4px;
     float: left;
     width: 75%;
   }
@@ -117,4 +117,12 @@ img {
   @include media-md {
     padding: $padding-md;
   }
+}
+
+// Compensate adminbar placement because we relatively positioned the body element
+#wpadminbar {
+    top: -$wp-admin-bar-height;
+    @include min-screen($breakpoint-wp-admin-bar-fixed) {
+      top: 0;
+    }
 }

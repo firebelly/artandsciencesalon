@@ -37,7 +37,7 @@ add_filter('excerpt_more', __NAMESPACE__ . '\\excerpt_more');
  */
 function redirect_exceptions($redirect_url, $requested_url) {
 
-  if($requested_url==='admin') {
+  if(strpos($requested_url, 'admin') !== false) {
     $redirect_url = $requested_url;
   }
 

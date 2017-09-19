@@ -4,7 +4,7 @@ $appointment-padding: 19px 24px;
 .book-appointment {
   padding: 0 0 2em;
   transition: opacity 0.3s 0.2s;
-  
+
   button {
     @include font-caption-bold;
     outline: 0;
@@ -66,7 +66,7 @@ $appointment-padding: 19px 24px;
     @include media-md {
       color: $brown;
       text-align: left;
-      background: rgba($dark-cream,0.7);
+      background: rgba($dark-cream,0.85);
     }
   }
 
@@ -99,8 +99,8 @@ body.admin-bar {
     @include media-md {
       top: $wp-admin-bar-height;
     }
-    @include min-screen($breakpoint-wp-admin-bar) {
-      top: $wp-admin-bar-height-destop;
+    @include min-screen($breakpoint-wp-admin-bar-fixed) {
+      top: $wp-admin-bar-height-big;
     }
   }
 }
