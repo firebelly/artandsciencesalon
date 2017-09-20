@@ -13,6 +13,7 @@
     padding: $padding-lg;
   }
 
+  // Overlapping classes
   &.-top-overlap {
     margin-top: -$padding;
 
@@ -61,7 +62,7 @@
   }
 }
 
-
+//Indentation Classes
 .-indent-right {
   margin-right: $padding;
 
@@ -73,6 +74,7 @@
     margin-right: $padding-lg;
   }
 }
+
 .-indent-right-big {
   margin-right: $padding;
 
@@ -84,6 +86,7 @@
     margin-right: $padding-lg*2;
   }
 }
+
 .-indent-left {    
   margin-left: $padding;
 
@@ -95,6 +98,7 @@
     margin-left: $padding-lg;
   }
 }
+
 .-indent-left-big {    
   margin-left: $padding;
 
@@ -107,6 +111,7 @@
   }
 }
 
+// Border Classes
 .-bottom-border {
   border-bottom: $orange 2px solid;
 }
