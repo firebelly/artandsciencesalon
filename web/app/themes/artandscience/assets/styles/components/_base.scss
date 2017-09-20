@@ -109,7 +109,10 @@ img {
   display: none;
 }
 
-
+::selection {
+  // color: $cream;
+  background: rgba($orange,0.5);
+}
 
 
 .site-wrap {
