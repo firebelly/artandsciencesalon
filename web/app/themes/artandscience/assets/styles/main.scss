@@ -28,14 +28,22 @@
 @import "components/forms";
 @import "components/footer";
 @import "components/book-appointment";
+@import "components/page-blocks";
 
 // Pages
-@import "pages/home";
-@import "pages/single-post";
-@import "pages/search-results";
-@import "pages/locations";
-@import "pages/stylists";
+@import "pages/about";
+@import "pages/bridal";
 @import "pages/careers";
+@import "pages/education";
+@import "pages/home";
+@import "pages/locations";
+@import "pages/lookbooks";
+@import "pages/press";
+@import "pages/search-results";
+@import "pages/services";
+@import "pages/single-post";
+@import "pages/social-impact";
+@import "pages/stylists";
 
 // WP specifics
 @import 'helpers/wp-classes';

@@ -2,6 +2,12 @@
 
 .page.locations {
   
+  .page-header {
+    .header-text {
+      background: $gray-dark;
+    }
+  }
+  
   .location {
     .banner {
       height: 0;

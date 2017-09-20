@@ -1,6 +1,18 @@
 // Stylists Page
 
+.page.stylists {
+  
+  .page-header {
+    background: $dark-cream;
+    .header-text {
+      background: $gray-dark;
+    }
+  }
+}
+
 .stylist {
+
+
   .bio {
     display: none;
   }

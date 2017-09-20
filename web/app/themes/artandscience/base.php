@@ -27,12 +27,12 @@ $header_text = get_post_meta($post->ID, '_cmb2_header_text', true);
       do_action('get_header');
       get_template_part('templates/header');
     ?>
-    <div class="site-wrap container" role="document">
+    <div class="site-wrap" role="document">
       <div class="page-header">
         <div class="header-image-wrap">
           <div class="header-image" style="background-image:url('<?= $header_image ?>');"></div>    
         </div>
-        <div class="header-text user-content">
+        <div class="header-text user-content -indent-right-big">
           <?= $header_text ?>
         </div>    
       </div>

@@ -109,15 +109,8 @@ img {
   display: none;
 }
 
-.container {
-  padding: 0;
-  width: 100%;
-  margin: 0 auto;
-  position: relative;
-  @include clearfix();
-  @include media-md {
-  }
-}
+
+
 
 .site-wrap {
   @include media-md {
@@ -131,7 +124,7 @@ img {
   background: $cream;
 
   @include media-md {
-    padding: $padding-md;
+    padding: $padding-lg;
   }
 }
 

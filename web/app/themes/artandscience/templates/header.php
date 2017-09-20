@@ -1,5 +1,4 @@
 <header class="site-header" role="banner">
-  <div class="container">
     <div class="site-banner">
       <h1 class="brand">
         <a  href="<?= esc_url(home_url('/')); ?>">
@@ -47,7 +46,6 @@
       endif;
       ?>
     </nav>
-  </div>
 
   
 </header>

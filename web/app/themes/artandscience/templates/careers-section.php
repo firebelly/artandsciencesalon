@@ -6,6 +6,6 @@
 ?>
 
 <article id="<?= $post->post_name ?>" class="careers-child-page">
-  <h3><?= the_title(); ?></h3>
+  <h2 class="block-title"><?= the_title(); ?></h2>
   <?= $body ?>
 </article>

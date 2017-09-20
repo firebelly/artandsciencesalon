@@ -1,4 +1,4 @@
-<footer class="site-footer container" role="contentinfo">
+<footer class="site-footer" role="contentinfo">
   <div class="locations">
     <?= \Firebelly\PostTypes\Location\get_locations(); ?>
   </div>

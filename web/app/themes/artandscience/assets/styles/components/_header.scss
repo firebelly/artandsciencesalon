@@ -140,14 +140,14 @@
     padding: ($padding - 6px) $padding ($padding - 8px); // (intended - correction)
 
     @include media-md {
-      margin-right: $padding-md/2;
+      margin-right: $padding-lg/2;
       border-bottom: 2px solid $orange;
-      padding: (36px - 5px) 40px (46px - 15px); // (intended - correction)
+      padding: (36px - 5px) $padding-md (46px - 15px); // (intended - correction)
     }
 
     @include media-lg {
-      margin-right: $padding-md*2;
-      padding: ($padding-md - 5px) $padding-md (60px - 15px); // (intended - correction)
+      margin-right: $padding-lg*2;
+      padding: ($padding-lg - 5px) $padding-lg (60px - 15px); // (intended - correction)
     }
   }
 }

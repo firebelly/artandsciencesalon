@@ -1,0 +1,112 @@
+
+// Page Blocks
+
+.page-block {
+  padding: $padding;
+  background: $dark-cream;
+
+  @include media-md {
+    padding: $padding-md;
+  }
+
+  @include media-lg {
+    padding: $padding-lg;
+  }
+
+  &.-top-overlap {
+    margin-top: -$padding;
+
+    @include media-md {
+      margin-top: -$padding-md;
+    }
+
+    @include media-lg {
+      margin-top: -$padding-lg;
+    }
+  }
+
+  &.-bottom-underlap {
+    padding-bottom: $padding*2;
+
+    @include media-md {
+      padding-bottom: $padding-md*2;
+    }
+
+    @include media-lg {
+      padding-bottom: $padding-lg*2;
+    }
+  }
+
+  // Content Styles
+  h2 {
+    @include font-h3;
+    padding-top: 34px;
+    position: relative;
+    @include big-dash($brown-light);
+
+    margin: (50px - 5px) 0 (22px - 10px);  // (intended - correction)
+
+    &:first-of-type {
+      margin-top: 0;
+    }
+  }
+
+  h3 {
+    @include font-caption-bold;
+    margin: (28px - 14px) 0 0;
+  }
+
+  p {
+    margin: 0 0 1em;
+  }
+}
+
+
+.-indent-right {
+  margin-right: $padding;
+
+  @include media-md {
+    margin-right: $padding-lg/2;
+   }
+
+   @include media-lg {
+    margin-right: $padding-lg;
+  }
+}
+.-indent-right-big {
+  margin-right: $padding;
+
+  @include media-md {
+    margin-right: $padding-lg/2;
+   }
+
+  @include media-lg {
+    margin-right: $padding-lg*2;
+  }
+}
+.-indent-left {    
+  margin-left: $padding;
+
+  @include media-md {
+    margin-left: $padding-lg/2;
+   }
+
+  @include media-lg {
+    margin-left: $padding-lg;
+  }
+}
+.-indent-left-big {    
+  margin-left: $padding;
+
+  @include media-md {
+    margin-left: $padding-lg/2;
+   }
+
+  @include media-lg {
+    margin-left: $padding-lg*2;
+  }
+}
+
+.-bottom-border {
+  border-bottom: $orange 2px solid;
+}
