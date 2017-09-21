@@ -66,6 +66,10 @@ Clipping the overflow hides the bleed.
   }
 }
 
+ul.semantic-only-list {
+  list-style: none;
+  padding-left: 0;
+}
 
 
 p {

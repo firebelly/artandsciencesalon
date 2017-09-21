@@ -66,6 +66,12 @@
   p {
     margin: 0 0 1em;
   }
+
+  a {
+    &:hover {
+      color: $orange;
+    }
+  }
 }
 
 //Indentation Classes

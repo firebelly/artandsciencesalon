@@ -6,6 +6,7 @@
   $intro_text = apply_filters('the_content', $post->post_content);
   $details = apply_filters('the_content', get_post_meta( get_the_ID(), '_cmb2_details', true) );
   $fineprint = apply_filters('the_content', get_post_meta( get_the_ID(), '_cmb2_fineprint', true) );
+  $contact = Firebelly\PostTypes\Pages\Bridal\get_salons();
 
 ?>
 
@@ -22,6 +23,7 @@
   <h2>Details</h2>
   <?= $details ?>
   <h2>Contact Information</h2>
+  <?= $contact ?>
   <h2>Pricing</h2>
   <h2>The Fine Print</h2>
   <?= $fineprint ?>

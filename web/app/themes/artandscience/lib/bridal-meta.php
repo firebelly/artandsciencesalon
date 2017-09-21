@@ -149,26 +149,67 @@ function register_metaboxes() {
 }
 add_action( 'cmb2_admin_init', __NAMESPACE__ . '\register_metaboxes', 10 );
 
+function get_salons() {
+  $salons = get_post_meta(get_the_ID(),'_cmb2_salon_group',true);
+  $output = '';
+
+  $output.= '<ul class="salons-list semantic-only-list">';
+  foreach ($salons as $salon) {
+
+    $coordinator = $salon['coordinator'];
+
+    if ( isset($salon['email']) ) {
+      $coordinator = '<a href="mailto:'.$salon['email'].'">'.$coordinator.'</a>';
+    }
+
+
+    $output .= <<<HTML
+      <li class="salons-item">
+        <h3>{$salon['name']}</h3>
+        <table class="dotted-leader-table contact-table">
+          <tr>
+            <td><span class="wordwrap">Coordinator</span></td>
+            <td><span class="wordwrap">{$coordinator}</span></td>
+          </tr>
+          <tr>
+            <td><span class="wordwrap">Bridal Stylists</span></td>
+            <td><span class="wordwrap">{$salon['bridal_stylists']}</span></td>
+          </tr>
+        </table>
+      </li>
+HTML;
+  }
+  $output .= '</ul>';
+
+  return $output;
+
+}
+
+
 // function get_salons() {
-//   salons = get_post_meta(get_the_ID(),'_cmb2_salon_group',true);
+//   $salons = get_post_meta(get_the_ID(),'_cmb2_salon_group',true);
 //   $output = '';
 
 //   $output.= '<ul class="salons-list">';
-//   foreach (salons as salon) {
+//   foreach ($salons as $salon) {
 
-//     $thumbnail_url = \wp_get_attachment_image_src(salon['thumbnail_id'],'medium')[0];
-//     $description = apply_filters('the_content',salon['description']);
-//     $url = esc_url(salon['url']);
+//     $coordinator = $salon['coordinator'].
+//       ( isset($salon['email']) ? 
+//         ' (<a href="mailto:'.$salon['email'].'">'.$salon['email'].'</a>)' : '');
 
 //     $output .= <<<HTML
-//       <li class="bridal columns-item">
-//         <h3 class='sr-only'>{salon['title']}</h3>
-//         <img src="{$thumbnail_url}" class="thumb">
-//         <p class="description">{$description}</p>
-//         <div class="login-wrap">
-//           <hr>
-//           <a href="{$url}" class="login no-underline" target="_blank"><button class="arrow -right -black -small">Login</button></a>
-//         </div>
+//       <li class="salons-item">
+//         <h3>{$salon['name']}</h3>
+//         <table class="dotted-underline-table contact-table">
+//           <tr>
+//             <td>Coordinator</td>
+//             <td>{$coordinator}</td>
+//           </tr>
+//           <tr>
+//             <td>Birdal Stylists</td>
+//             <td>{$salon['bridal_stylists']}</td>
+//           </tr>
+//         </table>
 //       </li>
 // HTML;
 //   }
