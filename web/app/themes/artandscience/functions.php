@@ -32,6 +32,7 @@ $firebelly_includes = [
   'lib/location-post-type.php',        // Locations
   'lib/person-post-type.php',          // People
   // 'lib/service-post-type.php',         // Services
+  'lib/bridal-meta.php',               // Bridal page admin/meta
 ];
 
 $sage_includes = array_merge($sage_includes, $firebelly_includes);
