@@ -114,20 +114,10 @@ img {
   background: rgba($orange,0.5);
 }
 
-
 .site-wrap {
   @include media-md {
     float: left;
     width: 75%;
-  }
-}
-
-.main-content {
-  padding: $padding;
-  background: $cream;
-
-  @include media-md {
-    padding: $padding-lg;
   }
 }
 

@@ -25,7 +25,7 @@ $appointment-padding: 19px 24px;
     position: fixed;
 
     button {
-      color: $dark-cream;
+      color: $cream-dark;
       padding: $appointment-padding;
       transition: background-color 0.8s 0.2s;
 
@@ -66,7 +66,7 @@ $appointment-padding: 19px 24px;
     @include media-md {
       color: $brown;
       text-align: left;
-      background: rgba($dark-cream,0.85);
+      background: rgba($cream-dark,0.85);
     }
   }
 

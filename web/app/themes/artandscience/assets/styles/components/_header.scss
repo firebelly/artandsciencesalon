@@ -67,7 +67,7 @@
         width: 45.5px;
         display: block;
         margin-top: 50px;
-        fill: $dark-cream;
+        fill: $cream-dark;
       }
 
       @include media-lg {
@@ -78,7 +78,7 @@
     .icon-wordmark {
       width: 160px;
       height: 13.5px;
-      fill: $dark-cream;
+      fill: $cream-dark;
 
       @include media-md {
         margin: auto;
@@ -134,7 +134,7 @@
     @include font-h1;
     bottom: 0;
     background: $gold;
-    color: $dark-cream;
+    color: $cream-dark;
     position: absolute;
     margin-right: $padding;
     padding: ($padding - 6px) $padding ($padding - 8px); // (intended - correction)

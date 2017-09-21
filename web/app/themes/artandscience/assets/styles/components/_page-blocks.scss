@@ -3,7 +3,10 @@
 
 .page-block {
   padding: $padding;
-  background: $dark-cream;
+
+  // Default colors to be overriden by specific classes below
+  color: $gray-dark;
+  background: $cream-dark;
 
   @include media-md {
     padding: $padding-md;
@@ -41,11 +44,14 @@
   // Content Styles
   h2 {
     @include font-h3;
-    padding-top: 34px;
     position: relative;
     @include big-dash($brown-light);
-
     margin: (50px - 5px) 0 (22px - 10px);  // (intended - correction)
+
+    padding-top: (24px - 3px); // (intended - correction)
+    @include media-lg {
+      padding-top: (34px - 7px); // (intended - correction)
+    }
 
     &:first-of-type {
       margin-top: 0;
@@ -114,4 +120,33 @@
 // Border Classes
 .-bottom-border {
   border-bottom: $orange 2px solid;
+}
+
+// Color Classes
+// Color Scheme Styles
+
+// Generic color classes for easy color assignment
+$colors: (
+  'black': $black,
+  'black-lite': $black-lite,
+  'brown': $brown,
+  'brown-light': $brown-light,
+  'cream': $cream,
+  'cream-dark': $cream-dark,
+  'gold': $gold,
+  'gold-light': $gold-light,
+  'gray-dark': $gray-dark,
+  'gray-lite': $gray-lite,
+  'gray-medium': $gray-medium,
+  'gray': $gray,
+  'orange': $orange,
+);
+
+@each $color-name, $color-hex in $colors {
+  .-bg-#{$color-name} {
+    background-color: $color-hex;
+  }
+  .-text-#{$color-name} {
+    color: $color-hex;
+  }
 }

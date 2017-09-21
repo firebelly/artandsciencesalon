@@ -10,8 +10,6 @@
   }
 
   .top-section {
-    color: $white;
-    background: $gold;
     padding-top: #{$padding-lg/2};
 
     .body-content {
@@ -93,6 +91,7 @@
     }
   }
 
+  // Need to hide default child page title for benefits and compensation as they want "benefits" and "compensation" to be seperate headers
   #benefits-compensation {
     .block-title {
       @extend .visually-hidden;

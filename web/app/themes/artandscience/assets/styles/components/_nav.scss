@@ -32,7 +32,7 @@ $mobile-nav-width: 160px;
       margin: 3px 0;
       list-style: none;
       text-align: center;
-      color: $dark-cream;
+      color: $cream-dark;
 
       a {
         display: block;
@@ -101,7 +101,7 @@ button.menu-toggle {
   .icon {
     top: 24px;
     left: 50%;
-    fill: $dark-cream;
+    fill: $cream-dark;
     position: absolute;
     transition: opacity 0.1s;
     transform: translateX(-50%);

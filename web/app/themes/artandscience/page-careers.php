@@ -8,7 +8,7 @@
 
 ?>
 
-<div class="top-section page-block -bottom-underlap">
+<div class="top-section page-block -bottom-underlap -text-cream -bg-gold">
   <div class="content-wrap">
     <div class="body-content user-content">
       <?= $body ?>
