@@ -6,7 +6,7 @@
 
   // Default colors to be overriden by specific classes below
   color: $gray-dark;
-  background: $cream-dark;
+  background: $cream;
 
   @include media-md {
     padding: $padding-md;
@@ -45,7 +45,7 @@
   h2 {
     @include font-h3;
     position: relative;
-    @include big-dash($brown-light);
+    @include big-dash($brown-lite);
     margin: (50px - 5px) 0 (22px - 10px);  // (intended - correction)
 
     padding-top: (24px - 3px); // (intended - correction)
@@ -136,11 +136,11 @@ $colors: (
   'black': $black,
   'black-lite': $black-lite,
   'brown': $brown,
-  'brown-light': $brown-light,
+  'brown-lite': $brown-lite,
   'cream': $cream,
   'cream-dark': $cream-dark,
   'gold': $gold,
-  'gold-light': $gold-light,
+  'gold-lite': $gold-lite,
   'gray-dark': $gray-dark,
   'gray-lite': $gray-lite,
   'gray-medium': $gray-medium,
@@ -154,5 +154,30 @@ $colors: (
   }
   .-text-#{$color-name} {
     color: $color-hex;
+  }
+}
+
+// If an element should want to break out of default .page-block padding and be FULL WIDTH...
+.break-out-of-padding {
+  margin-right: -$padding;
+  margin-left: -$padding;
+  padding-left: $padding;
+  padding-right: $padding;
+  width: calc( 100% + #{$padding}*2);
+
+  @include media-md {
+    margin-right: -$padding-md;
+    margin-left: -$padding-md;
+    padding-left: $padding-md;
+    padding-right: $padding-md;
+    width: calc( 100% + #{$padding-md}*2);
+  }
+
+  @include media-lg {
+    margin-right: -$padding-lg;
+    margin-left: -$padding-lg;
+    padding-left: $padding-lg;
+    padding-right: $padding-lg;
+    width: calc( 100% + #{$padding-lg}*2);
   }
 }

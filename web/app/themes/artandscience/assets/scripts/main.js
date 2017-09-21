@@ -29,6 +29,7 @@ var FBSage = (function($) {
     // $('main').fitVids();
 
     _initBookAppointment();
+    _initAccordianTable();
     _initStylistsSort();
     _initCareersNav();
     _initNav();
@@ -106,6 +107,17 @@ var FBSage = (function($) {
     $('body')
       .removeClass('-nav-open')
       .addClass('-nav-transition-permitted'); // Allows CSS transitions on nav -- this is off by default to prevent unwanted transitions on screen resize
+  }
+
+  function _initAccordianTable() {
+
+    // JQuery selectors
+    // var $tables = $('.accordian-table');
+    var $revealable = $('.revealable');
+
+    // Close the accordian from the getgo
+    // $revealable.velocity("slideUp", { duration: 0 });
+
   }
 
   function _initBookAppointment() {

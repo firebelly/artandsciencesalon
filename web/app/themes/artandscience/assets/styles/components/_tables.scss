@@ -47,6 +47,7 @@
         float: left;   
         width: 150px; 
         text-align: left;
+
         .wordwrap {
           padding-left: 0;
           padding-right: 1ch;
@@ -55,3 +56,37 @@
     }
   }
 }
+
+.accordian-table {
+  width: 100%;
+  // display: block;
+
+  .value, .name {
+    width: 50%;
+    float: left;
+  }
+  .value {
+    @include font-caption-thin;
+  }
+  .revealable {
+    // width: 100%;
+    background: $cream-lite;
+    display: block;
+    @extend .break-out-of-padding;
+  }
+  td {
+    float: left;
+    padding-top: 6px;
+    padding-bottom: 6px;
+  }
+  tr {
+    display: block;
+    @include clearfix;
+    @extend .break-out-of-padding;
+
+    &:nth-of-type(2n){
+      background: $cream-dark;
+    }
+  }
+}
+

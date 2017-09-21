@@ -186,35 +186,42 @@ HTML;
 }
 
 
-// function get_salons() {
-//   $salons = get_post_meta(get_the_ID(),'_cmb2_salon_group',true);
-//   $output = '';
+function get_pricing() {
+  $services = get_post_meta(get_the_ID(),'_cmb2_service_group',true);
+  $output = '';
 
-//   $output.= '<ul class="salons-list">';
-//   foreach ($salons as $salon) {
+  $output.= <<<HTML
+    <table class="service-list accordian-table">
+      <tr class="sr-only">
+        <th>Name</th>
+        <th>Price</th>
+        <th>Description</th>
+      </tr>
+HTML;
 
-//     $coordinator = $salon['coordinator'].
-//       ( isset($salon['email']) ? 
-//         ' (<a href="mailto:'.$salon['email'].'">'.$salon['email'].'</a>)' : '');
+  foreach ($services as $service) {
 
-//     $output .= <<<HTML
-//       <li class="salons-item">
-//         <h3>{$salon['name']}</h3>
-//         <table class="dotted-underline-table contact-table">
-//           <tr>
-//             <td>Coordinator</td>
-//             <td>{$coordinator}</td>
-//           </tr>
-//           <tr>
-//             <td>Birdal Stylists</td>
-//             <td>{$salon['bridal_stylists']}</td>
-//           </tr>
-//         </table>
-//       </li>
-// HTML;
-//   }
-//   $output .= '</ul>';
+    // Name, Price
+    $output .= <<<HTML
+      <tr>
+        <td class="name">{$service['name']}</td>
+        <td class="value">{$service['price']}</td>
+HTML;
 
-//   return $output;
+  // Optional Description (toggle will be created via js)
+    if ( isset($service['description']) ) {
+      if ($service['description']) {
+        $output .= <<<HTML
+        <td class="revealable">{$service['description']}</td>
+HTML;
+      }
+    }
 
-// }
+    $output .= '</tr>';
+
+  }
+  $output .= '</table>';
+
+  return $output;
+
+}

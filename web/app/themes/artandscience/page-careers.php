@@ -42,7 +42,7 @@
 </div>
 
 
-<div class="main-content user-content page-block -indent-right -top-overlap">
+<div class="main-content user-content page-block -indent-right -top-overlap -bg-cream-dark">
   <?php
   foreach ( $children as $post ) {
     include(locate_template('templates/careers-section.php'));
