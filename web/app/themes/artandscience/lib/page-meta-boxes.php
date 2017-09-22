@@ -66,3 +66,44 @@ function metaboxes( array $meta_boxes ) {
   return $meta_boxes;
 }
 add_filter( 'cmb2_meta_boxes', __NAMESPACE__ . '\metaboxes' );
+
+/** 
+ * ADAPTED FROM:
+ * Metabox for Page Slug
+ * @author Tom Morton
+ * @link https://github.com/WebDevStudios/CMB2/wiki/Adding-your-own-show_on-filters
+ *
+ * @param bool $display
+ * @param array $meta_box
+ * @return bool display metabox
+ */
+// Allows for a cmb2 boxes to be put on a page with
+// 'show_on'       => array( 'key' => 'slug', 'value' => 'bridal'),
+function metabox_show_on_slug( $display, $meta_box ) {
+    if ( ! isset( $meta_box['show_on']['key'], $meta_box['show_on']['value'] ) ) {
+        return $display;
+    }
+
+    if ( 'slug' !== $meta_box['show_on']['key'] ) {
+        return $display;
+    }
+
+    $post_id = 0;
+
+    // If we're showing it based on ID, get the current ID
+    if ( isset( $_GET['post'] ) ) {
+        $post_id = $_GET['post'];
+    } elseif ( isset( $_POST['post_ID'] ) ) {
+        $post_id = $_POST['post_ID'];
+    }
+
+    if ( ! $post_id ) {
+      return false; // In Morton's code, this WAS 'return $dispay;'-- but this caused all the metaboxes to appear for pages as they were being created, i.e. before they had proper slugs.
+    }
+
+    $slug = get_post( $post_id )->post_name;
+
+    // See if there's a match
+    return in_array( $slug, (array) $meta_box['show_on']['value']);
+}
+add_filter( 'cmb2_show_on', __NAMESPACE__ . '\metabox_show_on_slug', 10, 2 );
