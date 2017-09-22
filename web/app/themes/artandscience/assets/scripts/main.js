@@ -112,11 +112,32 @@ var FBSage = (function($) {
   function _initAccordianTable() {
 
     // JQuery selectors
-    // var $tables = $('.accordian-table');
-    var $revealable = $('.revealable');
+    var $toggles = $('.accordian-table .accordian-toggle');
+    var $drawers = $('.accordian-table .accordian-drawer');
 
     // Close the accordian from the getgo
-    // $revealable.velocity("slideUp", { duration: 0 });
+    $drawers.velocity("slideUp", { duration: 0 });
+
+    // Inject open/close indicator icon
+    $toggles.each(function() {
+      $('<svg class="icon icon-triangle"><use xlink:href="#icon-triangle"/></svg>')
+      .prependTo(this);
+    })
+
+    // Add click functionality
+    $toggles.click(function() {
+      $accordian = $(this);
+      $drawer = $(this).find('.accordian-drawer');
+
+      // Based on state: Add class -active and velocity slide open OR remove class and slide close
+      if ($accordian.is('.-active')) {
+        $accordian.removeClass('-active');
+        $drawer.velocity("slideUp", { duration: 200 });
+      } else {
+        $accordian.addClass('-active');
+        $drawer.velocity("slideDown", { duration: 200 });
+      }
+    });
 
   }
 

@@ -201,20 +201,19 @@ HTML;
 
   foreach ($services as $service) {
 
+    $content_to_reveal = isset($service['description']) ? ($service['description'] ? true : false) : false;
+
+    $output .= $content_to_reveal ? '<tr class="accordian-toggle">' : '<tr>';
+
     // Name, Price
     $output .= <<<HTML
-      <tr>
-        <td class="name">{$service['name']}</td>
-        <td class="value">{$service['price']}</td>
+      <td class="name">{$service['name']}</td>
+      <td class="value">{$service['price']}</td>
 HTML;
 
-  // Optional Description (toggle will be created via js)
-    if ( isset($service['description']) ) {
-      if ($service['description']) {
-        $output .= <<<HTML
-        <td class="revealable">{$service['description']}</td>
-HTML;
-      }
+    // Optional Description (toggle will be created via js)
+    if ($content_to_reveal) {
+      $output .= "<td class=\"accordian-drawer description\">{$service['description']}</td>";
     }
 
     $output .= '</tr>';
