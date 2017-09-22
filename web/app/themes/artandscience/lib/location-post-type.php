@@ -208,19 +208,19 @@ function metaboxes( array $meta_boxes ) {
   ) );
 
   /**
-   * Services
+   * Salon Color Pricing
    */
-  $pricing_group = new_cmb2_box( array(
-    'id'           => $prefix . 'services_box',
-    'title'        => __( 'Services', 'cmb2' ),
-    'priority'      => 'low',
-    'object_types' => array( 'location', ),
+  $salon_color_group = new_cmb2_box( array(
+    'id'           => $prefix . 'salon_color_box',
+    'title'        => __( 'Salon Color Services/Pricing', 'cmb2' ),
+    'priority'      => 'default',
+    'object_types'  => array( 'location', ), // Post type
   ) );
 
-  $pricing_group_id = $pricing_group->add_field( array(
-    'id'          => $prefix . 'services_group',
+  $salon_color_group_id = $salon_color_group->add_field( array(
+    'id'          => $prefix . 'salon_color_group',
     'type'        => 'group',
-    'description' => __( 'Note that you must switch Text mode and refresh to reorder the services', 'cmb2' ),
+    'description' => __( 'Note that you must switch Text mode and refresh to reorder these services', 'cmb2' ),
     'options'     => array(
         'group_title'   => __( 'Service {#}', 'cmb2' ),
         'add_button'    => __( 'Add Another Service', 'cmb2' ),
@@ -229,16 +229,80 @@ function metaboxes( array $meta_boxes ) {
     ),
   ) );
 
-  $pricing_group->add_group_field( $pricing_group_id, array(
-      'name' => 'Service',
-      'id'   => 'service',
+  $salon_color_group->add_group_field( $salon_color_group_id, array(
+      'name' => 'Service name',
+      'id'   => 'name',
       'type' => 'text',
   ) );
 
-  $pricing_group->add_group_field( $pricing_group_id, array(
-      'name' => 'Service Link',
-      'id'   => 'link',
+  $salon_color_group->add_group_field( $salon_color_group_id, array(
+      'name' => 'Colorist Price',
+      'id'   => 'colorist_price',
       'type' => 'text',
+  ) );
+
+  $salon_color_group->add_group_field( $salon_color_group_id, array(
+      'name' => 'Senior Price',
+      'id'   => 'senior price',
+      'type' => 'text',
+  ) );
+
+  $salon_color_group->add_group_field( $salon_color_group_id, array(
+      'name' => 'Master Price',
+      'id'   => 'master_price',
+      'type' => 'text',
+  ) );
+
+  $salon_color_group->add_group_field( $salon_color_group_id, array(
+      'name' => 'Director Price',
+      'id'   => 'director_price',
+      'type' => 'text',
+  ) );
+
+  $salon_color_group->add_group_field( $salon_color_group_id, array(
+      'name' => 'Description (optional)',
+      'id'   => 'description',
+      'type' => 'textarea_small',
+  ) );
+
+  /**
+   * Barbershop Services Pricing
+   */
+  $barbershop_services_group = new_cmb2_box( array(
+    'id'           => $prefix . 'barbershop_services_box',
+    'title'        => __( 'Barbershop Services/Pricing', 'cmb2' ),
+    'priority'      => 'default',
+    'object_types'  => array( 'location', ), // Post type
+  ) );
+
+  $barbershop_services_group_id = $barbershop_services_group->add_field( array(
+    'id'          => $prefix . 'barbershop_services_group',
+    'type'        => 'group',
+    'description' => __( 'Note that you must switch Text mode and refresh to reorder these services', 'cmb2' ),
+    'options'     => array(
+        'group_title'   => __( 'Service {#}', 'cmb2' ),
+        'add_button'    => __( 'Add Another Service', 'cmb2' ),
+        'remove_button' => __( 'Remove Service', 'cmb2' ),
+        'sortable'      => true, // beta
+    ),
+  ) );
+
+  $barbershop_services_group->add_group_field( $barbershop_services_group_id, array(
+      'name' => 'Service name',
+      'id'   => 'name',
+      'type' => 'text',
+  ) );
+
+  $barbershop_services_group->add_group_field( $barbershop_services_group_id, array(
+      'name' => 'Price',
+      'id'   => 'price',
+      'type' => 'text',
+  ) );
+
+  $barbershop_services_group->add_group_field( $barbershop_services_group_id, array(
+      'name' => 'Description (optional)',
+      'id'   => 'description',
+      'type' => 'textarea_small',
   ) );
 
   return $meta_boxes;
