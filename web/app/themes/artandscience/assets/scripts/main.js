@@ -256,8 +256,6 @@ var FBSage = (function($) {
           $(this).addClass('-active');
         }
 
-        console.log(target);
-
         $('.subpage.-active:not(#'+target+')').removeClass('-active');
         $('#'+target).addClass('-active');
 
