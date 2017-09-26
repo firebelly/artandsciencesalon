@@ -87,6 +87,71 @@ function custom_columns($column){
 }
 add_action('manage_posts_custom_column',  __NAMESPACE__ . '\custom_columns');
 
+
+/**
+ * Style services meta-boxes so there can be multiple per line (1 per line is VERY annoying/disorienting when entering data)
+ */
+function admin_styling() {
+  echo <<<HTML
+  <style>
+    *, *::before, *::after {
+      box-sizing: inherit;
+    }
+
+    html {
+      box-sizing: border-box;
+    }
+
+    .cmb-type-text .cmb-th {
+      min-width: 60px;
+    }
+
+    .cmb-type-text .cmb-td {
+      max-width: calc(100% - 60px);
+    }
+
+    #_cmb2_salon_cut_box .cmb-type-text {
+      width: 33%;
+      min-width: 120px;
+      border-bottom: none;
+      display: inline-block;
+      padding: 10px 10px 10px 0 !important;
+    }
+
+    #_cmb2_salon_color_box .cmb-type-text:not(:first-of-type) {
+      width: 25%;
+      min-width: 120px;
+      border-bottom: none;
+      display: inline-block;
+      padding: 10px 10px 10px 0 !important;
+    }
+
+    #_cmb2_tanning_box .cmb-type-text:first-of-type,
+    #_cmb2_waxing_lounge_box .cmb-type-text:first-of-type,
+    #_cmb2_barbershop_services_box .cmb-type-text:first-of-type {
+      width: 60%;
+      min-width: 120px;
+      border-bottom: none;
+      display: inline-block;
+      padding: 10px 10px 10px 0 !important;
+    }
+
+    #_cmb2_tanning_box .cmb-type-text:nth-of-type(2),
+    #_cmb2_waxing_lounge_box .cmb-type-text:nth-of-type(2),
+    #_cmb2_barbershop_services_box .cmb-type-text:nth-of-type(2) {
+      width: 40%;
+      min-width: 120px;
+      border-bottom: none;
+      display: inline-block;
+      padding: 10px 10px 10px 0 !important;
+    }
+
+
+  </style>
+HTML;
+}
+add_action('admin_head', __NAMESPACE__ . '\admin_styling');
+
 // Custom CMB2 fields for post type
 function metaboxes( array $meta_boxes ) {
   $prefix = '_cmb2_'; // Start with underscore to hide from custom fields list
@@ -160,7 +225,6 @@ function metaboxes( array $meta_boxes ) {
   $hours_group_id = $hours_group->add_field( array(
     'id'          => $prefix . 'hours_group',
     'type'        => 'group',
-    'description' => __( 'Note that you must switch Text mode and refresh to reorder the days', 'cmb2' ),
     'options'     => array(
         'group_title'   => __( 'Day {#}', 'cmb2' ),
         'add_button'    => __( 'Add Another Day', 'cmb2' ),
@@ -208,19 +272,65 @@ function metaboxes( array $meta_boxes ) {
   ) );
 
   /**
-   * Services
+   * Salon Cut Pricing
    */
-  $pricing_group = new_cmb2_box( array(
-    'id'           => $prefix . 'services_box',
-    'title'        => __( 'Services', 'cmb2' ),
-    'priority'      => 'low',
-    'object_types' => array( 'location', ),
+  $salon_cut_group = new_cmb2_box( array(
+    'id'            => $prefix . 'salon_cut_box',
+    'title'         => __( 'Salon Cut Services/Pricing', 'cmb2' ),
+    'priority'      => 'default',
+    'object_types'  => array( 'location', ), // Post type
   ) );
 
-  $pricing_group_id = $pricing_group->add_field( array(
-    'id'          => $prefix . 'services_group',
+  $salon_cut_group->add_field( array(
+    'id'          => $prefix . 'salon_cut_description',
+    'type'        => 'wysiwyg',
+    'name'        => 'Description',
+    'description' => __( 'Text underneath Salon Cut header', 'cmb2' ),
+  ) );
+
+  $salon_cut_group->add_field( array(
+      'name' => 'Stylist Price',
+      'id'   => 'stylist_price',
+      'type' => 'text',
+  ) );
+
+  $salon_cut_group->add_field( array(
+      'name' => 'Senior Price',
+      'id'   => 'senior_price',
+      'type' => 'text',
+  ) );
+
+  $salon_cut_group->add_field( array(
+      'name' => 'Master Price',
+      'id'   => 'master_price',
+      'type' => 'text',
+  ) );
+
+  $salon_cut_group->add_field( array(
+      'name' => 'Director Price',
+      'id'   => 'director_price',
+      'type' => 'text',
+  ) );
+
+  $salon_cut_group->add_field( array(
+      'name' => 'Blowdry Price',
+      'id'   => 'blowdry_price',
+      'type' => 'text',
+  ) );
+
+  /**
+   * Salon Color Pricing
+   */
+  $salon_color_group = new_cmb2_box( array(
+    'id'           => $prefix . 'salon_color_box',
+    'title'        => __( 'Salon Color Services/Pricing', 'cmb2' ),
+    'priority'      => 'default',
+    'object_types'  => array( 'location', ), // Post type
+  ) );
+
+  $salon_color_group_id = $salon_color_group->add_field( array(
+    'id'          => $prefix . 'salon_color_group',
     'type'        => 'group',
-    'description' => __( 'Note that you must switch Text mode and refresh to reorder the services', 'cmb2' ),
     'options'     => array(
         'group_title'   => __( 'Service {#}', 'cmb2' ),
         'add_button'    => __( 'Add Another Service', 'cmb2' ),
@@ -229,20 +339,186 @@ function metaboxes( array $meta_boxes ) {
     ),
   ) );
 
-  $pricing_group->add_group_field( $pricing_group_id, array(
-      'name' => 'Service',
-      'id'   => 'service',
+  $salon_color_group->add_group_field( $salon_color_group_id, array(
+      'name' => 'Name',
+      'id'   => 'name',
       'type' => 'text',
   ) );
 
-  $pricing_group->add_group_field( $pricing_group_id, array(
-      'name' => 'Service Link',
-      'id'   => 'link',
+  $salon_color_group->add_group_field( $salon_color_group_id, array(
+      'name' => 'Colorist Price',
+      'id'   => 'colorist_price',
       'type' => 'text',
+  ) );
+
+  $salon_color_group->add_group_field( $salon_color_group_id, array(
+      'name' => 'Senior Price',
+      'id'   => 'senior_price',
+      'type' => 'text',
+  ) );
+
+  $salon_color_group->add_group_field( $salon_color_group_id, array(
+      'name' => 'Master Price',
+      'id'   => 'master_price',
+      'type' => 'text',
+  ) );
+
+  $salon_color_group->add_group_field( $salon_color_group_id, array(
+      'name' => 'Director Price',
+      'id'   => 'director_price',
+      'type' => 'text',
+  ) );
+
+  $salon_color_group->add_group_field( $salon_color_group_id, array(
+      'name' => 'Description (optional)',
+      'id'   => 'description',
+      'type' => 'textarea_small',
+  ) );
+
+  /**
+   * Barbershop Services Pricing
+   */
+  $barbershop_services_group = new_cmb2_box( array(
+    'id'           => $prefix . 'barbershop_services_box',
+    'title'        => __( 'Barbershop Services/Pricing', 'cmb2' ),
+    'priority'      => 'default',
+    'object_types'  => array( 'location', ), // Post type
+  ) );
+
+  $barbershop_services_group->add_field( array(
+    'id'          => $prefix . 'barbershop_services_description',
+    'type'        => 'wysiwyg',
+    'name'        => 'Description',
+    'description' => __( 'Text underneath Barbershop Services header', 'cmb2' ),
+  ) );
+
+  $barbershop_services_group_id = $barbershop_services_group->add_field( array(
+    'id'          => $prefix . 'barbershop_services_group',
+    'type'        => 'group',
+    'options'     => array(
+        'group_title'   => __( 'Service {#}', 'cmb2' ),
+        'add_button'    => __( 'Add Another Service', 'cmb2' ),
+        'remove_button' => __( 'Remove Service', 'cmb2' ),
+        'sortable'      => true, // beta
+    ),
+  ) );
+
+  $barbershop_services_group->add_group_field( $barbershop_services_group_id, array(
+      'name' => 'Name',
+      'id'   => 'name',
+      'type' => 'text',
+  ) );
+
+  $barbershop_services_group->add_group_field( $barbershop_services_group_id, array(
+      'name' => 'Price',
+      'id'   => 'price',
+      'type' => 'text',
+  ) );
+
+  $barbershop_services_group->add_group_field( $barbershop_services_group_id, array(
+      'name' => 'Description (optional)',
+      'id'   => 'description',
+      'type' => 'textarea_small',
+  ) );
+
+  /**
+   * Waxing Lounge Pricing
+   */
+  $waxing_lounge_group = new_cmb2_box( array(
+    'id'           => $prefix . 'waxing_lounge_box',
+    'title'        => __( 'Waxing Lounge Services/Pricing', 'cmb2' ),
+    'priority'      => 'default',
+    'object_types'  => array( 'location', ), // Post type
+  ) );
+
+  $waxing_lounge_group_id = $waxing_lounge_group->add_field( array(
+    'id'          => $prefix . 'waxing_lounge_group',
+    'type'        => 'group',
+    'options'     => array(
+        'group_title'   => __( 'Service {#}', 'cmb2' ),
+        'add_button'    => __( 'Add Another Service', 'cmb2' ),
+        'remove_button' => __( 'Remove Service', 'cmb2' ),
+        'sortable'      => true, // beta
+    ),
+  ) );
+
+  $waxing_lounge_group->add_group_field( $waxing_lounge_group_id, array(
+      'name' => 'Name',
+      'id'   => 'name',
+      'type' => 'text',
+  ) );
+
+  $waxing_lounge_group->add_group_field( $waxing_lounge_group_id, array(
+      'name' => 'Price',
+      'id'   => 'price',
+      'type' => 'text',
+  ) );
+
+  $waxing_lounge_group->add_group_field( $waxing_lounge_group_id, array(
+      'name' => 'Description (optional)',
+      'id'   => 'description',
+      'type' => 'textarea_small',
+  ) );
+
+  /**
+   * Tanning Pricing
+   */
+  $tanning_group = new_cmb2_box( array(
+    'id'           => $prefix . 'tanning_box',
+    'title'        => __( 'Tanning Services/Pricing', 'cmb2' ),
+    'priority'      => 'default',
+    'object_types'  => array( 'location', ), // Post type
+  ) );
+
+  $tanning_group_id = $tanning_group->add_field( array(
+    'id'          => $prefix . 'tanning_group',
+    'type'        => 'group',
+    'options'     => array(
+        'group_title'   => __( 'Service {#}', 'cmb2' ),
+        'add_button'    => __( 'Add Another Service', 'cmb2' ),
+        'remove_button' => __( 'Remove Service', 'cmb2' ),
+        'sortable'      => true, // beta
+    ),
+  ) );
+
+  $tanning_group->add_group_field( $tanning_group_id, array(
+      'name' => 'Name',
+      'id'   => 'name',
+      'type' => 'text',
+  ) );
+
+  $tanning_group->add_group_field( $tanning_group_id, array(
+      'name' => 'Price',
+      'id'   => 'price',
+      'type' => 'text',
+  ) );
+
+  $tanning_group->add_group_field( $tanning_group_id, array(
+      'name' => 'Description (optional)',
+      'id'   => 'description',
+      'type' => 'textarea_small',
+  ) );
+
+  /**
+   * Bridal Suite Pricing
+   */
+  $bridal_suite_group = new_cmb2_box( array(
+    'id'           => $prefix . 'bridal_suite_box',
+    'title'        => __( 'Bridal Suite Services/Pricing', 'cmb2' ),
+    'priority'      => 'default',
+    'object_types'  => array( 'location', ), // Post type
+  ) );
+
+  $bridal_suite_group->add_field( array(
+    'id'          => $prefix . 'bridal_suite_description',
+    'type'        => 'wysiwyg',
+    'name'        => 'Description',
+    'description' => __( 'Text underneat Bridal Suite header', 'cmb2' ),
   ) );
 
   return $meta_boxes;
 }
+
 add_filter( 'cmb2_meta_boxes', __NAMESPACE__ . '\metaboxes' );
 
 /**
