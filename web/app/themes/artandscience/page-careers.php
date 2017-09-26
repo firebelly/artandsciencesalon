@@ -14,7 +14,7 @@
       <?= $body ?>
     </div>
     
-    <nav class="careers-nav">
+    <nav class="subpage-nav">
       <ul class="child-pages">
         <?php
         $i = 0;

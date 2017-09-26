@@ -31,7 +31,7 @@ var FBSage = (function($) {
     _initBookAppointment();
     _initAccordianTable();
     _initStylistsSort();
-    _initCareersNav();
+    _initSubpageNav();
     _initNav();
     _injectSvgSprite();
 
@@ -238,19 +238,19 @@ var FBSage = (function($) {
     }
   }
 
-  function _initCareersNav() {
-    var $careersNav = $('.careers-nav');
+  function _initSubpageNav() {
+    var $subPageNav = $('.subpage-nav');
 
-    if ($careersNav.length) {
+    if ($subPageNav.length) {
       // Hide the careers section initially, except the first
-      $('.careers-nav li:eq(0)').find('a').addClass('-active');
-      $('.careers-child-page:eq(0)').addClass('-active');
+      $('.subpage-nav li:eq(0)').find('a').addClass('-active');
+      $('.subpage:eq(0)').addClass('-active');
 
-      $('.careers-nav a').on('click', function(e) {
+      $('.subpage-nav a').on('click', function(e) {
         e.preventDefault();
         var target = $(this).attr('data-target');
 
-        $careersNav.find('a.-active').not($(this)).removeClass('-active');
+        $subPageNav.find('a.-active').not($(this)).removeClass('-active');
 
         if (!$(this).is('.-active')) {
           $(this).addClass('-active');
@@ -258,7 +258,7 @@ var FBSage = (function($) {
 
         console.log(target);
 
-        $('.careers-child-page.-active:not(#'+target+')').removeClass('-active');
+        $('.subpage.-active:not(#'+target+')').removeClass('-active');
         $('#'+target).addClass('-active');
 
       });

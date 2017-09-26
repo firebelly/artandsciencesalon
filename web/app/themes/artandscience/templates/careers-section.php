@@ -5,7 +5,7 @@
 
 ?>
 
-<article id="<?= $post->post_name ?>" class="careers-child-page">
+<article id="<?= $post->post_name ?>" class="subpage careers-child-page">
   <h2 class="block-title"><?= the_title(); ?></h2>
   <?= $body ?>
 </article>
