@@ -248,16 +248,21 @@ var FBSage = (function($) {
 
       $('.subpage-nav a').on('click', function(e) {
         e.preventDefault();
-        var target = $(this).attr('data-target');
+        var target = $(this).attr('data-target'),
+            $target = $('#'+target);
 
         $subPageNav.find('a.-active').not($(this)).removeClass('-active');
 
+        // If it aint already active, make it so
         if (!$(this).is('.-active')) {
           $(this).addClass('-active');
+          // Deactivate other active subpage
+          $('.subpage.-active:not(#'+target+')').css('opacity', 0).removeClass('-active');
+          $target.css('opacity', 0);
+          $target.addClass('-active');
+          _scrollBody($('.top-section'), 800);
+          $target.css('opacity', 1);
         }
-
-        $('.subpage.-active:not(#'+target+')').removeClass('-active');
-        $('#'+target).addClass('-active');
 
       });
     }
