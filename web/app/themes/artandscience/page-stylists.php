@@ -17,7 +17,7 @@
  $people_types = get_terms($people_type_args);
 ?>
 
-<nav class="stylists-nav">
+<nav class="stylists-nav top-section page-block -bottom-underlap -text-cream -bg-gold">
   <ul class="locations">
     <?php 
       foreach ($location_posts as $location):
@@ -62,7 +62,7 @@
   </ul>
 </nav>
 
-<div class="people-container">
+<div class="people-container main-content page-block -indent-right">
   
   <?php foreach ($location_posts as $location) { ?>
 
