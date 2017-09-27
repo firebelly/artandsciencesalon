@@ -69,6 +69,11 @@ function simplify_tinymce($settings) {
       'block' => 'span',
       'classes' => 'button',
     ),
+    array(
+      'title' => 'Two Image Layout',
+      'block' => 'div',
+      'classes' => 'image-layout -two-image',
+    ),
     // array( 
     //   'title' => '» Arrow Link',
     //   'block' => 'span',

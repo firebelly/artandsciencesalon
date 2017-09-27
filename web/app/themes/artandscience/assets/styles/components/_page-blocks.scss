@@ -72,6 +72,47 @@
       color: $orange;
     }
   }
+
+  // Image Layout Classes
+  .image-layout {
+    img {
+      width: 100%;
+      vertical-align: top;
+      border-bottom: 2px solid $orange;
+    }
+
+    &.-two-image {
+      margin: $padding 0;
+
+      @include media-md {
+        @include clearfix;
+        margin-right: -$padding-md;
+        width: calc(100% + $padding-md);
+
+        img {
+          float: left;
+          max-width: none;
+          width: calc(50% - #{$padding-md / 2});
+          &:first-of-type {
+            margin-right: $padding-md;
+          }
+        }
+      }
+
+      @include media-lg {
+        margin-right: -$padding-lg;
+        width: calc(100% + $padding-lg);
+
+        img {
+          width: calc(50% - #{$padding-lg / 2});
+          &:first-of-type {
+            margin-right: $padding-lg;
+          }
+        }
+      }
+
+    }
+  }
 }
 
 //Indentation Classes
