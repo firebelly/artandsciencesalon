@@ -61,10 +61,13 @@
   width: 100%;
 
   .value, .name {
-    width: 50%;
     float: left;
   }
+  .name {
+    width: 40%;
+  }
   .value {
+    width: 60%;
     @include font-caption-thin;
   }
   .description{

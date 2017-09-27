@@ -3,4 +3,76 @@
   .page-header {
     background: $cream-dark;
   }
+
+  .salon-cut-wrap {
+    position: relative;
+    padding-top: 20px;
+  }
+  .salon-cut-table {
+    position: absolute;
+    right: 0;
+    bottom: calc(100% - 13px);
+    width: 75%;
+    .titles {
+      @include font-caption-bold;
+    }
+    .prices {
+      @include font-caption-thin;
+    }
+    td, th {
+      width: 20%;
+      text-align: left;
+    }
+  }
+
+  .salon-color-table {
+    position: relative;
+    .value {
+      width: 15%;
+    }
+    .consultation {
+      width: 60%;
+      @include font-caption-thin;
+    }
+    .title-row {
+      right: 0;
+      margin: 0;
+      width: 60%;
+      z-index: 1;
+      padding: 0;
+      bottom: 100%;
+      display: block;
+      position: absolute;
+      margin-bottom: 10px;
+
+      .price-class {
+        width: 25%;
+        float: left;
+        display: block;
+        text-align: left;
+        @include font-caption-bold;
+      }
+    }
+  }
+
+  .bridal-details-link {
+    color: $gold;
+    text-decoration: none;
+    @include font-caption-bold;
+    
+    &::after {
+      top: -1px;
+      content: '>';
+      color: $orange;
+      margin-left: 1ch;
+      position: relative;
+    }
+    &:hover {
+      color: $orange;
+
+      &::after {
+        left: 3px;
+      }
+    }
+  }
 }

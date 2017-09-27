@@ -290,31 +290,31 @@ function metaboxes( array $meta_boxes ) {
 
   $salon_cut_group->add_field( array(
       'name' => 'Stylist Price',
-      'id'   => 'stylist_price',
+      'id'   => $prefix . 'salon_cut_stylist_price',
       'type' => 'text',
   ) );
 
   $salon_cut_group->add_field( array(
       'name' => 'Senior Price',
-      'id'   => 'senior_price',
+      'id'   => $prefix . 'salon_cut_senior_price',
       'type' => 'text',
   ) );
 
   $salon_cut_group->add_field( array(
       'name' => 'Master Price',
-      'id'   => 'master_price',
+      'id'   => $prefix . 'salon_cut_master_price',
       'type' => 'text',
   ) );
 
   $salon_cut_group->add_field( array(
       'name' => 'Director Price',
-      'id'   => 'director_price',
+      'id'   => $prefix . 'salon_cut_director_price',
       'type' => 'text',
   ) );
 
   $salon_cut_group->add_field( array(
       'name' => 'Blowdry Price',
-      'id'   => 'blowdry_price',
+      'id'   => $prefix . 'salon_cut_blowdry_price',
       'type' => 'text',
   ) );
 
@@ -331,6 +331,7 @@ function metaboxes( array $meta_boxes ) {
   $salon_color_group_id = $salon_color_group->add_field( array(
     'id'          => $prefix . 'salon_color_group',
     'type'        => 'group',
+    'description' => 'If all prices are left blank for a service, pricing table will display "Quoted by Consultation"',
     'options'     => array(
         'group_title'   => __( 'Service {#}', 'cmb2' ),
         'add_button'    => __( 'Add Another Service', 'cmb2' ),
@@ -524,7 +525,7 @@ add_filter( 'cmb2_meta_boxes', __NAMESPACE__ . '\metaboxes' );
 /**
  * Get Locations
  */
-function get_locations($options=[]) {
+function get_footer_locations($options=[]) {
   $output = '';
 
   $args = array(
@@ -547,6 +548,155 @@ function get_locations($options=[]) {
   endforeach;
 
   $output .= '</ul>';
+
+  return $output;
+}
+
+/**
+ * Get Tanning Pricing Table
+ */
+function get_services_salon_cut() {
+
+  $salon_cut_text = get_post_meta(get_the_ID(),'_cmb2_salon_cut_description',true);
+
+  if(!$salon_cut_text) { return false; }
+
+  $output = '';
+
+  $output .= '<h2>Salon Cut</h2>';
+  $output .= '<div class="salon-cut-wrap">';
+
+  $stylist_price = get_post_meta(get_the_ID(),'_cmb2_salon_cut_stylist_price',true);
+  $senior_price = get_post_meta(get_the_ID(),'_cmb2_salon_cut_senior_price',true);
+  $master_price = get_post_meta(get_the_ID(),'_cmb2_salon_cut_master_price',true);
+  $director_price = get_post_meta(get_the_ID(),'_cmb2_salon_cut_director_price',true);
+  $blowdry_price = get_post_meta(get_the_ID(),'_cmb2_salon_cut_blowdry_price',true);
+
+
+  $output .= <<<HTML
+    <table class="salon-cut-table">
+      <tr class="titles">
+        <th>Stylist <span class="sr-only">Price</span></th>
+        <th>Senior <span class="sr-only">Price</span></th>
+        <th>Master <span class="sr-only">Price</span></th>
+        <th>Director <span class="sr-only">Price</span></th>
+        <th>Blowdry <span class="sr-only">Price</span></th>
+      </tr>
+      <tr class="prices">
+        <td>{$stylist_price}</td>
+        <td>{$senior_price}</td>
+        <td>{$master_price}</td>
+        <td>{$director_price}</td>
+        <td>{$blowdry_price}</td>
+      </tr>
+    </table>
+HTML;
+
+  $output .= apply_filters('the_content', $salon_cut_text);
+
+  $output .= '</div>';
+
+  return $output;
+}
+
+/**
+ * Get Tanning Pricing Table
+ */
+function get_services_salon_color() {
+
+  $services = get_post_meta(get_the_ID(),'_cmb2_salon_color_group',true);
+
+  if(!$services) { return false; }
+
+  $output = '';
+
+  $output .= '<h2>Salon Color</h2>';
+
+  ob_start();
+  include(locate_template('templates/pricing-table-salon-color.php'));
+  $output .= ob_get_clean();
+
+  return $output;
+}
+/**
+ * Get Barbershop Pricing Table
+ */
+function get_services_barbershop() {
+
+  $services = get_post_meta(get_the_ID(),'_cmb2_barbershop_services_group',true);
+
+  if(!$services) { return false; }
+
+  $barbershop_text = apply_filters('the_content', get_post_meta(get_the_ID(),'_cmb2_barbershop_services_description',true) );
+
+  $output = '';
+
+  $output .= '<h2>Barbershop Services</h2>';
+
+  $output .= $barbershop_text;
+
+  ob_start();
+  include(locate_template('templates/pricing-table.php'));
+  $output .= ob_get_clean();
+
+  return $output;
+}
+
+/**
+ * Get Waxing Pricing Table
+ */
+function get_services_waxing() {
+
+  $services = get_post_meta(get_the_ID(),'_cmb2_waxing_lounge_group',true);
+
+  if(!$services) { return false; }
+
+  $output = '';
+
+  $output .= '<h2>Waxing Lounge</h2>';
+
+  ob_start();
+  include(locate_template('templates/pricing-table.php'));
+  $output .= ob_get_clean();
+
+  return $output;
+}
+
+/**
+ * Get Tanning Pricing Table
+ */
+function get_services_tanning() {
+
+  $services = get_post_meta(get_the_ID(),'_cmb2_tanning_group',true);
+
+  if(!$services) { return false; }
+
+  $output = '';
+
+  $output .= '<h2>Tanning</h2>';
+
+  ob_start();
+  include(locate_template('templates/pricing-table.php'));
+  $output .= ob_get_clean();
+
+  return $output;
+}
+
+/**
+ * Get Tanning Pricing Table
+ */
+function get_services_bridal() {
+
+  $bridal_text = get_post_meta(get_the_ID(),'_cmb2_bridal_suite_description',true);
+
+  if(!$bridal_text) { return false; }
+
+  $output = '';
+
+  $output .= '<h2>Bridal</h2>';
+
+  $output .= apply_filters('the_content', $bridal_text);
+  $output .= '<p><a href="/bridal" class="bridal-details-link">Service &plus; Price Details</a></p>';
 
   return $output;
 }

@@ -187,39 +187,13 @@ HTML;
 
 
 function get_pricing() {
+
   $services = get_post_meta(get_the_ID(),'_cmb2_service_group',true);
   $output = '';
 
-  $output.= <<<HTML
-    <table class="service-list accordian-table">
-      <tr class="sr-only">
-        <th>Name</th>
-        <th>Price</th>
-        <th>Description</th>
-      </tr>
-HTML;
-
-  foreach ($services as $service) {
-
-    $content_to_reveal = isset($service['description']) ? ($service['description'] ? true : false) : false;
-
-    $output .= $content_to_reveal ? '<tr class="accordian-toggle">' : '<tr>';
-
-    // Name, Price
-    $output .= <<<HTML
-      <td class="name">{$service['name']}</td>
-      <td class="value">{$service['price']}</td>
-HTML;
-
-    // Optional Description (toggle will be created via js)
-    if ($content_to_reveal) {
-      $output .= "<td class=\"accordian-drawer description\">{$service['description']}</td>";
-    }
-
-    $output .= '</tr>';
-
-  }
-  $output .= '</table>';
+  ob_start();
+  include(locate_template('templates/pricing-table.php'));
+  $output .= ob_get_clean();
 
   return $output;
 
