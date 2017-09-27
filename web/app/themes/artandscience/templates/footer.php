@@ -1,6 +1,6 @@
 <footer class="site-footer" role="contentinfo">
   <div class="locations">
-    <?= \Firebelly\PostTypes\Location\get_locations(); ?>
+    <?= \Firebelly\PostTypes\Location\get_footer_locations(); ?>
   </div>
   <ul class="social">
     <li><a target="_blank" href="https://www.facebook.com/<?= \Firebelly\SiteOptions\get_option('facebook_id'); ?>"><svg class="icon icon-facebook" aria-hidden="true" role="image"><use xlink:href="#icon-facebook"/></svg><span class="visually-hidden">Facebook</span></a></li>
