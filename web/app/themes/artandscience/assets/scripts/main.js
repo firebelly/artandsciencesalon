@@ -122,7 +122,7 @@ var FBSage = (function($) {
     $toggles.each(function() {
       $('<svg class="icon icon-triangle"><use xlink:href="#icon-triangle"/></svg>')
       .prependTo(this);
-    })
+    });
 
     // Add click functionality
     $toggles.click(function() {
