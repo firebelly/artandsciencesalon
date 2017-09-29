@@ -113,7 +113,7 @@
     padding-bottom: 100%;
 
     @include media-sm { 
-      padding-bottom: #{$breakpoint-small}px;
+      padding-bottom: #{$breakpoint-small};
     }
     @include media-md {
       padding-bottom: 60%;
