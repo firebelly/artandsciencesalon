@@ -199,7 +199,7 @@ $colors: (
 }
 
 // If an element should want to break out of default .page-block padding and be FULL WIDTH...
-.break-out-of-padding {
+@mixin break-out-of-padding {
   margin-right: -$padding;
   margin-left: -$padding;
   padding-left: $padding;

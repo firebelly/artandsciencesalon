@@ -126,15 +126,15 @@ var FBSage = (function($) {
 
     // Add click functionality
     $toggles.click(function() {
-      $accordian = $(this);
-      $drawer = $(this).find('.accordian-drawer');
+      $toggle = $(this);
+      $drawer = $(this).next();
 
       // Based on state: Add class -active and velocity slide open OR remove class and slide close
-      if ($accordian.is('.-active')) {
-        $accordian.removeClass('-active');
+      if ($toggle.is('.-active')) {
+        $toggle.removeClass('-active');
         $drawer.velocity("slideUp", { duration: 200 });
       } else {
-        $accordian.addClass('-active');
+        $toggle.addClass('-active');
         $drawer.velocity("slideDown", { duration: 200 });
       }
     });

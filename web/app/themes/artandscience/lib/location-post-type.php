@@ -574,22 +574,29 @@ function get_services_salon_cut() {
 
 
   $output .= <<<HTML
-    <table class="salon-cut-table">
+    <ul class="salon-cut-list">
       <tr class="titles">
-        <th>Stylist <span class="sr-only">Price</span></th>
-        <th>Senior <span class="sr-only">Price</span></th>
-        <th>Master <span class="sr-only">Price</span></th>
-        <th>Director <span class="sr-only">Price</span></th>
-        <th>Blowdry <span class="sr-only">Price</span></th>
-      </tr>
-      <tr class="prices">
-        <td>{$stylist_price}</td>
-        <td>{$senior_price}</td>
-        <td>{$master_price}</td>
-        <td>{$director_price}</td>
-        <td>{$blowdry_price}</td>
-      </tr>
-    </table>
+        <li>
+          <h3 class="price-type">Stylist <span class="sr-only">Price</span></h3>
+          <p class="price-value">{$stylist_price}</p>
+        </li>
+        <li>
+          <h3 class="price-type">Senior <span class="sr-only">Price</span></h3>
+          <p class="price-value">{$senior_price}</tp
+        </li>
+        <li>
+          <h3 class="price-type">Master <span class="sr-only">Price</span></h3>
+          <p class="price-value">{$master_price}</tp
+        </li>
+        <li>
+          <h3 class="price-type">Director <span class="sr-only">Price</span></h3>
+          <p class="price-value">{$director_price}<pd>
+        </li>
+        <li>
+          <h3 class="price-type">Blowdry <span class="sr-only">Price</span></h3>
+          <p class="price-value">{$blowdry_price}</p>
+        </li>
+      </ul>
 HTML;
 
   $output .= apply_filters('the_content', $salon_cut_text);

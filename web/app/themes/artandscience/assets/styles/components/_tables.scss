@@ -1,82 +1,161 @@
-.dotted-leader-table {
+@mixin leader-table {
   width: 100%;
+  display: block;
 
-  .wordwrap {
+  tbody {  
+    width: 100%;
+    display: block;
+  }
+
+  .leader-text {
     background: $cream;
   }
 
-  tr {
-    display: block;
+  .leader-row {
+    width: 100%;
+    display: block; 
+    flex-wrap: wrap;
+    margin-bottom: 0;
     @include clearfix;
-    position: relative;
-    margin-bottom: 1em;
+  }
 
-    @include media-md {
-      margin-bottom: 0;
-      &::before {
-        left: 0;
-        width: 100%;
-        content: '';
-        color: $gold;
-        top: 1.1em;
-        max-width: 100%;
-        overflow: hidden;
-        position: absolute;
-        border-bottom: 2px dotted $gold;
-      }
+  .leader-left, .leader-right {
+    position: relative;
+    @include font-paragraph;
+  }
+
+  .leader-left { 
+    width: 100%;
+    float: left;
+    margin-top: auto; 
+    text-align: left;
+    padding-right: 50%;
+
+    &::before {
+      left: 0;
+      width: 100%;
+      content: '';  
+      color: $gold;
+      bottom: 0.5em;
+      max-width: 100%;
+      overflow: hidden;
+      position: absolute;
+      border-bottom: 2px dotted $gold;
+    }
+
+    .leader-text {
+      padding-right: 0.5ch;
+      position: relative;
     }
   }
-  td {
-    display: block;
 
-    &:first-of-type {
-      font-style: italic;
+  .leader-right {
+    width: 50%;
+    float: right; 
+    text-align: right;
+    margin-top: -24px;
+
+    .leader-text {
+      padding-left: 0.5ch;
+    }
+  }
+
+  &.accordian-table {
+
+    .leader-row {
+      padding-top: 6px;
+      padding-bottom: 6px;
+      position: relative;
     }
 
-    @include media-md {
-      float: right;
-      text-align: right;
-      position: relative;
-      width: calc(100% - 150px);
+    .icon-triangle {
+      top: 17px;
+      width: 10px;
+      height: 10px;
+      left: -10px;
+    }
+  }
+}
 
-      .wordwrap {
-        padding-left: 1ch;
+@mixin stripey-table {
+  width: 100%;
+  display: block;
+
+  tbody {  
+    width: 100%;
+    display: block;
+  }
+
+  .stripey-row {
+    display: block;
+    @include clearfix;
+    background: $cream;
+    position: relative;
+    @include break-out-of-padding;
+
+    &.odd-row {
+      background: $cream-dark;
+    }
+  }
+
+  .stripey-left, .stripey-right {
+    float: left;
+    padding-top: 6px;
+    padding-bottom: 6px;
+  }
+
+  .stripey-left {
+    width: 40%;
+    text-align: left;
+    @include font-paragraph;
+  }
+
+  .stripey-right {
+    width: 60%;
+    text-align: left;
+    @include font-caption-thin;
+  }
+
+  &.accordian-table {
+    .icon-triangle {
+      top: 18px;
+      width: 12px;
+      height: 12px;
+      left: $padding/2;
+
+      @include media-md {
+        left: $padding-md/2;
       }
-
-      &:first-of-type {
-        float: left;   
-        width: 150px; 
-        text-align: left;
-
-        .wordwrap {
-          padding-left: 0;
-          padding-right: 1ch;
-        }
+      @include media-lg {
+        left: $padding-lg/2;
       }
     }
   }
 }
 
-.accordian-table {
-  width: 100%;
+@mixin accordian-table {
 
-  .value, .name {
-    float: left;
-  }
-  .name {
-    width: 40%;
-  }
-  .value {
-    width: 60%;
-    @include font-caption-thin;
-  }
-  .description{
-    display: block;
+  .accordian-drawer {
     background: $cream-lite;
-    @extend .break-out-of-padding;
+    @include break-out-of-padding;
+
+    // For WHATEVER reason, this fixes animation skitching in chrome. Tables!
+    td, th {
+      float: left;
+    }
+    @include clearfix;
   }
+
+  .icon-triangle {
+    fill: $gray-lite;
+    position: absolute;
+    transition: transform 0.2s;
+    transform: translate(-50%,-50%);
+  }
+
   .accordian-toggle {
     cursor: pointer;
+    position: relative;
 
     &.-active {
       .icon-triangle {
@@ -84,37 +163,28 @@
       }
     }
   }
-  td {
-    float: left;
-    padding-top: 6px;
-    padding-bottom: 6px;
-  }
-  tr {
-    display: block;
-    @include clearfix;
-    position: relative;
-    @extend .break-out-of-padding;
-
-    &:nth-of-type(2n){
-      background: $cream-dark;
-    }
-  }
-  .icon-triangle {
-    top: 18px;
-    width: 12px;
-    height: 12px;
-    left: $padding/2;
-    fill: $gray-lite;
-    position: absolute;
-    transform: translate(-50%,-50%);
-    transition: transform 0.2s;
-
-    @include media-md {
-      left: $padding-md/2;
-    }
-    @include media-lg {
-      left: $padding-lg/2;
-    }
-  }
 }
 
+.leader-table {
+  @include leader-table; 
+}
+
+.stripey-table {
+  @include stripey-table;
+}
+
+.accordian-table {
+  @include accordian-table;
+}
+
+// Most tables must be a leader in mobile and stripey in desktop...
+.pricing-table {
+
+  @include max-screen($breakpoint-medium - 1px) {
+    @include leader-table;
+  }
+
+  @include media-md {
+    @include stripey-table;
+  }
+}

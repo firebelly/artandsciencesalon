@@ -1,3 +1,7 @@
+$breakpoint-salon-color-table: 900px;
+$breakpoint-salon-cut-table-small: 550px;
+$breakpoint-salon-cut-table-big: 900px;
+
 .page.services {
   
   .page-header {
@@ -8,58 +12,136 @@
     position: relative;
     padding-top: 20px;
   }
-  .salon-cut-table {
-    position: absolute;
-    right: 0;
-    bottom: calc(100% - 13px);
-    width: 75%;
-    .titles {
+  .salon-cut-list {
+    margin: 0;
+    width: 260px;
+    padding-left: 0;
+    list-style: none;
+    @include clearfix;
+
+    @include min-screen($breakpoint-salon-cut-table-small) {
+      width: 100%;
+    }
+
+    @include min-screen($breakpoint-salon-cut-table-big) {
+      right: 0;
+      width: 75%;
+      position: absolute;
+      bottom: calc(100% - 13px);
+    }
+
+    li {
+      float: left;
+      width: 85px;
+      margin-bottom: 1em;
+      @include min-screen($breakpoint-salon-cut-table-small) {
+        width: 20%;
+      }
+      @include min-screen($breakpoint-salon-cut-table-big) {
+        margin-bottom: 0;
+      }
+    }
+
+    .price-type {
+      margin: 0;
       @include font-caption-bold;
     }
-    .prices {
+
+    .price-value {
+      margin: 0;
       @include font-caption-thin;
-    }
-    td, th {
-      width: 20%;
-      text-align: left;
     }
   }
 
-  .salon-color-table {
-    position: relative;
-    .value {
-      width: 15%;
-    }
+  .salon-color-table { //Goddang this thing's complicated....
+    
     .consultation {
-      width: 60%;
+      display: block;
       @include font-caption-thin;
     }
-    .title-row {
-      right: 0;
-      margin: 0;
-      width: 60%;
-      z-index: 1;
-      padding: 0;
-      bottom: 100%;
-      display: block;
-      position: absolute;
-      margin-bottom: 10px;
 
-      .price-class {
-        width: 25%;
-        float: left;
-        display: block;
+    // Customized leader table when small
+    @include max-screen ($breakpoint-salon-color-table - 1px) {
+
+      @include leader-table;
+
+      .title-row {
+        @include hidden;
+      }
+
+      .name {
+        @include font-paragraph;
         text-align: left;
+      }
+
+      .price-type {
         @include font-caption-bold;
+      }
+
+      .price-value {
+        @include font-caption-thin;
+      }
+
+      &.accordian-table .leader-row { // Specificity
+        padding: 0;
+      }
+
+      .service {
+        display: block;
+        margin-top: 35px;
+
+        .icon-triangle {
+          top: 12px;
+        }
+      }
+
+      .description {
+        padding-top: 6px;
+        padding-bottom: 6px;
+      }
+    }
+
+    // Customized stripey table when large
+    @include min-screen ($breakpoint-salon-color-table) {
+
+      @include stripey-table;
+
+      position: relative;
+
+      .price-type {
+        @include hidden;
+      }
+      .value {
+        width: 15%;
+      }
+      .title-row {
+        right: 0;
+        margin: 0;
+        width: 60%;
+        z-index: 1;
+        padding: 0;
+        bottom: 100%;
+        display: block;
+        position: absolute;
+        margin-bottom: 10px;
+
+        .price-class {
+          width: 25%;
+          float: left;
+          display: block;
+          text-align: left;
+          @include font-caption-bold;
+        }
       }
     }
   }
+
 
   .bridal-details-link {
     color: $gold;
     text-decoration: none;
     @include font-caption-bold;
-    
+
     &::after {
       top: -1px;
       content: '>';

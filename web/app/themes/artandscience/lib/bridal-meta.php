@@ -156,25 +156,32 @@ function get_salons() {
   $output.= '<ul class="salons-list semantic-only-list">';
   foreach ($salons as $salon) {
 
-    $coordinator = $salon['coordinator'];
+    // Safely grab repeating group array values
+    $name = isset($salon['name']) ? $salon['name'] : '';
+    $coordinator = isset($salon['coordinator']) ? $salon['coordinator'] : '';
+    $email = isset($salon['email']) ? $salon['email'] : '';
+    $bridal_stylists = isset($salon['bridal_stylists']) ? $salon['bridal_stylists'] : '';
 
-    if ( isset($salon['email']) ) {
-      $coordinator = '<a href="mailto:'.$salon['email'].'">'.$coordinator.'</a>';
+    // Append Email link if applicable
+    if ( $email ) {
+      $coordinator = '<a href="mailto:'.$email.'">'.$coordinator.'</a>';
     }
 
-
+    // Output markup
     $output .= <<<HTML
       <li class="salons-item">
-        <h3>{$salon['name']}</h3>
-        <table class="dotted-leader-table contact-table">
-          <tr>
-            <td><span class="wordwrap">Coordinator</span></td>
-            <td><span class="wordwrap">{$coordinator}</span></td>
-          </tr>
-          <tr>
-            <td><span class="wordwrap">Bridal Stylists</span></td>
-            <td><span class="wordwrap">{$salon['bridal_stylists']}</span></td>
-          </tr>
+        <h3>{$name}</h3>
+        <table class="contact-table">
+          <tbody>
+            <tr class="leader-row">
+              <th class="leader-left" scope="row"><span class="leader-text">Coordinator</span></th>
+              <td class="leader-right"><span class="leader-text">{$coordinator}</span></td>
+            </tr>
+            <tr class="leader-row">
+              <th class="leader-left" scope="row"><span class="leader-text">Bridal Stylists</span></th>
+              <td class="leader-right"><span class="leader-text">{$bridal_stylists}</span></td>
+            </tr>
+          </tbody>
         </table>
       </li>
 HTML;

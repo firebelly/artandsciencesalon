@@ -6,4 +6,30 @@
       background: $gray-dark;
     }
   }
+
+  .top-section {
+    p:last-of-type {
+      margin-bottom: 0;
+    }
+  }
+
+  .contact-table {
+
+    // Mobile styling
+    tr {
+      display: block;
+      margin-bottom: 1em;
+    }
+    th, td {
+      display: block;
+    }
+    th {
+      font-style: italic;
+    }
+
+    // At md, activate leader table styling
+    @include media-md {
+      @include leader-table;
+    }
+  }
 }
