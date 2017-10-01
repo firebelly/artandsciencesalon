@@ -3,8 +3,26 @@
 .page.locations {
   
   .page-header {
+    @include media-md {
+      z-index: 1;
+      margin-bottom: -96px;
+    }
+    @include media-lg {
+      margin-bottom: -60px;
+    }
     .header-text {
       background: $gray-dark;
+    }
+  }
+
+  .location-meta {
+    color: $gold;
+    @include font-caption-bold;
+    p {
+      margin: 0;
+    }
+    a {
+      text-decoration: none;
     }
   }
   
@@ -15,12 +33,73 @@
       position: relative;
       padding-bottom: 37.5%;
       background-size: cover;
+      border-bottom: 2px solid $orange;
       background-position: center center;
       a {
-        right: 0;
-        bottom: 0;
+        bottom: 24px;
+        color: $white;
+        right: $padding-lg;
         position: absolute;
+        text-decoration: none;
+        @include font-caption-bold;
+        &:hover {
+          text-decoration: underline;
+        }
       }
+    }
+
+    .location-header {
+      padding-top: $padding-lg;
+      padding-bottom: $padding-lg;
+    }
+
+    .location-name {
+      @include font-h1;
+      margin: 0;
+    }
+
+    .location-details {
+      @include clearfix;
+      padding-bottom: 5px;
+      padding-top: $padding-lg;
+
+      h4 {
+        margin-top: 0;
+        padding-bottom: 3px;
+        @include font-caption-bold;
+        border-bottom: 1px solid $gold;
+      }
+
+      .dotted-leader-table {
+        tr {
+          position: relative;
+        }
+        .day {
+          font-style: normal;
+          text-transform: capitalize;
+        }
+        .time span {
+          @include font-caption;
+        }
+        .hour-details {
+          display: block;
+          font-style: italic;
+          &::before {
+            display: none;
+          }
+          td {
+            float: none;
+            width: 100%;
+          }
+        }
+      }
+    }
+
+    .location-detail-set {
+      float: left;
+      max-width: 216px;
+      margin-right: $padding-lg;
+      margin-bottom: $padding-lg;
     }
   }
 
