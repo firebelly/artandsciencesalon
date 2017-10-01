@@ -21,7 +21,7 @@
       display: block;
       position: relative;
       padding: 6px 0 12px;
-      @include font-caption;
+      @include font-caption-thin;
       text-decoration: none;
 
       &::after {
@@ -34,7 +34,7 @@
         background: $gold-lite;
       }
 
-      &:hover,&.-active {
+      &:hover, &.-active {
         border-bottom: none;
 
         &::after {
