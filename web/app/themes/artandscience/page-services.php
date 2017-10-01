@@ -30,6 +30,9 @@ $locations = get_posts(['post_type'=>'location','sort_column'=>'menu_order','sor
 <?php
 
 ?>
+
+<?php include(locate_template('templates/experience-levels.php')); ?>
+
 <div class="main-content user-content page-block -indent-right -top-overlap -bg-cream">
   <?php
   foreach ( $locations as $post ) {
