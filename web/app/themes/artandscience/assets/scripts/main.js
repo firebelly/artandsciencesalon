@@ -29,6 +29,7 @@ var FBSage = (function($) {
     // $('main').fitVids();
 
     _initBookAppointment();
+    _initExperienceLevelsPopup();
     _initAccordianTable();
     _initStylistsSort();
     _initSubpageNav();
@@ -82,7 +83,7 @@ var FBSage = (function($) {
       .clone()
       .prependTo('.site-footer')
       .wrap('<div class="footer-menu"></div>')
-      .attr('id','#menu-footer-nav-duplicated'); 
+      .attr('id','#menu-footer-nav-duplicated');
 
     // Add interactivity to menu-toggle button
     $(document).on('click','.menu-toggle',function(e) {
@@ -200,12 +201,12 @@ var FBSage = (function($) {
       if ( scrollScore === -threshold ) {
         $bAModule.removeClass('-hide');
         $bAModule.addClass('-button');
-      } 
+      }
 
       // If we hit +threshold it means we've been scrolling DOWN for a while
       if ( scrollScore === threshold ) {
         $bAModule.addClass('-hide');
-      } 
+      }
 
       // Are we at the top of the page?
       if (scrollTop < 30) {
@@ -214,6 +215,14 @@ var FBSage = (function($) {
 
       // Save current scroll position to reference next event
       lastScrollTop = scrollTop;
+    });
+
+  }
+
+  function _initExperienceLevelsPopup() {
+    $toggles.each(function() {
+    $('<svg class="icon icon-triangle"><use xlink:href="#icon-triangle"/></svg>')
+      $hosts.prependTo(this);
     });
 
   }
@@ -300,7 +309,7 @@ var FBSage = (function($) {
     // Close the nav on resize and prevent transitions
     _hideMobileNav();
     // Avoid unwanted CSS transitions that result from change from mobile nav CSS to desktop nav CSS
-    $('body').removeClass('-nav-transition-permitted'); 
+    $('body').removeClass('-nav-transition-permitted');
   }
 
   // Called on scroll

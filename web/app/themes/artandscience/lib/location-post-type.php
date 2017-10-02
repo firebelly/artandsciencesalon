@@ -563,7 +563,7 @@ function get_services_salon_cut() {
 
   $output = '';
 
-  $output .= '<h2>Salon Cut</h2>';
+  $output .= '<h2 class="attach-experience-popup">Salon Cut</h2>';
   $output .= '<div class="salon-cut-wrap">';
 
   $stylist_price = get_post_meta(get_the_ID(),'_cmb2_salon_cut_stylist_price',true);
@@ -617,7 +617,7 @@ function get_services_salon_color() {
 
   $output = '';
 
-  $output .= '<h2>Salon Color</h2>';
+  $output .= '<h2 class="attach-experience-popup">Salon Color</h2>';
 
   ob_start();
   include(locate_template('templates/pricing-table-salon-color.php'));
@@ -638,7 +638,7 @@ function get_services_barbershop() {
 
   $output = '';
 
-  $output .= '<h2>Barbershop Services</h2>';
+  $output .= '<h2 class="attach-experience-popup">Barbershop Services</h2>';
 
   $output .= $barbershop_text;
 
