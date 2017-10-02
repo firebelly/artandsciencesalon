@@ -30,7 +30,7 @@ function register_metaboxes() {
     'type'     => 'wysiwyg',
     'desc'     => 'Content for "Details" section',
     'options' => array(
-      'media_buttons' => false, 
+      'media_buttons' => false,
     ),
   ) );
 
@@ -48,7 +48,6 @@ function register_metaboxes() {
   $salon_group_id = $salon_group->add_field( array(
     'id'          => $prefix . 'salon_group',
     'type'        => 'group',
-    'description' => __( 'Note that you must switch Text mode and refresh to reorder these salons', 'cmb2' ),
     'options'     => array(
         'group_title'   => __( 'Salon {#}', 'cmb2' ),
         'add_button'    => __( 'Add Another Salon', 'cmb2' ),
@@ -96,7 +95,6 @@ function register_metaboxes() {
   $service_group_id = $service_group->add_field( array(
     'id'          => $prefix . 'service_group',
     'type'        => 'group',
-    'description' => __( 'Note that you must switch Text mode and refresh to reorder these services', 'cmb2' ),
     'options'     => array(
         'group_title'   => __( 'Service {#}', 'cmb2' ),
         'add_button'    => __( 'Add Another Service', 'cmb2' ),
@@ -142,7 +140,7 @@ function register_metaboxes() {
     'type'     => 'wysiwyg',
     'desc'     => 'Content for "Fine Print" section',
     'options' => array(
-      'media_buttons' => false, 
+      'media_buttons' => false,
     ),
   ) );
 

@@ -1,8 +1,87 @@
+$breakpoint-press-additional-section: 850px;
+
 .page.press {
-  
+
   .page-header {
     background: $cream-dark;
     .header-text {
+    }
+  }
+
+  .awards-table .leader-text {
+    background: $cream-dark;
+  }
+
+  .leader-table {
+    margin-top: 1.5em;
+    .leader-row {
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+    .leader-text {
+      p {
+        display: inline;
+      }
+    }
+  }
+
+  .additional-sections-wrap {
+    @include clearfix;
+    margin-right: -$padding;
+    @include media-md {
+      margin-right: -$padding-md;
+    }
+    @include media-lg {
+      margin-right: -$padding-lg;
+    }
+  }
+  .additional-section {
+    padding-right: $padding;
+    @include media-md {
+      padding-right: $padding-md;
+    }
+    @include media-lg {
+      padding-right: $padding-lg;
+    }
+
+    @include min-screen ($breakpoint-press-additional-section) {
+      float: left;
+      width: 50%;
+    }
+
+    h2 {
+      margin-top: (50px - 5px); // (intended - correction)
+    }
+  }
+
+  .media-inquiries {
+    margin-top: -($padding*2);
+    margin-right: -($padding*2);
+    margin-left: 0;
+    @include media-md {
+    margin-left: 40%;
+      margin-top: -($padding-md*2);
+      margin-right: -($padding-lg/2 + $padding-md);
+    }
+    @include media-lg {
+      margin-top: -($padding-lg*2);
+      margin-right: -($padding-lg*2);
+    }
+    // width: 60%;
+
+    h2 {
+      color: $orange;
+
+      &::before {
+        background: $gold;
+      }
+    }
+    .line {
+      @include font-caption-bold;
+
+      a {
+        border-bottom: none;
+      }
     }
   }
 }

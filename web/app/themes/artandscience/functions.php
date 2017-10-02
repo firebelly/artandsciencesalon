@@ -33,6 +33,7 @@ $firebelly_includes = [
   'lib/person-post-type.php',          // People
   // 'lib/service-post-type.php',         // Services
   'lib/bridal-meta.php',               // Bridal page admin/meta
+  'lib/press-meta.php',                // Press page admin/meta
 ];
 
 $sage_includes = array_merge($sage_includes, $firebelly_includes);

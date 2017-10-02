@@ -4,7 +4,7 @@
   @include clearfix();
 
   h1,h2,h3,h4,h5,h6 {
-    
+
   }
 
 
@@ -20,7 +20,7 @@
       padding-top: (34px - 7px); // (intended - correction)
     }
 
-    &:first-of-type {
+    &:first-child {
       margin-top: 0;
     }
   }
@@ -35,8 +35,11 @@
   }
 
   a {
+    text-decoration: none;
+    border-bottom: $gray 1px solid;
     &:hover {
       color: $orange;
+      border-bottom-color: $orange;
     }
   }
 
@@ -79,6 +82,4 @@
   strong {
     font-weight: bold;
   }
-
-
 }
