@@ -40,6 +40,7 @@ var FBSage = (function($) {
     $(document).keyup(function(e) {
       if (e.keyCode === 27) {
         _hideMobileNav();
+        _closeExperiencePopup();
       }
     });
 
@@ -220,11 +221,43 @@ var FBSage = (function($) {
   }
 
   function _initExperienceLevelsPopup() {
-    // $toggles.each(function() {
-    // $('<svg class="icon icon-triangle"><use xlink:href="#icon-triangle"/></svg>')
-    //   $hosts.prependTo(this);
-    // });
 
+    // Hide the original popup (we'll be cloning it to wherever it needs to go)
+    var $experiencePopup = $('.experience-popup');
+    $experiencePopup.velocity('slideUp', {duration: 0});
+
+    // Inject popup open/close buttons where appropriate
+    $('.experience-popup-location').each(function() {
+      $('<button class="experience-popup-open"><svg class="icon icon-popup-open"><use xlink:href="#icon-popup-open"/></svg></button>').prependTo(this);
+    });
+    $('.experience-popup h2').each(function() {
+      $('<button class="experience-popup-close"><svg class="icon icon-popup-close"><use xlink:href="#icon-popup-close"/></svg></button>').prependTo(this);
+    });
+
+    // Clicking open button...
+    $(document).on('click','.experience-popup-open', function() {
+
+      // Place the markup in container of .experience-popup-location
+      var $popupLocation = $(this).closest('.experience-popup-location').parent();
+      $experiencePopup.appendTo($popupLocation);
+
+      // Open up
+      $experiencePopup.velocity('slideDown', {duration: 200}).focus();
+    });
+
+    // Clicking close button...
+    $(document).on('click','.experience-popup-close', function() {
+      _closeExperiencePopup();
+    });
+
+    // Clicking outside of popup
+    $experiencePopup.blur(function() {
+      _closeExperiencePopup();
+    });
+  }
+
+  function _closeExperiencePopup() {
+   $('.experience-popup').velocity('slideUp', {duration: 200});
   }
 
   function _initStylistsSort() {

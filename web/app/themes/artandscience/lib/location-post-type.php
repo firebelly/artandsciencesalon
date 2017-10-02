@@ -563,7 +563,8 @@ function get_services_salon_cut() {
 
   $output = '';
 
-  $output .= '<h2 class="attach-experience-popup">Salon Cut</h2>';
+  $output .= '<section class="section">';
+  $output .= '<h2 class="experience-popup-location">Salon Cut</h2>';
   $output .= '<div class="salon-cut-wrap">';
 
   $stylist_price = get_post_meta(get_the_ID(),'_cmb2_salon_cut_stylist_price',true);
@@ -602,7 +603,8 @@ HTML;
   $output .= apply_filters('the_content', $salon_cut_text);
 
   $output .= '</div>';
-
+  
+  $output .= '</section>';
   return $output;
 }
 
@@ -617,12 +619,14 @@ function get_services_salon_color() {
 
   $output = '';
 
-  $output .= '<h2 class="attach-experience-popup">Salon Color</h2>';
+  $output .= '<section class="section">';
+  $output .= '<h2 class="experience-popup-location">Salon Color</h2>';
 
   ob_start();
   include(locate_template('templates/pricing-table-salon-color.php'));
   $output .= ob_get_clean();
-
+  
+  $output .= '</section>';
   return $output;
 }
 /**
@@ -638,14 +642,16 @@ function get_services_barbershop() {
 
   $output = '';
 
-  $output .= '<h2 class="attach-experience-popup">Barbershop Services</h2>';
+  $output .= '<section class="section">';
+  $output .= '<h2 class="experience-popup-location">Barbershop Services</h2>';
 
   $output .= $barbershop_text;
 
   ob_start();
   include(locate_template('templates/pricing-table.php'));
   $output .= ob_get_clean();
-
+  
+  $output .= '</section>';
   return $output;
 }
 
@@ -660,12 +666,14 @@ function get_services_waxing() {
 
   $output = '';
 
+  $output .= '<section class="section">';
   $output .= '<h2>Waxing Lounge</h2>';
 
   ob_start();
   include(locate_template('templates/pricing-table.php'));
   $output .= ob_get_clean();
-
+  
+  $output .= '</section>';
   return $output;
 }
 
@@ -680,12 +688,14 @@ function get_services_tanning() {
 
   $output = '';
 
+  $output .= '<section class="section">';
   $output .= '<h2>Tanning</h2>';
 
   ob_start();
   include(locate_template('templates/pricing-table.php'));
   $output .= ob_get_clean();
 
+  $output .= '</section>';
   return $output;
 }
 
@@ -700,10 +710,12 @@ function get_services_bridal() {
 
   $output = '';
 
+  $output .= '<section class="section">';
   $output .= '<h2>Bridal</h2>';
 
   $output .= apply_filters('the_content', $bridal_text);
   $output .= '<p><a href="/bridal" class="bridal-details-link">Service &plus; Price Details</a></p>';
 
+  $output .= '</section>';
   return $output;
 }

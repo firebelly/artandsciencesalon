@@ -3,6 +3,7 @@
 
 .page-block {
   padding: $padding;
+  position: relative;
 
   // Default colors to be overriden by specific classes below
   color: $gray-dark;
@@ -14,6 +15,14 @@
 
   @include media-lg {
     padding: $padding-lg;
+  }
+
+  .section { 
+    position: relative;
+    margin-top: $section-margin-top;
+    &:first-child { 
+      margin-top: 0; 
+    }
   }
 
   // Overlapping classes

@@ -1,9 +1,52 @@
-.experience-levels {
+.experience-popup-location {
+  position: relative;
+}
+
+.experience-popup-open, .experience-popup-close {
+  right: 100%;
+  top: 0 + 2px; //intended + slight adjustment to match adjecent text
+  border: none;
+  outline: none;
+  appearance: none;
   position: absolute;
+  padding-left: 10px;
+  padding-right: 10px;
+  @include h2-padding-top;
+  background: transparent;
+
+  &:hover {
+    .icon-popup-open, .icon-popup-close {
+      fill: $orange;
+    }
+  }
+
+  .icon-popup-open, .icon-popup-close {
+    fill: $gray-lite;
+    width: 18px;
+    height: 18px;
+  }
+}
+
+.experience-popup {
   z-index: 1;
-  width: 100%;
+  position: absolute;
+  left: -$padding;
+  right: -$padding;
+  top: -$padding;
+
+  @include media-md {
+    left: -$padding-md;
+    right: -$padding-md;
+    top: -$padding-md;
+  }
+
+  @include media-lg {
+    left: -$padding-lg;
+    right: -$padding-lg;
+    top: -$padding-lg;
+  }
+
   h3 {
     color: $orange;
   }
-  display: none;
 }

@@ -5,7 +5,7 @@
     $title = $experience_levels->post_title;
   }
 ?>
-<div class="experience-levels user-content page-block -bg-gray-medium -text-cream-dark">
+<div class="experience-popup user-content page-block -bg-gray-medium -text-cream-dark" tabindex="-1">
   <?php if ($experience_levels) : ?>
   <h2><?= $title ?></h2>
   <?= $content ?>

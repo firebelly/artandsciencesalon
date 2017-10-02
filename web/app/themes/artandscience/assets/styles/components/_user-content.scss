@@ -1,5 +1,13 @@
 // Styling of content that is editable in wysiwyg
 
+// Some h2 styling is gonna need to be referenced elsewhere, so abstract it out.
+@mixin h2-padding-top {    
+  padding-top: (24px - 3px); // (intended - correction)
+  @include media-lg {
+    padding-top: (34px - 7px); // (intended - correction)
+  }
+}
+
 .user-content {
   @include clearfix();
 
@@ -7,18 +15,14 @@
 
   }
 
-
   // Content Styles
   h2 {
     @include font-h3;
     position: relative;
     @include big-dash($brown-lite);
-    margin: (50px - 5px) 0 (22px - 10px);  // (intended - correction)
+    margin: $section-margin-top 0 (22px - 10px);  // (intended - correction)
 
-    padding-top: (24px - 3px); // (intended - correction)
-    @include media-lg {
-      padding-top: (34px - 7px); // (intended - correction)
-    }
+    @include h2-padding-top;
 
     &:first-child {
       margin-top: 0;
@@ -54,7 +58,6 @@
       }
     }
   }
-
 
   ol,
   ul {

@@ -7,6 +7,7 @@ $locations = get_posts(['post_type'=>'location','sort_column'=>'menu_order','sor
 
 ?>
 
+
 <div class="top-section page-block -bottom-underlap -bg-cream-dark">
   <div class="content-wrap">
     <div class="body-content user-content">
@@ -27,12 +28,6 @@ $locations = get_posts(['post_type'=>'location','sort_column'=>'menu_order','sor
   </div>
 </div>
 
-<?php
-
-?>
-
-<?php include(locate_template('templates/experience-levels.php')); ?>
-
 <div class="main-content user-content page-block -indent-right -top-overlap -bg-cream">
   <?php
   foreach ( $locations as $post ) {
@@ -40,3 +35,5 @@ $locations = get_posts(['post_type'=>'location','sort_column'=>'menu_order','sor
   }
   ?>
 </div>
+
+<?php include(locate_template('templates/experience-levels.php')); ?>
