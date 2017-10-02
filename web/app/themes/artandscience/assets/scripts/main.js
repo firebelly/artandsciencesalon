@@ -220,10 +220,10 @@ var FBSage = (function($) {
   }
 
   function _initExperienceLevelsPopup() {
-    $toggles.each(function() {
-    $('<svg class="icon icon-triangle"><use xlink:href="#icon-triangle"/></svg>')
-      $hosts.prependTo(this);
-    });
+    // $toggles.each(function() {
+    // $('<svg class="icon icon-triangle"><use xlink:href="#icon-triangle"/></svg>')
+    //   $hosts.prependTo(this);
+    // });
 
   }
 
