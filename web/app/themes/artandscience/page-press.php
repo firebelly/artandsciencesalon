@@ -12,7 +12,6 @@
 
 
 <div class="awards user-content page-block -bg-cream-dark -bottom-underlap">
- <h2>Awards</h2>
  <?= $awards ?>
 </div>
 
@@ -20,11 +19,9 @@
 
 <div class="notable-press user-content page-block -bg-cream -indent-right">
   <div class="media-inquiries user-content page-block -bg-gray-dark -text-cream -bottom-border">
-    <h2>Media Inquiries</h2>
     <?= $media_inquiries ?>
   </div>
-
- <h2>Notable Press</h2>
+  
  <?= $notable_press ?>
  <div class="additional-sections-wrap">
    <?= $additional_sections ?>

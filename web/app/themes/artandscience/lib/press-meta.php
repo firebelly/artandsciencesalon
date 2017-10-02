@@ -221,6 +221,8 @@ function get_awards() {
   $awards = get_post_meta(get_the_ID(),'_cmb2_awards_group',true);
 
   $output = '';
+  $output .= '<section class="section">';
+  $output .= '<h2>Awards</h2>';
   $output .= '<table class="awards-table leader-table"><tbody>';
 
   foreach ($awards as $award) :
@@ -239,7 +241,7 @@ HTML;
 
   endforeach;
 
-  $output .= '</tr></tbody></table>';
+  $output .= '</tr></tbody></table></section>';
 
   return $output;
 
@@ -256,10 +258,13 @@ function get_media_inquiries() {
 
     // Output markup
     $output .= <<<HTML
-      <div class="name line">{$name}</div>
-      <div class="title line">{$title}</div>
-      <div class="email line"><a href="mailto:{$email}" target="_blank">{$email}</a></div>
-      <div class="number line">{$number}</div>
+      <section class="section">
+        <h2>Media Inquiries</h2>
+        <div class="name line">{$name}</div>
+        <div class="title line">{$title}</div>
+        <div class="email line"><a href="mailto:{$email}" target="_blank">{$email}</a></div>
+        <div class="number line">{$number}</div>
+      </section>
 HTML;
 
   return $output;
@@ -271,6 +276,8 @@ function get_notable_press() {
   $notable_press = get_post_meta(get_the_ID(),'_cmb2_notable_press_group',true);
 
   $output = '';
+  $output .= '<section class="section">';
+  $output .= '<h2>Notable Press</h2>';
   $output .= '<table class="notable_press-table leader-table"><tbody>';
 
   foreach ($notable_press as $press_entry) :
@@ -289,7 +296,7 @@ HTML;
 
   endforeach;
 
-  $output .= '</tr></tbody></table>';
+  $output .= '</tr></tbody></table></section>';
 
   return $output;
 
@@ -310,10 +317,10 @@ function get_additional_sections() {
 
     // Output markup
     $output .= <<<HTML
-      <div class="additional-section">
+      <section class="additional-section section">
         <h2>{$title}</h2>
         {$content}
-      </div>
+      </section>
 HTML;
 
   endforeach;

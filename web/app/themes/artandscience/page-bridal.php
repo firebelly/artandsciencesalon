@@ -21,12 +21,20 @@
 
 
 <div class="main-content user-content page-block -indent-right -top-overlap">
-  <h2>Details</h2>
-  <?= $details ?>
-  <h2>Contact Information</h2>
-  <?= $contact ?>
-  <h2>Pricing</h2>
-  <?= $pricing ?>
-  <h2>The Fine Print</h2>
-  <?= $fineprint ?>
+  <section class="section">
+    <h2>Details</h2>
+    <?= $details ?>
+  </section>
+  <section class="section">
+    <h2>Contact Information</h2>
+    <?= $contact ?>
+  </section>
+  <section class="section">
+    <h2>Pricing</h2>
+    <?= $pricing ?>
+  </section>
+  <section class="section">
+    <h2>The Fine Print</h2>
+    <?= $fineprint ?>
+  </section>
 </div>

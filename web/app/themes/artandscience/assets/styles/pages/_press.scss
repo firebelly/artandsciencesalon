@@ -36,6 +36,7 @@ $breakpoint-press-additional-section: 850px;
     }
   }
   .additional-section {
+    margin-top: $section-margin-top;
     padding-right: $padding;
     @include media-md {
       padding-right: $padding-md;
@@ -47,10 +48,6 @@ $breakpoint-press-additional-section: 850px;
     @include min-screen ($breakpoint-press-additional-section) {
       float: left;
       width: 50%;
-    }
-
-    h2 {
-      margin-top: (50px - 5px); // (intended - correction)
     }
   }
 

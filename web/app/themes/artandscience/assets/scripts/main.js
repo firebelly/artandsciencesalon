@@ -242,16 +242,11 @@ var FBSage = (function($) {
       $experiencePopup.appendTo($popupLocation);
 
       // Open up
-      $experiencePopup.velocity('slideDown', {duration: 200}).focus();
+      $experiencePopup.velocity('slideDown', {duration: 200});
     });
 
     // Clicking close button...
     $(document).on('click','.experience-popup-close', function() {
-      _closeExperiencePopup();
-    });
-
-    // Clicking outside of popup
-    $experiencePopup.blur(function() {
       _closeExperiencePopup();
     });
   }
