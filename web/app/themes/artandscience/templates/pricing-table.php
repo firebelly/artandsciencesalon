@@ -1,11 +1,11 @@
 
-<table class="service-list pricing-table accordian-table">
+<div class="service-list pricing-table accordian-table">
   <caption class="sr-only">Service Prices and Descriptions</caption>
 
-  <?php 
+  <?php
   $i = 0; // Incrementer for even/odd deduction
-  foreach ($services as $service) : 
- 
+  foreach ($services as $service) :
+
     // Clean the data
     $name = isset($service['name']) ? $service['name'] : '';
     $price = isset($service['price']) ? $service['price'] : '';
@@ -20,19 +20,19 @@
     $additional_classes .= $even ? ' even-row' : ' odd-row';
     ?>
 
-  <tr class="stripey-row leader-row<?= $additional_classes ?>">
-    <th class="leader-left stripey-left name" scope="row" <?= $description ? 'rowspan="2"' : '' ?>><span class="leader-text"><?= $name ?> </span></td>
-    <th class="sr-only" scope="row">Price</th>
-    <td class="leader-right stripey-right price"><span class="leader-text"><?= $price ?></span></td>
-  </tr>
+  <div class="stripey-row leader-row<?= $additional_classes ?>">
+    <div class="leader-left stripey-left name" scope="row" <?= $description ? 'rowspan="2"' : '' ?>><span class="leader-text"><?= $name ?> </span></div>
+    <div class="sr-only" scope="row">Price</div>
+    <div class="leader-right stripey-right price"><span class="leader-text"><?= $price ?></span></div>
+  </div>
 
   <?php if($description) : ?>
-  <tr class="accordian-drawer">
-    <th class="sr-only" scope="row">Description</th>
-    <td class="description"><?= $description ?></td>
-  </tr>
+  <div class="accordian-drawer">
+    <div class="sr-only" scope="row">Description</div>
+    <div class="description"><?= $description ?></div>
+  </div>
   <?php endif ?>
 
   <?php endforeach ?>
 
-</table>
+</div>

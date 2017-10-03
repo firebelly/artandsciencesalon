@@ -15,13 +15,11 @@
  <?= $awards ?>
 </div>
 
-
-
 <div class="notable-press user-content page-block -bg-cream -indent-right">
   <div class="media-inquiries user-content page-block -bg-gray-dark -text-cream -bottom-border">
     <?= $media_inquiries ?>
   </div>
-  
+
  <?= $notable_press ?>
  <div class="additional-sections-wrap">
    <?= $additional_sections ?>

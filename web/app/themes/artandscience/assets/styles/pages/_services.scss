@@ -8,22 +8,6 @@ $breakpoint-salon-cut-table-big: 900px;
     background: $cream-dark;
   }
 
-  // .subpage-nav {
-  //   .child-pages {
-  //     width: 40%;
-  //     display: block;
-  //     .child-page {
-  //       width: 100%;
-  //       a:not(.-active)::after {
-  //         display: none;
-  //       }
-  //       a.-active {
-  //         @include font-caption-bold;
-  //       }
-  //     }
-  //   }
-  // }
-
   .salon-cut-wrap {
     position: relative;
     padding-top: 20px;
@@ -154,7 +138,6 @@ $breakpoint-salon-cut-table-big: 900px;
       }
     }
   }
-
 
   .bridal-details-link {
     color: $gold;

@@ -24,5 +24,6 @@
 .screen-reader-text,
 .sr-only,
 .visually-hidden {
-  @include sr-only;
+  display: none;
+  // @include sr-only;
 }

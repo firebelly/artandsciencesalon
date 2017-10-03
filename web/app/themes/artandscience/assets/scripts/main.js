@@ -282,7 +282,7 @@ var FBSage = (function($) {
     var $subPageNav = $('.subpage-nav');
 
     if ($subPageNav.length) {
-      $('.subpage-nav a').each(function() {
+      $('.subpage-nav .subpage-link').each(function() {
 
         // Select me and my target
         var $thisLink = $(this),
