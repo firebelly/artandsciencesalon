@@ -35,6 +35,7 @@ var FBSage = (function($) {
     _initSubpageNav();
     _initNav();
     _injectSvgSprite();
+    _initBigclicky();
 
     // Certain elements (e.g. popups) are hidden during load, remove the class hiding them...
     $('.hide-during-page-load').removeClass('hide-during-page-load');
@@ -329,6 +330,24 @@ var FBSage = (function($) {
       $('.subpage:eq(0)').addClass('-active');
       $('.subpage-nav .subpages-list-item:eq(0)').find('.subpage-section-nav').velocity('slideDown', {duration: 300});
     }
+  }
+
+  function _initBigclicky() {
+    // Bigclicky™
+    $(document).on('click', '.bigclicky', function(e) {
+      if (!$(e.target).is('a')) {
+        e.preventDefault();
+        var link = $(this).find('a:first');
+        var href = link.attr('href');
+        if (href) {
+          if (e.metaKey || link.attr('target')) {
+            window.open(href);
+          } else {
+            location.href = href;
+          }
+        }
+      }
+    });
   }
 
   function _injectSvgSprite() {

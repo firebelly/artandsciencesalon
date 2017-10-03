@@ -9,10 +9,15 @@
   outline: none;
   appearance: none;
   position: absolute;
-  padding-left: 10px;
-  padding-right: 10px;
+  padding-left: 8px;
+  padding-right: 8px;
   @include h2-padding-top;
   background: transparent;
+
+  @include media-md {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
 
   &:hover {
     .icon-popup-open, .icon-popup-close {
@@ -21,9 +26,13 @@
   }
 
   .icon-popup-open, .icon-popup-close {
+    width: 15px;
+    height: 15px;
     fill: $gray-lite;
-    width: 18px;
-    height: 18px;
+    @include media-md {
+      width: 18px;
+      height: 18px;
+    }
   }
 }
 

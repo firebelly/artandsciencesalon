@@ -30,6 +30,7 @@ $firebelly_includes = [
   'lib/page-meta-boxes.php',           // Various tweaks for multiple post types
   'lib/post-meta-boxes.php',           // Various tweaks for multiple post types
   'lib/location-post-type.php',        // Locations
+  'lib/lookbook-post-type.php',        // LookBooks
   'lib/person-post-type.php',          // People
   // 'lib/service-post-type.php',         // Services
   'lib/bridal-meta.php',               // Bridal page admin/meta

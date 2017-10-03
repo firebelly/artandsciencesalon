@@ -4,7 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "f514be14545bb3cd44483462d59560a3",
+    "hash": "74b945bb29a02df475801b49c4232986",
+    "content-hash": "9cfc6c0bc85472803fe04441d626a587",
     "packages": [
         {
             "name": "composer/installers",
@@ -104,7 +105,7 @@
                 "zend",
                 "zikula"
             ],
-            "time": "2016-04-13T19:46:30+00:00"
+            "time": "2016-04-13 19:46:30"
         },
         {
             "name": "johnpbloch/wordpress",
@@ -143,7 +144,7 @@
                 "cms",
                 "wordpress"
             ],
-            "time": "2017-09-19T22:27:16+00:00"
+            "time": "2017-09-19 22:27:16"
         },
         {
             "name": "johnpbloch/wordpress-core",
@@ -183,7 +184,7 @@
                 "cms",
                 "wordpress"
             ],
-            "time": "2017-09-19T22:27:11+00:00"
+            "time": "2017-09-19 22:27:11"
         },
         {
             "name": "johnpbloch/wordpress-core-installer",
@@ -232,7 +233,7 @@
             "keywords": [
                 "wordpress"
             ],
-            "time": "2017-05-31T18:42:33+00:00"
+            "time": "2017-05-31 18:42:33"
         },
         {
             "name": "oscarotero/env",
@@ -274,7 +275,7 @@
             "keywords": [
                 "env"
             ],
-            "time": "2017-07-17T20:41:59+00:00"
+            "time": "2017-07-17 20:41:59"
         },
         {
             "name": "roots/wp-password-bcrypt",
@@ -331,7 +332,7 @@
             "keywords": [
                 "wordpress wp bcrypt password"
             ],
-            "time": "2016-03-01T16:27:06+00:00"
+            "time": "2016-03-01 16:27:06"
         },
         {
             "name": "vlucas/phpdotenv",
@@ -381,7 +382,7 @@
                 "env",
                 "environment"
             ],
-            "time": "2016-09-01T10:05:43+00:00"
+            "time": "2016-09-01 10:05:43"
         },
         {
             "name": "wpackagist-plugin/akismet",
@@ -394,7 +395,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://downloads.wordpress.org/plugin/akismet.4.0.zip",
-                "reference": null,
+                "reference": "tags/4.0",
                 "shasum": null
             },
             "require": {
@@ -414,7 +415,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://downloads.wordpress.org/plugin/cmb2.zip?timestamp=1503425980",
-                "reference": null,
+                "reference": "trunk",
                 "shasum": null
             },
             "require": {
@@ -434,7 +435,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://downloads.wordpress.org/plugin/duplicate-post.3.2.zip",
-                "reference": null,
+                "reference": "tags/3.2",
                 "shasum": null
             },
             "require": {
@@ -454,7 +455,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://downloads.wordpress.org/plugin/google-sitemap-generator.4.0.9.zip",
-                "reference": null,
+                "reference": "tags/4.0.9",
                 "shasum": null
             },
             "require": {
@@ -474,7 +475,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://downloads.wordpress.org/plugin/intuitive-custom-post-order.3.1.0.zip",
-                "reference": null,
+                "reference": "tags/3.1.0",
                 "shasum": null
             },
             "require": {
@@ -494,7 +495,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://downloads.wordpress.org/plugin/redirection.2.7.3.zip",
-                "reference": null,
+                "reference": "tags/2.7.3",
                 "shasum": null
             },
             "require": {
@@ -502,6 +503,26 @@
             },
             "type": "wordpress-plugin",
             "homepage": "https://wordpress.org/plugins/redirection/"
+        },
+        {
+            "name": "wpackagist-plugin/regenerate-thumbnails",
+            "version": "2.3.1",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/regenerate-thumbnails/",
+                "reference": "tags/2.3.1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/regenerate-thumbnails.2.3.1.zip",
+                "reference": null,
+                "shasum": null
+            },
+            "require": {
+                "composer/installers": "~1.0"
+            },
+            "type": "wordpress-plugin",
+            "homepage": "https://wordpress.org/plugins/regenerate-thumbnails/"
         },
         {
             "name": "wpackagist-plugin/update-from-bottom",
@@ -514,7 +535,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://downloads.wordpress.org/plugin/update-from-bottom.1.0.3.zip",
-                "reference": null,
+                "reference": "tags/1.0.3",
                 "shasum": null
             },
             "require": {
@@ -601,7 +622,7 @@
                 "phpcs",
                 "standards"
             ],
-            "time": "2017-05-22T02:43:20+00:00"
+            "time": "2017-05-22 02:43:20"
         }
     ],
     "aliases": [],

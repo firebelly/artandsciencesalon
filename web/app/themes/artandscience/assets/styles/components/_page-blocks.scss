@@ -93,7 +93,7 @@
 }
 
 //Indentation Classes
-.-indent-right {
+@mixin indent-right {
   margin-right: $padding;
 
   @include media-md {
@@ -105,8 +105,8 @@
   }
 }
 
-.-indent-right-big {
-  margin-right: $padding;
+@mixin indent-right-big {
+    margin-right: $padding;
 
   @include media-md {
     margin-right: $padding-lg/2;
@@ -117,7 +117,7 @@
   }
 }
 
-.-indent-left {
+@mixin indent-left {
   margin-left: $padding;
 
   @include media-md {
@@ -129,7 +129,7 @@
   }
 }
 
-.-indent-left-big {
+@mixin indent-left-big {
   margin-left: $padding;
 
   @include media-md {
@@ -139,6 +139,22 @@
   @include media-lg {
     margin-left: $padding-lg*2;
   }
+
+}
+.-indent-right {
+  @include indent-right;
+}
+
+.-indent-right-big {
+  @include indent-right-big;
+}
+
+.-indent-left {
+  @include indent-left;
+}
+
+.-indent-left-big {
+  @include indent-left-big;
 }
 
 // Border Classes

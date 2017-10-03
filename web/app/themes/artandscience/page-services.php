@@ -14,7 +14,7 @@ $locations = get_posts(['post_type'=>'location','sort_column'=>'menu_order','sor
     </div>
 
     <nav class="subpage-nav -has-subpage-sections">
-      <h3 class="nav-title">Locations</h3>
+      <h3 class="nav-title">Location</h3>
       <ul class="subpages-list">
         <?php
         foreach ( $locations as $location ) {

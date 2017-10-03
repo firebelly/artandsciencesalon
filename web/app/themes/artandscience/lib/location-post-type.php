@@ -554,7 +554,7 @@ function get_footer_locations($options=[]) {
 
 
 /**
- * Get Locations
+ * Get Service Section Nav
  */
 function get_service_section_nav($location) {
 
@@ -566,7 +566,7 @@ function get_service_section_nav($location) {
   $location_id = $location->ID;
 
 
-  $output .= get_post_meta($location_id,'_cmb2_salon_cut_group',true) ?
+  $output .= get_post_meta($location_id,'_cmb2_salon_cut_description',true) ?
   '<li class="subpage-section-list-item"><a href="#'.$slug.'-salon-cut" class="smoothscroll">Salon Cut</a></li>' : '';
 
   $output .= get_post_meta($location_id,'_cmb2_salon_color_group',true) ?
@@ -591,7 +591,7 @@ function get_service_section_nav($location) {
 }
 
 /**
- * Get Tanning Pricing Table
+ * Get Salon Cut Pricing Table
  */
 function get_services_salon_cut() {
 
@@ -654,7 +654,7 @@ HTML;
 }
 
 /**
- * Get Tanning Pricing Table
+ * Get Salon Color Pricing Table
  */
 function get_services_salon_color() {
 
@@ -679,6 +679,7 @@ function get_services_salon_color() {
   $output .= '</section>';
   return $output;
 }
+
 /**
  * Get Barbershop Pricing Table
  */

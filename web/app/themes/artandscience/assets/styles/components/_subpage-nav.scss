@@ -9,6 +9,7 @@
 
   .nav-title {
     color: $gold;
+    margin-top: 0;
     @include font-caption-bold;
   }
 
@@ -69,6 +70,11 @@
   // The more complicated version of the nav, where each subpage has sections
   &.-has-subpage-sections {
 
+    .subpage-section-list {
+      list-style: none;
+      margin: 0;
+      padding: 0.25em 0 0.5em;
+    }
 
     .subpage-link {
       @include font-caption-bold;
@@ -83,12 +89,6 @@
           display: block;
         }
       }
-    }
-
-    .subpage-section-list {
-      list-style: none;
-      margin: 0;
-      padding: 0.25em 0 0.5em;
     }
 
     .subpage-section-nav {
@@ -121,18 +121,64 @@
     }
 
     @include media-md {
-      .subpage-section-nav {
-        position: absolute;
-        left: 33.33%;
-        top: 0;
+      width: 100%;
+      margin-left: 0;
+
+      .nav-title {
+        color: $gray-dark;
       }
+
       .subpages-list {
-        width: 33.33%
+        width: 33.33%;
+        position: relative;
       }
+
       .subpages-list-item {
-        display: block;
         width: 100%;
         float: none;
+        display: block;
+        padding-left: 0;
+      }
+
+      .subpage-link:not(.-active) {
+        @include font-caption-thin;
+      }
+
+      .subpage-section-nav {
+        top: 0;
+        left: 100%;
+        width: 200%;
+        position: absolute;
+      }
+
+      .subpage-section-list {
+        padding: 0;
+        display: flex;
+        flex-wrap: wrap;
+      }
+
+      .subpage-section-list-item {
+        width: 50%;
+        float: left; // backup for flex
+        flex-basis: 50%;
+        padding-top: 6px;
+        padding-left: $padding;
+
+        @include min-screen(950px) {
+          padding-left: $padding-md;
+        }
+
+        @include media-lg {
+          padding-left: $padding-lg;
+        }
+
+        a {
+          @include font-caption-bold;
+
+          &::before {
+            display: none;
+          }
+        }
       }
     }
   }
