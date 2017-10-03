@@ -289,22 +289,6 @@ var FBSage = (function($) {
             target = $thisLink.attr('data-target'),
             $target = $('#'+target);
 
-        // Build subnavs to link to sections within childpages, if applicable
-        if($target.find('.linked-subpage-section').length) {
-          
-          // Make a ul to house the links
-          var $subnav = $('<ul class="subpage-section-nav"></ul>').insertAfter($thisLink).velocity('slideUp', {duration: 0});
-
-          // Loop through each subpage-section that needs a link (as dictated by class)
-          $target.find('.linked-subpage-section').each(function () {
-
-            // Insert a smoothscroll link to that section with text from data-title
-            var title = $(this).data('title');
-            var sectionId = $(this).attr('id');
-            $('<li><a href="#'+sectionId+'" class="smoothscroll">'+title+'</a></li>').appendTo($subnav);
-          });
-        }
-
         // Click behavior
         $thisLink.on('click', function(e) {
           e.preventDefault();
@@ -316,7 +300,7 @@ var FBSage = (function($) {
           if (!$thisLink.is('.-active')) {
 
             $thisLink.addClass('-active');
-            
+
             // Deactivate and hide previously active subpage
             $('.subpage.-active:not(#'+target+')').css('opacity', 0).removeClass('-active');
 
@@ -336,6 +320,7 @@ var FBSage = (function($) {
       });
 
       // Hide the subpages initially, except the first
+      $('.subpage-section-nav').velocity('slideUp', {duration: 0});
       $('.subpage-nav .subpages-list-item:eq(0)').find('.subpage-link').addClass('-active');
       $('.subpage:eq(0)').addClass('-active');
       $('.subpage-nav .subpages-list-item:eq(0)').find('.subpage-section-nav').velocity('slideDown', {duration: 300});

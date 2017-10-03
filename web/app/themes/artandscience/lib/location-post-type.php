@@ -552,29 +552,71 @@ function get_footer_locations($options=[]) {
   return $output;
 }
 
+
+/**
+ * Get Locations
+ */
+function get_service_section_nav($location) {
+
+  $output = '';
+  $output .= '<nav class="subpage-section-nav hide-during-page-load">';
+  $output .= '<ul class="subpage-section-list">';
+
+  $slug = $location->post_name;
+  $location_id = $location->ID;
+
+
+  $output .= get_post_meta($location_id,'_cmb2_salon_cut_group',true) ?
+  '<li class="subpage-section-list-item"><a href="#'.$slug.'-salon-cut" class="smoothscroll">Salon Cut</a></li>' : '';
+
+  $output .= get_post_meta($location_id,'_cmb2_salon_color_group',true) ?
+  '<li class="subpage-section-list-item"><a href="#'.$slug.'-salon-color" class="smoothscroll">Salon Color</a></li>' : '';
+
+  $output .= get_post_meta($location_id,'_cmb2_barbershop_services_group',true) ?
+  '<li class="subpage-section-list-item"><a href="#'.$slug.'-barbershop-services" class="smoothscroll">Barbershop Services</a></li>' : '';
+
+  $output .= get_post_meta($location_id,'_cmb2_waxing_lounge_group',true) ?
+  '<li class="subpage-section-list-item"><a href="#'.$slug.'-waxing-lounge" class="smoothscroll">Waxing Lounge</a></li>' : '';
+
+  $output .= get_post_meta($location_id,'_cmb2_tanning_group',true) ?
+  '<li class="subpage-section-list-item"><a href="#'.$slug.'-tanning" class="smoothscroll">Tanning</a></li>' : '';
+
+  $output .= get_post_meta($location_id,'_cmb2_bridal_suite_description',true) ?
+  '<li class="subpage-section-list-item"><a href="#'.$slug.'-bridal" class="smoothscroll">Bridal</a></li>' : '';
+
+
+  $output.= '</ul></nav>';
+
+  return $output;
+}
+
 /**
  * Get Tanning Pricing Table
  */
 function get_services_salon_cut() {
 
-  $salon_cut_text = get_post_meta(get_the_ID(),'_cmb2_salon_cut_description',true);
+  global $post;
+  $location_id = $post->ID;
+
+  $salon_cut_text = get_post_meta($location_id,'_cmb2_salon_cut_description',true);
 
   if(!$salon_cut_text) { return false; }
 
   $output = '';
 
-  global $post;
+
   $slug = $post->post_name;
-  $output .= '<section class="section linked-subpage-section" data-title="Salon Cut" id="'.$slug.'-salon-cut">';
+
+  $output .= '<section class="section linked-subpage-section" id="'.$slug.'-salon-cut">';
 
   $output .= '<h2 class="experience-popup-location">Salon Cut</h2>';
   $output .= '<div class="salon-cut-wrap">';
 
-  $stylist_price = get_post_meta(get_the_ID(),'_cmb2_salon_cut_stylist_price',true);
-  $senior_price = get_post_meta(get_the_ID(),'_cmb2_salon_cut_senior_price',true);
-  $master_price = get_post_meta(get_the_ID(),'_cmb2_salon_cut_master_price',true);
-  $director_price = get_post_meta(get_the_ID(),'_cmb2_salon_cut_director_price',true);
-  $blowdry_price = get_post_meta(get_the_ID(),'_cmb2_salon_cut_blowdry_price',true);
+  $stylist_price = get_post_meta($location_id,'_cmb2_salon_cut_stylist_price',true);
+  $senior_price = get_post_meta($location_id,'_cmb2_salon_cut_senior_price',true);
+  $master_price = get_post_meta($location_id,'_cmb2_salon_cut_master_price',true);
+  $director_price = get_post_meta($location_id,'_cmb2_salon_cut_director_price',true);
+  $blowdry_price = get_post_meta($location_id,'_cmb2_salon_cut_blowdry_price',true);
 
 
   $output .= <<<HTML
@@ -606,7 +648,7 @@ HTML;
   $output .= apply_filters('the_content', $salon_cut_text);
 
   $output .= '</div>';
-  
+
   $output .= '</section>';
   return $output;
 }
@@ -616,22 +658,24 @@ HTML;
  */
 function get_services_salon_color() {
 
-  $services = get_post_meta(get_the_ID(),'_cmb2_salon_color_group',true);
+  global $post;
+  $location_id = $post->ID;
+
+  $services = get_post_meta($location_id,'_cmb2_salon_color_group',true);
 
   if(!$services) { return false; }
 
   $output = '';
 
-  global $post;
   $slug = $post->post_name;
-  $output .= '<section class="section linked-subpage-section" data-title="Salon Color" id="'.$slug.'-salon-color"">
+  $output .= '<section class="section linked-subpage-section" id="'.$slug.'-salon-color"">
   ';
   $output .= '<h2 class="experience-popup-location">Salon Color</h2>';
 
   ob_start();
   include(locate_template('templates/pricing-table-salon-color.php'));
   $output .= ob_get_clean();
-  
+
   $output .= '</section>';
   return $output;
 }
@@ -640,18 +684,19 @@ function get_services_salon_color() {
  */
 function get_services_barbershop() {
 
-  $services = get_post_meta(get_the_ID(),'_cmb2_barbershop_services_group',true);
+  global $post;
+  $location_id = $post->ID;
+
+  $services = get_post_meta($location_id,'_cmb2_barbershop_services_group',true);
 
   if(!$services) { return false; }
 
-  $barbershop_text = apply_filters('the_content', get_post_meta(get_the_ID(),'_cmb2_barbershop_services_description',true) );
+  $barbershop_text = apply_filters('the_content', get_post_meta($location_id,'_cmb2_barbershop_services_description',true) );
 
   $output = '';
 
-  global $post;
   $slug = $post->post_name;
-  $output .= '<section class="section linked-subpage-section" data-title="Barbershop Services
-  " id="'.$slug.'-barbershop-services">';
+  $output .= '<section class="section linked-subpage-section" id="'.$slug.'-barbershop-services">';
   $output .= '<h2 class="experience-popup-location">Barbershop Services</h2>';
 
   $output .= $barbershop_text;
@@ -659,7 +704,7 @@ function get_services_barbershop() {
   ob_start();
   include(locate_template('templates/pricing-table.php'));
   $output .= ob_get_clean();
-  
+
   $output .= '</section>';
   return $output;
 }
@@ -669,21 +714,23 @@ function get_services_barbershop() {
  */
 function get_services_waxing() {
 
-  $services = get_post_meta(get_the_ID(),'_cmb2_waxing_lounge_group',true);
+  global $post;
+  $location_id = $post->ID;
+
+  $services = get_post_meta($location_id,'_cmb2_waxing_lounge_group',true);
 
   if(!$services) { return false; }
 
   $output = '';
 
-  global $post;
   $slug = $post->post_name;
-  $output .= '<section class="section linked-subpage-section" data-title="Waxing Lounge" id="'.$slug.'-waxing-lounge">';
+  $output .= '<section class="section linked-subpage-section" id="'.$slug.'-waxing-lounge">';
   $output .= '<h2>Waxing Lounge</h2>';
 
   ob_start();
   include(locate_template('templates/pricing-table.php'));
   $output .= ob_get_clean();
-  
+
   $output .= '</section>';
   return $output;
 }
@@ -693,17 +740,18 @@ function get_services_waxing() {
  */
 function get_services_tanning() {
 
-  $services = get_post_meta(get_the_ID(),'_cmb2_tanning_group',true);
+  global $post;
+  $location_id = $post->ID;
+
+  $services = get_post_meta($location_id,'_cmb2_tanning_group',true);
 
   if(!$services) { return false; }
 
   $output = '';
 
-
-  global $post;
   $slug = $post->post_name;
-  $output .= '<section class="section linked-subpage-section" data-title="Tanning" id="'.$slug.'-tanning">';
- 
+  $output .= '<section class="section linked-subpage-section" id="'.$slug.'-tanning">';
+
   $output .= '<h2>Tanning</h2>';
 
   ob_start();
@@ -719,16 +767,18 @@ function get_services_tanning() {
  */
 function get_services_bridal() {
 
-  $bridal_text = get_post_meta(get_the_ID(),'_cmb2_bridal_suite_description',true);
+  global $post;
+  $location_id = $post->ID;
+
+  $bridal_text = get_post_meta($location_id,'_cmb2_bridal_suite_description',true);
 
   if(!$bridal_text) { return false; }
 
   $output = '';
 
-  global $post;
   $slug = $post->post_name;
-  $output .= '<section class="section linked-subpage-section" data-title="Bridal" id="'.$slug.'-bridal">';
-  
+  $output .= '<section class="section linked-subpage-section" id="'.$slug.'-bridal">';
+
   $output .= '<h2>Bridal</h2>';
 
   $output .= apply_filters('the_content', $bridal_text);

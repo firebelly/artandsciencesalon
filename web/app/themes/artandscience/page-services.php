@@ -1,8 +1,8 @@
-<?php 
+<?php
   /*
     Template name: Services
   */
- 
+
 $locations = get_posts(['post_type'=>'location','sort_column'=>'menu_order','sort_order'=>'asc']);
 
 ?>
@@ -10,16 +10,20 @@ $locations = get_posts(['post_type'=>'location','sort_column'=>'menu_order','sor
 <div class="top-section page-block -bottom-underlap -bg-cream-dark">
   <div class="content-wrap">
     <div class="body-content user-content">
-      
+
     </div>
-    
-    <nav class="subpage-nav">
+
+    <nav class="subpage-nav -has-subpage-sections">
+      <h3 class="nav-title">Locations</h3>
       <ul class="subpages-list">
         <?php
-        $i = 0;
         foreach ( $locations as $location ) {
-          echo '<li class="subpages-list-item"><a href="'.get_permalink($location).'" data-target="'.$location->post_name.'-services" class="subpage-link">'.$location->post_title.'</a></li>';
-          $i++;
+
+          echo '<li class="subpages-list-item"><a href="'.get_permalink($location).'" data-target="'.$location->post_name.'-services" class="subpage-link">'.$location->post_title.'</a>';
+
+          echo Firebelly\PostTypes\Location\get_service_section_nav($location);
+
+          echo '</li>';
         }
         ?>
       </ul>
