@@ -106,11 +106,11 @@
 
     <div class="hours location-detail-set">
       <h4>Hours</h4>
-      <table class="dotted-leader-table hours-table">
+      <table class="leader-table hours-table">
         <?php 
         if ($hours_group) {
           foreach ($hours_group as $day) {
-            echo '<tr><td class="day"><span class="wordwrap">'.$day['day'].'</span></td><td class="time"><span class="wordwrap">'.$day['hours'].'</span></td></tr>'.((!empty($day['details']))?'<tr class="hour-details"><td>('.$day['details'].')</td></tr>':'').'';
+            echo '<tr class="leader-row"><td class="day leader-left"><span class="leader-text">'.$day['day'].'</span></td><td class="time leader-right"><span class="leader-text">'.$day['hours'].'</span></td></tr>'.((!empty($day['details']))?'<tr class="hour-details"><td>('.$day['details'].')</td></tr>':'').'';
           }
         }
         ?>
