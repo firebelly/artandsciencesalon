@@ -1,5 +1,5 @@
 
-<div class="service-list pricing-table accordian-table">
+<table class="service-list pricing-table accordian-table">
   <caption class="sr-only">Service Prices and Descriptions</caption>
 
   <?php
@@ -20,19 +20,19 @@
     $additional_classes .= $even ? ' even-row' : ' odd-row';
     ?>
 
-  <div class="stripey-row leader-row<?= $additional_classes ?>">
-    <div class="leader-left stripey-left name" scope="row" <?= $description ? 'rowspan="2"' : '' ?>><span class="leader-text"><?= $name ?> </span></div>
-    <div class="sr-only" scope="row">Price</div>
-    <div class="leader-right stripey-right price"><span class="leader-text"><?= $price ?></span></div>
-  </div>
+  <tr class="stripey-row leader-row<?= $additional_classes ?>">
+    <th class="leader-left stripey-left name" scope="row" <?= $description ? 'rowspan="2"' : '' ?>><span class="leader-text"><?= $name ?> </span></td>
+    <th class="sr-only" scope="row">Price</th>
+    <td class="leader-right stripey-right price"><span class="leader-text"><?= $price ?></span></td>
+  </tr>
 
   <?php if($description) : ?>
-  <div class="accordian-drawer">
-    <div class="sr-only" scope="row">Description</div>
-    <div class="description"><?= $description ?></div>
-  </div>
+  <tr class="accordian-drawer">
+    <th class="sr-only" scope="row">Description</th>
+    <td class="description"><?= $description ?></td>
+  </tr>
   <?php endif ?>
 
   <?php endforeach ?>
 
-</div>
+</table>

@@ -41,10 +41,10 @@ Clipping the overflow hides the bleed.
     left: 0;
     right: 0;
     bottom: 0;
+    z-index: -1;
     margin: -20px;
     filter: blur(3px);
     position: absolute;
-    z-index: -1;
     background-size: cover;
     background-image: url('../images/blended-background.png'); // There is also a blended-background.jpg at ~100k
   }
