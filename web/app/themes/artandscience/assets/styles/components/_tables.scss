@@ -135,23 +135,28 @@
 }
 
 @mixin accordian-table {
+    position: relative;
 
   .accordian-drawer {
+    display: none;
     background: $cream-lite;
     @include break-out-of-padding;
+    overflow: hidden;
 
-    // For WHATEVER reason, this fixes animation skitching in chrome. Tables!
-    td, th {
-      float: left;
+    // td {
+    //   z-index: -1;
+    // }
+
+    &.-active {
+      display: block;
     }
-    @include clearfix;
   }
 
   .icon-triangle {
     fill: $gray-lite;
     position: absolute;
-    transition: transform 0.2s;
     transform: translate(-50%,-50%);
+    // transition: transform 0.2s;
   }
 
   .accordian-toggle {

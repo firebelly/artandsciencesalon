@@ -88,7 +88,7 @@
     .subpage-section-list {
       list-style: none;
       margin: 0;
-      padding: 0.5em 0;
+      padding: 0.25em 0 0.5em;
     }
 
     .subpage-section-nav {
@@ -121,6 +121,11 @@
     }
 
     @include media-md {
+      .subpage-section-nav {
+        position: absolute;
+        left: 33.33%;
+        top: 0;
+      }
       .subpages-list {
         width: 33.33%
       }

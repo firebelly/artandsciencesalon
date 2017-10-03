@@ -120,9 +120,6 @@ var FBSage = (function($) {
     var $toggles = $('.accordian-table .accordian-toggle');
     var $drawers = $('.accordian-table .accordian-drawer');
 
-    // Close the accordian from the getgo
-    $drawers.velocity("slideUp", { duration: 0 });
-
     // Inject open/close indicator icon
     $toggles.each(function() {
       $('<svg class="icon icon-triangle"><use xlink:href="#icon-triangle"/></svg>')
@@ -134,13 +131,20 @@ var FBSage = (function($) {
       $toggle = $(this);
       $drawer = $(this).next();
 
-      // Based on state: Add class -active and velocity slide open OR remove class and slide close
+      // Toggle open or closed based on current state
       if ($toggle.is('.-active')) {
-        $toggle.removeClass('-active');
-        $drawer.velocity("slideUp", { duration: 200 });
+
+        $drawer.find('td').velocity({opacity: 0}, {
+          duration: 200,
+          complete: function () {
+            $toggle.removeClass('-active');
+            $drawer.removeClass('-active');
+          }
+        });
       } else {
         $toggle.addClass('-active');
-        $drawer.velocity("slideDown", { duration: 200 });
+        $drawer.addClass('-active');
+        $drawer.find('td').velocity({translateX: "20px", opacity: 0}, {duration: 0}).velocity({translateX: "0px", opacity: 1}, {duration: 300});
       }
     });
 
