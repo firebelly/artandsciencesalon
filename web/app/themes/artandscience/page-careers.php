@@ -15,7 +15,7 @@
     </div>
     
     <nav class="subpage-nav">
-      <ul class="child-pages">
+      <ul class="subpages-list">
         <?php
         $i = 0;
         foreach ( $children as $child_page ) {
@@ -24,7 +24,7 @@
             echo '<div class="row">';
           }
           // Write nav item
-          echo '<li class="child-page"><a href="'.get_permalink($child_page).'" data-target="'.$child_page->post_name.'">'.$child_page->post_title.'</a></li>';
+          echo '<li class="subpages-list-item"><a href="'.get_permalink($child_page).'" data-target="'.$child_page->post_name.'" class="subpage-link">'.$child_page->post_title.'</a></li>';
           // Close the row at end of each group
           if ($i % 3 === 2) {
             echo '</div><!-- /.row -->';

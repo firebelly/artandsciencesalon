@@ -36,6 +36,9 @@ var FBSage = (function($) {
     _initNav();
     _injectSvgSprite();
 
+    // Certain elements (e.g. popups) are hidden during load, remove the class hiding them...
+    $('.hide-during-page-load').removeClass('hide-during-page-load');
+
     // Esc handlers
     $(document).keyup(function(e) {
       if (e.keyCode === 27) {
@@ -279,29 +282,63 @@ var FBSage = (function($) {
     var $subPageNav = $('.subpage-nav');
 
     if ($subPageNav.length) {
-      // Hide the careers section initially, except the first
-      $('.subpage-nav li:eq(0)').find('a').addClass('-active');
-      $('.subpage:eq(0)').addClass('-active');
+      $('.subpage-nav a').each(function() {
 
-      $('.subpage-nav a').on('click', function(e) {
-        e.preventDefault();
-        var target = $(this).attr('data-target'),
+        // Select me and my target
+        var $thisLink = $(this),
+            target = $thisLink.attr('data-target'),
             $target = $('#'+target);
 
-        $subPageNav.find('a.-active').not($(this)).removeClass('-active');
+        // Build subnavs to link to sections within childpages, if applicable
+        if($target.find('.linked-subpage-section').length) {
+          
+          // Make a ul to house the links
+          var $subnav = $('<ul class="subpage-section-nav"></ul>').insertAfter($thisLink).velocity('slideUp', {duration: 0});
 
-        // If it aint already active, make it so
-        if (!$(this).is('.-active')) {
-          $(this).addClass('-active');
-          // Deactivate other active subpage
-          $('.subpage.-active:not(#'+target+')').css('opacity', 0).removeClass('-active');
-          $target.css('opacity', 0);
-          $target.addClass('-active');
-          _scrollBody($('.top-section'), 800);
-          $target.css('opacity', 1);
+          // Loop through each subpage-section that needs a link (as dictated by class)
+          $target.find('.linked-subpage-section').each(function () {
+
+            // Insert a smoothscroll link to that section with text from data-title
+            var title = $(this).data('title');
+            var sectionId = $(this).attr('id');
+            $('<li><a href="#'+sectionId+'" class="smoothscroll">'+title+'</a></li>').appendTo($subnav);
+          });
         }
 
+        // Click behavior
+        $thisLink.on('click', function(e) {
+          e.preventDefault();
+
+          // Remove -active class where not needed
+          $subPageNav.find('a.-active').not($thisLink).removeClass('-active');
+
+          // If it aint already active, make it so
+          if (!$thisLink.is('.-active')) {
+
+            $thisLink.addClass('-active');
+            
+            // Deactivate and hide previously active subpage
+            $('.subpage.-active:not(#'+target+')').css('opacity', 0).removeClass('-active');
+
+            // Hide all subpage section navs
+            $('.subpage-section-nav').velocity('slideUp', {duration: 0});
+
+            // Fade in target, add active class, scroll to it
+            $target.css('opacity', 0);
+            $target.addClass('-active');
+            _scrollBody($('.top-section'), 800);
+            $target.css('opacity', 1);
+
+            // Show suppage section nav for this page;
+            $thisLink.next('.subpage-section-nav').velocity('slideDown', {duration: 300});
+          }
+        }); // end click behavior
       });
+
+      // Hide the subpages initially, except the first
+      $('.subpage-nav .subpages-list-item:eq(0)').find('.subpage-link').addClass('-active');
+      $('.subpage:eq(0)').addClass('-active');
+      $('.subpage-nav .subpages-list-item:eq(0)').find('.subpage-section-nav').velocity('slideDown', {duration: 300});
     }
   }
 

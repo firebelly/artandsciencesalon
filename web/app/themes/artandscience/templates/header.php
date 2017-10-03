@@ -12,7 +12,7 @@
 
 
 
-      <div id="book-appointment" class="book-appointment">
+      <div id="book-appointment" class="book-appointment hide-during-page-load">
         <button>Book an appointment</button>
         <ul class="location-list">
           

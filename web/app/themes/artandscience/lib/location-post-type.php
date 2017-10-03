@@ -563,7 +563,10 @@ function get_services_salon_cut() {
 
   $output = '';
 
-  $output .= '<section class="section">';
+  global $post;
+  $slug = $post->post_name;
+  $output .= '<section class="section linked-subpage-section" data-title="Salon Cut" id="'.$slug.'-salon-cut">';
+
   $output .= '<h2 class="experience-popup-location">Salon Cut</h2>';
   $output .= '<div class="salon-cut-wrap">';
 
@@ -619,7 +622,10 @@ function get_services_salon_color() {
 
   $output = '';
 
-  $output .= '<section class="section">';
+  global $post;
+  $slug = $post->post_name;
+  $output .= '<section class="section linked-subpage-section" data-title="Salon Color" id="'.$slug.'-salon-color"">
+  ';
   $output .= '<h2 class="experience-popup-location">Salon Color</h2>';
 
   ob_start();
@@ -642,7 +648,10 @@ function get_services_barbershop() {
 
   $output = '';
 
-  $output .= '<section class="section">';
+  global $post;
+  $slug = $post->post_name;
+  $output .= '<section class="section linked-subpage-section" data-title="Barbershop Services
+  " id="'.$slug.'-barbershop-services">';
   $output .= '<h2 class="experience-popup-location">Barbershop Services</h2>';
 
   $output .= $barbershop_text;
@@ -666,7 +675,9 @@ function get_services_waxing() {
 
   $output = '';
 
-  $output .= '<section class="section">';
+  global $post;
+  $slug = $post->post_name;
+  $output .= '<section class="section linked-subpage-section" data-title="Waxing Lounge" id="'.$slug.'-waxing-lounge">';
   $output .= '<h2>Waxing Lounge</h2>';
 
   ob_start();
@@ -688,7 +699,11 @@ function get_services_tanning() {
 
   $output = '';
 
-  $output .= '<section class="section">';
+
+  global $post;
+  $slug = $post->post_name;
+  $output .= '<section class="section linked-subpage-section" data-title="Tanning" id="'.$slug.'-tanning">';
+ 
   $output .= '<h2>Tanning</h2>';
 
   ob_start();
@@ -710,7 +725,10 @@ function get_services_bridal() {
 
   $output = '';
 
-  $output .= '<section class="section">';
+  global $post;
+  $slug = $post->post_name;
+  $output .= '<section class="section linked-subpage-section" data-title="Bridal" id="'.$slug.'-bridal">';
+  
   $output .= '<h2>Bridal</h2>';
 
   $output .= apply_filters('the_content', $bridal_text);

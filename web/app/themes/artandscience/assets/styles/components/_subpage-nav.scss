@@ -7,13 +7,13 @@
     width: calc(100% + 20px);
   }
 
-  .child-pages {
+  .subpages-list {
     margin:0;
     padding: 0;
     list-style: none;
   }
 
-  .child-page {
+  .subpages-list-item {
     padding-top: 6px;
 
     a {
@@ -46,14 +46,14 @@
   }
 
   @include media-md {
-    .child-pages {
+    .subpages-list {
       @include clearfix;
     }
     .row {
       display: flex;
       @include clearfix;
     }
-    .child-page {
+    .subpages-list-item {
       float: left; // Flex fallback (creates uneven item heights but looks mostly ok)
       width: 33.333%;
       padding-left: 20px;

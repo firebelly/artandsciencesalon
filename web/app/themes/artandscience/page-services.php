@@ -7,7 +7,6 @@ $locations = get_posts(['post_type'=>'location','sort_column'=>'menu_order','sor
 
 ?>
 
-
 <div class="top-section page-block -bottom-underlap -bg-cream-dark">
   <div class="content-wrap">
     <div class="body-content user-content">
@@ -15,11 +14,11 @@ $locations = get_posts(['post_type'=>'location','sort_column'=>'menu_order','sor
     </div>
     
     <nav class="subpage-nav">
-      <ul class="child-pages">
+      <ul class="subpages-list">
         <?php
         $i = 0;
         foreach ( $locations as $location ) {
-          echo '<li class="child-page"><a href="'.get_permalink($location).'" data-target="'.$location->post_name.'-services">'.$location->post_title.'</a></li>';
+          echo '<li class="subpages-list-item"><a href="'.get_permalink($location).'" data-target="'.$location->post_name.'-services" class="subpage-link">'.$location->post_title.'</a></li>';
           $i++;
         }
         ?>

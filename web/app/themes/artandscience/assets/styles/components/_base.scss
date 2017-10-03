@@ -110,7 +110,11 @@ img {
 
 // Utility classes
 .hide {
-  display: none;
+  @include hidden;
+}
+
+.hide-during-page-load { // Same as hide, but init function will remove this class
+  @include hidden;
 }
 
 ::selection {
