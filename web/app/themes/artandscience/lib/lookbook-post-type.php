@@ -27,7 +27,7 @@ function post_type() {
     'not_found_in_trash'  => 'Not found in Trash',
   );
   $rewrite = array(
-    'slug'                => 'stylist',
+    'slug'                => 'lookbooks',
     'with_front'          => false,
     'pages'               => false,
     'feeds'               => false,
