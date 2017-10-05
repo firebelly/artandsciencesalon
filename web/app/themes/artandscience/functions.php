@@ -19,22 +19,24 @@ $sage_includes = [
 ];
 
 $firebelly_includes = [
-  'lib/disable-comments.php',          // Disables WP comments in admin and frontend
-  'lib/fb_init.php',                   // FB theme setups
-  'lib/fb_assets.php',                 // FB assets
-  'lib/media.php',                     // FB media
-  'lib/ajax.php',                      // AJAX functions
-  'lib/custom-functions.php',          // Rando utility functions and miscellany
-  'lib/site-options.php',              // Custon site options
-  'lib/cmb2-custom-fields.php',        // Custom CMB2
-  'lib/page-meta-boxes.php',           // Various tweaks for multiple post types
-  'lib/post-meta-boxes.php',           // Various tweaks for multiple post types
-  'lib/location-post-type.php',        // Locations
-  'lib/lookbook-post-type.php',        // LookBooks
-  'lib/person-post-type.php',          // People
-  // 'lib/service-post-type.php',         // Services
-  'lib/bridal-meta.php',               // Bridal page admin/meta
-  'lib/press-meta.php',                // Press page admin/meta
+  'lib/disable-comments.php',                 // Disables WP comments in admin and frontend
+  'lib/fb_init.php',                          // FB theme setups
+  'lib/fb_assets.php',                        // FB assets
+  'lib/media.php',                            // FB media
+  'lib/ajax.php',                             // AJAX functions
+  'lib/custom-functions.php',                 // Rando utility functions and miscellany
+  'lib/site-options.php',                     // Custon site options
+  'lib/cmb2-custom-fields.php',               // Custom CMB2
+  'lib/page-meta-boxes.php',                  // Various tweaks for multiple post types
+  'lib/post-meta-boxes.php',                  // Various tweaks for multiple post types
+  'lib/location-post-type.php',               // Locations
+  'lib/lookbook-post-type.php',               // Lookbooks
+  'lib/social-impact-gallery-post-type.php',  // Social Impact Gallery
+  'lib/person-post-type.php',                 // People
+  // 'lib/service-post-type.php',                // Services
+  'lib/bridal-meta.php',                      // Bridal page admin/meta
+  'lib/social-impact-meta.php',                      // Social Impact page admin/meta
+  'lib/press-meta.php',                       // Press page admin/meta
 ];
 
 $sage_includes = array_merge($sage_includes, $firebelly_includes);

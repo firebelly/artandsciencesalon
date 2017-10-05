@@ -1,9 +1,9 @@
 <?php
 /**
- * Lookbook post type
+ * Social Impact Gallery post type
  */
 
-namespace Firebelly\PostTypes\Lookbook;
+namespace Firebelly\PostTypes\SocialImpact;
 use Firebelly\Utils;
 
 /**
@@ -12,29 +12,29 @@ use Firebelly\Utils;
 function post_type() {
 
   $labels = array(
-    'name'                => 'Lookbooks',
-    'singular_name'       => 'Lookbook',
-    'menu_name'           => 'Lookbooks',
+    'name'                => 'Social Impact Galleries',
+    'singular_name'       => 'Gallery',
+    'menu_name'           => 'Social Impact Galleries',
     'parent_item_colon'   => '',
-    'all_items'           => 'All Lookbooks',
-    'view_item'           => 'View Lookbook',
-    'add_new_item'        => 'Add New Lookbook',
+    'all_items'           => 'All Social Impact Galleries',
+    'view_item'           => 'View Gallery',
+    'add_new_item'        => 'Add New Gallery',
     'add_new'             => 'Add New',
-    'edit_item'           => 'Edit Lookbook',
-    'update_item'         => 'Update Lookbook',
-    'search_items'        => 'Search Lookbooks',
+    'edit_item'           => 'Edit Gallery',
+    'update_item'         => 'Update Gallery',
+    'search_items'        => 'Search Social Impact Galleries',
     'not_found'           => 'Not found',
     'not_found_in_trash'  => 'Not found in Trash',
   );
   $rewrite = array(
-    'slug'                => 'lookbooks',
+    'slug'                => 'social-impact',
     'with_front'          => false,
     'pages'               => false,
     'feeds'               => false,
   );
   $args = array(
-    'label'               => 'lookbook',
-    'description'         => 'Lookbooks',
+    'label'               => 'social-impact',
+    'description'         => 'Social Impact Galleries',
     'labels'              => $labels,
     'taxonomies'          => array(''),
     'supports'            => array( 'title', 'editor', 'thumbnail', ),
@@ -52,7 +52,7 @@ function post_type() {
     'publicly_queryable'  => true,
     'rewrite'             => $rewrite,
   );
-  register_post_type( 'lookbook', $args );
+  register_post_type( 'si-gallery', $args );
 
 }
 add_action( 'init', __NAMESPACE__ . '\post_type', 0 );
@@ -69,11 +69,11 @@ function edit_columns($columns){
   );
   return $columns;
 }
-add_filter('manage_lookbook_posts_columns', __NAMESPACE__ . '\edit_columns');
+add_filter('manage_si-gallery_posts_columns', __NAMESPACE__ . '\edit_columns');
 
 function custom_columns($column){
   global $post;
-  if ( $post->post_type == 'lookbook' ) {
+  if ( $post->post_type == 'si-gallery' ) {
     if ( $column == 'featured_image' )
       echo the_post_thumbnail('thumbnail');
     elseif ( $column == 'content' )
@@ -91,10 +91,10 @@ add_action('manage_posts_custom_column',  __NAMESPACE__ . '\custom_columns');
 function metaboxes( array $meta_boxes ) {
   $prefix = '_cmb2_'; // Start with underscore to hide from custom fields list
 
-  $meta_boxes['Lookbook Images'] = array(
-    'id'            => 'lookbook_images',
-    'title'         => __( 'Lookbook Images', 'cmb2' ),
-    'object_types'  => array( 'lookbook', ), // Post type
+  $meta_boxes['Gallery Images'] = array(
+    'id'            => 'si-gallery_images',
+    'title'         => __( 'Gallery Images', 'cmb2' ),
+    'object_types'  => array( 'si-gallery', ), // Post type
     'context'       => 'normal',
     'priority'      => 'high',
     'description'   => 'Minimu 1200px width resolution. Thumbnails will be square cropped, but on click user will see full dimensions in popup.',

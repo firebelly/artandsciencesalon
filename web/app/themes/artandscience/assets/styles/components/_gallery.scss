@@ -1,10 +1,18 @@
+body.single-lookbook {
+  .page-header {
+    .header-image {
+      background-position: top;
+    }
+  }
+}
+
 .gallery {
   padding: 0;
   display: block;
   background: transparent;
 
   @include media-md {
-    background: $gray;
+    background: transparent;
   }
   
   @include media-lg {
@@ -12,7 +20,7 @@
   }
 }
 
-.gallery-list {
+.gallery-list, .image-list {
   margin: 0;
   padding: 0;
   list-style: none;
@@ -23,7 +31,7 @@
   }
 }
 
-.gallery-list-item {
+.gallery-list-item, .image-list-item {
   margin: 0;
   padding: 0;
   display: block;
@@ -49,7 +57,7 @@
   }
 }
 
-.gallery-article {
+.gallery-article, .gallery-image {
   height: 0;
   width: 100%;
   position: relative;
@@ -62,7 +70,7 @@
     bottom: 0;
     position: absolute;
     background-size: cover;
-    background-position: center;
+    background-position: top;
   }
 
   .title {
@@ -77,6 +85,105 @@
       bottom: 0;
       position: absolute;
       text-decoration: none;
+    }
+  }
+}
+
+.image-viewer-popup-open {
+  cursor: pointer;
+}
+
+.image-viewer-popup {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10;
+  position: fixed;
+  background: rgba($gray-dark,0.8);
+
+  .full-image {
+    top: 50%;
+    left: 50%;
+    width: 80vw;
+    height: 80vh;
+    position: fixed;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    transform: translate(-50%,-50%);
+
+    @include media-md {
+      width: 90vw;
+      height: 90vh;
+    }
+  }
+
+  button {
+    border: none;
+    outline: none;
+    padding: $padding*0.25;
+    background: transparent;
+
+    @media-md {
+      padding: $padding-md*0.25;
+    }
+
+    .icon {
+      fill: $cream;
+      width: 18px;
+      height: 18px;
+    }
+
+    &:hover {
+      .icon {
+        fill: $orange;
+      }
+    }
+  }
+
+  .next-image, .prev-image {
+    top: 50%;
+    padding-top: 30vw;
+    position: absolute;
+    padding-bottom: 30vw;
+    transform: translateY(-50%);
+  }
+
+  .next-image {
+    right: 0;
+    padding-left: 30vw;
+  }
+
+  .prev-image {
+    left: 0;
+    padding-right: 30vw;
+
+    .icon-triangle {
+      transform: rotate(180deg);
+    }
+  }
+
+  .popup-close {
+    top: 0;
+    right: 0;
+    border: 0;
+    position: absolute;
+    padding-left: 10vw;
+    padding-bottom: 10vw;
+  }
+}
+
+// Avoid collision with wp admin bar when fixed position
+body.admin-bar {
+  .image-viewer-popup {
+
+    @include min-screen($breakpoint-wp-admin-bar-fixed) {
+      top: $wp-admin-bar-height;
+    }
+
+    @include min-screen($breakpoint-wp-admin-bar-small) {
+      top: $wp-admin-bar-height-big;
     }
   }
 }

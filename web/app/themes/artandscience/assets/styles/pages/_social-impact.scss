@@ -5,4 +5,20 @@
       background: $gray-dark;
     }
   }
+
+  .main-content {
+    h2 {
+      margin-bottom: 0;
+    }
+  }
+
+  .contact {
+    position: relative;
+    @include big-dash($brown-lite);
+    margin-top: 1em;
+
+    @include h2-padding-top;
+    @include font-caption-bold;
+  }
+
 }

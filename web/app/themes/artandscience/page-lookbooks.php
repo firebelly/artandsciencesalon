@@ -10,16 +10,6 @@ $lookbooks = get_posts([
   'numberposts'=>-1,
 ]);
 
-?>
-
-<div class="main-content gallery page-block">
-  <ul class="gallery-list">
-  <?php
-  foreach ( $lookbooks as $post ) {
-    echo '<li class="gallery-list-item">';
-    include(locate_template('templates/article-gallery.php'));
-    echo '</li>';
-  }
-  ?>
-  </ul>
-</div>
+$content = false;
+$posts = $lookbooks;
+include(locate_template('templates/page-gallery.php'));

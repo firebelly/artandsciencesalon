@@ -28,6 +28,7 @@ var FBSage = (function($) {
     // Fit them vids!
     // $('main').fitVids();
 
+    _initImageViewerPopup();
     _initBookAppointment();
     _initExperienceLevelsPopup();
     _initAccordianTable();
@@ -45,6 +46,7 @@ var FBSage = (function($) {
       if (e.keyCode === 27) {
         _hideMobileNav();
         _closeExperiencePopup();
+        _imageViewerPopupClose();
       }
     });
 
@@ -63,6 +65,46 @@ var FBSage = (function($) {
     });
 
   } // end init()
+
+  function _initImageViewerPopup() {
+
+    // for reference later re: lazy loading -- https://github.com/kenwheeler/slick/issues/248
+
+    // Hide the popup
+    $('.image-viewer-popup').velocity('fadeOut', {duration: 0});
+
+    // Inject close button into popup
+    $('<button class="popup-close"><svg class="icon icon-popup-close"><use xlink:href="#icon-popup-close"/></svg></button>')
+      .appendTo('.image-viewer-popup');
+
+    // Image slider in popup
+    $('.image-viewer-popup .image-slider').slick({
+      infinite: true,
+      dots: false,
+      fade: true,
+      speed: 100,
+      prevArrow: '<button class="prev-image"><svg class="icon icon-triangle"><use xlink:href="#icon-triangle"/></svg></button>',
+      nextArrow: '<button class="next-image"><svg class="icon icon-triangle"><use xlink:href="#icon-triangle"/></svg></button>',
+    });
+
+    // Clicking an image to open the slider
+    $('.image-viewer-popup-open').click(function() {
+      var imageUrl = $(this).data('image-url');
+      var slideNum = parseInt($(this).data('slide'));
+      console.log('slide: '+slideNum);
+      $('.image-viewer-popup').velocity('fadeIn', {duration: 100});
+      $('.image-viewer-popup .image-slider').slick('slickGoTo', slideNum );
+    });
+
+    // Close button
+    $(document).on('click','.image-viewer-popup .popup-close', function () {
+      _imageViewerPopupClose();
+    });
+  }
+
+  function _imageViewerPopupClose() {
+    $('.image-viewer-popup').velocity('fadeOut', {duration: 100});
+  }
 
   function _scrollBody(element, duration, delay) {
     if ($('#wpadminbar').length) {
