@@ -3,19 +3,32 @@
 $two-col-buffer: 24px;
 $dash-distance-md: 40px;
 
+// Facilitate footer underlap
+.site-main {
+  z-index: 1;
+  position: relative;
+}
+
 .site-footer {
   @include font-footer;
   float: right;
   color: $gray-lite;
   position: relative;
+  margin-top: -$padding;
   background: $gray-dark;
   width: calc(100% - #{$padding});
-  padding: ($padding*1.33) $padding ($padding*1.75);
+  padding: ($padding*1.33+$padding) $padding ($padding*1.75);
 
   @include media-md {
-    margin-left: 25%;
     width: 75%;
-    padding: ($padding-lg*1.5) $padding-lg ($padding-lg*1.5);
+    margin-left: 25%;
+    margin-top: -$padding-md;
+    padding: ($padding-lg*1.5+$padding-md) $padding-lg ($padding-lg*1.5);
+  }
+
+  @include media-lg {
+    margin-top: -$padding-lg;
+    padding-top: ($padding-lg*1.5+$padding-lg);
   }
 
   a:hover {

@@ -10,7 +10,6 @@
   $fineprint = apply_filters('the_content', get_post_meta( get_the_ID(), '_cmb2_fineprint', true) );
 
 ?>
-
 <div class="top-section page-block -bottom-underlap -bg-cream-dark font-h3 -bg-cream-dark">
   <div class="content-wrap">
     <div class="body-content user-content">
@@ -20,7 +19,7 @@
 </div>
 
 
-<div class="main-content user-content page-block -indent-right -top-overlap">
+<div class="user-content page-block -indent-right -top-overlap">
   <section class="section">
     <h2>Details</h2>
     <?= $details ?>

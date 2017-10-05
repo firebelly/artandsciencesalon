@@ -1,7 +1,12 @@
-body.single-lookbook {
+body.single-lookbook, body.single-si-gallery {
   .page-header {
     .header-image {
       background-position: top;
+    }
+    .header-text {
+      h2::before{
+        background: $cream;
+      }
     }
   }
 }
@@ -57,11 +62,50 @@ body.single-lookbook {
   }
 }
 
+@include media-md {
+  .image-list {
+    margin-right: -$padding-md/2;
+    margin-bottom: -$padding-md/2;
+    @include media-lg {
+      margin-right: -$padding-lg/2;
+    }
+  }
+  .image-list-item {
+    padding-right: $padding-md/2;
+    padding-bottom: $padding-md/2;
+    @include media-lg {
+      padding-right: $padding-lg/2;
+      padding-bottom: $padding-lg/2;
+    }
+  }
+}
+
 .gallery-article, .gallery-image {
   height: 0;
   width: 100%;
   position: relative;
   padding-bottom: 100%;
+
+  &:hover {
+    .thumbnail {
+      transform: scale(1.03);
+      &::after {
+        opacity: 1;
+      }
+    }
+    .title {
+      color: $orange;
+    }
+  }
+  
+  .content-wrap {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: absolute;
+    overflow: hidden;
+  }
 
   .thumbnail {
     top: 0;
@@ -71,15 +115,29 @@ body.single-lookbook {
     position: absolute;
     background-size: cover;
     background-position: top;
+    transition: transform 5s;
+    &::after{
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      opacity: 0;
+      content: '';
+      position: absolute;
+      transition: opacity 0.2s;
+      background: rgba($brown,0.2);
+    }
   }
 
   .title {
     margin: 0;
+    z-index: 1;
     width: 100%;
     height: 100%;
     color: $cream;
     @include font-h2;
     position: relative;
+    transition: color 0.2s;
 
     .text-wrap {
       bottom: 0;

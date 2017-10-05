@@ -12,10 +12,9 @@ $si_galleries = get_posts([
 $content = apply_filters('the_content',$post->post_content);
 $contact = apply_filters('the_content',get_post_meta( $post->ID, '_cmb2_contact', true ));
 ?>
-
-<div class="page-block -bg-cream-dark -bottom-underlap -indent-left main-content">
+<div class="page-block description -bg-cream-dark -bottom-underlap">
   <h2 class="font-h2">Hair Cares</h2>
-  <div class="description user-content">
+  <div class="user-content">
     <?= $content ?>
   </div>
   <div class="contact user-content">

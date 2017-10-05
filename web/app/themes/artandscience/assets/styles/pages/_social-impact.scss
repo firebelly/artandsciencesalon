@@ -1,14 +1,15 @@
 .page.social-impact {
   
   .page-header {
+    background: $cream-dark;
     .header-text {
       background: $gray-dark;
     }
   }
 
-  .main-content {
+  .description {
     h2 {
-      margin-bottom: 0;
+      margin: 0;
     }
   }
 
@@ -20,5 +21,4 @@
     @include h2-padding-top;
     @include font-caption-bold;
   }
-
 }

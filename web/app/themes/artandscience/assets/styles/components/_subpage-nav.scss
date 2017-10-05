@@ -162,6 +162,7 @@
         float: left; // backup for flex
         flex-basis: 50%;
         padding-top: 6px;
+        margin-top: auto;
         padding-left: $padding;
 
         @include min-screen(950px) {

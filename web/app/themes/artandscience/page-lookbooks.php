@@ -10,6 +10,7 @@ $lookbooks = get_posts([
   'numberposts'=>-1,
 ]);
 
+
 $content = false;
 $posts = $lookbooks;
 include(locate_template('templates/page-gallery.php'));

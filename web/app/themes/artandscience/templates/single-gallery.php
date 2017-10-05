@@ -9,7 +9,7 @@
 </div>
 <?php endif ?>
 
-<div class="main-content gallery page-block<?= $content ? ' -top-overlap' : '' ?>">
+<div class="gallery page-block<?= $content ? ' -top-overlap' : '' ?>">
   <ul class="image-list">
   <?php 
   $i = 0;
@@ -17,7 +17,9 @@
 
     <li class="image-list-item">
       <div id="image-<?= $i ?>" class="gallery-image image-viewer-popup-open" data-slide="<?= $i ?>">
-        <div class="thumbnail -bottom-border page-block" style="background-image: url('<?= $attachment_url ?>');">
+        <div class="content-wrap">
+          <div class="thumbnail " style="background-image: url('<?= $attachment_url ?>');">
+          </div>
         </div>
       </div>
     </li>

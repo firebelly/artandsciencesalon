@@ -10,7 +10,6 @@
 
 ?>
 
-
 <div class="awards user-content page-block -bg-cream-dark -bottom-underlap">
  <?= $awards ?>
 </div>
