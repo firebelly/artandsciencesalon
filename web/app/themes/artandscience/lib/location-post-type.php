@@ -607,7 +607,7 @@ function get_services_salon_cut() {
 
   $slug = $post->post_name;
 
-  $output .= '<section class="section linked-subpage-section" id="'.$slug.'-salon-cut">';
+  $output .= '<section class="section" id="'.$slug.'-salon-cut">';
 
   $output .= '<h2 class="experience-popup-location">Salon Cut</h2>';
   $output .= '<div class="salon-cut-wrap">';
@@ -787,4 +787,27 @@ function get_services_bridal() {
 
   $output .= '</section>';
   return $output;
+}
+
+/**
+ * Convenience Functions
+ */
+function get_location_from_term($term) {
+
+  $slug = $term->slug;
+  $args = array(
+    'name'        => $slug,
+    'post_type'   => 'location',
+    'numberposts' => 1
+  );
+  return get_posts($args)[0];
+}
+
+function get_link_url($location) {
+  $slug = $location->post_name;
+  return '/locations/#'.$slug;
+}
+
+function get_code($location_id) {
+  return get_post_meta($location_id, '_cmb2_code', true);
 }

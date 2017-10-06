@@ -8,12 +8,258 @@
       background: $gray-dark;
     }
   }
+  
+  .subpage-nav {
+    .subpages-list {
+      // Make room for 2 columns of 5 items in the subpage section nav, because they are accordians, it is better to pos:a them then put them in doc flow and repaint the screen a lot when they push contents
+      @include media-md {
+        min-height: 42px*5;
+      }
+    }
+  }
+}
+
+.people-grid {
+  margin-top: $padding;
+  .people-grid-item {
+    width: 100%;
+    margin-bottom: $padding*1.25;
+    &::before {
+      display: none;
+    }
+  }
+  @include media-md {
+    // display: flex;
+    @include clearfix;
+    margin-right: -$padding-md;
+    .people-grid-item {
+      float: left;
+      width: 33.33%;
+      padding-right: $padding-md;
+      margin-bottom: 10px;
+    }
+  }
 }
 
 .stylist {
+ .thumbnail-wrap {
+    width: 100%;
+    height: 0;
+    padding-bottom: 100%;
+    position: relative;
+    .thumbnail {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-size: cover;
+      background-color: $gray-dark; 
+      background-position: center top;
+    }
+  }
+  .stylist-name {
+    @include font-caption-bold;
+    @include media-md {
+      margin-top: 1em;
+    }
+  }
+}
+
+.person-popup {
+  display: none;
+}
+
+.person-popup.first-one {
+  z-index: 2;
+  color: $cream;
+  display: block;
+  position: absolute;
+  margin-left: -$padding;
+  padding-left: $padding;
+  padding-right: $padding;
+  margin-right: -$padding*2;
+  width: calc( 100% + #{$padding}*3);
+
+  @include media-md {
+    padding-left: $padding-md;
+    margin-left: -$padding-md;
+    padding-right: $padding-md;
+    margin-right: -($padding-md+$padding-lg/2);
+    width: calc( 100% + #{$padding-md}*2 + #{$padding-lg}/2);
+  }
+
+  @include media-lg {
+    margin-left: -$padding-lg;
+    padding-left: $padding-lg;
+    padding-right: $padding-lg;
+    margin-right: -$padding-lg*2;
+    width: calc( 100% + #{$padding-lg}*3);
+  }
+
+  &::before {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    content: '';
+    position: fixed;
+    background: $gray-dark;
+
+    @include media-md {
+      left: 25vw;
+    }
+  }
+
+  .header-wrap {
+    position: relative;
+
+    button {
+      border: none;
+      height: 100%;
+      outline: none;
+      width: $padding;
+      background: $gold;
+
+      @include media-md {
+        width: $padding-md;
+      }
+      @include media-lg {
+        width: $padding-lg;
+      }
+
+      .icon {
+        width: 12px;
+        height: 12px;
+        fill: $cream;
+      }
+
+      &:hover {
+        background: $orange;
+
+        .icon {
+          fill: $gray-dark;
+        }
+      }
+    }
+  
+    .controls-wrap {
+      position: relative; 
+
+      .next-person, .prev-person {
+        top: 50%;
+        position: absolute;
+        transform: translateY(-50%);
+      }
+
+      .next-person {
+        left: 100%;
+      }
+
+      .prev-person {
+        right: 100%;
+
+        .icon-triangle {
+          transform: rotate(180deg);
+        }
+      }
+    }
+  }
 
 
-  .bio {
-    display: none;
+  .header-content {
+    padding: $padding 0;
+      @include media-md {
+      padding: $padding-md/2 $padding-md;
+    }
+    @include media-lg {
+      padding: $padding-lg/2 $padding-lg;
+    }
+   .stylist-name {
+      margin-top: 0;
+      color: $orange;
+      @include font-h2;
+      margin-bottom: 6px;
+    }
+
+    .stylist-title {
+      @include font-h3;
+      margin-bottom: 14px;
+    }
+
+    .stylist-quote {
+      display: none;
+    }
+
+    .stylist-locations {
+      .short { 
+        display: none; 
+        @include media-md {
+          display: inline;
+        }
+        @include media-lg {
+          display: none;
+        }
+      }
+      .long { 
+        display: inline; 
+        @include media-md {
+          display: none;
+        }
+        @include media-lg {
+          display: inline;
+        }
+      }
+      a {
+        display: block;
+        border-bottom: none;
+        @include font-caption-bold;
+      }
+      margin-bottom: 0;
+    }
+  }
+
+
+  @include media-md {
+
+    .header-wrap {
+      @include clearfix;
+      background: $gray-medium2;
+      display: flex;
+      // min-height: 50%;
+
+      .controls-wrap {
+        position: static;
+        float: left;
+        width: 35%;
+        @include media-lg {
+          width: 30%;
+        }
+      }
+
+      .thumbnail-wrap {
+        // padding-bottom: 30%;
+        min-height: 100%;
+      }
+
+      .header-content {
+        float: left;
+        width: 65%;
+        @include media-lg {
+          width: 60%;
+        }
+      }
+    }
+
+    .content-wrap {
+      margin-left: 35%;
+      padding-left: $padding-md;
+
+      @include media-lg {
+        margin-left: 30%;
+        padding-left: $padding-lg;
+      }
+    }
   }
 }

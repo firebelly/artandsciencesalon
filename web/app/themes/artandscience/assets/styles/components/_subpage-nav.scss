@@ -96,6 +96,7 @@
       a {
         padding: 6px 0;
         @include font-caption-thin;
+        color: $black-lite;
 
         &::before {
           content: '-';
@@ -140,8 +141,12 @@
         padding-left: 0;
       }
 
-      .subpage-link:not(.-active) {
+      .subpage-link {
         @include font-caption-thin;
+        color: $gray;
+        &.-active {
+          color: $black-lite;
+        }
       }
 
       .subpage-section-nav {
@@ -174,8 +179,6 @@
         }
 
         a {
-          @include font-caption-bold;
-
           &::before {
             display: none;
           }

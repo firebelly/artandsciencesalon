@@ -191,26 +191,27 @@ $colors: (
   }
 }
 
-// If an element should want to break out of default .page-block padding and be FULL WIDTH...
+// If an element should want to break out of default .page-block padding and be FREE!!! 
+// FULL WIDTH...
 @mixin break-out-of-padding {
-  margin-right: -$padding;
   margin-left: -$padding;
   padding-left: $padding;
+  margin-right: -$padding;
   padding-right: $padding;
   width: calc( 100% + #{$padding}*2);
 
   @include media-md {
-    margin-right: -$padding-md;
     margin-left: -$padding-md;
     padding-left: $padding-md;
+    margin-right: -$padding-md;
     padding-right: $padding-md;
     width: calc( 100% + #{$padding-md}*2);
   }
 
   @include media-lg {
-    margin-right: -$padding-lg;
     margin-left: -$padding-lg;
     padding-left: $padding-lg;
+    margin-right: -$padding-lg;
     padding-right: $padding-lg;
     width: calc( 100% + #{$padding-lg}*2);
   }

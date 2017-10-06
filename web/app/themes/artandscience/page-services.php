@@ -3,7 +3,12 @@
     Template name: Services
   */
 
-$locations = get_posts(['post_type'=>'location','sort_column'=>'menu_order','sort_order'=>'asc']);
+$locations = get_posts([
+  'post_type'=>'location',
+  'sort_column'=>'menu_order',
+  'sort_order'=>'asc',
+  'numberposts' => -1,
+]);
 
 ?>
 

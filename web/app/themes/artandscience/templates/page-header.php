@@ -1,7 +1,7 @@
 <?php
 use Roots\Sage\Titles;
 
-$header_image = get_the_post_thumbnail_url($post);
+$header_image = \Firebelly\Media\get_post_thumbnail_url($post->ID);
 
 $header_text = '';
 

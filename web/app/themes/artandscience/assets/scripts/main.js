@@ -28,6 +28,7 @@ var FBSage = (function($) {
     // Fit them vids!
     // $('main').fitVids();
 
+    _initPeoplePopup();
     _initImageViewerPopup();
     _initBookAppointment();
     _initExperienceLevelsPopup();
@@ -65,6 +66,12 @@ var FBSage = (function($) {
     });
 
   } // end init()
+
+  function _initPeoplePopup() {
+      $('<button class="prev-person"><svg class="icon icon-triangle"><use xlink:href="#icon-triangle"/></svg></button><button class="next-person"><svg class="icon icon-triangle"><use xlink:href="#icon-triangle"/></svg></button>')
+        .prependTo('.person-popup .controls-wrap');
+   
+  }
 
   function _initImageViewerPopup() {
 

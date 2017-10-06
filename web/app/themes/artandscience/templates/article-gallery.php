@@ -1,6 +1,6 @@
 <?php
 
-$header_image = get_the_post_thumbnail_url($post);
+$header_image = Firebelly\Media\get_post_thumbnail_url($post->ID,'gallery-thumb');
 $permalink = get_permalink($post);
 
 ?>

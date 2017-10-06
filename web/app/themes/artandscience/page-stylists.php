@@ -1,116 +1,43 @@
-<?php 
+<?php
   /*
     Template name: Stylists
   */
- 
- $location_args = array(
-   'numberposts' => -1,
-   'post_type' => 'location',
-   'orderby' => 'menu_order',
- );
 
- $location_posts = get_posts($location_args);
+$location_sections = get_posts([
+  'post_type'=>'location',
+  'sort_column'=>'menu_order',
+  'sort_order'=>'asc',
+  'numberposts' => -1,
+]);
 
- $people_type_args = array(
-   'taxonomy'=>'person_type'
- );
- $people_types = get_terms($people_type_args);
 ?>
 
-<nav class="stylists-nav top-section page-block -bottom-underlap -text-cream -bg-gold">
-  <ul class="locations">
-    <?php 
-      foreach ($location_posts as $location):
-        echo '<li class="location"><a href="#people-'.$location->post_name.'">'.$location->post_name.'</a></li>';
-      endforeach;
-    ?>
-  </ul>
+<div class="top-section page-block -bottom-underlap -bg-cream-dark">
+  <div class="content-wrap">
+    <nav class="subpage-nav -has-subpage-sections">
+      <h3 class="nav-title">Location</h3>
+      <ul class="subpages-list">
+        <?php
+        foreach ( $location_sections as $location_section ) {
 
-  <ul class="person-types">
-    <?php foreach ($location_posts as $location):
-      echo '<div class="location-group" data-location="'.$location->post_name.'">';
+          echo '<li class="subpages-list-item"><a href="'.get_permalink($location_section).'" data-target="'.$location_section->post_name.'-people" class="subpage-link">'.$location_section->post_title.'</a>';
 
-      foreach ($people_types as $people_type):
-        $people_args = array(
-          'numberposts' => -1,
-          'post_type' => 'person',
-          'orderby' => 'menu_order',
-          'tax_query' => array(
-            'relation' => 'AND',
-            array(
-              'taxonomy' => 'locations',
-              'field' => 'name',
-              'terms' => $location->post_title
-            ),
-            array(
-              'taxonomy' => 'person_type',
-              'field' => 'slug',
-              'terms' => $people_type
-            )
-          )
-        );
-        $people = get_posts($people_args);
+          echo Firebelly\PostTypes\People\get_people_section_nav($location_section);
 
-        if (!empty($people)):
-          echo '<li>'.$people_type->name.'</li>';
-        endif;
-      endforeach;
-
-      echo '</div>';
-    endforeach;
-    ?>
-  </ul>
-</nav>
-
-<div class="people-container main-content page-block -indent-right">
-  
-  <?php foreach ($location_posts as $location) { ?>
-
-    <div id="people-<?= $location->post_name; ?>" class="people">
-
-      <h4><?= $location->post_title ?></h4>
-      
-      <?php foreach ($people_types as $people_type) {
-
-        $people_args = array(
-          'numberposts' => -1,
-          'post_type' => 'person',
-          'orderby' => 'menu_order',
-          'tax_query' => array(
-            'relation' => 'AND',
-            array(
-              'taxonomy' => 'locations',
-              'field' => 'name',
-              'terms' => $location->post_title
-            ),
-            array(
-              'taxonomy' => 'person_type',
-              'field' => 'slug',
-              'terms' => $people_type
-            )
-          )
-        );
-        $people = get_posts($people_args);
-
-        if (!empty($people)) {
+          echo '</li>';
+        }
         ?>
-        
-        <div class="person-type">
-          
-          <h3><?= $people_type->name ?>s</h3>
-
-          <div class="people-grid">
-            <?php foreach ($people as $post):
-              include(locate_template('templates/article-person.php'));
-            endforeach; ?>
-          </div>
-
-        </div>
-
-      <?php } } ?>
-
-    </div>
-
-  <?php } ?>
-
+      </ul>
+    </nav>
+  </div>
 </div>
+
+<div class="main-content page-block -indent-right -top-overlap -bg-cream user-content">
+  <?php
+  foreach ( $location_sections as $location_section ) {
+    include(locate_template('templates/stylists-section.php'));
+  }
+  ?>
+</div>
+
+<?php include(locate_template('templates/experience-levels.php')); ?>

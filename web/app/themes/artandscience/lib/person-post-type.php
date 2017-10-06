@@ -3,7 +3,7 @@
  * Person post type
  */
 
-namespace Firebelly\PostTypes\Person;
+namespace Firebelly\PostTypes\People;
 use Firebelly\Utils;
 
 /**
@@ -248,6 +248,52 @@ function metaboxes( array $meta_boxes ) {
   return $meta_boxes;
 }
 add_filter( 'cmb2_meta_boxes', __NAMESPACE__ . '\metaboxes' );
+
+/**
+ * Get Service Section Nav
+ */
+function get_people_section_nav($location) {
+
+  $output = '';
+  $output .= '<nav class="subpage-section-nav hide-during-page-load">';
+  $output .= '<ul class="subpage-section-list">';
+
+
+  $slug = $location->post_name;
+  $location_id = $location->ID;
+  $people_types = get_terms(['taxonomy'=>'person_type']);
+
+   foreach ($people_types as $people_type):
+      $people = get_posts([
+        'numberposts' => -1,
+        'post_type' => 'person',
+        'orderby' => 'menu_order',
+        'tax_query' => array(
+          'relation' => 'AND',
+          array(
+            'taxonomy' => 'locations',
+            'field' => 'name',
+            'terms' => $location->post_title
+          ),
+          array(
+            'taxonomy' => 'person_type',
+            'field' => 'slug',
+            'terms' => $people_type
+          )
+        )
+      ]);
+
+      if (!empty($people)):
+        $output .= '<li class="subpage-section-list-item"><a href="#'.$slug.'-'.$people_type->slug.'" class="smoothscroll">'.$people_type->name.'</a></li>';
+      endif;
+    endforeach;
+
+
+  $output.= '</ul></nav>';
+
+  return $output;
+}
+
 
 /**
  * Get People
