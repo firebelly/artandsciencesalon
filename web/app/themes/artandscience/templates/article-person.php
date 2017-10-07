@@ -12,7 +12,7 @@ $lookbook_group = get_post_meta($post->ID, '_cmb2_lookbook_group', false);
 $thumb_url = \Firebelly\Media\get_post_thumbnail_url($post->ID,'gallery-thumb',true);
 ?>
 
-<article id="<?= $post->post_name ?>" class="stylist person" data-id="<?= $post->ID ?>" data-page-title="<?= $post->post_title ?>" data-page-url="<?= get_permalink($post) ?>">
+<article id="<?= $post->post_name ?>" class="stylist person" data-slug="<?= $post->post_name ?>" data-page-title="<?= $post->post_title ?>" data-page-url="<?= get_permalink($post) ?>">
   <div class="person-popup hide-during-page-load">
     <div class="popup-wrap">
       <div class="header-wrap">

@@ -42,13 +42,25 @@ var FBSage = (function($) {
     // Certain elements (e.g. popups) are hidden during load, remove the class hiding them...
     $('.hide-during-page-load').removeClass('hide-during-page-load');
 
-    // Esc handlers
+    // Key Handlers
     $(document).keyup(function(e) {
+
+      // Esc
       if (e.keyCode === 27) {
         _hideMobileNav();
         _closeExperiencePopup();
         _imageViewerPopupClose();
         _closePersonPopup();
+      }
+
+      // Left
+      if (e.keyCode === 37) {
+        _switchPersonPopup('prev');
+      }
+
+      // Right
+      if (e.keyCode === 39) {
+        _switchPersonPopup('next');
       }
     });
 
@@ -59,10 +71,20 @@ var FBSage = (function($) {
       _scrollBody($(href));
     });
 
-    // Scroll down to hash afer page load
+    // Scroll down to hash afer page load OR open person popup with hash content
     $(window).load(function() {
       if (window.location.hash) {
-        _scrollBody($(window.location.hash));
+        var $peopleMatches = $(window.location.hash+'.person');
+        console.log($peopleMatches);
+        if($peopleMatches.length){
+          _scrollBody($('body'));
+          setTimeout(function() {
+            $person = $peopleMatches.first();
+            _openPersonPopup($person);
+          },1000);
+        } else {
+          _scrollBody($(window.location.hash));
+        }
       }
     });
 
@@ -103,6 +125,15 @@ var FBSage = (function($) {
 
   function _openPersonPopup($person) {
 
+    // Update the history (url bar)
+    history.replaceState(null, null, '#'+$person.attr('data-slug'));
+
+    // If I belong to a subpage and it is not open, open it.
+    $subpage = $person.closest('.subpage:not(.-active)');
+    if( $subpage.length ) {
+      _openSubpage($subpage.first(), false);
+    }
+
     // Find the popup
     $popup = $person.find('.person-popup');
 
@@ -111,21 +142,35 @@ var FBSage = (function($) {
       .addClass('-open')
       .velocity('fadeIn', {duration: 100});
 
-    // Contents slide in
+    // Hide contents
+    $popup.find('.content-wrap').velocity('slideUp',{duration: 0});
+
+    // Header slides in
     $popup.find('.popup-wrap')
       .velocity({translateX: '100px', opacity: 0}, {duration: 0})
-      .velocity({translateX: '0px', opacity: 1}, {duration: 300});
+      .velocity({translateX: '0px', opacity: 1}, {
+        duration: 150,
+        complete: function() {
+
+          // Then contents drop down
+          $popup.find('.content-wrap').velocity('slideDown',{duration: 150});
+        }
+      });
 
     // After short delay, scroll to just above it
     _scrollBody($person, 500, 300, -50);
   }
 
   function _closePersonPopup() {
+
     // Find the open popup
     $popup = $('.person-popup.-open');
 
     // If it exists...
     if($popup.length) {
+
+      // Reset url
+      history.replaceState(null, null, window.location.pathname);
 
       // Hide it and remove -open class
       $popup
@@ -454,38 +499,48 @@ var FBSage = (function($) {
         // Click behavior
         $thisLink.on('click', function(e) {
           e.preventDefault();
-
-          // Remove -active class where not needed
-          $subPageNav.find('a.-active').not($thisLink).removeClass('-active');
-
-          // If it aint already active, make it so
-          if (!$thisLink.is('.-active')) {
-
-            $thisLink.addClass('-active');
-
-            // Deactivate and hide previously active subpage
-            $('.subpage.-active:not(#'+target+')').css('opacity', 0).removeClass('-active');
-
-            // Hide all subpage section navs
-            $('.subpage-section-nav').velocity('slideUp', {duration: 0});
-
-            // Fade in target, add active class, scroll to it
-            $target.css('opacity', 0);
-            $target.addClass('-active');
-            _scrollBody($('.top-section'), 800);
-            $target.css('opacity', 1);
-
-            // Show suppage section nav for this page;
-            $thisLink.next('.subpage-section-nav').velocity('slideDown', {duration: 300});
-          }
+          _openSubpage($target,true);
         }); // end click behavior
       });
 
-      // Hide the subpages initially, except the first
+      // Hide the subpage section navs
       $('.subpage-section-nav').velocity('slideUp', {duration: 0});
-      $('.subpage-nav .subpages-list-item:eq(0)').find('.subpage-link').addClass('-active');
-      $('.subpage:eq(0)').addClass('-active');
-      $('.subpage-nav .subpages-list-item:eq(0)').find('.subpage-section-nav').velocity('slideDown', {duration: 300});
+
+      // Open first page (dont scroll there)
+      _openSubpage($('.subpage:eq(0)'),false);
+    }
+  }
+  function _openSubpage($target,scrollToSubpage) {
+    var $subPageNav = $('.subpage-nav');
+
+    if ($subPageNav.length) {
+
+      var target = $target.attr('id');
+      $thisLink = $('.subpage-link[data-target="'+target+'"]');
+
+      // Remove -active class where not needed
+      $subPageNav.find('a.-active').not($thisLink).removeClass('-active');
+
+      // If it aint already active, make it so
+      if (!$thisLink.is('.-active')) {
+
+        $thisLink.addClass('-active');
+
+        // Deactivate and hide previously active subpage
+        $('.subpage.-active:not(#'+target+')').css('opacity', 0).removeClass('-active');
+
+        // Hide all subpage section navs
+        $('.subpage-section-nav').velocity('slideUp', {duration: 0});
+
+        // Fade in target, add active class, scroll to it (if specified)
+        $target.css('opacity', 0);
+        $target.addClass('-active');
+        if(scrollToSubpage) {_scrollBody($('.top-section'), 800);}
+        $target.css('opacity', 1);
+
+        // Show suppage section nav for this page;
+        $thisLink.next('.subpage-section-nav').velocity('slideDown', {duration: 300});
+      }
     }
   }
 
