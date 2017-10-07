@@ -28,7 +28,7 @@ var FBSage = (function($) {
     // Fit them vids!
     // $('main').fitVids();
 
-    _initPeoplePopup();
+    _initPersonPopup();
     _initImageViewerPopup();
     _initBookAppointment();
     _initExperienceLevelsPopup();
@@ -48,6 +48,7 @@ var FBSage = (function($) {
         _hideMobileNav();
         _closeExperiencePopup();
         _imageViewerPopupClose();
+        _closePersonPopup();
       }
     });
 
@@ -67,10 +68,112 @@ var FBSage = (function($) {
 
   } // end init()
 
-  function _initPeoplePopup() {
-      $('<button class="prev-person"><svg class="icon icon-triangle"><use xlink:href="#icon-triangle"/></svg></button><button class="next-person"><svg class="icon icon-triangle"><use xlink:href="#icon-triangle"/></svg></button>')
+  function _initPersonPopup() {
+
+      // Add control buttons to popups
+      $('<button class="prev-person-popup arrow"><svg class="icon icon-triangle"><use xlink:href="#icon-triangle"/></svg></button><button class="next-person-popup arrow"><svg class="icon icon-triangle"><use xlink:href="#icon-triangle"/></svg></button>')
         .prependTo('.person-popup .controls-wrap');
-   
+      $('<button class="close-person-popup"><span class="text">Close</span><svg class="icon icon-x"><use xlink:href="#icon-x"/></svg></button>')
+        .prependTo('.person-popup');
+
+      // Hide popups
+      $('.person-popup').velocity('fadeOut',{duration: 0});
+
+      // Open button handling
+      $('.open-person-popup').click(function () {
+        $person = $(this).closest('.person');
+        _openPersonPopup($person);
+      });
+
+      // Next button handling
+      $('.next-person-popup').click(function () {
+        _switchPersonPopup('next');
+      });
+
+      // Prev button handling
+      $('.prev-person-popup').click(function () {
+        _switchPersonPopup('prev');
+      });
+
+      // Close button handling
+      $('.close-person-popup').click(function () {
+        _closePersonPopup();
+      });
+  }
+
+  function _openPersonPopup($person) {
+
+    // Find the popup
+    $popup = $person.find('.person-popup');
+
+    // Give it -open class and fade in
+    $popup
+      .addClass('-open')
+      .velocity('fadeIn', {duration: 100});
+
+    // Contents slide in
+    $popup.find('.popup-wrap')
+      .velocity({translateX: '100px', opacity: 0}, {duration: 0})
+      .velocity({translateX: '0px', opacity: 1}, {duration: 300});
+
+    // After short delay, scroll to just above it
+    _scrollBody($person, 500, 300, -50);
+  }
+
+  function _closePersonPopup() {
+    // Find the open popup
+    $popup = $('.person-popup.-open');
+
+    // If it exists...
+    if($popup.length) {
+
+      // Hide it and remove -open class
+      $popup
+        .removeClass('-open')
+        .velocity('fadeOut', {duration: 300});
+    }
+  }
+
+  function _switchPersonPopup(nextOrPrev) {
+        // Find the open popup
+    $popup = $('.person-popup.-open');
+
+    // If it exists...
+    if($popup.length) {
+
+      // Who am I?
+      var $currentPerson = $popup.closest('.person');
+
+      // Are we on a subpage? If so, grab all the people on that subpage,
+      // If not on a subpage (like on "about"), grab everyone on the whole page
+      var $currentSubpage = $popup.closest('.subpage');
+      var $people;
+      if ($currentSubpage.length) {
+        $people = $currentSubpage.find('.person');
+      } else {
+        $people = $('.person');
+      }
+      // console.log($people);
+
+      // Where am I in the list?
+      var currentIndex = $people.index($currentPerson);
+
+      // Find the next or previous person, depending on nextOrPrev
+      var nextIndex;
+      if(nextOrPrev==='next') {
+        nextIndex = (currentIndex + 1) % ($people.length);
+      }
+      if(nextOrPrev==='prev') {
+        nextIndex = (currentIndex - 1) % ($people.length);
+      }
+      var $nextPerson = $($people.get(nextIndex));
+
+      // The king is dead
+      _closePersonPopup();
+
+      // Long live the king
+      _openPersonPopup($nextPerson);
+    }
   }
 
   function _initImageViewerPopup() {
@@ -113,7 +216,12 @@ var FBSage = (function($) {
     $('.image-viewer-popup').velocity('fadeOut', {duration: 100});
   }
 
-  function _scrollBody(element, duration, delay) {
+  function _scrollBody(element, duration, delay, offset) {
+
+    if (typeof offset === 'undefined') {
+      offset = 0;
+    }
+
     if ($('#wpadminbar').length) {
       wpOffset = $('#wpadminbar').height();
     } else {
@@ -122,7 +230,7 @@ var FBSage = (function($) {
     element.velocity("scroll", {
       duration: duration,
       delay: delay,
-      offset: -wpOffset
+      offset: -wpOffset + offset
     }, "easeOutSine");
   }
 

@@ -139,15 +139,15 @@ function metaboxes( array $meta_boxes ) {
       'id'   => 'day',
       'type'             => 'select',
       'show_option_none' => false,
-      'default'          => 'monday',
+      'default'          => 'Monday',
       'options'          => array(
-        'monday'    => __( 'Monday', 'cmb2' ),
-        'tuesday'   => __( 'Tuesday', 'cmb2' ),
-        'wednesday' => __( 'Wednesday', 'cmb2' ),
-        'thursday'  => __( 'Thursday', 'cmb2' ),
-        'friday'    => __( 'Friday', 'cmb2' ),
-        'saturday'  => __( 'Saturday', 'cmb2' ),
-        'sunday'    => __( 'Sunday', 'cmb2' ),
+        'Monday'    => __( 'Monday', 'cmb2' ),
+        'Tuesday'   => __( 'Tuesday', 'cmb2' ),
+        'Wednesday' => __( 'Wednesday', 'cmb2' ),
+        'Thursday'  => __( 'Thursday', 'cmb2' ),
+        'Friday'    => __( 'Friday', 'cmb2' ),
+        'Saturday'  => __( 'Saturday', 'cmb2' ),
+        'Sunday'    => __( 'Sunday', 'cmb2' ),
       ),
   ) );
 
@@ -188,9 +188,9 @@ function metaboxes( array $meta_boxes ) {
   ) );
 
   $pricing_group->add_group_field( $pricing_group_id, array(
-      'name' => 'Service',
-      'id'   => 'service',
-      'type' => 'text',
+    'name' => 'Service',
+    'id'   => 'service',
+    'type' => 'text',
   ) );
 
   $pricing_group->add_group_field( $pricing_group_id, array(
@@ -230,7 +230,7 @@ function metaboxes( array $meta_boxes ) {
 
   $lookbook_group->add_group_field( $lookbook_group_id, array(
       'name' => 'Source',
-      'id'   => $prefix . 'source',
+      'id'   => 'source',
       'type' => 'select',
       'options' => array(
         'pinterest' => 'Pinterest',
@@ -241,7 +241,7 @@ function metaboxes( array $meta_boxes ) {
 
   $lookbook_group->add_group_field( $lookbook_group_id, array(
     'name'     => 'Link Url',
-    'id'       => $prefix . 'url',
+    'id'       => 'url',
     'type'     => 'text',
   ) );
 

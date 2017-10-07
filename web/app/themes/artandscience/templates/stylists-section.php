@@ -1,6 +1,5 @@
 <?php
   use Firebelly\PostTypes\Location;
-  $first_person = true;
   $people_types = get_terms(['taxonomy'=>'person_type']);
 ?>
 
@@ -30,9 +29,9 @@
 
     if (!empty($people)) :
     ?>
-    
+
       <section class="person-type section" id="<?= $location_section->post_name.'-'.$people_type->slug ?>">
-        
+
         <h2 class="experience-popup-location"><?= $people_type->name ?>s</h2>
 
         <ul class="people-grid semantic-only-list">
@@ -40,7 +39,6 @@
             echo '<li class="people-grid-item">';
             include(locate_template('templates/article-person.php'));
             echo '</li>';
-            $first_person = false;
           endforeach; ?>
         </ul>
 
