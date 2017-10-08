@@ -1,7 +1,7 @@
 // Styling of content that is editable in wysiwyg
 
 // Some h2 styling is gonna need to be referenced elsewhere, so abstract it out.
-@mixin h2-padding-top {    
+@mixin h2-padding-top {
   padding-top: (24px - 3px); // (intended - correction)
   @include media-lg {
     padding-top: (34px - 7px); // (intended - correction)
@@ -84,5 +84,45 @@
 
   strong {
     font-weight: bold;
+  }
+
+    // Image Layout Classes
+  .image-layout {
+    img {
+      width: 100%;
+      vertical-align: top;
+      border-bottom: 2px solid $orange;
+    }
+
+    &.-two-image {
+      margin: $padding 0;
+
+      @include media-md {
+        @include clearfix;
+        margin-right: -$padding-md;
+        width: calc(100% + $padding-md);
+
+        img {
+          float: left;
+          max-width: none;
+          width: calc(50% - #{$padding-md / 2});
+          &:first-of-type {
+            margin-right: $padding-md;
+          }
+        }
+      }
+
+      @include media-lg {
+        margin-right: -$padding-lg;
+        width: calc(100% + $padding-lg);
+
+        img {
+          width: calc(50% - #{$padding-lg / 2});
+          &:first-of-type {
+            margin-right: $padding-lg;
+          }
+        }
+      }
+    }
   }
 }

@@ -17,11 +17,11 @@
     padding: $padding-lg;
   }
 
-  .section { 
+  .section {
     position: relative;
     margin-top: $section-margin-top;
-    &:first-child { 
-      margin-top: 0; 
+    &:first-child {
+      margin-top: 0;
     }
   }
 
@@ -47,47 +47,6 @@
 
     @include media-lg {
       padding-bottom: $padding-lg*2;
-    }
-  }
-
-  // Image Layout Classes
-  .image-layout {
-    img {
-      width: 100%;
-      vertical-align: top;
-      border-bottom: 2px solid $orange;
-    }
-
-    &.-two-image {
-      margin: $padding 0;
-
-      @include media-md {
-        @include clearfix;
-        margin-right: -$padding-md;
-        width: calc(100% + $padding-md);
-
-        img {
-          float: left;
-          max-width: none;
-          width: calc(50% - #{$padding-md / 2});
-          &:first-of-type {
-            margin-right: $padding-md;
-          }
-        }
-      }
-
-      @include media-lg {
-        margin-right: -$padding-lg;
-        width: calc(100% + $padding-lg);
-
-        img {
-          width: calc(50% - #{$padding-lg / 2});
-          &:first-of-type {
-            margin-right: $padding-lg;
-          }
-        }
-      }
-
     }
   }
 }
@@ -191,7 +150,7 @@ $colors: (
   }
 }
 
-// If an element should want to break out of default .page-block padding and be FREE!!! 
+// If an element should want to break out of default .page-block padding and be FREE!!!
 // FULL WIDTH...
 @mixin break-out-of-padding {
   margin-left: -$padding;

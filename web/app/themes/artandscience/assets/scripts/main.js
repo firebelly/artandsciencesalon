@@ -38,6 +38,7 @@ var FBSage = (function($) {
     _initNav();
     _injectSvgSprite();
     _initBigclicky();
+    _breakupLongEmails();
 
     // Certain elements (e.g. popups) are hidden during load, remove the class hiding them...
     $('.hide-during-page-load').removeClass('hide-during-page-load');
@@ -77,7 +78,7 @@ var FBSage = (function($) {
         var $peopleMatches = $(window.location.hash+'.person');
         console.log($peopleMatches);
         if($peopleMatches.length){
-          _scrollBody($('body'));
+          _scrollBody($('body'), 0, 0, 0);
           setTimeout(function() {
             $person = $peopleMatches.first();
             _openPersonPopup($person);
@@ -89,6 +90,18 @@ var FBSage = (function($) {
     });
 
   } // end init()
+
+  function _breakupLongEmails () {
+    $('.breakup-email').each(function () {
+      var email = $(this).text().split('@');
+      if (email.length === 2) {
+        var brokenEmail = '<span class="email-part">'+email[0]+'@</span><span class="email-part">'+email[1]+'</span>';
+        $(this).empty().append(brokenEmail);
+      }
+
+    })
+  }
+
 
   function _initPersonPopup() {
 

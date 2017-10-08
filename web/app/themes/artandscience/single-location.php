@@ -87,68 +87,70 @@
 
 ?>
 
-<div id="<?= $post->post_name ?>" class="location -indent-right" data-id="<?= $post->ID ?>" data-page-title="<?= $post->post_title ?>" data-page-url="<?= get_permalink($post) ?>">
+<div id="<?= $post->post_name ?>" class="location" data-id="<?= $post->ID ?>" data-page-title="<?= $post->post_title ?>" data-page-url="<?= get_permalink($post) ?>">
   <div class="banner" style="background-image:url('<?= $location_image ?>');">
     <?= (!empty($virtual_tour_url))?'<a href="'.$virtual_tour_url.'">Take a virtual tour</a>':''; ?>
   </div>
 
-  <header class="page-block -bg-cream-dark location-header">    
+  <header class="page-block -bg-cream-dark location-header">
     <h4 class="location-name"><?= $post->post_title ?></h4>
-    <div class="location-meta">    
+    <div class="location-meta">
       <p class="location-address"><?= $address ?></p>
       <p class="location-phone"><?= $phone_number ?></p>
-      <p class="location-email"><a href="<?= $email ?>" target="_blank"><?= $email ?></a></p>
+      <p class="location-email"><a href="<?= $email ?>" target="_blank" class="breakup-email"><?= $email ?></a></p>
     </div>
     <p class="location-description"><?= $body ?></p>
   </header>
 
   <div class="page-block location-details -bg-cream">
+    <div class="details-block-wrap">
 
-    <div class="hours location-detail-set">
-      <h4>Hours</h4>
-      <table class="leader-table hours-table">
-        <?php 
-        if ($hours_group) {
-          foreach ($hours_group as $day) {
-            echo '<tr class="leader-row"><td class="day leader-left"><span class="leader-text">'.$day['day'].'</span></td><td class="time leader-right"><span class="leader-text">'.$day['hours'].'</span></td></tr>'.((!empty($day['details']))?'<tr class="hour-details"><td>('.$day['details'].')</td></tr>':'').'';
+      <div class="hours details-block">
+        <h4>Hours</h4>
+        <table class="leader-table hours-table">
+          <?php
+          if ($hours_group) {
+            foreach ($hours_group as $day) {
+              echo '<tr class="leader-row"><td class="day leader-left"><span class="leader-text">'.$day['day'].'</span></td><td class="time leader-right"><span class="leader-text">'.$day['hours'].'</span></td></tr>'.((!empty($day['details']))?'<tr class="hour-details"><td>('.$day['details'].')</td></tr>':'').'';
+            }
+          }
+          ?>
+        </table>
+      </div>
+
+      <?php if (!empty($services_group)) { ?>
+      <div class="services details-block">
+        <h4>Available Services</h4>
+        <table class="data-table services-table">
+          <?php
+          if ($services_group) {
+            foreach ($services_group as $service) {
+              echo '<tr><td>'.((!empty($service['link']))?'<a href="'.$service['link'].'">'.$service['service'].'</a>': $service['service']).'</td></tr>';
+            }
+          }
+          ?>
+        </table>
+      </div>
+      <?php } ?>
+
+      <?php
+        if (!empty($people_types)) {
+
+          foreach ($people_types as $people_type) {
+            $people_type_args = $people_type.'_args';
+            $people = get_posts($$people_type_args);
+
+            $people_type_title = ucfirst($people_type);
+
+            if (!empty($people)) {
+              echo '<h4>'.$people_type_title.'</h4>';
+              foreach ($people as $person):
+                echo $person->post_title;
+              endforeach;
+            }
           }
         }
-        ?>
-      </table>
+      ?>
     </div>
-
-    <?php if (!empty($services_group)) { ?>
-    <div class="services location-detail-set">
-      <h4>Available Services</h4>
-      <table class="data-table services-table">    
-        <?php 
-        if ($services_group) {
-          foreach ($services_group as $service) {
-            echo '<tr><td>'.((!empty($service['link']))?'<a href="'.$service['link'].'">'.$service['service'].'</a>': $service['service']).'</td></tr>';
-          }
-        }
-        ?>
-      </table>
-    </div>
-    <?php } ?>
-
-    <?php 
-      if (!empty($people_types)) {
-
-        foreach ($people_types as $people_type) {
-          $people_type_args = $people_type.'_args';
-          $people = get_posts($$people_type_args);
-
-          $people_type_title = ucfirst($people_type);
-
-          if (!empty($people)) {
-            echo '<h4>'.$people_type_title.'</h4>';
-            foreach ($people as $person):
-              echo $person->post_title;
-            endforeach;
-          }
-        }
-      }
-    ?>
   </div>
 </div>

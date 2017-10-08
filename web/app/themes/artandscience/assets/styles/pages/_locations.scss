@@ -1,14 +1,11 @@
 // Locations Page
 
 .page.locations {
-  
+
   .page-header {
-    @include media-md {
-      z-index: 1;
-      margin-bottom: -96px;
-    }
     @include media-lg {
-      margin-bottom: -60px;
+      z-index: 2;
+      margin-bottom: -$padding-lg;
     }
     .header-text {
       background: $gray-dark;
@@ -23,45 +20,84 @@
     }
     a {
       text-decoration: none;
+      &:hover {
+        color: $orange
+      }
+    }
+    .location-email a {
+      .email-part {
+        display: inline-block;
+      }
     }
   }
-  
-  .location {
+
+  .site-main .location { // .site-main to differentiate from footer locations
+
+    &:nth-child(even) {
+      @include indent-left;
+    }
+    &:nth-child(odd) {
+      @include indent-right;
+    }
+
+    &:first-child {
+
+    }
+
     .banner {
       height: 0;
       width: 100%;
       position: relative;
-      padding-bottom: 37.5%;
+      padding-bottom: 66%;
       background-size: cover;
       border-bottom: 2px solid $orange;
       background-position: center center;
+
+      @include media-md {
+        padding-bottom: 37.5%;
+      }
+
       a {
         bottom: 24px;
         color: $white;
-        right: $padding-lg;
+        right: $padding;
         position: absolute;
         text-decoration: none;
         @include font-caption-bold;
+        border-bottom: 1px solid transparent; // hack to prevent 1 pixel shift when adding border
+
+        @include media-md {
+          right: $padding-md;
+        }
+
+        @include media-lg {
+          right: $padding-lg;
+        }
+
         &:hover {
-          text-decoration: underline;
+          border-bottom: 1px solid $white;
         }
       }
     }
 
     .location-header {
-      padding-top: $padding-lg;
-      padding-bottom: $padding-lg;
+        padding-bottom: $padding/2;
+
+      @include media-md {
+        padding-bottom: $padding-md/2;
+      }
+
+      @include media-lg {
+        padding-bottom: $padding-lg/2;
+      }
     }
 
     .location-name {
-      @include font-h1;
       margin: 0;
+      @include font-h2;
     }
 
     .location-details {
-      @include clearfix;
-      padding-bottom: 5px;
-      padding-top: $padding-lg;
 
       h4 {
         margin-top: 0;
@@ -96,12 +132,41 @@
       }
     }
 
-    .location-detail-set {
-      float: left;
-      max-width: 216px;
-      margin-right: $padding-lg;
-      margin-bottom: $padding-lg;
+    .details-block-wrap {
+      @include clearfix;
+
+
+      @include media-md {
+        display: flex;
+        flex-wrap: wrap;
+        max-width: 700px;
+        margin-right: -$padding-md;
+      }
+
+      @include media-lg {
+        max-width: 1050px;
+        margin-right: -$padding-lg;
+      }
+
+    }
+
+    .details-block {
+      float: left; // no-flex fallback
+      margin-bottom: $padding;
+
+      @include media-md {
+        width: 50%; // no-flex fallback
+        flex-basis: 50%;
+        margin-bottom: $padding-md;
+        padding-right: $padding-md;
+      }
+
+      @include media-lg {
+        width: 33.33%; // no-flex fallback
+        flex-basis: 33.33%;
+        margin-bottom: $padding-lg;
+        padding-right: $padding-lg;
+      }
     }
   }
-
 }
