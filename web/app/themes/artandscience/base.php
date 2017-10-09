@@ -3,6 +3,12 @@
 use Roots\Sage\Setup;
 use Roots\Sage\Wrapper;
 
+$classes = '';
+if(is_front_page()) {
+  $schemes = ['a','b'];
+  $classes .= 'color-scheme-'.$schemes[rand(0,1)];
+}
+
 ?>
 
 <!doctype html>
@@ -10,7 +16,7 @@ use Roots\Sage\Wrapper;
 <!--[if IE 9 ]> <html class="no-js ie9 lt-ie10" lang="en"> <![endif]-->
 <!--[if gt IE 9]><!--> <html class="no-js" <?php language_attributes(); ?>> <!--<![endif]-->
   <?php get_template_part('templates/head'); ?>
-  <body <?php body_class(); ?>>
+  <body <?php body_class($classes); ?>>
     <div id="breakpoint-indicator"></div>
     <div class="site-background">
       <div class="big-a-s"></div>

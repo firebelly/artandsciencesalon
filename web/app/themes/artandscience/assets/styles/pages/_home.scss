@@ -3,26 +3,19 @@
 .home.page {
 
   .boxes {
-    // width: 50%;
-    @include clearfix;
-
-    .box {
-      float: left;
-      // width: 50%;
-      width: 100%;
-      border: 2px solid black;
-      background: $cream;
-    }
 
     a {
       border-bottom: none;
       text-decoration: none;
     }
+
     h2 {
       margin: 0;
     }
 
-    .thumb-box {
+    .aspect-ratio-box {
+      width: 100%;
+
       .aspect-ratio {
         height: 0;
         width: 100%;
@@ -30,14 +23,15 @@
         padding-bottom: 100%;
       }
 
-      .thumb {
+      .box {
         top: 0;
         left: 0;
         right: 0;
         bottom: 0;
-        background: $gold;
+        color: $cream;
         position: absolute;
-        @include padding;
+        background-size: cover;
+        background-position: center;
       }
 
       .text-wrap {
@@ -51,14 +45,163 @@
           position: absolute;
         }
       }
-
-      .spotlight {
-        display: block;
-      }
     }
 
-    .text-box {
+    .content-sized-box {
+      width: auto;
+    }
+
+    .box {
+      background: $gray;
       @include padding;
+    }
+
+    .spotlight {
+      display: block;
+    }
+
+    .line-1 {
+      display: block;
+      padding-bottom: 28px - 12px; // intent - correction
+    }
+    
+    .line-2 {
+      display: block;
+      padding-top: 28px - 4; // intent - correction
+      @include big-dash($gold);
+    }
+  }
+
+  // Mobile Layout
+  @include max-screen($breakpoint-medium - 1px) {
+    #mission-statement {
+      &.box-container {
+        padding-right: $padding;
+      }
+      .box {
+        padding-bottom: 2*$padding;
+      }
+    }
+    #stylist-spotlight {
+      margin-top: -$padding;
+      &.box-container {
+        padding-left: $padding;
+      }
+    }
+    #careers {
+      &.box-container {
+        padding-left: $padding;
+      }
+      .aspect-ratio {
+        padding-bottom: 114%;
+      }
+      .box {
+        padding-bottom: 2*$padding;
+      }
+    }
+    #press {
+      position: relative;
+      z-index: 1;
+      margin-top: -$padding;
+      margin-bottom: -$padding;
+      &.box-container {
+        padding-right: 2*$padding;
+      }
+    }
+    #lookbook-spotlight {
+      &.box-container {
+        padding-left: $padding;
+      }
+    }
+    #services {
+      &.box-container {
+        padding-left: $padding;
+      }
+      .box {
+        padding-bottom: 2*$padding;
+      }
+      .aspect-ratio {
+        padding-bottom: 129%;
+      }
+    }
+    #social-impact {
+      z-index: 1;
+      position: relative;
+      margin-top: -$padding;
+      &.box-container {
+        padding-right: 2*$padding;
+      }
+      .box {
+        padding-bottom: 2*$padding;
+      }
+    }
+    #behind-the-scenes {
+      z-index: 2;
+      position: relative;
+      margin-top: -$padding;
+      &.box-container {
+        padding-left: $padding;
+      }
+    }
+  }
+
+  // Color 
+  &.color-scheme-a {
+    #mission-statement .box {
+      color: $gray-dark;
+      background: $cream;
+    }
+    #press .box {
+      color: $cream;
+      background: $gray-dark;
+    }
+  }
+  &.color-scheme-b {
+    #mission-statement .box {
+      color: $cream;
+      background: $gray-dark;
+    }
+    #press .box {
+      color: $gray-dark;
+      background: $cream;
+    }
+  }
+  #social-impact .box {
+    color: $cream;
+    background: $gold;
+
+    .details-link:not(:hover) {
+      color: $gray-dark;
+    }
+  }
+
+  // Diamond Button
+  #behind-the-scenes {
+    .diamond {
+      width: 207px;
+      height: 84px;
+      display: block;
+      text-align: center;
+      background-repeat: no-repeat;
+      background-image: url('../images/diamond.svg');
+
+      @include media-md {
+        width: 233px;
+        height: 95px;
+      }
+      @include media-lg {
+        width: 279px;
+        height: 112px;
+      }
+
+      .diamond-text {
+        width: 100%;
+        color: $gray-dark;
+        position: absolute;
+        top: 50%; left: 50%;
+        transform: translate(-50%,-55%);
+      }
     }
   }
 }
+

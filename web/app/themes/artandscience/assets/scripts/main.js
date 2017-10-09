@@ -80,16 +80,20 @@ var FBSage = (function($) {
     $(window).load(function() {
       if (window.location.hash) {
 
-        // Determine the target
-        var $target = $(window.location.hash);
+        // Find direct matches
+        $hashMatches = $(window.location.hash);
 
-        console.log(window.location.hash);
-        console.log($target);
+        // Find matches a generic person (not tied to specific location), make $target first of these
+        $personMatchesBySlug = $('[data-slug="'+window.location.hash.substr(1)+'"]');
+        
+        // Grab targets, prioritize exact match, then generic match (not that they should ever overlap)
+        $targets = $hashMatches.length ? $hashMatches : $personMatchesBySlug;
 
-        if($target.length){
+        // If we have any sort of match...
+        if($targets.length){
 
           // I know id's are supposed to be unique, but just to be safe...
-          $target = $target.first();
+          $target = $targets.first();
 
           // If target belongs subpage and it is not open, open it.
           var $subpage = $target.closest('.subpage:not(.-active)');
@@ -97,7 +101,7 @@ var FBSage = (function($) {
             _openSubpage($subpage, false);
           }
 
-          // If a person, open the popup
+          // If target is a person, open the popup
           if($target.hasClass('person')){
             setTimeout(function() {
               _openPersonPopup($target);
@@ -105,6 +109,7 @@ var FBSage = (function($) {
 
           // Otherwise scroll to the target
           } else {
+
             _scrollBody($target);
           }
         }
