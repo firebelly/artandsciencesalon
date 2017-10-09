@@ -76,6 +76,19 @@
   }
 }
 
+
+@mixin indent-right-huge {
+    margin-right: $padding*2;
+
+  @include media-md {
+    margin-right: $padding-md*2;
+   }
+
+  @include media-lg {
+    margin-right: $padding-lg*4;
+  }
+}
+
 @mixin indent-left {
   margin-left: $padding;
 
@@ -98,26 +111,43 @@
   @include media-lg {
     margin-left: $padding-lg*2;
   }
-
 }
+
+
+@mixin indent-left-huge {
+    margin-left: $padding*2;
+
+  @include media-md {
+    margin-left: $padding-md*2;
+   }
+
+  @include media-lg {
+    margin-left: $padding-lg*4;
+  }
+}
+
 .-indent-right {
   @include indent-right;
 }
-
 .-indent-right-big {
   @include indent-right-big;
+}
+.-indent-right-huge {
+  @include indent-right-huge;
 }
 
 .-indent-left {
   @include indent-left;
 }
-
 .-indent-left-big {
   @include indent-left-big;
 }
+.-indent-left-huge {
+  @include indent-left-huge;
+}
 
 // Border Classes
-.-bottom-border {
+.-border-bottom {
   border-bottom: $orange 2px solid;
 }
 
@@ -147,6 +177,9 @@ $colors: (
   }
   .-text-#{$color-name} {
     color: $color-hex;
+    a {
+      border-bottom-color: $color-hex;
+    }
   }
 }
 

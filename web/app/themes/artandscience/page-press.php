@@ -15,7 +15,7 @@
 </div>
 
 <div class="notable-press user-content page-block -bg-cream -indent-right">
-  <div class="media-inquiries user-content page-block -bg-gray-dark -text-cream -bottom-border">
+  <div class="media-inquiries user-content page-block -bg-gray-dark -text-cream -border-bottom">
     <?= $media_inquiries ?>
   </div>
 

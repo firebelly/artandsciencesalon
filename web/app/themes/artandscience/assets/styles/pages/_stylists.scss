@@ -76,6 +76,7 @@
 }
 
 .person-popup {
+  left: 0;
   z-index: 1;
   color: $cream;
   display: block;
@@ -111,7 +112,7 @@
     backface-visibility: hidden;
 
     @include media-md {
-      left: 25vw;
+      left: 25%;
     }
   }
 

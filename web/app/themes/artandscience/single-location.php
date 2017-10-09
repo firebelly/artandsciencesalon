@@ -1,4 +1,8 @@
 <?php
+
+  use Firebelly\PostTypes\People;
+  use Firebelly\Media;
+
   $body = apply_filters('the_content', $post->post_content);
   $address = get_post_meta($post->ID, '_cmb2_address', true);
   $phone_number = get_post_meta($post->ID, '_cmb2_phone_number', true);
@@ -7,87 +11,16 @@
   $hours_group = get_post_meta($post->ID, '_cmb2_hours_group', true);
   $services_group = get_post_meta($post->ID, '_cmb2_services_group', true);
   $people_types = get_post_meta($post->ID, '_cmb2_people_types', true);
-  $location_image = get_the_post_thumbnail_url($post);
+  $location_image = Media\get_post_thumbnail_url($post->ID);
 
-  $stylists_args = array(
-    'numberposts' => -1,
-    'post_type' => 'person',
-    'orderby' => 'menu_order',
-    'tax_query' => array(
-      'relation' => 'AND',
-      array(
-        'taxonomy' => 'location',
-        'field' => 'name',
-        'terms' => $post->post_title
-      ),
-      array(
-        'taxonomy' => 'person_type',
-        'field' => 'slug',
-        'terms' => array('stylist', 'master-stylist', 'senior-stylist', 'director-stylist')
-      )
-    )
-  );
-
-  $barbers_args = array(
-    'numberposts' => -1,
-    'post_type' => 'person',
-    'orderby' => 'menu_order',
-    'tax_query' => array(
-      'relation' => 'AND',
-      array(
-        'taxonomy' => 'location',
-        'field' => 'name',
-        'terms' => $post->post_title
-      ),
-      array(
-        'taxonomy' => 'person_type',
-        'field' => 'slug',
-        'terms' => 'barber'
-      )
-    )
-  );
-
-  $aestheticians_args = array(
-    'numberposts' => -1,
-    'post_type' => 'person',
-    'orderby' => 'menu_order',
-    'tax_query' => array(
-      'relation' => 'AND',
-      array(
-        'taxonomy' => 'location',
-        'field' => 'name',
-        'terms' => $post->post_title
-      ),
-      array(
-        'taxonomy' => 'person_type',
-        'field' => 'slug',
-        'terms' => 'aesthetician'
-      )
-    )
-  );
-
-  $colorists_args = array(
-    'numberposts' => -1,
-    'post_type' => 'person',
-    'orderby' => 'menu_order',
-    'tax_query' => array(
-      'relation' => 'AND',
-      array(
-        'taxonomy' => 'location',
-        'field' => 'name',
-        'terms' => $post->post_title
-      ),
-      array(
-        'taxonomy' => 'person_type',
-        'field' => 'slug',
-        'terms' => array('colorist', 'master-colorist', 'senior-colorist', 'director-colorist')
-      )
-    )
-  );
+  $colorists = People\get_people_list($post, ['colorist', 'master-colorist', 'senior-colorist', 'director-colorist']);
+  $stylists = People\get_people_list($post, ['stylist', 'master-stylist', 'senior-stylist', 'director-stylist']);
+  $barbers = People\get_people_list($post, ['barber']);
+  $aestheticians = People\get_people_list($post, ['aesthetician']);
 
 ?>
 
-<div id="<?= $post->post_name ?>" class="location" data-id="<?= $post->ID ?>" data-page-title="<?= $post->post_title ?>" data-page-url="<?= get_permalink($post) ?>">
+<div id="<?= $post->post_name ?>" class="location" data-page-title="<?= $post->post_title ?>" data-page-url="<?= get_permalink($post) ?>">
   <div class="banner" style="background-image:url('<?= $location_image ?>');">
     <?= (!empty($virtual_tour_url))?'<a href="'.$virtual_tour_url.'">Take a virtual tour</a>':''; ?>
   </div>
@@ -97,12 +30,12 @@
     <div class="location-meta">
       <p class="location-address"><?= $address ?></p>
       <p class="location-phone"><?= $phone_number ?></p>
-      <p class="location-email"><a href="<?= $email ?>" target="_blank" class="breakup-email"><?= $email ?></a></p>
+      <p class="location-email"><a href="mailto:<?= $email ?>" target="_blank" class="breakup-email"><?= $email ?></a></p>
     </div>
     <p class="location-description"><?= $body ?></p>
   </header>
 
-  <div class="page-block location-details -bg-cream">
+  <div class="page-block location-details -bg-cream user-content">
     <div class="details-block-wrap">
 
       <div class="hours details-block">
@@ -118,7 +51,7 @@
         </table>
       </div>
 
-      <?php if (!empty($services_group)) { ?>
+      <?php if (!empty($services_group)) : ?>
       <div class="services details-block">
         <h4>Available Services</h4>
         <table class="data-table services-table">
@@ -131,26 +64,36 @@
           ?>
         </table>
       </div>
-      <?php } ?>
+      <?php endif; ?>
 
-      <?php
-        if (!empty($people_types)) {
+      <?php if ($colorists) : ?>
+        <div class="services details-block">
+          <h4>Colorists</h4>
+          <?= $colorists ?>
+        </div>
+      <?php endif; ?>
 
-          foreach ($people_types as $people_type) {
-            $people_type_args = $people_type.'_args';
-            $people = get_posts($$people_type_args);
+      <?php if ($stylists) : ?>
+        <div class="services details-block">
+          <h4>Stylists</h4>
+          <?= $stylists ?>
+        </div>
+      <?php endif; ?>
 
-            $people_type_title = ucfirst($people_type);
+      <?php if ($barbers) : ?>
+        <div class="services details-block">
+          <h4>Barbers</h4>
+          <?= $barbers ?>
+        </div>
+      <?php endif; ?>
 
-            if (!empty($people)) {
-              echo '<h4>'.$people_type_title.'</h4>';
-              foreach ($people as $person):
-                echo $person->post_title;
-              endforeach;
-            }
-          }
-        }
-      ?>
+      <?php if ($aestheticians) : ?>
+        <div class="services details-block">
+          <h4>Aestheticians</h4>
+          <?= $aestheticians ?>
+        </div>
+      <?php endif; ?>
+
     </div>
   </div>
 </div>

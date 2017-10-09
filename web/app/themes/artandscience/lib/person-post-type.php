@@ -100,6 +100,12 @@ function metaboxes( array $meta_boxes ) {
     'show_names'    => true, // Show field names on the left
     'fields'        => array(
       array(
+        'name' => 'Short Name',
+        'id'   => $prefix . 'short_name',
+        'description' => 'To be used for short, informal name.  (If not specified, the first word of the full name will be taken.)',
+        'type' => 'text',
+      ),
+      array(
         'name' => 'Quote',
         'id'   => $prefix . 'quote',
         'type' => 'textarea',
@@ -249,6 +255,17 @@ function metaboxes( array $meta_boxes ) {
 }
 add_filter( 'cmb2_meta_boxes', __NAMESPACE__ . '\metaboxes' );
 
+
+function get_short_name($person) {
+  $short_name = get_post_meta($person, '_cmb2_short_name', true);
+  if ($short_name) {
+    return $short_name;
+  }
+  // If a short name is not provided, take first word of full name
+  return explode(' ',trim($person->post_title))[0];
+}
+
+
 /**
  * Get Service Section Nav
  */
@@ -261,7 +278,10 @@ function get_people_section_nav($location) {
 
   $slug = $location->post_name;
   $location_id = $location->ID;
-  $people_types = get_terms(['taxonomy'=>'person_type']);
+  $people_types = get_terms([
+    'taxonomy'=>'person_type',
+    'slug' => ['colorist', 'master-colorist', 'senior-colorist', 'director-colorist','stylist', 'master-stylist', 'senior-stylist', 'director-stylist']
+  ]);
 
    foreach ($people_types as $people_type):
       $people = get_posts([
@@ -294,7 +314,6 @@ function get_people_section_nav($location) {
   return $output;
 }
 
-
 /**
  * Get People
  */
@@ -323,4 +342,45 @@ function get_people($options=[]) {
   $output .= '</ul>';
 
   return $output;
+}
+
+function get_people_list($location, $slug_array) {
+
+  $args = array(
+    'numberposts' => -1,
+    'post_type' => 'person',
+    'orderby' => 'title',
+    'order' => 'ASC',
+    'tax_query' => array(
+      'relation' => 'AND',
+      array(
+        'taxonomy' => 'locations',
+        'field' => 'slug',
+        'terms' => $location->post_name
+      ),
+      array(
+        'taxonomy' => 'person_type',
+        'field' => 'slug',
+        'terms' => $slug_array
+      )
+    )
+  );
+
+  $people = get_posts($args);
+
+  if(!$people) { return false; }
+
+  $output = '';
+
+  $output .= '<ul class="people-list semantic-only-list">';
+
+
+  foreach ($people as $person) :
+    $output .= '<li class="people-list-item"><a href="/stylists/#'.$location->post_name.'-'.$person->post_name.'">'.$person->post_title.'</a></li>';
+  endforeach;
+
+  $output  .= '</ul>';
+
+  return $output;
+
 }

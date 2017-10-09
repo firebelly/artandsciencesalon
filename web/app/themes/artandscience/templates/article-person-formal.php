@@ -1,9 +1,8 @@
 <?php
 
-use Firebelly\PostTypes\Location;
+$full_name = get_post_meta($post->ID, '_cmb2_full_name', true);
+$title = get_post_meta($post->ID, '_cmb2_title', true);
 
-
-$name = Firebelly\PostTypes\People\get_short_name($post);
 $thumb_url = \Firebelly\Media\get_post_thumbnail_url($post->ID,'gallery-thumb',true);
 $id = (isset($location_section) ? $location_section->post_name.'-' : '' ).$post->post_name;
 
@@ -18,6 +17,7 @@ $id = (isset($location_section) ? $location_section->post_name.'-' : '' ).$post-
     <div style="background-image: url('<?= $thumb_url ?>');" class="thumbnail"></div>
   </div>
 
-  <h4 class="stylist-name open-person-popup"><?= $name ?></h4>
+  <h4 class="stylist-name open-person-popup"><?= $post->post_title ?></h4>
+  <h4 class="stylist-title open-person-popup"><?= $title ?></h4>
 
 </article>

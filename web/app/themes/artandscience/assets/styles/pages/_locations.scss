@@ -151,10 +151,10 @@
     }
 
     .details-block {
-      float: left; // no-flex fallback
       margin-bottom: $padding;
 
       @include media-md {
+        float: left; // no-flex fallback
         width: 50%; // no-flex fallback
         flex-basis: 50%;
         margin-bottom: $padding-md;

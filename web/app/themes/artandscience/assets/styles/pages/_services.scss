@@ -138,25 +138,4 @@ $breakpoint-salon-cut-table-big: 900px;
       }
     }
   }
-
-  .bridal-details-link {
-    color: $gold;
-    border-bottom: none;
-    @include font-caption-bold;
-
-    &::after {
-      top: -1px;
-      content: '>';
-      color: $orange;
-      margin-left: 1ch;
-      position: relative;
-    }
-    &:hover {
-      color: $orange;
-
-      &::after {
-        left: 3px;
-      }
-    }
-  }
 }

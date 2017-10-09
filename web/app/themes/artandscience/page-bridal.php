@@ -1,8 +1,8 @@
-<?php 
+<?php
   /*
-    Template name: Careers
+    Template name: Bridal
   */
- 
+
   $intro_text = apply_filters('the_content', $post->post_content);
   $details = apply_filters('the_content', get_post_meta( get_the_ID(), '_cmb2_details', true) );
   $contact = Firebelly\PostTypes\Pages\Bridal\get_salons();

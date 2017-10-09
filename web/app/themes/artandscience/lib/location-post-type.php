@@ -197,18 +197,6 @@ function metaboxes( array $meta_boxes ) {
         'id'   => $prefix . 'virtual_tour_url',
         'type' => 'text_url',
       ),
-      array(
-        'name'           => 'Types of People to Display',
-        'desc'           => 'Check all that apply',
-        'id'             => $prefix.'people_types',
-        'type'           => 'multicheck',
-        'options'        => array(
-            'barbers'    => 'Barbers',
-            'stylists'   => 'Stylists',
-            'colorists'  => 'Colorists',
-            'aestheticians' => 'Aestheticians',
-        ),
-      ),
     ),
   );
 
@@ -552,7 +540,6 @@ function get_footer_locations($options=[]) {
   return $output;
 }
 
-
 /**
  * Get Service Section Nav
  */
@@ -783,7 +770,7 @@ function get_services_bridal() {
   $output .= '<h2>Bridal</h2>';
 
   $output .= apply_filters('the_content', $bridal_text);
-  $output .= '<p><a href="/bridal" class="bridal-details-link">Service &plus; Price Details</a></p>';
+  $output .= '<p><a href="/bridal" class="details-link">Service &plus; Price Details</a></p>';
 
   $output .= '</section>';
   return $output;

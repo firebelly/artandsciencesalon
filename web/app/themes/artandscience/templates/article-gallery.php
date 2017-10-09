@@ -6,7 +6,7 @@ $permalink = get_permalink($post);
 ?>
 
 
-<article id="<?= $post->post_name ?>" class="gallery-article bigclicky -bottom-border">
+<article id="<?= $post->post_name ?>" class="gallery-article bigclicky -border-bottom">
   <div class="content-wrap page-block">
     <div class="thumbnail" style="background-image: url('<?= $header_image ?>');"></div>
     <h2 class="title">

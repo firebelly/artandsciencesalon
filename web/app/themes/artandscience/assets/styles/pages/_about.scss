@@ -1,9 +1,188 @@
 .page.about {
-  
+
   .page-header {
     background: $cream-dark;
     .header-text {
       background: $gray-dark;
+    }
+  }
+
+  .philosophy {
+    // padding-left: 0;
+    @include clearfix;
+
+    .image {
+      margin-left: -$padding;
+      padding: 0 0 $padding 0;
+
+      @include media-md {
+        width: 50%;
+        float: left;
+        margin-left: -$padding-md;
+        padding: 0 $padding-md ($padding-md - 10px) 0;
+      }
+
+      @include media-lg {
+        width: 40%;
+        margin-left: -$padding-lg;
+        padding: 0 $padding-lg $padding-lg/2 0;
+      }
+    }
+  }
+
+  .page-block {
+    p:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  .owners {
+    @include media-md {
+      // padding-right: 0;
+    }
+
+    .owner {
+      @include clearfix;
+      margin-bottom: $padding;
+
+      @include media-md {
+        margin-right: -$padding-md;
+        margin-bottom: $padding-md;
+      }
+      @include media-lg {
+        margin-bottom: $padding-lg;
+      }
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+
+      .owner-bio {
+        @include media-md {
+          width: 65%;
+          float: left;
+          padding-right: $padding-md;
+        }
+        @include media-lg {
+          width: 70%;
+          padding-right: $padding-lg;
+        }
+      }
+      .image {
+        margin-right: -$padding;
+        margin-top: $padding;
+        @include media-md {
+          margin: 0;
+          width: 35%;
+          float: left;
+        }
+        @include media-lg {
+          width: 30%;
+        }
+        p {
+          text-align: center;
+        }
+      }
+      .owner-name {
+        color: $orange;
+        display: inline;
+        @include font-caption-bold;
+        & + p {
+          display: inline;
+        }
+      }
+    }
+  }
+
+  .management {
+    position: relative;
+  }
+
+  .barbershops {
+    @include clearfix;
+    padding-right: 0;
+    padding-top: 0;
+    .content {
+      padding:  $padding $padding 0 0;
+
+      @include media-md {
+        width: 60%;
+        float: left;
+        padding: $padding-md $padding-md 0 0;
+      }
+      @include media-lg {
+        width: 70%;
+        padding: $padding-lg $padding-lg 0 0;
+      }
+    }
+    .image {
+      @include media-md {
+        width: 40%;
+        float: left;
+      }
+
+      @include media-lg {
+        width: 30%;
+        float: left;
+        margin-right: -$padding-lg;
+        .thumbnail-wrap {
+        }
+      }
+
+      .thumbnail-wrap {
+        padding-bottom: 133.33%;
+        @include media-lg {
+
+          width: calc(100% + #{$padding-lg});
+          padding-bottom: calc((100% + #{$padding-lg})*1.33);
+        }
+      }
+    }
+  }
+
+  .management {
+    .person {
+      & > .stylist-name {
+        margin-bottom: 0;
+      }
+      & > .stylist-title {
+        @include font-caption-thin;
+        margin: 0;
+      }
+    }
+    h2 {
+      margin-top: $padding;
+
+      @include media-md {
+        margin-top: $padding-md;
+      }
+
+      @include media-lg {
+        margin-top: $padding-lg;
+      }
+      &:first-of-type {
+        margin-top: 0;
+      }
+    }
+  }
+
+
+
+  .thumbnail-wrap {
+    height: 0;
+    width: 100%;
+    position: relative;
+    padding-bottom: 100%;
+    border-bottom: 2px solid $orange;
+
+    .thumbnail {
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      position: absolute;
+      background-size: cover;
+      background-position: top;
     }
   }
 }

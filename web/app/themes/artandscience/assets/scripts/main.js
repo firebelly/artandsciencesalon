@@ -28,6 +28,7 @@ var FBSage = (function($) {
     // Fit them vids!
     // $('main').fitVids();
 
+    _hashHandling();
     _initPersonPopup();
     _initImageViewerPopup();
     _initBookAppointment();
@@ -72,24 +73,44 @@ var FBSage = (function($) {
       _scrollBody($(href));
     });
 
+  } // end init()
+
+  function _hashHandling() {
     // Scroll down to hash afer page load OR open person popup with hash content
     $(window).load(function() {
       if (window.location.hash) {
-        var $peopleMatches = $(window.location.hash+'.person');
-        console.log($peopleMatches);
-        if($peopleMatches.length){
-          _scrollBody($('body'), 0, 0, 0);
-          setTimeout(function() {
-            $person = $peopleMatches.first();
-            _openPersonPopup($person);
-          },1000);
-        } else {
-          _scrollBody($(window.location.hash));
+
+        // Determine the target
+        var $target = $(window.location.hash);
+
+        console.log(window.location.hash);
+        console.log($target);
+
+        if($target.length){
+
+          // I know id's are supposed to be unique, but just to be safe...
+          $target = $target.first();
+
+          // If target belongs subpage and it is not open, open it.
+          var $subpage = $target.closest('.subpage:not(.-active)');
+          if( $subpage.length ) {
+            _openSubpage($subpage, false);
+          }
+
+          // If a person, open the popup
+          if($target.hasClass('person')){
+            setTimeout(function() {
+              _openPersonPopup($target);
+            },1000);
+
+          // Otherwise scroll to the target
+          } else {
+            _scrollBody($target);
+          }
         }
       }
     });
-
-  } // end init()
+  }
 
   function _breakupLongEmails () {
     $('.breakup-email').each(function () {
@@ -98,8 +119,7 @@ var FBSage = (function($) {
         var brokenEmail = '<span class="email-part">'+email[0]+'@</span><span class="email-part">'+email[1]+'</span>';
         $(this).empty().append(brokenEmail);
       }
-
-    })
+    });
   }
 
 
@@ -139,13 +159,7 @@ var FBSage = (function($) {
   function _openPersonPopup($person) {
 
     // Update the history (url bar)
-    history.replaceState(null, null, '#'+$person.attr('data-slug'));
-
-    // If I belong to a subpage and it is not open, open it.
-    $subpage = $person.closest('.subpage:not(.-active)');
-    if( $subpage.length ) {
-      _openSubpage($subpage.first(), false);
-    }
+    history.replaceState(null, null, '#'+$person.attr('id'));
 
     // Find the popup
     $popup = $person.find('.person-popup');
@@ -162,11 +176,11 @@ var FBSage = (function($) {
     $popup.find('.popup-wrap')
       .velocity({translateX: '100px', opacity: 0}, {duration: 0})
       .velocity({translateX: '0px', opacity: 1}, {
-        duration: 150,
+        duration: 200,
         complete: function() {
 
           // Then contents drop down
-          $popup.find('.content-wrap').velocity('slideDown',{duration: 150});
+          $popup.find('.content-wrap').velocity('slideDown',{duration: 200});
         }
       });
 
@@ -207,9 +221,9 @@ var FBSage = (function($) {
       var $currentSubpage = $popup.closest('.subpage');
       var $people;
       if ($currentSubpage.length) {
-        $people = $currentSubpage.find('.person');
+        $people = $currentSubpage.find('.person:not(.no-popup)');
       } else {
-        $people = $('.person');
+        $people = $('.person:not(.no-popup)');
       }
       // console.log($people);
 
@@ -274,7 +288,7 @@ var FBSage = (function($) {
     $('.image-viewer-popup').velocity('fadeOut', {duration: 100});
   }
 
-  function _scrollBody(element, duration, delay, offset) {
+  function _scrollBody($element, duration, delay, offset) {
 
     if (typeof offset === 'undefined') {
       offset = 0;
@@ -285,7 +299,7 @@ var FBSage = (function($) {
     } else {
       wpOffset = 0;
     }
-    element.velocity("scroll", {
+    $element.velocity("scroll", {
       duration: duration,
       delay: delay,
       offset: -wpOffset + offset
@@ -625,6 +639,7 @@ var FBSage = (function($) {
   };
 
 })(jQuery);
+
 
 // Fire up the mothership
 jQuery(document).ready(FBSage.init);

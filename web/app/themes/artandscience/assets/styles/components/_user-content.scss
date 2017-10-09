@@ -1,6 +1,13 @@
 // Styling of content that is editable in wysiwyg
 
 // Some h2 styling is gonna need to be referenced elsewhere, so abstract it out.
+
+
+@mixin user-content-h1 {
+  margin: 0;
+  @include font-h2;
+}
+
 @mixin h2-padding-top {
   padding-top: (24px - 3px); // (intended - correction)
   @include media-lg {
@@ -8,39 +15,60 @@
   }
 }
 
+@mixin user-content-h2 {
+  @include font-h3;
+  position: relative;
+  @include h2-padding-top;
+  @include big-dash($brown-lite);
+  margin: $section-margin-top 0 (22px - 10px);  // (intended - correction)
+
+  &:first-child {
+    margin-top: 0;
+  }
+}
+
+@mixin user-content-h3 {
+  margin: (28px - 14px) 0 0;
+  @include font-caption-bold;
+}
+
+.user-content-h1 {
+  @include user-content-h1;
+}
+
+.user-content-h2 {
+  @include user-content-h2;
+}
+
+.user-content-h3 {
+  @include user-content-h3;
+}
+
 .user-content {
-  @include clearfix();
+  // @include clearfix();
 
-  h1,h2,h3,h4,h5,h6 {
-
+  h1 {
+    @include user-content-h1;
   }
 
-  // Content Styles
   h2 {
-    @include font-h3;
-    position: relative;
-    @include big-dash($brown-lite);
-    margin: $section-margin-top 0 (22px - 10px);  // (intended - correction)
-
-    @include h2-padding-top;
-
-    &:first-child {
-      margin-top: 0;
-    }
+    @include user-content-h2;
   }
 
   h3 {
-    @include font-caption-bold;
-    margin: (28px - 14px) 0 0;
+    @include user-content-h3;
   }
+
+
 
   p {
     margin: 0 0 1em;
   }
 
-  a {
+  a:not(.non-user-content-link) {
     text-decoration: none;
     border-bottom: $gray 1px solid;
+
     &:hover {
       color: $orange;
       border-bottom-color: $orange;
@@ -59,15 +87,15 @@
     }
   }
 
-  ol,
-  ul {
-    li {
-      ol,
-      ul {
+  // ol,
+  // ul {
+  //   li {
+  //     ol,
+  //     ul {
 
-      }
-    }
-  }
+  //     }
+  //   }
+  // }
 
   hr {
     height: 0;
@@ -123,6 +151,30 @@
           }
         }
       }
+    }
+  }
+}
+
+
+.details-link {
+  color: $gold;
+  border-bottom: none;
+  text-decoration: none;
+  @include font-caption-bold;
+
+  &::after {
+    top: -1px;
+    content: '>';
+    color: $orange;
+    margin-left: 1ch;
+    position: relative;
+  }
+
+  &:hover {
+    color: $orange;
+
+    &::after {
+      left: 3px;
     }
   }
 }

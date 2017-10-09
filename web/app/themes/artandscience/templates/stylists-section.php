@@ -1,6 +1,12 @@
 <?php
   use Firebelly\PostTypes\Location;
-  $people_types = get_terms(['taxonomy'=>'person_type']);
+  $people_types = get_terms([
+    'taxonomy'=>'person_type',
+    'slug' => ['colorist', 'master-colorist', 'senior-colorist', 'director-colorist','stylist', 'master-stylist', 'senior-stylist', 'director-stylist']
+  ]);
+
+
+
 ?>
 
 <article id="<?= $location_section->post_name ?>-people" class="subpage careers-child-page">
