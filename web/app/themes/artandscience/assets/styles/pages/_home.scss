@@ -1,4 +1,64 @@
 // Home page
 
 .home.page {
+
+  .boxes {
+    // width: 50%;
+    @include clearfix;
+
+    .box {
+      float: left;
+      // width: 50%;
+      width: 100%;
+      border: 2px solid black;
+      background: $cream;
+    }
+
+    a {
+      border-bottom: none;
+      text-decoration: none;
+    }
+    h2 {
+      margin: 0;
+    }
+
+    .thumb-box {
+      .aspect-ratio {
+        height: 0;
+        width: 100%;
+        position: relative;
+        padding-bottom: 100%;
+      }
+
+      .thumb {
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: $gold;
+        position: absolute;
+        @include padding;
+      }
+
+      .text-wrap {
+        width: 100%;
+        height: 100%;
+        position: relative;
+
+        .text-bottom {
+          display: block;
+          bottom: 0;
+          position: absolute;
+        }
+      }
+
+      .spotlight {
+        display: block;
+      }
+    }
+
+    .text-box {
+      @include padding;
+    }
+  }
 }

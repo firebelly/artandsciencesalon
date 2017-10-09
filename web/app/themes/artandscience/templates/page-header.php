@@ -27,13 +27,14 @@ if ( 'si-gallery' == get_post_type() ) {
 // Throw special class if header is very short
 $header_class = strlen($header_text) < 30 ? ' -has-short-text' : '';
 
-
+if (!is_front_page()) :
 ?>
  <div class="page-header<?= $header_class ?>">
   <div class="header-image-wrap">
-    <div class="header-image" style="background-image:url('<?= $header_image ?>');"></div>    
+    <div class="header-image" style="background-image:url('<?= $header_image ?>');"></div>
   </div>
   <div class="header-text user-content -indent-right-big">
     <?= $header_text ?>
-  </div>    
+  </div>
 </div>
+<?php endif; ?>

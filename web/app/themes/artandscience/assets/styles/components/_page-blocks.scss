@@ -1,13 +1,8 @@
 
 // Page Blocks
 
-.page-block {
+@mixin padding {
   padding: $padding;
-  position: relative;
-
-  // Default colors to be overriden by specific classes below
-  color: $gray-dark;
-  background: $cream;
 
   @include media-md {
     padding: $padding-md;
@@ -16,6 +11,16 @@
   @include media-lg {
     padding: $padding-lg;
   }
+}
+
+.page-block {
+  @include padding;
+  position: relative;
+
+  // Default colors to be overriden by specific classes below
+  color: $gray-dark;
+  background: $cream;
+
 
   .section {
     position: relative;
