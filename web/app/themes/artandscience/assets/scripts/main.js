@@ -77,7 +77,7 @@ var FBSage = (function($) {
 
   function _hashHandling() {
     // Scroll down to hash afer page load OR open person popup with hash content
-    $(window).load(function() {
+    // $(window).load(function() {
       if (window.location.hash) {
 
         // Find direct matches
@@ -103,9 +103,10 @@ var FBSage = (function($) {
 
           // If target is a person, open the popup
           if($target.hasClass('person')){
+            _scrollBody($('body'),0,0,0);
             setTimeout(function() {
               _openPersonPopup($target);
-            },1000);
+            },500);
 
           // Otherwise scroll to the target
           } else {
@@ -114,7 +115,7 @@ var FBSage = (function($) {
           }
         }
       }
-    });
+    // });
   }
 
   function _breakupLongEmails () {
@@ -135,6 +136,8 @@ var FBSage = (function($) {
         .prependTo('.person-popup .controls-wrap');
       $('<button class="close-person-popup"><span class="text">Close</span><svg class="icon icon-x"><use xlink:href="#icon-x"/></svg></button>')
         .prependTo('.person-popup');
+       // $('<div class="popup-mask"></div>')
+       //  .appendTo('body');
 
       // Hide popups
       $('.person-popup').velocity('fadeOut',{duration: 0});
@@ -166,22 +169,23 @@ var FBSage = (function($) {
     // Update the history (url bar)
     history.replaceState(null, null, '#'+$person.attr('id'));
 
+    $('body').addClass('-person-popup-open');
+
     // Find the popup
     $popup = $person.find('.person-popup');
 
     // Give it -open class and fade in
     $popup
       .addClass('-open')
-      .velocity('fadeIn', {duration: 100});
+      .velocity('fadeIn', {duration: 200});
 
     // Hide contents
     $popup.find('.content-wrap').velocity('slideUp',{duration: 0});
 
     // Header slides in
     $popup.find('.popup-wrap')
-      .velocity({translateX: '100px', opacity: 0}, {duration: 0})
-      .velocity({translateX: '0px', opacity: 1}, {
-        duration: 200,
+      .velocity('fadeIn', {
+        duration: 100,
         complete: function() {
 
           // Then contents drop down
@@ -190,13 +194,15 @@ var FBSage = (function($) {
       });
 
     // After short delay, scroll to just above it
-    _scrollBody($person, 500, 300, -50);
+    // _scrollBody($person, 500, 300, -50);
   }
 
   function _closePersonPopup() {
 
     // Find the open popup
     $popup = $('.person-popup.-open');
+
+    $('body').removeClass('-person-popup-open');
 
     // If it exists...
     if($popup.length) {
@@ -205,9 +211,13 @@ var FBSage = (function($) {
       history.replaceState(null, null, window.location.pathname);
 
       // Hide it and remove -open class
-      $popup
-        .removeClass('-open')
-        .velocity('fadeOut', {duration: 300});
+      $popup.removeClass('-open').addClass('-closing');
+      $popup.find('.popup-wrap').velocity('fadeOut', {
+        duration: 200,
+        complete: function () {
+          $('.person-popup.-closing').velocity('fadeOut', {duration: 100}).removeClass('-closing');
+        }
+      });
     }
   }
 
