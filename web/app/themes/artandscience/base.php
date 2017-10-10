@@ -5,8 +5,9 @@ use Roots\Sage\Wrapper;
 
 $classes = '';
 if(is_front_page()) {
+  $homepage_theme = rand(0,1);
   $schemes = ['a','b'];
-  $classes .= 'color-scheme-'.$schemes[rand(0,1)];
+  $classes .= 'color-scheme-'.$schemes[$homepage_theme];
 }
 
 ?>
@@ -35,7 +36,7 @@ if(is_front_page()) {
       <main class="site-main" role="main">
         <?php include Wrapper\template_path(); ?>
       </main><!-- /.main -->
-    </div><!-- /.site-wrap -->      
+    </div><!-- /.site-wrap -->
     <?php
       do_action('get_footer');
       get_template_part('templates/footer');

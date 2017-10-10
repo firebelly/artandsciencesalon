@@ -38,6 +38,7 @@ $firebelly_includes = [
   'lib/social-impact-meta.php',                      // Social Impact page admin/meta
   'lib/press-meta.php',                       // Press page admin/meta
   'lib/about-meta.php',                       // About page admin/meta
+  'lib/home-meta.php',                        // Home page admin/meta
 ];
 
 $sage_includes = array_merge($sage_includes, $firebelly_includes);

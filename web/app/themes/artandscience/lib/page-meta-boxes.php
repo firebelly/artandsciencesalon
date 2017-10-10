@@ -17,7 +17,7 @@ function metaboxes( array $meta_boxes ) {
 //     'priority'      => 'high',
 //     'show_names'    => true, // Show field names on the left
 //     'fields'        => array(
-      
+
 //       // General page fields
 //       array(
 //         'name' => 'Secondary Content',
@@ -36,7 +36,7 @@ function metaboxes( array $meta_boxes ) {
     'priority'      => 'high',
     'show_names'    => true,
     'fields'        => array(
-      
+
       array(
         'name' => 'Header Text',
         'id'   => $prefix . 'header_text',
@@ -45,29 +45,12 @@ function metaboxes( array $meta_boxes ) {
     ),
   );
 
-  $meta_boxes['frontpage_accolades'] = array(
-    'id'            => 'frontpage_accolades',
-    'title'         => __( 'Accolades', 'cmb2' ),
-    'object_types'  => array( 'page', ), // Post type
-    'context'       => 'normal',
-    'show_on'       => array( 'key' => 'page-template', 'value' => 'front-page.php'),
-    'priority'      => 'high',
-    'show_names'    => true,
-    'fields'        => array(
-      
-      array(
-        'name' => 'Accolades',
-        'id'   => $prefix . 'accolade',
-        'type' => 'text',
-      ),
-    ),
-  );
 
   return $meta_boxes;
 }
 add_filter( 'cmb2_meta_boxes', __NAMESPACE__ . '\metaboxes' );
 
-/** 
+/**
  * ADAPTED FROM:
  * Metabox for Page Slug
  * @author Tom Morton

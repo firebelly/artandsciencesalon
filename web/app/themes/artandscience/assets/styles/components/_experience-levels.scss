@@ -8,11 +8,11 @@
   border: none;
   outline: none;
   appearance: none;
-  position: absolute;
   padding-left: 8px;
   padding-right: 8px;
-  @include h2-padding-top;
+  position: absolute;
   background: transparent;
+  @include h2-padding-top;
 
   @include media-md {
     padding-left: 10px;
@@ -29,6 +29,7 @@
     width: 15px;
     height: 15px;
     fill: $gray-lite;
+
     @include media-md {
       width: 18px;
       height: 18px;
@@ -38,21 +39,22 @@
 
 .experience-popup {
   z-index: 1;
-  position: absolute;
+  top: -$padding;
   left: -$padding;
   right: -$padding;
-  top: -$padding;
+  position: absolute;
+  backface-visibility: hidden;
 
   @include media-md {
+    top: -$padding-md;
     left: -$padding-md;
     right: -$padding-md;
-    top: -$padding-md;
   }
 
   @include media-lg {
+    top: -$padding-lg;
     left: -$padding-lg;
     right: -$padding-lg;
-    top: -$padding-lg;
   }
 
   h3 {

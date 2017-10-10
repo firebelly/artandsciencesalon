@@ -64,7 +64,7 @@
       display: block;
       padding-bottom: 28px - 12px; // intent - correction
     }
-    
+
     .line-2 {
       display: block;
       padding-top: 28px - 4; // intent - correction
@@ -74,6 +74,9 @@
 
   // Mobile Layout
   @include max-screen($breakpoint-medium - 1px) {
+    .page-header {
+      display: none;
+    }
     #mission-statement {
       &.box-container {
         padding-right: $padding;
@@ -86,6 +89,9 @@
       margin-top: -$padding;
       &.box-container {
         padding-left: $padding;
+      }
+      .box {
+        border-bottom: 2px solid $orange;
       }
     }
     #careers {
@@ -109,6 +115,10 @@
       }
     }
     #lookbook-spotlight {
+      .box {
+        border-bottom: 2px solid $orange;
+      }
+
       &.box-container {
         padding-left: $padding;
       }
@@ -139,13 +149,129 @@
       z-index: 2;
       position: relative;
       margin-top: -$padding;
+
+      .box {
+        border-bottom: 2px solid $orange;
+      }
+
       &.box-container {
         padding-left: $padding;
       }
     }
   }
 
-  // Color 
+  // Tablet/ Desktop View
+  @include media-md {
+    .page-header {
+      padding-bottom: 0;
+    }
+
+    .boxes {
+      padding-right: $padding-md;
+      @include clearfix;
+
+      .box-container {
+        width: 50%;
+      }
+
+      .top-group {
+
+        @include clearfix;
+        position: relative;
+
+
+        #mission-statement {
+          left: 0;
+          bottom: 100%;
+          position: absolute;
+          @include screen($breakpoint-medium, 950px) {
+            h2 {
+              @include font-h2;
+            }
+          }
+        }
+
+        .stylist-careers-subgroup {
+          bottom: 0;
+          left: 50%;
+          width: 50%;
+          float: right;
+          position: absolute;
+
+          #stylist-spotlight {
+            bottom: 100%;
+            position: absolute;
+
+            &.box-container {
+              width: 100%;
+            }
+          }
+
+          #careers {
+            &.box-container {
+              margin-right: -$padding-md;
+              width: calc(100% + #{$padding-md});
+            }
+            .aspect-ratio {
+              padding-bottom: 119%;
+            }
+            .box {
+              border-top: 2px solid $orange;
+            }
+          }
+        }
+
+        .lookbook-press-subgroup {
+          width: 50%;
+          float: left;
+          display: flex; // Use flexbox to flip the order
+          flex-wrap: wrap;
+          @include clearfix;
+
+          #press {
+            order: 1;
+            width: 100%;
+            float: left;
+            flex-basis: 100%;
+            .box {
+              border-top: 2px solid $orange;
+            }
+          }
+
+          #lookbook-spotlight {
+            order: 0;
+            width: 100%;
+            float: right;
+            flex-basis: 100%;
+          }
+        }
+      }
+
+      .bottom-group {
+        @include clearfix;
+        #services {
+          float: left;
+          .aspect-ratio {
+            padding-bottom: 132%;
+          }
+          .box {
+            border-bottom: 2px solid $orange;
+          }
+        }
+        #social-impact {
+          float: left;
+        }
+        #behind-the-scenes {
+          float: right;
+          .box {
+            border-bottom: 2px solid $orange;
+          }
+        }
+      }
+    }
+  }
+
+  // Color
   &.color-scheme-a {
     #mission-statement .box {
       color: $gray-dark;
@@ -182,6 +308,7 @@
       height: 84px;
       display: block;
       text-align: center;
+      background-size: cover;
       background-repeat: no-repeat;
       background-image: url('../images/diamond.svg');
 

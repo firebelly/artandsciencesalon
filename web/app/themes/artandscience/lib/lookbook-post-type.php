@@ -36,7 +36,7 @@ function post_type() {
     'label'               => 'lookbook',
     'description'         => 'Lookbooks',
     'labels'              => $labels,
-    'taxonomies'          => array(''),
+    'taxonomies'          => array('category'),
     'supports'            => array( 'title', 'editor', 'thumbnail', ),
     'hierarchical'        => false,
     'public'              => true,
