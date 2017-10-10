@@ -125,8 +125,6 @@
         width: 30%;
         float: left;
         margin-right: -$padding-lg;
-        .thumbnail-wrap {
-        }
       }
 
       .thumbnail-wrap {
@@ -166,23 +164,23 @@
     }
   }
 
+  .image {
+    .thumbnail-wrap {
+      height: 0;
+      width: 100%;
+      position: relative;
+      padding-bottom: 100%;
 
-
-  .thumbnail-wrap {
-    height: 0;
-    width: 100%;
-    position: relative;
-    padding-bottom: 100%;
-    border-bottom: 2px solid $orange;
-
-    .thumbnail {
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      position: absolute;
-      background-size: cover;
-      background-position: top;
+      .thumbnail {
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        position: absolute;
+        background-size: cover;
+        background-position: top;
+        border-bottom: 2px solid $orange;
+      }
     }
   }
 }

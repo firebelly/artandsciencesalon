@@ -60,6 +60,17 @@
       background-size: cover;
       background-color: $gray-dark;
       background-position: center top;
+
+      &::after{
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        opacity: 0;
+        content: '';
+        position: absolute;
+        background: rgba($brown,0.2);
+      }
     }
   }
 
@@ -72,6 +83,22 @@
 
   .open-person-popup {
     cursor: pointer;
+    &:hover {
+      .thumbnail {
+        border-bottom: 2px solid $orange;
+        &::after {
+          opacity: 1;
+        }
+      }
+      // Add in hover state for details link, present occasionally
+      .details-link {
+        color: $orange;
+
+        &::after {
+          left: 3px;
+        }
+      }
+    }
   }
 }
 

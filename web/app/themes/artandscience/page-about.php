@@ -65,10 +65,12 @@
 
           <div class="user-content owner-bio"><?= $paul_bio ?></div>
           <div class="image">
-            <div class="thumbnail-wrap open-person-popup">
-              <div class="thumbnail" style="background-image: url(<?= $paul_image_url ?>);"></div>
+            <div class="open-person-popup">
+              <div class="thumbnail-wrap">
+                <div class="thumbnail" style="background-image: url(<?= $paul_image_url ?>);"></div>
+              </div>
+              <p><a href="#" class="details-link non-user-content-link open-person-popup">Paul's Profile</a></p>
             </div>
-            <p><a href="#" class="details-link non-user-content-link open-person-popup">Paul's Profile</a></p>
           </div>
 
       </article>

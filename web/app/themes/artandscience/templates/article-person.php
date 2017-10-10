@@ -14,10 +14,11 @@ $id = (isset($location_section) ? $location_section->post_name.'-' : '' ).$post-
 
   <?php include(locate_template('templates/person-popup.php')); ?>
 
-  <div class="thumbnail-wrap open-person-popup">
-    <div style="background-image: url('<?= $thumb_url ?>');" class="thumbnail"></div>
+  <div class="open-person-popup">
+    <div class="thumbnail-wrap">
+      <div style="background-image: url('<?= $thumb_url ?>');" class="thumbnail"></div>
+    </div>
+    <h4 class="stylist-name"><?= $name ?></h4>
   </div>
-
-  <h4 class="stylist-name open-person-popup"><?= $name ?></h4>
 
 </article>
