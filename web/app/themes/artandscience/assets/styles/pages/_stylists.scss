@@ -104,17 +104,17 @@
 
 .person-popup {
   left: 0;
-  z-index: 12;
+  z-index: 2;
   color: $cream;
   display: block;
-      position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    backface-visibility: hidden;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  backface-visibility: hidden;
 
-    overflow-y: scroll;
+  overflow-y: scroll;
 
   // Do some gross math to escape containers margins/padding and create popup container (full width mobile, 75% tablet)
   // margin-left: -$padding;
@@ -133,26 +133,26 @@
   //   width: calc( 100% + #{$padding-lg}*3);
   // }
 
-  // Black page overlay
-  &::before {
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 1;
-    content: '';
-    position: fixed;
-    background: $gray-dark;
-    backface-visibility: hidden;
+  // // Black page overlay
+  // &::before {
+  //   top: 0;
+  //   left: 0;
+  //   right: 0;
+  //   bottom: 0;
+  //   z-index: 1;
+  //   content: '';
+  //   position: fixed;
+  //   background: $gray-dark;
+  //   backface-visibility: hidden;
 
-    @include media-md {
-      left: 25%;
-    }
-  }
+  //   @include media-md {
+  //     left: 25%;
+  //   }
+  // }
 
-  &.-closing {
-    z-index: 100;
-  }
+  // &.-closing {
+  //   z-index: 100;
+  // }
 
   // Close button
   button.close-person-popup {
@@ -519,16 +519,33 @@
   }
 }
 
+.popup-mask {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  position: fixed;
+  background: $gray-dark;
+  backface-visibility: hidden;
+  transition: visibility 0.3s 0s, opacity 0.2s 0.1s; // fade-out
+  opacity: 0;
+  visibility: hidden;
+  @include media-md {
+    left: 25%;
+  }
+}
+
 body.-person-popup-open {
   overflow: hidden;
-  // .popup-mask {
-  //   position: absolute;
-  //   content: '';
-  //   top: 0;
-  //   bottom: 0;
-  //   left: 0;
-  //   right: 50%;
-  //   background: $gray-dark;
-  //   z-index: 1;
-  // }
+  .book-appointment, #livechat-compact-container {
+    opacity: 0 !important;
+    pointer-events: none;
+    transition: opacity 0.5s;
+  }
+  .popup-mask {
+    opacity: 1;
+    visibility: visible;
+    transition: visibility 0s, opacity 0.15s; // fade-in
+  }
 }

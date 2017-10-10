@@ -136,8 +136,8 @@ var FBSage = (function($) {
         .prependTo('.person-popup .controls-wrap');
       $('<button class="close-person-popup"><span class="text">Close</span><svg class="icon icon-x"><use xlink:href="#icon-x"/></svg></button>')
         .prependTo('.person-popup');
-       // $('<div class="popup-mask"></div>')
-       //  .appendTo('body');
+       $('<div class="popup-mask"></div>')
+        .prependTo('.site-main');
 
       // Hide popups
       $('.person-popup').velocity('fadeOut',{duration: 0});
@@ -174,22 +174,16 @@ var FBSage = (function($) {
     // Find the popup
     $popup = $person.find('.person-popup');
 
-    // Give it -open class and fade in
-    $popup
-      .addClass('-open')
-      .velocity('fadeIn', {duration: 200});
-
     // Hide contents
     $popup.find('.content-wrap').velocity('slideUp',{duration: 0});
 
     // Header slides in
-    $popup.find('.popup-wrap')
-      .velocity('fadeIn', {
-        duration: 100,
+    $popup.addClass('-open').velocity('fadeIn', {
+        duration: 200,
         complete: function() {
 
           // Then contents drop down
-          $popup.find('.content-wrap').velocity('slideDown',{duration: 200});
+          $popup.find('.content-wrap').velocity('slideDown',{duration: 300});
         }
       });
 
@@ -211,12 +205,8 @@ var FBSage = (function($) {
       history.replaceState(null, null, window.location.pathname);
 
       // Hide it and remove -open class
-      $popup.removeClass('-open').addClass('-closing');
-      $popup.find('.popup-wrap').velocity('fadeOut', {
-        duration: 200,
-        complete: function () {
-          $('.person-popup.-closing').velocity('fadeOut', {duration: 100}).removeClass('-closing');
-        }
+      $popup.removeClass('-open').velocity('fadeOut', {
+        duration: 200
       });
     }
   }
