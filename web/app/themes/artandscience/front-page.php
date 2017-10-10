@@ -71,7 +71,8 @@
     <div class="stylist-careers-subgroup">
       <article id="stylist-spotlight" class="box-container right one aspect-ratio-box bigclicky">
         <div class="aspect-ratio">
-          <div class="box" style="background-image: url('<?= $person_image_url ?>');">
+          <div class="box">
+            <div class="thumb" style="background-image: url('<?= $person_image_url ?>');"></div>
             <h2 class="text-wrap">
               <a href="<?= $person_link_url ?>" class="text-bottom font-h2">Stylist <span class="spotlight font-h3">Spotlight</span></a>
             </h2>
@@ -81,7 +82,8 @@
 
       <article id="careers" class="box-container right two aspect-ratio-box bigclicky">
         <div class="aspect-ratio">
-          <div class="box" style="background-image: url('<?= $careers_image_url ?>');">
+          <div class="box">
+            <div class="thumb" style="background-image: url('<?= $careers_image_url ?>');"></div>
             <h2 class="text-wrap">
               <a href="/careers" class="text-bottom font-h2">Careers</a>
             </h2>
@@ -102,7 +104,8 @@
 
       <article id="lookbook-spotlight" class="box-container left two aspect-ratio-box bigclicky">
         <div class="aspect-ratio">
-          <div class="box" style="background-image: url('<?= $lookbook_image_url ?>');"">
+          <div class="box">
+            <div class="thumb" style="background-image: url('<?= $lookbook_image_url ?>');"></div>
             <h2 class="text-wrap">
               <a href="<?= $lookbook_link_url ?>" class="text-bottom font-h2">Lookbook <span class="spotlight font-h3">Spotlight</span></a>
             </h2>
@@ -115,7 +118,8 @@
   <div class="bottom-group">
     <article id="services" class="box-container left four aspect-ratio-box bigclicky">
       <div class="aspect-ratio">
-        <div class="box" style="background-image: url('<?= $services_image_url ?>');">
+        <div class="box">
+          <div class="thumb" style="background-image: url('<?= $services_image_url ?>');"></div>
           <h2 class="text-wrap">
             <a  href="/careers" class="text-bottom font-h2">Services</a>
           </h2>
@@ -135,6 +139,7 @@
     <article id="behind-the-scenes" class="box-container right four aspect-ratio-box bigclicky">
       <div class="aspect-ratio">
         <div class="box">
+          <div class="thumb" style="background-image: url('<?= '' ?>');"></div>
           <h2 class="text-wrap" href="/careers">
               <a class="font-h3 diamond text-bottom"><div class="diamond-text">Behind<br>The Scenes</div></a>
             </div>

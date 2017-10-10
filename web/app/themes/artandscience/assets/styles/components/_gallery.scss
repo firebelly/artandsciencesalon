@@ -19,7 +19,7 @@ body.single-lookbook, body.single-si-gallery {
   @include media-md {
     background: transparent;
   }
-  
+
   @include media-lg {
     margin-right: $padding-lg;
   }
@@ -97,7 +97,7 @@ body.single-lookbook, body.single-si-gallery {
       color: $orange;
     }
   }
-  
+
   .content-wrap {
     top: 0;
     left: 0;
@@ -116,6 +116,7 @@ body.single-lookbook, body.single-si-gallery {
     background-size: cover;
     background-position: top;
     transition: transform 5s;
+
     &::after{
       top: 0;
       left: 0;
