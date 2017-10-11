@@ -18,7 +18,8 @@
     "velocity": "~1.2.2",
     "fastclick": "~1.0.6",
     "isotope": "^3.0.4",
-    "slick-carousel": "^1.8.1"
+    "slick-carousel": "^1.8.1",
+    "jquery-lazy": "^1.7.5"
   },
   "overrides": {
     "modernizr": {
@@ -34,7 +35,7 @@
       "main": "./dist/js/boomsvgloader.js"
     },
     "slick-carousel": {
-      "main" : "./slick/slick.min.js"
+      "main": "./slick/slick.min.js"
     }
   }
 }

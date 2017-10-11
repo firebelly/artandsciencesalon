@@ -9,6 +9,7 @@ namespace Firebelly\Media;
 add_filter( 'jpeg_quality', create_function( '', 'return 80;' ) );
 
 // Add image sizes
+add_image_size( 'preload', 50 );
 add_image_size( 'gallery', 1600 );
 add_image_size( 'gallery-thumb', 800 );
 add_image_size( 'popout-thumb', 250, 300, ['center', 'top'] );

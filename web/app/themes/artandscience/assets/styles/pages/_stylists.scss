@@ -103,78 +103,46 @@
 }
 
 .person-popup {
-  left: 0;
-  z-index: 2;
-  color: $cream;
-  display: block;
-  position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  backface-visibility: hidden;
-
+  z-index: 2;
+  color: $cream;
+  display: block;
+  position: fixed;
   overflow-y: scroll;
-
-  // Do some gross math to escape containers margins/padding and create popup container (full width mobile, 75% tablet)
-  // margin-left: -$padding;
-  // margin-right: -$padding*2;
-  // width: calc( 100% + #{$padding}*3);
-
-  // @include media-md {
-  //   margin-left: -$padding-md;
-  //   margin-right: -($padding-md+$padding-lg/2);
-  //   width: calc( 100% + #{$padding-md}*2 + #{$padding-lg}/2);
-  // }
-
-  // @include media-lg {
-  //   margin-left: -$padding-lg;
-  //   margin-right: -$padding-lg*2;
-  //   width: calc( 100% + #{$padding-lg}*3);
-  // }
-
-  // // Black page overlay
-  // &::before {
-  //   top: 0;
-  //   left: 0;
-  //   right: 0;
-  //   bottom: 0;
-  //   z-index: 1;
-  //   content: '';
-  //   position: fixed;
-  //   background: $gray-dark;
-  //   backface-visibility: hidden;
-
-  //   @include media-md {
-  //     left: 25%;
-  //   }
-  // }
-
-  // &.-closing {
-  //   z-index: 100;
-  // }
+  backface-visibility: hidden; // HA hack
 
   // Close button
   button.close-person-popup {
     right: 0;
-    z-index: 1;
     padding: 0;
     border: none;
-    bottom: 100%;
+    bottom: calc(100% - #{$padding}*2);
+    
     outline: none;
     position: absolute;
     background: transparent;
 
+    @include media-md {
+    bottom: calc(100% - #{$padding-md}*2);
+    }
+
+    @include media-lg {
+    bottom: calc(100% - #{$padding-lg}*2);
+    }
+
     // Extend the close button to entire background via invisible overlay
-    // &::before {
-    //   top: 0;
-    //   left: 0;
-    //   right: 0;
-    //   bottom: 0;
-    //   content: '';
-    //   z-index: -1;
-    //   position: fixed;
-    // }
+    &::before {
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      content: '';
+      z-index: -1;
+      position: fixed;
+    }
 
     &:hover {
       .text {
@@ -210,18 +178,20 @@
 
   // The container of everything in the popup
   .popup-wrap {
-    // left: 25%;
-    margin-left: 25%;
     z-index: 100;
     position: relative;
-    padding: $padding*2 $padding $padding;
+    padding: 0 $padding $padding;
+    margin-top: $padding*2;
 
     @include media-md {
-      padding: $padding-md*2 $padding-md $padding-md;
+      margin-left: 25%;
+      padding: 0 $padding-md $padding-md;
+      margin-top: $padding-md*2;
     }
 
     @include media-lg {
-      padding: $padding-lg*2 $padding-lg $padding-lg;
+      padding: 0 $padding-lg $padding-lg;
+      margin-top: $padding-lg*2;
     }
   }
 
@@ -283,7 +253,6 @@
       }
     }
   }
-
 
   .header-content {
     margin-bottom: 0;
@@ -381,7 +350,6 @@
     }
     .details {
       font-style: italic;
-      // display: inline-block;
     }
     .leader-right {
       @include font-caption-thin;
@@ -525,12 +493,13 @@
   right: 0;
   bottom: 0;
   z-index: 1;
-  position: fixed;
-  background: $gray-dark;
-  backface-visibility: hidden;
-  transition: visibility 0.3s 0s, opacity 0.2s 0.1s; // fade-out
   opacity: 0;
+  position: fixed;
   visibility: hidden;
+  background: $gray-dark;
+  backface-visibility: hidden; // HA Hack
+  transition: visibility 0.3s 0s, opacity 0.2s 0.1s; // fade-out
+ 
   @include media-md {
     left: 25%;
   }
@@ -538,6 +507,7 @@
 
 body.-person-popup-open {
   overflow: hidden;
+ 
   .book-appointment, #livechat-compact-container {
     opacity: 0 !important;
     pointer-events: none;

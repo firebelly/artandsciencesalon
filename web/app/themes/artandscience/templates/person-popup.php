@@ -56,13 +56,13 @@ $name = Firebelly\PostTypes\People\get_short_name($post);
                 <?php foreach ($days_group as $day) :
                   $location_code = isset($day['location']) ? Location\get_code($day['location']) : '';
                   $day_name = isset($day['day']) ? $day['day'] : '';
-                  $day_details = !empty($day['pattern']) ? ' <br><span class="details">'.$day['pattern'].'</span>' : '';
+                  $day_details = !empty($day['pattern']) ? $day['pattern'] : '';
                   ?>
 
                   <tr class="leader-row">
                     <td class="leader-left">
                       <span class="leader-text">
-                        <?= $day_name.$day_details ?>
+                        <?= $day_name ?>
                       </span>
                     </td>
                     <td class="leader-right">
@@ -71,6 +71,12 @@ $name = Firebelly\PostTypes\People\get_short_name($post);
                       </span>
                     </td>
                   </tr>
+
+                  <?php if ($day_details) : ?>
+                    <tr class="details">
+                      <td colspan="2">(<?= $day_details ?>)</td>
+                    </tr>
+                  <?php endif ?>
 
                 <?php endforeach; ?>
               </tbody>
@@ -86,14 +92,14 @@ $name = Firebelly\PostTypes\People\get_short_name($post);
               <tbody>
                 <?php foreach ($pricing_group as $service) :
                   $service_name = isset($service['service']) ? $service['service'] : '';
-                  $service_details = !empty($service['details']) ? ' <br><span class="details">('.$service['details'].')</span>' : '';
+                  $service_details = !empty($service['details']) ? $service['details'] : '';
                   $service_price = isset($service['price']) ? $service['price'] : '';
                   ?>
 
                   <tr class="leader-row">
                     <td class="leader-left">
                       <span class="leader-text">
-                        <?= $service_name.$service_details ?>
+                        <?= $service_name ?>
                       </span>
                     </td>
                     <td class="leader-right">
@@ -102,7 +108,11 @@ $name = Firebelly\PostTypes\People\get_short_name($post);
                       </span>
                     </td>
                   </tr>
-
+                  <?php if ($service_details) : ?>
+                    <tr class="details">
+                      <td colspan="2">(<?= $service_details ?>)</td>
+                    </tr>
+                  <?php endif ?>
                 <?php endforeach; ?>
               </tbody>
             </table>

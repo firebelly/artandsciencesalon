@@ -11,7 +11,8 @@
   $hours_group = get_post_meta($post->ID, '_cmb2_hours_group', true);
   $services_group = get_post_meta($post->ID, '_cmb2_services_group', true);
   $people_types = get_post_meta($post->ID, '_cmb2_people_types', true);
-  $location_image = Media\get_post_thumbnail_url($post->ID);
+  $location_image_url = Media\get_post_thumbnail_url($post->ID,'gallery',true);
+  $location_image_preload_url = Media\get_post_thumbnail_url($post->ID,'preload',true);
 
   $colorists = People\get_people_list($post, ['colorist', 'master-colorist', 'senior-colorist', 'director-colorist']);
   $stylists = People\get_people_list($post, ['stylist', 'master-stylist', 'senior-stylist', 'director-stylist']);
@@ -21,7 +22,8 @@
 ?>
 
 <div id="<?= $post->post_name ?>" class="location" data-page-title="<?= $post->post_title ?>" data-page-url="<?= get_permalink($post) ?>">
-  <div class="banner" style="background-image:url('<?= $location_image ?>');">
+  <div class="banner lazy" data-src="<?= $location_image_url ?>">
+    <div class="load-mask" style="background-image:url('<?= $location_image_preload_url ?>');"></div>
     <?= (!empty($virtual_tour_url))?'<a href="'.$virtual_tour_url.'">Take a virtual tour</a>':''; ?>
   </div>
 

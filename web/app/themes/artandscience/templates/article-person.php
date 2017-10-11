@@ -5,6 +5,7 @@ use Firebelly\PostTypes\Location;
 
 $name = Firebelly\PostTypes\People\get_short_name($post);
 $thumb_url = \Firebelly\Media\get_post_thumbnail_url($post->ID,'gallery-thumb',true);
+$thumb_preload_url = \Firebelly\Media\get_post_thumbnail_url($post->ID,'preload',true);
 $id = (isset($location_section) ? $location_section->post_name.'-' : '' ).$post->post_name;
 
 ?>
@@ -16,7 +17,9 @@ $id = (isset($location_section) ? $location_section->post_name.'-' : '' ).$post-
 
   <div class="open-person-popup">
     <div class="thumbnail-wrap">
-      <div style="background-image: url('<?= $thumb_url ?>');" class="thumbnail"></div>
+      <div data-src="<?= $thumb_url ?>" class="thumbnail lazy">
+        <div class="load-mask" style="background-image: url('<?= $thumb_preload_url ?>');"></div>
+      </div>
     </div>
     <h4 class="stylist-name"><?= $name ?></h4>
   </div>

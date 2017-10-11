@@ -29,6 +29,7 @@ var FBSage = (function($) {
     // $('main').fitVids();
 
     _hashHandling();
+    _initLazyLoading();
     _initPersonPopup();
     _initImageViewerPopup();
     _initBookAppointment();
@@ -118,7 +119,23 @@ var FBSage = (function($) {
     // });
   }
 
-  function _breakupLongEmails () {
+  function _initLazyLoading() {
+    console.log('init lazy load');
+    $('.lazy').Lazy({
+       // beforeLoad: function($element) {
+       //    var style = $element.attr('style');
+       //    $('<div class="load-mask">')
+       //      .prependTo($element)
+       //      .attr('style',style);
+       //  },
+        afterLoad: function($element) {
+          $element.addClass('-loaded');
+          console.log($element);
+        }
+    });
+  }
+
+  function _breakupLongEmails() {
     $('.breakup-email').each(function () {
       var email = $(this).text().split('@');
       if (email.length === 2) {
@@ -174,12 +191,22 @@ var FBSage = (function($) {
     // Find the popup
     $popup = $person.find('.person-popup');
 
+    // Give it -open class and fade in
+    $popup
+      .addClass('-open')
+      .velocity('fadeIn', {duration: 200});
+
     // Hide contents
-    $popup.find('.content-wrap').velocity('slideUp',{duration: 0});
+    $popup.find('.content-wrap')
+      .velocity('slideUp',{duration: 0});
+    $popup.find('.popup-wrap')
+      .velocity({opacity: 0, translateY: '-30px'}, {duration: 0})
 
     // Header slides in
-    $popup.addClass('-open').velocity('fadeIn', {
-        duration: 200,
+    $popup.find('.popup-wrap')
+      .velocity({opacity: 1, translateY: '0px'}, {
+        delay: 200,
+        duration: 100,
         complete: function() {
 
           // Then contents drop down
