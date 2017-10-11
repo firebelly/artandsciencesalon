@@ -200,7 +200,7 @@ var FBSage = (function($) {
     $popup.find('.content-wrap')
       .velocity('slideUp',{duration: 0});
     $popup.find('.popup-wrap')
-      .velocity({opacity: 0, translateY: '-30px'}, {duration: 0})
+      .velocity({opacity: 0, translateY: '-30px'}, {duration: 0});
 
     // Header slides in
     $popup.find('.popup-wrap')
