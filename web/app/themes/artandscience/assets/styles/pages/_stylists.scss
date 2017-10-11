@@ -45,6 +45,7 @@
 }
 
 .stylist {
+
  .thumbnail-wrap {
     height: 0;
     width: 100%;
@@ -78,7 +79,13 @@
     @include font-caption-bold;
     @include media-md {
       margin-top: 1em;
+      margin-bottom: 0;
     }
+  }
+  
+  .stylist-title {
+    @include font-caption-thin;
+    margin: 0;
   }
 
   .open-person-popup {

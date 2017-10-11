@@ -48,9 +48,7 @@ $header_class = strlen($header_text) < 30 ? ' -has-short-text' : '';
 
  <div class="page-header<?= $header_class ?>">
   <div class="header-image-wrap">
-    <div class="header-image lazy" data-src="<?= $header_image_url ?>">
-      <div class="load-mask" style="background-image: url('<?= $header_image_preload_url ?>');"></div>
-    </div>
+    <div class="header-image lazy" data-src="<?= $header_image_url ?>" data-preload-src="<?= $header_image_preload_url ?>"></div>
   </div>
   <?php if (!is_front_page()) :?>
     <div class="header-text user-content -indent-right-big">

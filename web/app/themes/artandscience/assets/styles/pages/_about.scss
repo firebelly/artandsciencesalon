@@ -50,6 +50,7 @@
         margin-bottom: $padding-md;
       }
       @include media-lg {
+        margin-right: -$padding-lg;
         margin-bottom: $padding-lg;
       }
 
@@ -139,15 +140,6 @@
   }
 
   .management {
-    .person {
-      & > .stylist-name {
-        margin-bottom: 0;
-      }
-      & > .stylist-title {
-        @include font-caption-thin;
-        margin: 0;
-      }
-    }
     h2 {
       margin-top: $padding;
 

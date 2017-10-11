@@ -3,19 +3,25 @@
     Template name: Front-page
   */
 
-
+  // Mission Statment
   $mission1 = get_post_meta($post->ID,'_cmb2_mission1',true);
   $mission2 = get_post_meta($post->ID,'_cmb2_mission2',true);
 
-  $careers_image_url = Firebelly\Media\get_thumbnail_url(get_post_meta($post->ID,'_cmb2_careers_image_id',true),'gallery-thumb', false);
+  // Careers
+  $careers_image_url = Firebelly\Media\get_thumbnail_url(get_post_meta($post->ID,'_cmb2_careers_image_id',true),'gallery-thumb', false);  
+  $careers_image_preload_url = Firebelly\Media\get_thumbnail_url(get_post_meta($post->ID,'_cmb2_careers_image_id',true),'preload', false);
 
+  // Press
   $press = get_post_meta($post->ID,'_cmb2_press',true);
 
-  $services_image_url = Firebelly\Media\get_thumbnail_url(get_post_meta($post->ID,'_cmb2_services_image_id',true),'gallery-thumb', false);
+  // Services
+  $services_image_url = Firebelly\Media\get_thumbnail_url(get_post_meta($post->ID,'_cmb2_services_image_id',true),'gallery-thumb', false);  
+  $services_image_preload_url = Firebelly\Media\get_thumbnail_url(get_post_meta($post->ID,'_cmb2_services_image_id',true),'preload', false);
 
+  // Social Impact
   $social_impact = get_post_meta($post->ID,'_cmb2_social_impact',true);
 
-  // Get a random featured person
+  // Get a random featured stylist
   $people = get_posts([
     'numberposts' => 1,
     'post_type' => 'person',
@@ -32,6 +38,7 @@
     $person = $people[0];
     $person_link_url = 'stylists/#'.$person->post_name;
     $person_image_url = \Firebelly\Media\get_post_thumbnail_url($person->ID,'gallery-thumb',true);
+    $person_image_preload_url = \Firebelly\Media\get_post_thumbnail_url($person->ID,'preload',true);
   }
 
   // Get a random featured lookbook
@@ -51,8 +58,8 @@
     $lookbook = $lookbooks[0];
     $lookbook_link_url = get_permalink($lookbook);
     $lookbook_image_url = \Firebelly\Media\get_post_thumbnail_url($lookbook->ID,'gallery-thumb',true);
+    $lookbook_image_preload_url = \Firebelly\Media\get_post_thumbnail_url($lookbook->ID,'preload',true);
   }
-
 
 ?>
 <div class="boxes">
@@ -72,7 +79,7 @@
       <article id="stylist-spotlight" class="box-container right one aspect-ratio-box bigclicky">
         <div class="aspect-ratio">
           <div class="box">
-            <div class="thumb" style="background-image: url('<?= $person_image_url ?>');"></div>
+            <div class="thumb lazy" data-src="<?= $person_image_url ?>" data-preload-src="<?=  $person_image_preload_url ?>"></div>
             <h2 class="text-wrap">
               <a href="<?= $person_link_url ?>" class="text-bottom font-h2">Stylist <span class="spotlight font-h3">Spotlight</span></a>
             </h2>
@@ -83,7 +90,7 @@
       <article id="careers" class="box-container right two aspect-ratio-box bigclicky">
         <div class="aspect-ratio">
           <div class="box">
-            <div class="thumb" style="background-image: url('<?= $careers_image_url ?>');"></div>
+            <div class="thumb lazy" data-src="<?= $careers_image_url ?>" data-preload-src="<?= $careers_image_preload_url ?>"></div>
             <h2 class="text-wrap">
               <a href="/careers" class="text-bottom font-h2">Careers</a>
             </h2>
@@ -105,7 +112,7 @@
       <article id="lookbook-spotlight" class="box-container left two aspect-ratio-box bigclicky">
         <div class="aspect-ratio">
           <div class="box">
-            <div class="thumb" style="background-image: url('<?= $lookbook_image_url ?>');"></div>
+            <div class="thumb lazy" data-src="<?= $lookbook_image_url ?>" data-preload-src="<?= $lookbook_image_preload_url ?>"></div>
             <h2 class="text-wrap">
               <a href="<?= $lookbook_link_url ?>" class="text-bottom font-h2">Lookbook <span class="spotlight font-h3">Spotlight</span></a>
             </h2>
@@ -119,7 +126,7 @@
     <article id="services" class="box-container left four aspect-ratio-box bigclicky">
       <div class="aspect-ratio">
         <div class="box">
-          <div class="thumb" style="background-image: url('<?= $services_image_url ?>');"></div>
+          <div class="thumb lazy" data-src="<?= $services_image_url ?>" data-preload-src="<?= $services_image_preload_url ?>"></div>
           <h2 class="text-wrap">
             <a  href="/careers" class="text-bottom font-h2">Services</a>
           </h2>
@@ -139,7 +146,7 @@
     <article id="behind-the-scenes" class="box-container right four aspect-ratio-box bigclicky">
       <div class="aspect-ratio">
         <div class="box">
-          <div class="thumb" style="background-image: url('<?= '' ?>');"></div>
+          <div class="thumb lazy" data-src="<?= '' ?>" data-preload-src="<?= '_preload_url' ?>"></div>
           <h2 class="text-wrap" href="/careers">
               <a class="font-h3 diamond text-bottom"><div class="diamond-text">Behind<br>The Scenes</div></a>
             </div>

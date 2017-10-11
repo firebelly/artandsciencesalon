@@ -1,5 +1,5 @@
 <?php
-  use Firebelly\PostTypes\Location;
+
   $people_types = get_terms([
     'taxonomy'=>'person_type',
     'slug' => ['colorist', 'master-colorist', 'senior-colorist', 'director-colorist','stylist', 'master-stylist', 'senior-stylist', 'director-stylist']
@@ -41,9 +41,9 @@
         <h2 class="experience-popup-location"><?= $people_type->name ?>s</h2>
 
         <ul class="people-grid semantic-only-list">
-          <?php foreach ($people as $post):
+          <?php foreach ($people as $person):
             echo '<li class="people-grid-item">';
-            include(locate_template('templates/article-person.php'));
+            echo \Firebelly\PostTypes\People\get_person($person);
             echo '</li>';
           endforeach; ?>
         </ul>

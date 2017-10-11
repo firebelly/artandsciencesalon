@@ -23,8 +23,7 @@
     <li class="image-list-item">
       <div id="image-<?= $i ?>" class="gallery-image image-viewer-popup-open" data-slide="<?= $i ?>">
         <div class="content-wrap">
-          <div class="thumbnail lazy" data-src="<?= $image_url ?>">
-            <div class="load-mask" style="background-image: url('<?= $image_preload_url ?>');"></div>
+          <div class="thumbnail lazy" data-src="<?= $image_url ?>" data-preload-src="<?= $image_preload_url ?>">
           </div>
         </div>
       </div>

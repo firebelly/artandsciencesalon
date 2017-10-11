@@ -256,7 +256,11 @@ function metaboxes( array $meta_boxes ) {
 add_filter( 'cmb2_meta_boxes', __NAMESPACE__ . '\metaboxes' );
 
 
+/**
+ * Shorten a full name to a first name
+ */
 function get_short_name($person) {
+
   $short_name = get_post_meta($person, '_cmb2_short_name', true);
   if ($short_name) {
     return $short_name;
@@ -264,7 +268,6 @@ function get_short_name($person) {
   // If a short name is not provided, take first word of full name
   return explode(' ',trim($person->post_title))[0];
 }
-
 
 /**
  * Get Service Section Nav
@@ -315,35 +318,8 @@ function get_people_section_nav($location) {
 }
 
 /**
- * Get People
+ * Get List of People For A Location
  */
-function get_people($options=[]) {
-  $output = '';
-
-  $args = array(
-    'numberposts' => -1,
-    'post_type' => 'person',
-    'orderby' => 'menu_order',
-  );
-
-  $person_posts = get_posts($args);
-  if (!$person_posts) return false;
-
-  $output = '<ul class="grid-items people-grid';
-
-  foreach ( $person_posts as $post ):
-    $output .= '<li class="grid-item person">';
-    ob_start();
-    include(locate_template('templates/article-person.php'));
-    $output .= ob_get_clean();
-    $output .= '</li>';
-  endforeach;
-
-  $output .= '</ul>';
-
-  return $output;
-}
-
 function get_people_list($location, $slug_array) {
 
   $args = array(
@@ -382,5 +358,51 @@ function get_people_list($location, $slug_array) {
   $output  .= '</ul>';
 
   return $output;
+}
 
+/**
+ * Get person for person grid
+ */
+function get_person($person,$formal=false,$popup=true) {
+
+  $output = '';
+
+
+  $full_name = $person->post_title;
+  $name = $formal ? $full_name : \Firebelly\PostTypes\People\get_short_name($person);
+  $thumb_url = \Firebelly\Media\get_post_thumbnail_url($person->ID,'gallery-thumb',true);
+  $thumb_preload_url = \Firebelly\Media\get_post_thumbnail_url($person->ID,'preload',true);
+  $slug = $person->post_name;
+  $id = (isset($location_section) ? $location_section->post_name.'-' : '' ).$person->post_name;
+  $permalink = get_permalink($person);
+  $no_popup = $popup ? '' : 'no-popup';
+  $title = get_post_meta($person->ID,'_cmb2_title',true);
+
+  $output .= <<<HTML
+    <article id="{$id}" class="stylist person {$no_popup}" data-slug="{$slug}" data-page-title="{$full_name}" data-page-url="{$permalink}">
+HTML;
+
+  $output .= '<div class="grid-content'.($popup ? ' open-person-popup' : '').'">';
+
+  $output .= <<<HTML
+      <div class="thumbnail-wrap">
+        <div data-src="{$thumb_url}" data-preload-src="{$thumb_preload_url}" class="thumbnail lazy"></div>
+      </div>
+      <h4 class="stylist-name">{$name}</h4>
+HTML;
+  
+  $output .= $formal ? '<h4 class="stylist-title">'.$title.'</h4>' : '';
+
+  $output .= '</div>';
+
+  if($popup) {
+    ob_start();
+    $post = $person;
+    include(locate_template('templates/person-popup.php'));
+    $output .= ob_get_clean();
+  }
+
+  $output .= '</article>';
+
+  return $output;
 }

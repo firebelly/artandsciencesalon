@@ -3,23 +3,34 @@
     Template name: About
   */
 
+  // Philosophy
   $philosophy =apply_filters('the_content',  get_post_meta($post->ID,'_cmb2_philosophy',true) );
   $philosophy_image_url = Firebelly\Media\get_thumbnail_url(get_post_meta($post->ID,'_cmb2_philosophy_image_id',true),'gallery-thumb');
+  $philosophy_image_preload_url = Firebelly\Media\get_thumbnail_url(get_post_meta($post->ID,'_cmb2_philosophy_image_id',true),'preload');
 
+  // David
   $david_bio = apply_filters('the_content', '<h3 class="owner-name">David Raccuglia</h3>'.get_post_meta($post->ID,'_cmb2_david_bio',true) );
   $david_image_url = Firebelly\Media\get_thumbnail_url(get_post_meta($post->ID,'_cmb2_david_image_id',true),'gallery-thumb');
+  $david_image_preload_url = Firebelly\Media\get_thumbnail_url(get_post_meta($post->ID,'_cmb2_david_image_id',true),'preload');
 
+  // Paul
   $paul_bio = apply_filters('the_content', '<h3 class="owner-name">Paul Wilson</h3>'.get_post_meta($post->ID,'_cmb2_paul_bio',true) );
   $paul_image_url = Firebelly\Media\get_thumbnail_url(get_post_meta($post->ID,'_cmb2_paul_image_id',true),'gallery-thumb');
+  $paul_image_preload_url = Firebelly\Media\get_thumbnail_url(get_post_meta($post->ID,'_cmb2_paul_image_id',true),'preload');
 
+  // Management
   $managing_partners = apply_filters('the_content', get_post_meta($post->ID,'_cmb2_managing_partners',true) );
 
+  // Educators
   $educators = apply_filters('the_content', get_post_meta($post->ID,'_cmb2_educators',true) );
 
+  // Social Impact
   $social_impact = apply_filters('the_content', get_post_meta($post->ID,'_cmb2_social_impact',true) );
 
+  // Barbershops
   $barbershops = apply_filters('the_content', get_post_meta($post->ID,'_cmb2_barbershops',true) );
   $barbershops_image_url = Firebelly\Media\get_thumbnail_url(get_post_meta($post->ID,'_cmb2_barbershops_image_id',true),'gallery-thumb');
+  $barbershops_image_preload_url = Firebelly\Media\get_thumbnail_url(get_post_meta($post->ID,'_cmb2_barbershops_image_id',true),'preload');
 
 ?>
 
@@ -27,7 +38,7 @@
   <div class="content">
     <div class="image">
       <div class="thumbnail-wrap">
-        <div class="thumbnail" style="background-image: url(<?= $philosophy_image_url ?>);"></div>
+        <div class="thumbnail lazy" data-src="<?= $philosophy_image_url ?>" data-preload-src="<?= $philosophy_image_preload_url ?>"></div>
       </div>
     </div>
     <h2 class="user-content-h1">Philosophy</h2>
@@ -42,7 +53,7 @@
     <div class="user-content owner-bio"><?= $david_bio ?></div>
     <div class="image">
       <div class="thumbnail-wrap">
-        <div class="thumbnail" style="background-image: url(<?= $david_image_url ?>);"></div>
+        <div class="thumbnail lazy" data-src="<?= $david_image_url ?>" data-preload-src="<?= $david_image_preload_url ?>"></div>
       </div>
     </div>
   </div>
@@ -54,20 +65,22 @@
     'name' => 'paul-wilson',
   ]);
 
-  foreach($pauls as $post) :
-    $id = $post->post_name;
+  foreach($pauls as $person) :
+    $id = $person->post_name;
     ?>
 
     <div class="section">
-      <article id="<?= $id ?>" class="stylist person owner" data-slug="<?= $post->post_name ?>" data-page-title="<?= $post->post_title ?>" data-page-url="<?= get_permalink($post) ?>">
+      <article id="<?= $id ?>" class="stylist person owner" data-slug="<?= $person->post_name ?>" data-page-title="<?= $person->post_title ?>" data-page-url="<?= get_permalink($person) ?>">
 
-          <?php include(locate_template('templates/person-popup.php')); ?>
+          
+          <?php $post = $person;  
+          include(locate_template('templates/person-popup.php')); ?>
 
           <div class="user-content owner-bio"><?= $paul_bio ?></div>
           <div class="image">
             <div class="open-person-popup">
               <div class="thumbnail-wrap">
-                <div class="thumbnail" style="background-image: url(<?= $paul_image_url ?>);"></div>
+                <div class="thumbnail lazy" data-src="<?= $paul_image_url ?>" data-preload-src="<?= $paul_image_preload_url ?>"></div>
               </div>
               <p><a href="#" class="details-link non-user-content-link open-person-popup">Paul's Profile</a></p>
             </div>
@@ -103,9 +116,9 @@
   ?>
     <div class="person-type section">
       <ul class="people-grid semantic-only-list">
-        <?php foreach ($people as $post):
+        <?php foreach ($people as $person):
           echo '<li class="people-grid-item">';
-          include(locate_template('templates/article-person-formal.php'));
+            echo \Firebelly\PostTypes\People\get_person($person,true,true);
           echo '</li>';
         endforeach; ?>
       </ul>
@@ -133,12 +146,9 @@
   ?>
     <div class="person-type section">
       <ul class="people-grid semantic-only-list">
-        <?php foreach ($people as $post):
+        <?php foreach ($people as $person):
           echo '<li class="people-grid-item">';
-
-          $full_name = true;
-          $title = true;
-          include(locate_template('templates/article-person-formal-nopopup.php'));
+          echo \Firebelly\PostTypes\People\get_person($person,true,false);
           echo '</li>';
         endforeach; ?>
       </ul>
@@ -179,9 +189,9 @@
     <h3 class="user-content-h2">Stylists</h3>
     <div class="person-type section">
       <ul class="people-grid semantic-only-list">
-        <?php foreach ($stylist_educators as $post):
+        <?php foreach ($stylist_educators as $person):
           echo '<li class="people-grid-item">';
-          include(locate_template('templates/article-person.php'));
+          echo \Firebelly\PostTypes\People\get_person($person);
           echo '</li>';
         endforeach; ?>
       </ul>
@@ -214,9 +224,9 @@
     <h3 class="user-content-h2">Colorists</h3>
     <div class="person-type section">
       <ul class="people-grid semantic-only-list">
-        <?php foreach ($colorist_educators as $post):
+        <?php foreach ($colorist_educators as $person):
           echo '<li class="people-grid-item">';
-          include(locate_template('templates/article-person.php'));
+          echo \Firebelly\PostTypes\People\get_person($person);
           echo '</li>';
         endforeach; ?>
       </ul>
@@ -244,7 +254,7 @@
   </div>
   <div class="image">
     <div class="thumbnail-wrap">
-      <div class="thumbnail" style="background-image: url(<?= $barbershops_image_url ?>);"></div>
+      <div class="thumbnail lazy" data-src="<?= $barbershops_image_url ?>" data-preload-src="<?= $barbershops_image_preload_url ?>"></div>
     </div>
   </div>
 </div>

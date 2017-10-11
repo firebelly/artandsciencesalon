@@ -14,6 +14,15 @@ var FBSage = (function($) {
       loadingTimer,
       page_at;
 
+  // Inject lazy-loading masks
+  $('.lazy').each(function () {
+    var $thumb = $(this);
+    var preload_url = $(this).data('preload-src');
+    $('<div class="load-mask"></div>')
+      .prependTo($thumb)
+      .attr('style',"background-image: url('"+preload_url+"');");
+  });
+
   function _init() {
     // touch-friendly fast clicks
     FastClick.attach(document.body);
@@ -122,15 +131,14 @@ var FBSage = (function($) {
   function _initLazyLoading() {
     console.log('init lazy load');
     $('.lazy').Lazy({
-       // beforeLoad: function($element) {
-       //    var style = $element.attr('style');
-       //    $('<div class="load-mask">')
-       //      .prependTo($element)
-       //      .attr('style',style);
-       //  },
         afterLoad: function($element) {
           $element.addClass('-loaded');
-          console.log($element);
+
+          // Remove the unncessary markup after its transition
+          var $mask = $element.find('.load-mask');
+          setTimeout(function () {
+            $mask.remove();
+          },500)
         }
     });
   }

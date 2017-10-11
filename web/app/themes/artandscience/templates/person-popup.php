@@ -10,6 +10,7 @@ $days_group = get_post_meta($post->ID, '_cmb2_days_group', true);
 $pricing_group = get_post_meta($post->ID, '_cmb2_pricing_group', true);
 $lookbook_group = get_post_meta($post->ID, '_cmb2_lookbook_group', false);
 $thumb_url = \Firebelly\Media\get_post_thumbnail_url($post->ID,'gallery-thumb',true);
+$thumb_preload_url = \Firebelly\Media\get_post_thumbnail_url($post->ID,'preload',true);
 $id = (isset($location_section) ? $location_section->post_name.'-' : '' ).$post->post_name;
 $name = Firebelly\PostTypes\People\get_short_name($post);
 
@@ -20,7 +21,7 @@ $name = Firebelly\PostTypes\People\get_short_name($post);
     <div class="header-wrap">
       <div class="controls-wrap">
         <div class="thumbnail-wrap">
-          <div style="background-image: url('<?= $thumb_url ?>');" class="thumbnail"></div>
+            <div data-src="<?= $thumb_url ?>" data-preload-src="<?= $thumb_preload_url ?>"" class="thumbnail lazy"></div>
         </div>
       </div>
       <div class="header-content">
