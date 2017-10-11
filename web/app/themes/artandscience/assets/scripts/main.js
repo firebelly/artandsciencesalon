@@ -78,7 +78,7 @@ var FBSage = (function($) {
 
   function _hashHandling() {
     // Scroll down to hash afer page load OR open person popup with hash content
-    // $(window).load(function() {
+    $(window).load(function() {
       if (window.location.hash) {
 
         // Find direct matches
@@ -116,7 +116,7 @@ var FBSage = (function($) {
           }
         }
       }
-    // });
+    });
   }
 
   function _initLazyLoading() {
@@ -257,7 +257,6 @@ var FBSage = (function($) {
       } else {
         $people = $('.person:not(.no-popup)');
       }
-      // console.log($people);
 
       // Where am I in the list?
       var currentIndex = $people.index($currentPerson);
@@ -305,7 +304,6 @@ var FBSage = (function($) {
     $('.image-viewer-popup-open').click(function() {
       var imageUrl = $(this).data('image-url');
       var slideNum = parseInt($(this).data('slide'));
-      console.log('slide: '+slideNum);
       $('.image-viewer-popup').velocity('fadeIn', {duration: 100});
       $('.image-viewer-popup .image-slider').slick('slickGoTo', slideNum );
     });
@@ -575,6 +573,7 @@ var FBSage = (function($) {
     if ($subPageNav.length) {
 
       var target = $target.attr('id');
+
       $thisLink = $('.subpage-link[data-target="'+target+'"]');
 
       // Remove -active class where not needed
