@@ -120,7 +120,7 @@ var FBSage = (function($) {
 
           // Otherwise scroll to the target
           } else {
-
+            _scrollBody($('body'),0,0,0);
             _scrollBody($target);
           }
         }
