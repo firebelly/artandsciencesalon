@@ -138,7 +138,7 @@ var FBSage = (function($) {
           var $mask = $element.find('.load-mask');
           setTimeout(function () {
             $mask.remove();
-          },500)
+          },500);
         }
     });
   }
