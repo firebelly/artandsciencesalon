@@ -42,7 +42,18 @@
           transition: transform 5s;
           background-position: center;
 
-          &::after{
+          &::before {
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            content: '';
+            position: absolute;
+            // transition: opacity 0.1s;
+            background: linear-gradient(to top, rgba($gray-dark,0.5), transparent 40%, transparent);
+          }
+
+          &::after {
             top: 0;
             left: 0;
             right: 0;

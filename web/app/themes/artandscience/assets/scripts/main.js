@@ -129,8 +129,8 @@ var FBSage = (function($) {
   }
 
   function _initLazyLoading() {
-    console.log('init lazy load');
     $('.lazy').Lazy({
+        threshold: 2000,
         afterLoad: function($element) {
           $element.addClass('-loaded');
 

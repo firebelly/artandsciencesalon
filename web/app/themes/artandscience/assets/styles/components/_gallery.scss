@@ -148,6 +148,20 @@ body.single-lookbook, body.single-si-gallery {
   }
 }
 
+.gallery-article {
+  .thumbnail {
+    &::before {
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      content: '';
+      position: absolute;
+      background: linear-gradient(to top, rgba($gray-dark,0.5), transparent 40%, transparent);
+    }
+  }
+}
+
 .image-viewer-popup-open {
   cursor: pointer;
 }
