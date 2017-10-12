@@ -126,8 +126,11 @@ function get_treated_url($post_or_id, $size, $type='default') {
 
     // DEFAULT BEHAVIOR
     } else {
+      // OLD COMMAND (BROKEN ON WF SERVER)
       // convert test1.jpg -brightness-contrast -5%x-20% +level 13%,87%,1.3 -channel B +level 1% testfoo10.jpg
-      $full_command = $convert_command.' '.$image_to_convert.' -brightness-contrast -5%x-20% +level 13%,87%,1.3 -channel B +level 1% '.$treated_image;
+      // NEW COMMAND
+      // convert IMG_6143.jpg -brightness-contrast -5%x-5% +level 5%,90%,1.1 -channel B +level 1%,99%,1.1 out12.jpg
+      $full_command = $convert_command.' '.$image_to_convert.' -brightness-contrast -5%x-5% +level 5%,90%,1.1 -channel B +level 1%,99%,1.1 '.$treated_image;
     }
 
     if($full_command) { exec($full_command); }
