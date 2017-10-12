@@ -502,7 +502,7 @@ function metaboxes( array $meta_boxes ) {
     'id'          => $prefix . 'bridal_suite_description',
     'type'        => 'wysiwyg',
     'name'        => 'Description',
-    'description' => __( 'Text underneat Bridal Suite header', 'cmb2' ),
+    'description' => __( 'Text underneath Bridal Suite header', 'cmb2' ),
   ) );
 
   return $meta_boxes;
@@ -573,6 +573,45 @@ function get_service_section_nav($location) {
 
 
   $output.= '</ul></nav>';
+
+  return $output;
+}
+
+
+/**
+ * Get Service Section Nav
+ */
+function get_service_table($location) {
+
+  $output = '';
+  $output .= '<div class="services details-block">';
+  $output .= '<h4>Available Services</h4>';
+  $output .= '<table class="data-table services-table"><tbody>';
+
+  $slug = $location->post_name;
+  $location_id = $location->ID;
+
+
+  $output .= get_post_meta($location_id,'_cmb2_salon_cut_description',true) ?
+  '<tr><td><a href="/services/#'.$slug.'-salon-cut">Salon Cut</td></tr>' : '';
+
+  $output .= get_post_meta($location_id,'_cmb2_salon_color_group',true) ?
+  '<tr><td><a href="/services/#'.$slug.'-salon-color">Salon Color</td></tr>' : '';
+
+  $output .= get_post_meta($location_id,'_cmb2_barbershop_services_group',true) ?
+  '<tr><td><a href="/services/#'.$slug.'-barbershop-services">Barbershop Services</td></tr>' : '';
+
+  $output .= get_post_meta($location_id,'_cmb2_waxing_lounge_group',true) ?
+  '<tr><td><a href="/services/#'.$slug.'-waxing-lounge">Waxing Lounge</td></tr>' : '';
+
+  $output .= get_post_meta($location_id,'_cmb2_tanning_group',true) ?
+  '<tr><td><a href="/services/#'.$slug.'-tanning">Tanning</td></tr>' : '';
+
+  $output .= get_post_meta($location_id,'_cmb2_bridal_suite_description',true) ?
+  '<tr><td><a href="/services/#'.$slug.'-bridal">Bridal</td></tr>' : '';
+
+
+  $output.= '</tbody></table></div>';
 
   return $output;
 }

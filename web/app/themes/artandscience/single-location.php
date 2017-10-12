@@ -1,6 +1,7 @@
 <?php
 
   use Firebelly\PostTypes\People;
+  use Firebelly\PostTypes\Location;
   use Firebelly\Media;
 
   $body = apply_filters('the_content', $post->post_content);
@@ -9,7 +10,6 @@
   $email = get_post_meta($post->ID, '_cmb2_email', true);
   $virtual_tour_url = get_post_meta($post->ID, '_cmb2_virtual_tour_url', true);
   $hours_group = get_post_meta($post->ID, '_cmb2_hours_group', true);
-  $services_group = get_post_meta($post->ID, '_cmb2_services_group', true);
   $people_types = get_post_meta($post->ID, '_cmb2_people_types', true);
   $location_image_url = Media\get_post_thumbnail_url($post->ID,'gallery',true);
   $location_image_preload_url = Media\get_post_thumbnail_url($post->ID,'preload',true);
@@ -18,6 +18,7 @@
   $stylists = People\get_people_list($post, ['stylist', 'master-stylist', 'senior-stylist', 'director-stylist']);
   $barbers = People\get_people_list($post, ['barber']);
   $aestheticians = People\get_people_list($post, ['aesthetician']);
+  $services = Location\get_service_table($post);
 
 ?>
 
@@ -52,20 +53,7 @@
         </table>
       </div>
 
-      <?php if (!empty($services_group)) : ?>
-      <div class="services details-block">
-        <h4>Available Services</h4>
-        <table class="data-table services-table">
-          <?php
-          if ($services_group) {
-            foreach ($services_group as $service) {
-              echo '<tr><td>'.((!empty($service['link']))?'<a href="'.$service['link'].'">'.$service['service'].'</a>': $service['service']).'</td></tr>';
-            }
-          }
-          ?>
-        </table>
-      </div>
-      <?php endif; ?>
+      <?= $services ?>
 
       <?php if ($colorists) : ?>
         <div class="services details-block">
@@ -98,3 +86,22 @@
     </div>
   </div>
 </div>
+
+
+
+
+<!-- 
+ <?php if (!empty($services_group)) : ?>
+      <div class="services details-block">
+        <h4>Available Services</h4>
+        <table class="data-table services-table">
+          <?php
+          if ($services_group) {
+            foreach ($services_group as $service) {
+              echo '<tr><td>'.((!empty($service['link']))?'<a href="'.$service['link'].'">'.$service['service'].'</a>': $service['service']).'</td></tr>';
+            }
+          }
+          ?>
+        </table>
+      </div>
+      <?php endif; ?> -->
