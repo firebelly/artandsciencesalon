@@ -49,7 +49,6 @@
             bottom: 0;
             content: '';
             position: absolute;
-            // transition: opacity 0.1s;
             background: linear-gradient(to top, rgba($gray-dark,0.5), transparent 40%, transparent);
           }
 
@@ -61,7 +60,6 @@
             opacity: 0;
             content: '';
             position: absolute;
-            // transition: opacity 0.1s;
             background: rgba($brown,0.2);
           }
         }
@@ -373,6 +371,18 @@
 
     .details-link:not(:hover) {
       color: $gray-dark;
+    }
+  }
+
+  #instafeed {
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba($gold, 0.3);
     }
   }
 

@@ -50,6 +50,7 @@ var FBSage = (function($) {
     _injectSvgSprite();
     _initBigclicky();
     _breakupLongEmails();
+    _pullInstagramPost();
 
     // Certain elements (e.g. popups) are hidden during load, remove the class hiding them...
     $('.hide-during-page-load').removeClass('hide-during-page-load');
@@ -84,6 +85,25 @@ var FBSage = (function($) {
     });
 
   } // end init()
+
+  function _pullInstagramPost() {
+    if($('#instafeed').length) {
+
+      var clientId =  '87f02470c76449f187c33be623387c45', //'355f9b2e465040f3a9836df35c8a15b1',  
+      accessToken = '429658804.87f0247.f3373e9bfed947b3a66e22daaf826c15'; //'1602873229.355f9b2.02d386b0e8eb442fb2753c079ede0b50';
+
+      var feed = new Instafeed({
+          get: 'user',
+          userId: '429658804', //'1602873229',
+          clientId: clientId,
+          accessToken: accessToken,
+          limit: 1,
+          resolution: 'standard_resolution',
+          template: '<div class="thumbnail lazy" style="background-image: url(\'{{image}}\');"></div>',
+      });
+      feed.run();
+    }
+  }
 
   function _hashHandling() {
     // Scroll down to hash afer page load OR open person popup with hash content

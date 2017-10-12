@@ -146,9 +146,9 @@
     <article id="behind-the-scenes" class="box-container right four aspect-ratio-box bigclicky">
       <div class="aspect-ratio">
         <div class="box">
-          <div class="thumbnail lazy" data-src="<?= '' ?>" data-preload-src="<?= '_preload_url' ?>"></div>
-          <h2 class="text-wrap" href="/careers">
-              <a class="font-h3 diamond text-bottom"><div class="diamond-text">Behind<br>The Scenes</div></a>
+          <div id="instafeed"></div>
+          <h2 class="text-wrap">
+              <a class="font-h3 diamond text-bottom" href="https://www.instagram.com/artandsciencesalon/" target="_blank"><div class="diamond-text">Behind<br>The Scenes</div></a>
             </div>
           </h2>
         </div>

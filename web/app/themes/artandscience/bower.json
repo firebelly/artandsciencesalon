@@ -19,7 +19,8 @@
     "fastclick": "~1.0.6",
     "isotope": "^3.0.4",
     "slick-carousel": "^1.8.1",
-    "jquery-lazy": "^1.7.5"
+    "jquery-lazy": "^1.7.5",
+    "instafeed.js": "^1.4.1"
   },
   "overrides": {
     "modernizr": {
