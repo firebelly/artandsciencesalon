@@ -79,7 +79,7 @@
       <article id="stylist-spotlight" class="box-container right one aspect-ratio-box bigclicky">
         <div class="aspect-ratio">
           <div class="box">
-            <div class="thumb lazy" data-src="<?= $person_image_url ?>" data-preload-src="<?=  $person_image_preload_url ?>"></div>
+            <div class="thumbnail lazy" data-src="<?= $person_image_url ?>" data-preload-src="<?=  $person_image_preload_url ?>"></div>
             <h2 class="text-wrap">
               <a href="<?= $person_link_url ?>" class="text-bottom font-h2">Stylist <span class="spotlight font-h3">Spotlight</span></a>
             </h2>
@@ -90,7 +90,7 @@
       <article id="careers" class="box-container right two aspect-ratio-box bigclicky">
         <div class="aspect-ratio">
           <div class="box">
-            <div class="thumb lazy" data-src="<?= $careers_image_url ?>" data-preload-src="<?= $careers_image_preload_url ?>"></div>
+            <div class="thumbnail lazy" data-src="<?= $careers_image_url ?>" data-preload-src="<?= $careers_image_preload_url ?>"></div>
             <h2 class="text-wrap">
               <a href="/careers" class="text-bottom font-h2">Careers</a>
             </h2>
@@ -112,7 +112,7 @@
       <article id="lookbook-spotlight" class="box-container left two aspect-ratio-box bigclicky">
         <div class="aspect-ratio">
           <div class="box">
-            <div class="thumb lazy" data-src="<?= $lookbook_image_url ?>" data-preload-src="<?= $lookbook_image_preload_url ?>"></div>
+            <div class="thumbnail lazy" data-src="<?= $lookbook_image_url ?>" data-preload-src="<?= $lookbook_image_preload_url ?>"></div>
             <h2 class="text-wrap">
               <a href="<?= $lookbook_link_url ?>" class="text-bottom font-h2">Lookbook <span class="spotlight font-h3">Spotlight</span></a>
             </h2>
@@ -126,7 +126,7 @@
     <article id="services" class="box-container left four aspect-ratio-box bigclicky">
       <div class="aspect-ratio">
         <div class="box">
-          <div class="thumb lazy" data-src="<?= $services_image_url ?>" data-preload-src="<?= $services_image_preload_url ?>"></div>
+          <div class="thumbnail lazy" data-src="<?= $services_image_url ?>" data-preload-src="<?= $services_image_preload_url ?>"></div>
           <h2 class="text-wrap">
             <a  href="/careers" class="text-bottom font-h2">Services</a>
           </h2>
@@ -146,7 +146,7 @@
     <article id="behind-the-scenes" class="box-container right four aspect-ratio-box bigclicky">
       <div class="aspect-ratio">
         <div class="box">
-          <div class="thumb lazy" data-src="<?= '' ?>" data-preload-src="<?= '_preload_url' ?>"></div>
+          <div class="thumbnail lazy" data-src="<?= '' ?>" data-preload-src="<?= '_preload_url' ?>"></div>
           <h2 class="text-wrap" href="/careers">
               <a class="font-h3 diamond text-bottom"><div class="diamond-text">Behind<br>The Scenes</div></a>
             </div>

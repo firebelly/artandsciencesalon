@@ -74,7 +74,7 @@ function register_metaboxes() {
   ) );
   $about_owners -> add_field( array(
     'name'    => "David Raccuglia's Image",
-    'desc'    => 'Select/upload an image',
+    'desc'    => 'Select/upload an image.  This image should be TREATED.',
     'id'      => $prefix.'david_image',
     'type'    => 'file',
     'options' => array(
@@ -100,7 +100,7 @@ function register_metaboxes() {
   ) );
   $about_owners -> add_field( array(
     'name'    => "Paul Wilson's Image",
-    'desc'    => 'Select/upload an image',
+    'desc'    => 'Select/upload an image.  This image should be TREATED.',
     'id'      => $prefix.'paul_image',
     'type'    => 'file',
     'options' => array(
@@ -205,7 +205,7 @@ function register_metaboxes() {
   ) );
   $about_barbershops -> add_field( array(
     'name'    => "Barbershops Image",
-    'desc'    => 'Select/upload an image',
+    'desc'    => 'Select/upload an image.  This image should be TREATED.',
     'id'      => $prefix.'barbershops_image',
     'type'    => 'file',
     'options' => array(

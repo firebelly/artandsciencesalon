@@ -5,18 +5,18 @@
 
   // Philosophy
   $philosophy =apply_filters('the_content',  get_post_meta($post->ID,'_cmb2_philosophy',true) );
-  $philosophy_image_url = Firebelly\Media\get_thumbnail_url(get_post_meta($post->ID,'_cmb2_philosophy_image_id',true),'gallery-thumb');
-  $philosophy_image_preload_url = Firebelly\Media\get_thumbnail_url(get_post_meta($post->ID,'_cmb2_philosophy_image_id',true),'preload');
+  $philosophy_image_url = Firebelly\Media\get_thumbnail_url(get_post_meta($post->ID,'_cmb2_philosophy_image_id',true),'gallery-thumb', false);
+  $philosophy_image_preload_url = Firebelly\Media\get_thumbnail_url(get_post_meta($post->ID,'_cmb2_philosophy_image_id',true),'preload', false);
 
   // David
   $david_bio = apply_filters('the_content', '<h3 class="owner-name">David Raccuglia</h3>'.get_post_meta($post->ID,'_cmb2_david_bio',true) );
-  $david_image_url = Firebelly\Media\get_thumbnail_url(get_post_meta($post->ID,'_cmb2_david_image_id',true),'gallery-thumb');
-  $david_image_preload_url = Firebelly\Media\get_thumbnail_url(get_post_meta($post->ID,'_cmb2_david_image_id',true),'preload');
+  $david_image_url = Firebelly\Media\get_thumbnail_url(get_post_meta($post->ID,'_cmb2_david_image_id',true),'gallery-thumb', false);
+  $david_image_preload_url = Firebelly\Media\get_thumbnail_url(get_post_meta($post->ID,'_cmb2_david_image_id',true),'preload', false);
 
   // Paul
   $paul_bio = apply_filters('the_content', '<h3 class="owner-name">Paul Wilson</h3>'.get_post_meta($post->ID,'_cmb2_paul_bio',true) );
-  $paul_image_url = Firebelly\Media\get_thumbnail_url(get_post_meta($post->ID,'_cmb2_paul_image_id',true),'gallery-thumb');
-  $paul_image_preload_url = Firebelly\Media\get_thumbnail_url(get_post_meta($post->ID,'_cmb2_paul_image_id',true),'preload');
+  $paul_image_url = Firebelly\Media\get_thumbnail_url(get_post_meta($post->ID,'_cmb2_paul_image_id',true),'gallery-thumb', false);
+  $paul_image_preload_url = Firebelly\Media\get_thumbnail_url(get_post_meta($post->ID,'_cmb2_paul_image_id',true),'preload', false);
 
   // Management
   $managing_partners = apply_filters('the_content', get_post_meta($post->ID,'_cmb2_managing_partners',true) );
@@ -29,8 +29,8 @@
 
   // Barbershops
   $barbershops = apply_filters('the_content', get_post_meta($post->ID,'_cmb2_barbershops',true) );
-  $barbershops_image_url = Firebelly\Media\get_thumbnail_url(get_post_meta($post->ID,'_cmb2_barbershops_image_id',true),'gallery-thumb');
-  $barbershops_image_preload_url = Firebelly\Media\get_thumbnail_url(get_post_meta($post->ID,'_cmb2_barbershops_image_id',true),'preload');
+  $barbershops_image_url = Firebelly\Media\get_thumbnail_url(get_post_meta($post->ID,'_cmb2_barbershops_image_id',true),'gallery-thumb', false);
+  $barbershops_image_preload_url = Firebelly\Media\get_thumbnail_url(get_post_meta($post->ID,'_cmb2_barbershops_image_id',true),'preload', false);
 
 ?>
 
