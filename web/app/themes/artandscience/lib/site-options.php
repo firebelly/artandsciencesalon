@@ -172,6 +172,12 @@ class FbSiteOptions {
       'desc'    => __( 'This will be used if unable to find an image for shared post/page', 'firebelly' ),
       'id'   => 'default_metatag_image',
       'type' => 'file',
+      'options' => array(
+        'url' => false, // Hide the text input for the url
+      ),
+      'text'    => array(
+        'add_upload_file_text' => 'Add/Upload Image' // Change upload button text. Default: "Add or Upload File"
+      ),
     ) );
 
   }
