@@ -27,7 +27,7 @@ function register_metaboxes() {
   );
   $home_alternate_thumb -> add_field( array(
     'name'    => "Image",
-    'desc'    => 'Select/upload an image -- this image will need to be pre-treated.',
+    'desc'    => 'This image MUST be PRE-TREATED.',
     'id'      => $prefix.'alternate_featured_image',
     'type'    => 'file',
     'options' => array(
@@ -82,7 +82,7 @@ function register_metaboxes() {
   );
   $home_careers -> add_field( array(
     'name'    => "Image",
-    'desc'    => 'Select/upload an image -- this image will need to be pre-treated.',
+    'desc'    => 'This image MUST be PRE-TREATED.',
     'id'      => $prefix.'careers_image',
     'type'    => 'file',
     'options' => array(
@@ -132,7 +132,7 @@ function register_metaboxes() {
   );
   $home_services -> add_field( array(
     'name'    => "Image",
-    'desc'    => 'Select/upload an image -- this image will need to be pre-treated.',
+    'desc'    => 'This image MUST be PRE-TREATED.',
     'id'      => $prefix.'services_image',
     'type'    => 'file',
     'options' => array(

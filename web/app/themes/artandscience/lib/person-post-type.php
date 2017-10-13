@@ -241,7 +241,6 @@ function metaboxes( array $meta_boxes ) {
       'options' => array(
         'pinterest' => 'Pinterest',
         'instagram' => 'Instagram',
-        'tumblr'    => 'Tumblr',
       ),
   ) );
 
