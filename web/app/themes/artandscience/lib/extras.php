@@ -31,3 +31,13 @@ function excerpt_more() {
   return ' &hellip; <a href="' . get_permalink() . '">' . __('Continued', 'sage') . '</a>';
 }
 add_filter('excerpt_more', __NAMESPACE__ . '\\excerpt_more');
+
+
+// function custom_disable_redirect_canonical( $redirect_url, $requested_url ) {
+//   if ( preg_match("/admin/",$redirect_url) ) {
+//     return false;
+//   } else {
+//     return $redirect_url;
+//   }
+// }
+// add_filter( 'redirect_canonical', __NAMESPACE__ . '\\custom_disable_redirect_canonical' );

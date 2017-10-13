@@ -21,8 +21,9 @@ $sage_includes = [
 $firebelly_includes = [
   'lib/disable-comments.php',                 // Disables WP comments in admin and frontend
   'lib/fb_init.php',                          // FB theme setups
-  'lib/fb_assets.php',                        // FB assets
   'lib/media.php',                            // FB media
+  'lib/fb_metatags.php',                        // FB metatags
+  'lib/fb_assets.php',                        // FB assets
   'lib/ajax.php',                             // AJAX functions
   'lib/custom-functions.php',                 // Rando utility functions and miscellany
   'lib/site-options.php',                     // Custon site options

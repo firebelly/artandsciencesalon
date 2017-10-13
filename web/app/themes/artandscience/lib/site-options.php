@@ -145,19 +145,19 @@ class FbSiteOptions {
       'type' => 'text',
     ) );
 
-    $cmb->add_field( array(
-      'name' => __( 'Contact Phone Number', 'firebelly' ),
-      'id'   => 'contact_phone',
-      'desc' => __( 'Phone number shown in the footer'),
-      'type' => 'text',
-    ) );
+    // $cmb->add_field( array(
+    //   'name' => __( 'Contact Phone Number', 'firebelly' ),
+    //   'id'   => 'contact_phone',
+    //   'desc' => __( 'Phone number shown in the footer'),
+    //   'type' => 'text',
+    // ) );
 
-    $cmb->add_field( array(
-      'name' => __( 'Contact Email', 'firebelly' ),
-      'id'   => 'contact_email',
-      'desc' => __( 'Email shown in the footer'),
-      'type' => 'text_email',
-    ) );
+    // $cmb->add_field( array(
+    //   'name' => __( 'Contact Email', 'firebelly' ),
+    //   'id'   => 'contact_email',
+    //   'desc' => __( 'Email shown in the footer'),
+    //   'type' => 'text_email',
+    // ) );
 
     $cmb->add_field( array(
       'name' => __( 'Facebook App ID', 'firebelly' ),
