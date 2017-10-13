@@ -36,7 +36,7 @@ class FbSiteOptions {
    */
   public function __construct() {
     // Set our title
-    $this->title = __( 'Site Options', 'firebelly' );
+    $this->title = __( 'Social Media', 'firebelly' );
   }
 
   /**
