@@ -165,7 +165,7 @@ function metaboxes( array $meta_boxes ) {
     'show_names'    => true, // Show field names on the left
     'fields'        => array(
       array(
-        'name' => 'Abbreviate Title',
+        'name' => 'Abbreviated Title',
         'id'   => $prefix . 'short_title',
         'desc' => 'Ex: "Logan Square" instead of "Logan Square Barbershop"',
         'type' => 'text',
