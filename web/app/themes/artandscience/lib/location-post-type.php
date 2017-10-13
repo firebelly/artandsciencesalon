@@ -809,7 +809,7 @@ function get_services_bridal() {
   $output .= '<h2>Bridal</h2>';
 
   $output .= apply_filters('the_content', $bridal_text);
-  $output .= '<p><a href="/bridal" class="details-link">Service &plus; Price Details</a></p>';
+  $output .= '<p><a href="/bridal" class="details-link non-user-content-link">Service &plus; Price Details</a></p>';
 
   $output .= '</section>';
   return $output;
