@@ -41,7 +41,11 @@ function hide_editor() {
   if( get_current_screen()->id != 'page') return;
 
   // Get the Post ID.
-  $post_id = $_GET['post'] ? $_GET['post'] : $_POST['post_ID'] ;
+if ( isset( $_GET['post'] ) ) {
+    $post_id = $_GET['post'];
+} elseif ( isset( $_POST['post_ID'] ) ) {
+    $post_id = $_POST['post_ID'];
+}
   if( !isset( $post_id ) ) return;
 
   // Get the slug
@@ -130,7 +134,7 @@ function metabox_exclude_on_slug( $display, $meta_box ) {
     }
 
     if ( ! $post_id ) {
-      return false; // In Morton's code, this WAS 'return $dispay;'-- but this caused all the metaboxes to appear for pages as they were being created, i.e. before they had proper slugs.
+      return $display; // WILL SHOW AUTOMATICALLY ON A NEW PAGE
     }
 
     $slug = get_post( $post_id )->post_name;
