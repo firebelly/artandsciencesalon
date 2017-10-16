@@ -12,7 +12,7 @@ $lookbook_group = get_post_meta($post->ID, '_cmb2_lookbook_group', false);
 $thumb_url = \Firebelly\Media\get_post_thumbnail_url($post->ID,'gallery-thumb',true);
 $thumb_preload_url = \Firebelly\Media\get_post_thumbnail_url($post->ID,'preload',true);
 $id = (isset($location_section) ? $location_section->post_name.'-' : '' ).$post->post_name;
-$name = Firebelly\PostTypes\People\get_short_name($post);
+$name = get_the_title($post);
 
 ?>
 
