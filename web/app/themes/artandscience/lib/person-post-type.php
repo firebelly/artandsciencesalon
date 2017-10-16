@@ -144,16 +144,15 @@ function metaboxes( array $meta_boxes ) {
       'name' => 'Day',
       'id'   => 'day',
       'type'             => 'select',
-      'show_option_none' => false,
-      'default'          => 'Monday',
+      'show_option_none' => true,
       'options'          => array(
-        'Monday'    => __( 'Monday', 'cmb2' ),
-        'Tuesday'   => __( 'Tuesday', 'cmb2' ),
-        'Wednesday' => __( 'Wednesday', 'cmb2' ),
-        'Thursday'  => __( 'Thursday', 'cmb2' ),
-        'Friday'    => __( 'Friday', 'cmb2' ),
-        'Saturday'  => __( 'Saturday', 'cmb2' ),
-        'Sunday'    => __( 'Sunday', 'cmb2' ),
+        'Monday'     => __( 'Monday', 'cmb2' ),
+        'Tuesday'    => __( 'Tuesday', 'cmb2' ),
+        'Wednesday'  => __( 'Wednesday', 'cmb2' ),
+        'Thursday'   => __( 'Thursday', 'cmb2' ),
+        'Friday'     => __( 'Friday', 'cmb2' ),
+        'Saturday'   => __( 'Saturday', 'cmb2' ),
+        'Sunday'     => __( 'Sunday', 'cmb2' ),
       ),
   ) );
 
@@ -168,6 +167,7 @@ function metaboxes( array $meta_boxes ) {
     'name'     => 'Location',
     'id'       => 'location',
     'type'     => 'select',
+    'show_option_none' => true,
     'options'  => \Firebelly\CMB2\get_post_options(['post_type' => 'location', 'numberposts' => -1]),
   ) );
 
@@ -238,6 +238,7 @@ function metaboxes( array $meta_boxes ) {
       'name' => 'Source',
       'id'   => 'source',
       'type' => 'select',
+      'show_option_none' => true,
       'options' => array(
         'pinterest' => 'Pinterest',
         'instagram' => 'Instagram',

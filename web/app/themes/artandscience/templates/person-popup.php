@@ -49,7 +49,7 @@ $name = get_the_title($post);
 
       <div class="block-wrap">
 
-        <?php if ($days_group[0]) : ?>
+        <?php if ($days_group) : ?>
           <div class="availability block">
             <h4>Days</h4>
             <table class="leader-table">
@@ -86,7 +86,7 @@ $name = get_the_title($post);
         <?php endif; ?>
 
 
-        <?php if ($pricing_group[0]) : ?>
+        <?php if ($pricing_group) : ?>
           <div class="pricing block">
             <h4>Pricing</h4>
             <table class="leader-table">
@@ -141,12 +141,12 @@ $name = get_the_title($post);
         </div>
 
 
-        <?php if ($lookbook_group[0]) : ?>
+        <?php if ($lookbook_group) : ?>
           <div class="lookbooks block">
             <h4>Lookbooks</h4>
             <ul class="lookbook-list semantic-only-list">
               <?php
-                foreach ($lookbook_group[0] as $lookbook) :
+                foreach ($lookbook_group as $lookbook) :
                   $lookbook_url = isset($lookbook['url']) ? $lookbook['url'] : '';
                   $lookbook_source = isset($lookbook['source']) ? $lookbook['source'] : '';
                   ?>
