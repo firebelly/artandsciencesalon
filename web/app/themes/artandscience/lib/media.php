@@ -109,7 +109,7 @@ function get_treated_url($post_or_id, $size, $type='default') {
   $treated_image = $base_dir . $treated_filename;
 
   // If treated file doesn't exist, create it
-  // if (!file_exists($treated_image)) {
+  if (!file_exists($treated_image)) {
     // If the duo directory doesn't exist, create it first
     if(!file_exists($base_dir)) {
       mkdir($base_dir);
@@ -138,7 +138,7 @@ function get_treated_url($post_or_id, $size, $type='default') {
     if($full_command) { exec($full_command); }
 
   // echo '<script>console.log(\'MESSAGE FROM PHP:'.$full_command.'\');</script>';
-  // }
+  }
 
   // Finally, get the URL
   $duo_url = $upload_dir['baseurl'] . $treated_dir . $treated_filename;
