@@ -263,9 +263,9 @@ add_filter( 'admin_post_thumbnail_html', __NAMESPACE__ . '\add_featured_image_in
 function add_featured_image_instruction( $content ) {
 
   // Possible image instructions
-   $desc = '<p>(Untreated. 800px width advised. Will be cropped 1:1 square [top-weighted])</p><p>Profile picture of this person to be used wherever they appear on the site and within their bio popups.</p>';
+   $desc = '<p>(Untreated. 800px width advised. Will be cropped 1:1 square [top-weighted].)</p><p>Profile picture of this person to be used wherever they appear on the site and within their bio popups.</p>';
 
-  if( get_current_screen()->id != 'si-gallery') return $content; // This function is only concerned with pages.
+  if( get_current_screen()->id != 'person') return $content; // This function is only concerned with pages.
 
   return $content . $desc;
 
