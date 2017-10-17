@@ -146,7 +146,7 @@ $name = get_the_title($post);
             <h4>Lookbooks</h4>
             <ul class="lookbook-list semantic-only-list">
               <?php
-                foreach ($lookbook_group as $lookbook) :
+                foreach ($lookbook_group[0] as $lookbook) :
                   $lookbook_url = isset($lookbook['url']) ? $lookbook['url'] : '';
                   $lookbook_source = isset($lookbook['source']) ? $lookbook['source'] : '';
                   ?>
