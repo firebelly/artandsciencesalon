@@ -118,7 +118,7 @@
       <ul class="people-grid semantic-only-list">
         <?php foreach ($people as $person):
           echo '<li class="people-grid-item">';
-            echo \Firebelly\PostTypes\People\get_person($person,true,true);
+            echo \Firebelly\PostTypes\People\get_person_markup($person,true,true);
           echo '</li>';
         endforeach; ?>
       </ul>
@@ -148,7 +148,7 @@
       <ul class="people-grid semantic-only-list">
         <?php foreach ($people as $person):
           echo '<li class="people-grid-item">';
-          echo \Firebelly\PostTypes\People\get_person($person,true,false);
+          echo \Firebelly\PostTypes\People\get_person_markup($person,true,false);
           echo '</li>';
         endforeach; ?>
       </ul>
@@ -191,7 +191,7 @@
       <ul class="people-grid semantic-only-list">
         <?php foreach ($stylist_educators as $person):
           echo '<li class="people-grid-item">';
-          echo \Firebelly\PostTypes\People\get_person($person);
+          echo \Firebelly\PostTypes\People\get_person_markup($person);
           echo '</li>';
         endforeach; ?>
       </ul>
@@ -226,7 +226,7 @@
       <ul class="people-grid semantic-only-list">
         <?php foreach ($colorist_educators as $person):
           echo '<li class="people-grid-item">';
-          echo \Firebelly\PostTypes\People\get_person($person);
+          echo \Firebelly\PostTypes\People\get_person_markup($person);
           echo '</li>';
         endforeach; ?>
       </ul>

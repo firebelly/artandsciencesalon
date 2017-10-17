@@ -377,8 +377,9 @@ function get_people_list($location, $slug_array) {
 
 /**
  * Get person for person grid
+ * person (the object )
  */
-function get_person($person,$formal=false,$popup=true) {
+function get_person_markup($person,$formal=false,$popup=true,$location=false) {
 
   $output = '';
 
@@ -388,7 +389,7 @@ function get_person($person,$formal=false,$popup=true) {
   $thumb_url = \Firebelly\Media\get_post_thumbnail_url($person->ID,'gallery-thumb',true);
   $thumb_preload_url = \Firebelly\Media\get_post_thumbnail_url($person->ID,'preload',true);
   $slug = $person->post_name;
-  $id = (isset($location_section) ? $location_section->post_name.'-' : '' ).$person->post_name;
+  $id = ($location ? $location->post_name.'-' : '' ).$person->post_name;
   $permalink = get_permalink($person);
   $no_popup = $popup ? '' : 'no-popup';
   $title = get_post_meta($person->ID,'_cmb2_title',true);

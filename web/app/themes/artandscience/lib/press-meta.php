@@ -97,7 +97,7 @@ function register_metaboxes() {
       'name' => 'Contact Number',
       'id'   => $prefix.'media_inquiries_number',
       'type' => 'text',
-      'desc' => 'Seperate with spaces, e.g.: "312 787 4247".',
+      'desc' => 'Format: "123.456.7890".',
   ) );
 
   /**

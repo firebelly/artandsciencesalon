@@ -43,7 +43,7 @@
         <ul class="people-grid semantic-only-list">
           <?php foreach ($people as $person):
             echo '<li class="people-grid-item">';
-            echo \Firebelly\PostTypes\People\get_person($person);
+            echo \Firebelly\PostTypes\People\get_person_markup($person,false,true,$location_section);
             echo '</li>';
           endforeach; ?>
         </ul>
