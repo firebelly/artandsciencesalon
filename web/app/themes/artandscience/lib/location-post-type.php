@@ -537,7 +537,7 @@ function add_featured_image_description( $content ) {
 
   if( get_current_screen()->id === 'location') {
 
-    return $content.'<p>(Untreated. 1600px width advised. Will be cropped to 8:3 aspect ratio desktop, 3:2 on mobile--so put important content in center)</p><p>Banner Image at top of this location on Locations page.</p>.';
+    return $content.'<p>(Untreated. 1600px width advised. Will be cropped to 8:3 aspect ratio desktop, 3:2 on mobile--so put important content in center)</p><p>Banner Image at top of this location on Locations page.</p>';
 
   } else {
     return $content;
