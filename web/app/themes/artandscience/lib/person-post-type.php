@@ -283,7 +283,7 @@ function get_people_section_nav($location) {
   $location_id = $location->ID;
   $people_types = get_terms([
     'taxonomy'=>'person_type',
-    'slug' => ['colorist', 'master-colorist', 'senior-colorist', 'director-colorist','stylist', 'master-stylist', 'senior-stylist', 'director-stylist']
+    'slug' => ['colorist', 'master-colorist', 'senior-colorist', 'director-colorist','stylist', 'master-stylist', 'senior-stylist', 'director-stylist','barber','aesthetician']
   ]);
 
    foreach ($people_types as $people_type):
