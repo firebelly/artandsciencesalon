@@ -109,7 +109,7 @@ function metaboxes( array $meta_boxes ) {
         'text' => array(
           'add_upload_files_text' => 'Add or Upload Images'
         ),
-        'desc'   => '(Untreated. 1600px width advised.  The image thumbnail will be cropped to 1:1 square aspect ratio desktop [top-weighted]--so put important content center top. When the user clicks on the thumbnail, they will view the image in its original aspect ratio.)',
+        'desc'   => '(Untreated. 1600px for landscape OR 900px height for portrait advised. The image thumbnail will be cropped to 1:1 square aspect ratio [top-weighted]--so put important content center top. When the user clicks on the thumbnail, they will view the image in its original aspect ratio.)',
       ),
     ),
   );
@@ -126,10 +126,10 @@ add_filter( 'admin_post_thumbnail_html', __NAMESPACE__ . '\add_featured_image_in
 function add_featured_image_instruction( $content ) {
 
   // Possible image instructions
-   $desc = '<p>(Untreated. 1600px width for landscape OR 900px height for advised. 1200px  The banner version will be cropped to 5:3 aspect ratio desktop [top-weighted], 1:1 square ratio on mobile--so put important content center top.  The thumbnail version will be cropped 1:1.)</p><p>Banner image at top of this lookbook\'s gallery and also the thumbnail for this gallery on the Lookbook page.</p>';
+   $desc = '<p>(Untreated. 1600px width advised.  The banner version will be cropped to 5:3 aspect ratio desktop [top-weighted], 1:1 square ratio on mobile--so put important content center top.  The thumbnail version will also be cropped 1:1.)</p><p>Banner image at top of this lookbook\'s gallery and also the thumbnail for this gallery on the Lookbook page.</p>';
 
   if( get_current_screen()->id != 'lookbook') return $content; // This function is only concerned with pages.
 
-  return $content .= $desc;
+  return $content . $desc;
 
 }

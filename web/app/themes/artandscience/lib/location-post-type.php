@@ -531,16 +531,17 @@ add_filter( 'cmb2_meta_boxes', __NAMESPACE__ . '\metaboxes' );
 /**
  * Add descriptions to featured images in locations
  */
-add_filter( 'admin_post_thumbnail_html', __NAMESPACE__ . '\add_featured_image_instruction');
-function add_featured_image_instruction( $content ) {
+add_filter( 'admin_post_thumbnail_html', __NAMESPACE__ . '\add_featured_image_description');
 
-  // Possible image instructions
-  $desc = '<p>(Untreated. 1600px width advised. Will be cropped to 8:3 aspect ratio desktop, 3:2 on mobile--so put important content in center)</p><p>Banner Image at top of this location on Locations page.</p>';
+function add_featured_image_description( $content ) {
 
-  if( get_current_screen()->id != 'location') return $content; // This function is only concerned with pages.
+  if( get_current_screen()->id === 'location') {
 
-  return $content .= $desc;
+    return $content.'<p>(Untreated. 1600px width advised. Will be cropped to 8:3 aspect ratio desktop, 3:2 on mobile--so put important content in center)</p><p>Banner Image at top of this location on Locations page.</p>.';
 
+  } else {
+    return $content;
+  }
 }
 
 

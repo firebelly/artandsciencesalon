@@ -130,6 +130,6 @@ function add_featured_image_instruction( $content ) {
 
   if( get_current_screen()->id != 'si-gallery') return $content; // This function is only concerned with pages.
 
-  return $content .= $desc;
+  return $content . $desc;
 
 }

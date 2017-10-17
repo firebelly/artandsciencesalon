@@ -50,12 +50,12 @@ function add_featured_image_instruction( $content ) {
   } elseif ( isset( $_POST['post_ID'] ) ) {
       $post_id = $_POST['post_ID'];
   }
-  if( !isset( $post_id ) ) return $content .= $desc_page; // New page
+  if( !isset( $post_id ) ) return $content . $desc_page; // New page
 
   if (get_post($post_id)->post_name === 'home') {
-    return $content .= $desc_home;
+    return $content . $desc_home;
   } else {
-    return $content .= $desc_page;
+    return $content . $desc_page;
   }
 }
 
