@@ -265,7 +265,7 @@ function get_media_inquiries() {
         <div class="name line">{$name}</div>
         <div class="title line">{$title}</div>
         <div class="email line"><a href="mailto:{$email}" target="_blank">{$email}</a></div>
-        <div class="number line">{$number}</div>
+        <div class="number line"><a href="tel:{$number}">{$number}</a></div>
       </section>
 HTML;
 

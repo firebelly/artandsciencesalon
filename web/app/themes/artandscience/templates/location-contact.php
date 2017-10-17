@@ -5,5 +5,5 @@
 
 <div class="location data-id="<?= $location_post->ID ?>" data-page-title="<?= $location_post->post_title ?>" data-page-url="<?= get_permalink($location_post) ?>">
   <h4 class="location-name"><?= $short_title ?></h4>
-  <p class="location-phone"><?= $phone_number ?></p>
+  <a class="location-phone" href="tel:<?= $phone_number ?>"><?= $phone_number ?></a>
 </div>

@@ -132,8 +132,8 @@ $name = get_the_title($post);
             ?>
 
             <li class="location-list-item">
-              <a href="'.$location_url.'" class="name"><?= $location_title ?></a>
-              <span class="phone"><?= $location_phone ?></span>
+              <a href="<?= $location_url ?>" class="name"><?= $location_title ?></a>
+              <a href="tel:<?= $location_phone ?>" class="phone"><?= $location_phone ?></a>
             </li>
 
           <?php endforeach ?>

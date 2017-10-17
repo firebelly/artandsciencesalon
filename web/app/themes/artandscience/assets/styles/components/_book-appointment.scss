@@ -4,6 +4,7 @@ $appointment-padding: 19px 24px;
 .book-appointment {
   padding: 0 0 2em;
   transition: opacity 0.3s 0.2s;
+  backface-visibility: hidden;
 
   button {
     @include font-caption-bold;
@@ -54,6 +55,10 @@ $appointment-padding: 19px 24px;
 
     h4 {
       @include font-caption-bold;
+    }
+
+    a {
+      text-decoration: none;
     }
 
     li {

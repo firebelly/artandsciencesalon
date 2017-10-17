@@ -31,7 +31,7 @@
     <h4 class="location-name"><?= $post->post_title ?></h4>
     <div class="location-meta">
       <p class="location-address"><?= $address ?></p>
-      <p class="location-phone"><?= $phone_number ?></p>
+      <p class="location-phone"><a href="tel:<?= $phone_number ?>"><?= $phone_number ?></a></p>
       <p class="location-email"><a href="mailto:<?= $email ?>" target="_blank" class="breakup-email"><?= $email ?></a></p>
     </div>
     <p class="location-description"><?= $body ?></p>
