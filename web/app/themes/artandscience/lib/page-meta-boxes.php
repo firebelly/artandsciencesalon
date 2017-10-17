@@ -16,13 +16,13 @@ function metaboxes( array $meta_boxes ) {
     'context'       => 'normal',
     'priority'      => 'high',
     'show_names'    => true,
-    'show_on'       => array( 'key' => 'exclude_slug', 'value' => ['home','experience-levels','our-approach','benefits-compensation','models','education','career-path','administrative-jobs']),
+    'show_on'       => array( 'key' => 'exclude_slug', 'value' => ['home','experience-levels','our-approach','benefits-compensation','models','education','career-path','administrative-jobs']), // wrote a custom exclude by slug
     'fields'        => array(
-
       array(
         'name' => 'Header Text',
         'id'   => $prefix . 'header_text',
         'type' => 'textarea_small',
+        'description'   => 'Banner text at top of page.<br><br>  IMPORTANT: Use normal capitalization--text will be transformed to all-caps when displayed.',
       ),
     ),
   );
@@ -33,6 +33,33 @@ function metaboxes( array $meta_boxes ) {
 add_filter( 'cmb2_meta_boxes', __NAMESPACE__ . '\metaboxes' );
 
 /**
+ * Add descriptions to featured images on pages
+ */
+add_filter( 'admin_post_thumbnail_html', __NAMESPACE__ . '\add_featured_image_instruction');
+function add_featured_image_instruction( $content ) {
+
+  // Possible image instructions
+  $desc_page = '<p>(Untreated. 1600px width advised. Will be cropped to 5:3 aspect ratio desktop, 1:1 square ratio on mobile--so put important content in center.)</p><p>Banner Image at top of page.</p>';
+  $desc_home = '<p>(PRE-TREATMENT REQUIRED. 1600px width advised. Will be cropped to 5:3 aspect ratio desktop, 1:1 square ratio on mobile--so put important content in center.)</p><p>Banner Image at top of page. Home page has two schemes.</p><p>This image will be used for the primary scheme.</p>';
+
+  if( get_current_screen()->id != 'page') return $content; // This function is only concerned with pages.
+
+  // Get the Post ID (if we need to figure out what type of post we are on).  Lack of id will indicate new page.
+  if ( isset( $_GET['post'] ) ) {
+      $post_id = $_GET['post'];
+  } elseif ( isset( $_POST['post_ID'] ) ) {
+      $post_id = $_POST['post_ID'];
+  }
+  if( !isset( $post_id ) ) return $content .= $desc_page; // New page
+
+  if (get_post($post_id)->post_name === 'home') {
+    return $content .= $desc_home;
+  } else {
+    return $content .= $desc_page;
+  }
+}
+
+/**
  * Hide editor and featured image on specific pages by slug.  Adapted from: https://gist.github.com/ramseyp/4060095
  */
 add_action( 'do_meta_boxes', __NAMESPACE__ . '\hide_editor' );
@@ -41,11 +68,11 @@ function hide_editor() {
   if( get_current_screen()->id != 'page') return;
 
   // Get the Post ID.
-if ( isset( $_GET['post'] ) ) {
-    $post_id = $_GET['post'];
-} elseif ( isset( $_POST['post_ID'] ) ) {
-    $post_id = $_POST['post_ID'];
-}
+  if ( isset( $_GET['post'] ) ) {
+      $post_id = $_GET['post'];
+  } elseif ( isset( $_POST['post_ID'] ) ) {
+      $post_id = $_POST['post_ID'];
+  }
   if( !isset( $post_id ) ) return;
 
   // Get the slug

@@ -28,7 +28,7 @@ function register_metaboxes() {
     'name'     => 'Details',
     'id'       => $prefix.'details',
     'type'     => 'wysiwyg',
-    'desc'     => 'Content for "Details" section',
+    'desc'     => 'Copy for Details section.',
     'options' => array(
       'media_buttons' => false,
     ),
@@ -39,46 +39,46 @@ function register_metaboxes() {
    */
   $salon_group = new_cmb2_box( array(
     'id'           => $prefix . 'contact_box',
-    'title'        => __( 'Contact Information', 'cmb2' ),
+    'title'        => __( 'Contact Information (Under Construction)', 'cmb2' ),
     'priority'      => 'default',
     'object_types'  => array( 'page', ), // Post type
     'show_on'       => array( 'key' => 'slug', 'value' => 'bridal'),
   ) );
 
-  $salon_group_id = $salon_group->add_field( array(
-    'id'          => $prefix . 'salon_group',
-    'type'        => 'group',
-    'options'     => array(
-        'group_title'   => __( 'Salon {#}', 'cmb2' ),
-        'add_button'    => __( 'Add Another Salon', 'cmb2' ),
-        'remove_button' => __( 'Remove Salon', 'cmb2' ),
-        'sortable'      => true, // beta
-    ),
-  ) );
+  // $salon_group_id = $salon_group->add_field( array(
+  //   'id'          => $prefix . 'salon_group',
+  //   'type'        => 'group',
+  //     'options'     => array(
+  //       'group_title'   => __( 'Salon {#}', 'cmb2' ),
+  //       'add_button'    => __( 'Add Another Salon', 'cmb2' ),
+  //       'remove_button' => __( 'Remove Salon', 'cmb2' ),
+  //       'sortable'      => true, // beta
+  //   ),
+  // ) );
 
-  $salon_group->add_group_field( $salon_group_id, array(
-      'name' => 'Salon Name',
-      'id'   => 'name',
-      'type' => 'text',
-  ) );
+  // $salon_group->add_group_field( $salon_group_id, array(
+  //     'name' => 'Salon Name',
+  //     'id'   => 'name',
+  //     'type' => 'text',
+  // ) );
 
-  $salon_group->add_group_field( $salon_group_id, array(
-      'name' => 'Coordinator',
-      'id'   => 'coordinator',
-      'type' => 'text',
-  ) );
+  // $salon_group->add_group_field( $salon_group_id, array(
+  //     'name' => 'Coordinator',
+  //     'id'   => 'coordinator',
+  //     'type' => 'text',
+  // ) );
 
-  $salon_group->add_group_field( $salon_group_id, array(
-      'name' => 'Coordinator Email',
-      'id'   => 'email',
-      'type' => 'text',
-  ) );
+  // $salon_group->add_group_field( $salon_group_id, array(
+  //     'name' => 'Coordinator Email',
+  //     'id'   => 'email',
+  //     'type' => 'text',
+  // ) );
 
-  $salon_group->add_group_field( $salon_group_id, array(
-      'name' => 'Bridal Stylists',
-      'id'   => 'bridal_stylists',
-      'type' => 'text',
-  ) );
+  // $salon_group->add_group_field( $salon_group_id, array(
+  //     'name' => 'Bridal Stylists',
+  //     'id'   => 'bridal_stylists',
+  //     'type' => 'text',
+  // ) );
 
 
   /**
@@ -95,6 +95,7 @@ function register_metaboxes() {
   $service_group_id = $service_group->add_field( array(
     'id'          => $prefix . 'service_group',
     'type'        => 'group',
+    'desc'        => 'List of services in Pricing section.',
     'options'     => array(
         'group_title'   => __( 'Service {#}', 'cmb2' ),
         'add_button'    => __( 'Add Another Service', 'cmb2' ),
@@ -113,12 +114,14 @@ function register_metaboxes() {
       'name' => 'Price',
       'id'   => 'price',
       'type' => 'text',
+      'desc' => 'Include dollar sign ($) if appropriate.',
   ) );
 
   $service_group->add_group_field( $service_group_id, array(
       'name' => 'Description (optional)',
       'id'   => 'description',
       'type' => 'textarea_small',
+      'desc' => 'The text hidden within the accordion (triangle icon).<br>If blank, this service will have no accordion.',
   ) );
 
   /**
@@ -138,7 +141,7 @@ function register_metaboxes() {
     'name'     => 'The Fine Print',
     'id'       => $prefix.'fineprint',
     'type'     => 'wysiwyg',
-    'desc'     => 'Content for "Fine Print" section',
+    'desc'     => 'Copy for Fine Print section.',
     'options' => array(
       'media_buttons' => false,
     ),

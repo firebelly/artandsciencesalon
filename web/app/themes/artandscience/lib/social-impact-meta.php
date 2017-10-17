@@ -28,9 +28,10 @@ function register_metaboxes() {
     'name'     => 'For more information',
     'id'       => $prefix.'contact',
     'type'     => 'wysiwyg',
-    'options' => array(
+    'options'  => array(
       'media_buttons' => false,
     ),
+    'desc'     => 'Contact information copy after dash in main section.',
   ) );
 
 }

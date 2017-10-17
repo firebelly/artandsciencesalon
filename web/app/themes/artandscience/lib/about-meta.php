@@ -31,6 +31,7 @@ function register_metaboxes() {
     'options' => array(
       'media_buttons' => false,
     ),
+    'desc'    => 'Copy for Philosophy section.',
   ) );
   $about_philosophy -> add_field( array(
     'name'    => "Philosophy Image",
@@ -48,6 +49,7 @@ function register_metaboxes() {
       'type'     => 'image',
     ),
     'preview_size' => 'gallery-thumb',
+    'desc'    => '(PRE-TREATMENT REQUIRED. 800px width advised. Will be cropped to 1:1 aspect ratio [top weighted].)<br><br>The image for the Philosophy section.',
   ) );
 
   /**
@@ -66,7 +68,7 @@ function register_metaboxes() {
   $about_owners -> add_field( array(
     'name'     => 'David Raccuglia...',
     'id'       => $prefix.'david_bio',
-    'description' => 'Continue the sentence starting with his name. E.g.: "is the original founder of"...',
+    'description' => 'Bio for David.<br><br>Continue the sentence starting with his name. E.g.: "is the original founder of..."',
     'type'    => 'wysiwyg',
     'options' => array(
       'media_buttons' => false,
@@ -77,6 +79,7 @@ function register_metaboxes() {
     'desc'    => 'Select/upload an image.  This image should be TREATED.',
     'id'      => $prefix.'david_image',
     'type'    => 'file',
+    'desc'    => '(PRE-TREATMENT REQUIRED. 800px width advised. Will be cropped to 1:1 aspect ratio [top weighted].)<br><br>David\'s picture.',
     'options' => array(
       'url'   => false, // Hide the text input for the url
     ),
@@ -92,7 +95,7 @@ function register_metaboxes() {
   $about_owners -> add_field( array(
     'name'        => 'Paul Wilson...',
     'id'          => $prefix.'paul_bio',
-    'description' => 'Continue the sentence starting with his name. E.g.: "is the original founder of"...',
+    'description' => 'Bio for Paul.<br><br>Continue the sentence starting with his name. E.g.: "is the original founder of..."',
     'type'        => 'wysiwyg',
     'options'     => array(
       'media_buttons' => false,
@@ -103,13 +106,13 @@ function register_metaboxes() {
     'desc'    => 'Select/upload an image.  This image should be TREATED.',
     'id'      => $prefix.'paul_image',
     'type'    => 'file',
+    'desc'    => '(PRE-TREATMENT REQUIRED. 800px width advised. Will be cropped to 1:1 aspect ratio [top weighted].)<br><br>Paul\'s picture.<br><br>This can and should be a different image than his popup bio picture--especially since it needs to be treated here whereas the image uploaded to the popup should NOT be treated.',
     'options' => array(
       'url'   => false, // Hide the text input for the url
     ),
     'text'    => array(
       'add_upload_file_text' => 'Add Image'
     ),
-    // query_args are passed to wp.media's library query.
     'query_args' => array(
       'type'     => 'image',
     ),
@@ -133,6 +136,7 @@ function register_metaboxes() {
     'name'     => 'Content',
     'id'       => $prefix.'managing_partners',
     'type'     => 'wysiwyg',
+    'description' => 'Copy for Managing Partners section.<br><br>The partners and staff themselves will be added automatically.',
     'options'  => array(
       'media_buttons' => false,
     ),
@@ -155,6 +159,7 @@ function register_metaboxes() {
     'name'     => 'Content',
     'id'       => $prefix.'educators',
     'type'     => 'wysiwyg',
+    'description' => 'Copy for Educators section.<br><br>The educators themselves will be added automatically.',
     'options'  => array(
       'media_buttons' => false,
     ),
@@ -177,6 +182,7 @@ function register_metaboxes() {
     'name'     => 'Content',
     'id'       => $prefix.'social_impact',
     'type'     => 'wysiwyg',
+    'description' => 'Copy for Social Impact section',
     'options'  => array(
       'media_buttons' => false,
     ),
@@ -199,6 +205,7 @@ function register_metaboxes() {
     'name'     => 'Barbershops Content',
     'id'       => $prefix.'barbershops',
     'type'     => 'wysiwyg',
+    'description' => 'Copy for Barbershops section.',
     'options'  => array(
       'media_buttons' => false,
     ),
@@ -211,6 +218,7 @@ function register_metaboxes() {
     'options' => array(
       'url'   => false, // Hide the text input for the url
     ),
+    'desc'    => '(PRE-TREATMENT REQUIRED. 800px width advised. Will be cropped to 3:4 aspect ratio [top weighted].)<br><br>The image for the Barbershops section.',
     'text'    => array(
       'add_upload_file_text' => 'Add Image'
     ),

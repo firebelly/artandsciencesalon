@@ -167,13 +167,13 @@ function metaboxes( array $meta_boxes ) {
       array(
         'name' => 'Abbreviated Title',
         'id'   => $prefix . 'short_title',
-        'desc' => 'Ex: "Logan Square" instead of "Logan Square Barbershop"',
+        'desc' => 'Ex: "Logan Square" instead of "Logan Square Barbershop".',
         'type' => 'text',
       ),
       array(
         'name' => 'Location Code',
         'id'   => $prefix . 'code',
-        'desc' => 'Ex: Logan Square = LSQ',
+        'desc' => 'Ex: Logan Square = "LSQ".',
         'type' => 'text',
       ),
       array(
@@ -249,14 +249,14 @@ function metaboxes( array $meta_boxes ) {
     'name'     => 'Details',
     'id'       => 'details',
     'type'     => 'text',
-    'desc'     => 'Ex: appointment lines open',
+    'desc'     => 'Ex: "appointment lines open". Parentheses will be added.',
   ) );
 
   $hours_group->add_field( array(
     'name'        => 'Abbreviated Hours',
     'id'          => $prefix . 'hours_abbr',
     'type'        => 'textarea_small',
-    'description' => __( 'An abbreviated version of the location hours for the footer (ideally 3 lines)', 'cmb2' ),
+    'description' => __( 'An abbreviated version of the location hours for the footer (ideally 3 lines).', 'cmb2' ),
   ) );
 
   /**
@@ -273,37 +273,42 @@ function metaboxes( array $meta_boxes ) {
     'id'          => $prefix . 'salon_cut_description',
     'type'        => 'wysiwyg',
     'name'        => 'Description',
-    'description' => __( 'Text underneath Salon Cut header', 'cmb2' ),
+    'description' => __( 'Copy for Salon Cut section.', 'cmb2' ),
   ) );
 
   $salon_cut_group->add_field( array(
       'name' => 'Stylist Price',
       'id'   => $prefix . 'salon_cut_stylist_price',
       'type' => 'text',
+      'desc' => 'Include "$"'
   ) );
 
   $salon_cut_group->add_field( array(
       'name' => 'Senior Price',
       'id'   => $prefix . 'salon_cut_senior_price',
       'type' => 'text',
+      'desc' => 'Include "$"'
   ) );
 
   $salon_cut_group->add_field( array(
       'name' => 'Master Price',
       'id'   => $prefix . 'salon_cut_master_price',
       'type' => 'text',
+      'desc' => 'Include "$"'
   ) );
 
   $salon_cut_group->add_field( array(
       'name' => 'Director Price',
       'id'   => $prefix . 'salon_cut_director_price',
       'type' => 'text',
+      'desc' => 'Include "$"'
   ) );
 
   $salon_cut_group->add_field( array(
       'name' => 'Blowdry Price',
       'id'   => $prefix . 'salon_cut_blowdry_price',
       'type' => 'text',
+      'desc' => 'Include "$"'
   ) );
 
   /**
@@ -319,7 +324,7 @@ function metaboxes( array $meta_boxes ) {
   $salon_color_group_id = $salon_color_group->add_field( array(
     'id'          => $prefix . 'salon_color_group',
     'type'        => 'group',
-    'description' => 'If all prices are left blank for a service, pricing table will display "Quoted by Consultation"',
+    'description' => 'List of services to be included under Salon Color for this location.  If no services are added, the Salon Color section will be ommitted for this location.<br><br>If all prices are left blank for a service, pricing table will display "Quoted by Consultation".',
     'options'     => array(
         'group_title'   => __( 'Service {#}', 'cmb2' ),
         'add_button'    => __( 'Add Another Service', 'cmb2' ),
@@ -338,30 +343,35 @@ function metaboxes( array $meta_boxes ) {
       'name' => 'Colorist Price',
       'id'   => 'colorist_price',
       'type' => 'text',
+      'desc' => 'Include "$"'
   ) );
 
   $salon_color_group->add_group_field( $salon_color_group_id, array(
       'name' => 'Senior Price',
       'id'   => 'senior_price',
       'type' => 'text',
+      'desc' => 'Include "$"'
   ) );
 
   $salon_color_group->add_group_field( $salon_color_group_id, array(
       'name' => 'Master Price',
       'id'   => 'master_price',
       'type' => 'text',
+      'desc' => 'Include "$"'
   ) );
 
   $salon_color_group->add_group_field( $salon_color_group_id, array(
       'name' => 'Director Price',
       'id'   => 'director_price',
       'type' => 'text',
+      'desc' => 'Include "$"'
   ) );
 
   $salon_color_group->add_group_field( $salon_color_group_id, array(
       'name' => 'Description (optional)',
       'id'   => 'description',
       'type' => 'textarea_small',
+      'desc' => 'The text hidden within the accordion (triangle icon).<br>If blank, this service will have no accordion.',
   ) );
 
   /**
@@ -378,12 +388,13 @@ function metaboxes( array $meta_boxes ) {
     'id'          => $prefix . 'barbershop_services_description',
     'type'        => 'wysiwyg',
     'name'        => 'Description',
-    'description' => __( 'Text underneath Barbershop Services header', 'cmb2' ),
+    'description' => __( 'Copy for Barbershop Services section.', 'cmb2' ),
   ) );
 
   $barbershop_services_group_id = $barbershop_services_group->add_field( array(
     'id'          => $prefix . 'barbershop_services_group',
     'type'        => 'group',
+    'description' => 'List of services to be included under Barbershop Services for this location.  If no services are added, the Barbershop Services section will be ommitted for this location.',
     'options'     => array(
         'group_title'   => __( 'Service {#}', 'cmb2' ),
         'add_button'    => __( 'Add Another Service', 'cmb2' ),
@@ -402,12 +413,14 @@ function metaboxes( array $meta_boxes ) {
       'name' => 'Price',
       'id'   => 'price',
       'type' => 'text',
+      'desc' => 'Include "$"'
   ) );
 
   $barbershop_services_group->add_group_field( $barbershop_services_group_id, array(
       'name' => 'Description (optional)',
       'id'   => 'description',
       'type' => 'textarea_small',
+      'desc' => 'The text hidden within the accordion (triangle icon).<br>If blank, this service will have no accordion.',
   ) );
 
   /**
@@ -423,6 +436,7 @@ function metaboxes( array $meta_boxes ) {
   $waxing_lounge_group_id = $waxing_lounge_group->add_field( array(
     'id'          => $prefix . 'waxing_lounge_group',
     'type'        => 'group',
+    'description' => 'List of services to be included under Waxing Lounge for this location.  If no services are added, the Waxing Lounge section will be ommitted for this location.',
     'options'     => array(
         'group_title'   => __( 'Service {#}', 'cmb2' ),
         'add_button'    => __( 'Add Another Service', 'cmb2' ),
@@ -441,12 +455,14 @@ function metaboxes( array $meta_boxes ) {
       'name' => 'Price',
       'id'   => 'price',
       'type' => 'text',
+      'desc' => 'Include "$"'
   ) );
 
   $waxing_lounge_group->add_group_field( $waxing_lounge_group_id, array(
       'name' => 'Description (optional)',
       'id'   => 'description',
       'type' => 'textarea_small',
+      'desc' => 'The text hidden within the accordion (triangle icon).<br>If blank, this service will have no accordion.',
   ) );
 
   /**
@@ -462,6 +478,7 @@ function metaboxes( array $meta_boxes ) {
   $tanning_group_id = $tanning_group->add_field( array(
     'id'          => $prefix . 'tanning_group',
     'type'        => 'group',
+    'description' => 'List of services to be included under Tanning for this location.  If no services are added, the Tanning section will be ommitted for this location.',
     'options'     => array(
         'group_title'   => __( 'Service {#}', 'cmb2' ),
         'add_button'    => __( 'Add Another Service', 'cmb2' ),
@@ -480,12 +497,14 @@ function metaboxes( array $meta_boxes ) {
       'name' => 'Price',
       'id'   => 'price',
       'type' => 'text',
+      'desc' => 'Include "$"'
   ) );
 
   $tanning_group->add_group_field( $tanning_group_id, array(
       'name' => 'Description (optional)',
       'id'   => 'description',
       'type' => 'textarea_small',
+      'desc' => 'The text hidden within the accordion (triangle icon).<br>If blank, this service will have no accordion.',
   ) );
 
   /**
@@ -502,13 +521,28 @@ function metaboxes( array $meta_boxes ) {
     'id'          => $prefix . 'bridal_suite_description',
     'type'        => 'wysiwyg',
     'name'        => 'Description',
-    'description' => __( 'Text underneath Bridal Suite header', 'cmb2' ),
+    'description' => __( 'Copy for Bridal Suite section.', 'cmb2' ),
   ) );
 
   return $meta_boxes;
 }
-
 add_filter( 'cmb2_meta_boxes', __NAMESPACE__ . '\metaboxes' );
+
+/**
+ * Add descriptions to featured images in locations
+ */
+add_filter( 'admin_post_thumbnail_html', __NAMESPACE__ . '\add_featured_image_instruction');
+function add_featured_image_instruction( $content ) {
+
+  // Possible image instructions
+  $desc = '<p>(Untreated. 1600px width advised. Will be cropped to 8:3 aspect ratio desktop, 3:2 on mobile--so put important content in center)</p><p>Banner Image at top of this location on Locations page.</p>';
+
+  if( get_current_screen()->id != 'location') return $content; // This function is only concerned with pages.
+
+  return $content .= $desc;
+
+}
+
 
 /**
  * Get Locations

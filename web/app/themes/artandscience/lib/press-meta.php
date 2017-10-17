@@ -25,6 +25,7 @@ function register_metaboxes() {
   $awards_group_id = $awards_group->add_field( array(
     'id'          => $prefix . 'awards_group',
     'type'        => 'group',
+    'description' => __( 'List of awards for Awards section.', 'cmb2' ),
     'options'     => array(
         'group_title'   => __( 'Award {#}', 'cmb2' ),
         'add_button'    => __( 'Add Another Award', 'cmb2' ),
@@ -37,12 +38,12 @@ function register_metaboxes() {
       'name' => 'Award Name',
       'id'   => 'name',
       'type'     => 'wysiwyg',
-      'description' => 'Use editor styling for italics or links',
+      'description' => 'Use editor for creating links or using italic styling.',
       'options' => array(
         'media_buttons' => false,
         'textarea_rows' => 1,
         'teeny' => true,
-        'wpautop' => false, // use wpautop?
+        'wpautop' => false,
       ),
   ) );
 
@@ -50,12 +51,12 @@ function register_metaboxes() {
       'name' => 'Source',
       'id'   => 'source',
       'type'     => 'wysiwyg',
-      'description' => 'Use editor styling for italics or links',
+      'description' => 'Use editor for creating links or using italic styling.',
       'options' => array(
         'media_buttons' => false,
         'textarea_rows' => 1,
         'teeny' => true,
-        'wpautop' => false, // use wpautop?
+        'wpautop' => false,
       ),
   ) );
 
@@ -70,19 +71,20 @@ function register_metaboxes() {
     'context'       => 'normal',
     'priority'      => 'default',
     'show_names'    => true,
-    'description' => 'Contact info for media inquiries',
     )
   );
   $press_media_inquiries -> add_field( array(
       'name' => 'Contact Name',
       'id'   => $prefix.'media_inquiries_name',
       'type' => 'text',
+      'description' => 'Contact person for media inquiries.',
   ) );
 
   $press_media_inquiries -> add_field( array(
       'name' => 'Contact Title',
       'id'   => $prefix.'media_inquiries_title',
       'type' => 'text',
+      'desc' => 'E.g., "Operations Director".',
   ) );
 
   $press_media_inquiries -> add_field( array(
@@ -95,7 +97,7 @@ function register_metaboxes() {
       'name' => 'Contact Number',
       'id'   => $prefix.'media_inquiries_number',
       'type' => 'text',
-      'description' => 'Seperate with spaces, e.g.: "312 787 4247"',
+      'desc' => 'Seperate with spaces, e.g.: "312 787 4247".',
   ) );
 
   /**
@@ -112,7 +114,7 @@ function register_metaboxes() {
   $notable_press_group_id = $notable_press_group->add_field( array(
     'id'          => $prefix . 'notable_press_group',
     'type'        => 'group',
-    'description' => __( '&lt;i&gt;Text surrounded like this will be italic&lt;/i&gt;', 'cmb2' ),
+    'description' => __( 'List of press mentions for Notable Press section.', 'cmb2' ),
     'options'     => array(
         'group_title'   => __( 'Press Entry {#}', 'cmb2' ),
         'add_button'    => __( 'Add Another Press Entry', 'cmb2' ),
@@ -125,12 +127,12 @@ function register_metaboxes() {
       'name' => 'Name',
       'id'   => 'name',
       'type'     => 'wysiwyg',
-      'description' => 'Use editor styling for italics or links',
+      'description' => 'Use editor for creating links or using italic styling.',
       'options' => array(
         'media_buttons' => false,
         'textarea_rows' => 1,
         'teeny' => true,
-        'wpautop' => false, // use wpautop?
+        'wpautop' => false,
       ),
   ) );
 
@@ -138,12 +140,12 @@ function register_metaboxes() {
       'name' => 'Source',
       'id'   => 'source',
       'type'     => 'wysiwyg',
-      'description' => 'Use editor styling for italics or links',
+      'description' => 'Use editor for creating links or using italic styling.',
       'options' => array(
         'media_buttons' => false,
         'textarea_rows' => 1,
         'teeny' => true,
-        'wpautop' => false, // use wpautop?
+        'wpautop' => false,
       ),
   ) );
 
@@ -163,7 +165,7 @@ function register_metaboxes() {
   $additional_sections_group_id = $additional_sections_group->add_field( array(
     'id'          => $prefix . 'additional_sections_group',
     'type'        => 'group',
-    'description' => __( 'Note that you must switch Text mode and refresh to reorder these additional sections', 'cmb2' ),
+    'description' => __( 'Additional half-width sections at end of page.', 'cmb2' ),
     'options'     => array(
         'group_title'   => __( 'Section {#}', 'cmb2' ),
         'add_button'    => __( 'Add Another Section', 'cmb2' ),
@@ -182,7 +184,7 @@ function register_metaboxes() {
     'name'     => 'Section Content',
     'id'       => 'content',
     'type'     => 'wysiwyg',
-    'desc'     => 'A list or paragraph',
+    'desc'     => 'A list, paragraph, or any other content.',
     'options' => array(
       'media_buttons' => false,
     ),

@@ -97,7 +97,6 @@ function metaboxes( array $meta_boxes ) {
     'object_types'  => array( 'si-gallery', ), // Post type
     'context'       => 'normal',
     'priority'      => 'high',
-    'description'   => 'Minimu 1200px width resolution. Thumbnails will be square cropped, but on click user will see full dimensions in popup.',
     'show_names'    => true, // Show field names on the left
     'fields'        => array(
       array(
@@ -110,6 +109,7 @@ function metaboxes( array $meta_boxes ) {
         'text' => array(
           'add_upload_files_text' => 'Add or Upload Images'
         ),
+        'desc'   => '(Untreated. 1600px for landscape OR 900px height for portrait advised.  The image thumbnail will be cropped to 1:1 square aspect ratio [top-weighted]--so put important content center top. When the user clicks on the thumbnail, they will view the image in its original aspect ratio.)',
       ),
     ),
   );
@@ -118,3 +118,18 @@ function metaboxes( array $meta_boxes ) {
   return $meta_boxes;
 }
 add_filter( 'cmb2_meta_boxes', __NAMESPACE__ . '\metaboxes' );
+
+/**
+ * Add descriptions to featured images in social impact galleries
+ */
+add_filter( 'admin_post_thumbnail_html', __NAMESPACE__ . '\add_featured_image_instruction');
+function add_featured_image_instruction( $content ) {
+
+  // Possible image instructions
+   $desc = '<p>(Untreated. 1600px width advised. The banner version will be cropped to 5:3 aspect ratio desktop [top-weighted], 1:1 square ratio on mobile--so put important content center top.  The thumbnail version will also be cropped 1:1.)</p><p>Banner image at top of this particular gallery page and also the thumbnail for this gallery on the Social Impact page.</p>';
+
+  if( get_current_screen()->id != 'si-gallery') return $content; // This function is only concerned with pages.
+
+  return $content .= $desc;
+
+}

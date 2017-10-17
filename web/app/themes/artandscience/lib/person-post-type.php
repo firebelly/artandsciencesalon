@@ -106,9 +106,10 @@ function metaboxes( array $meta_boxes ) {
         'type' => 'text',
       ),
       array(
-        'name' => 'Quote',
+        'name' => 'Quote (optional)',
         'id'   => $prefix . 'quote',
         'type' => 'textarea',
+        'desc' => 'Include quotation marks ("") if applicable.'
       ),
       array(
         'name' => 'Title/Position',
@@ -131,7 +132,7 @@ function metaboxes( array $meta_boxes ) {
   $group_field_id = $days_group->add_field( array(
     'id'          => $prefix . 'days_group',
     'type'        => 'group',
-    'description' => __( 'Note that you must switch Text mode and refresh to reorder the days', 'cmb2' ),
+    'description' => __( 'List of days and locations this person is available.', 'cmb2' ),
     'options'     => array(
         'group_title'   => __( 'Day {#}', 'cmb2' ),
         'add_button'    => __( 'Add Another Day', 'cmb2' ),
@@ -158,7 +159,7 @@ function metaboxes( array $meta_boxes ) {
 
   $days_group->add_group_field( $group_field_id, array(
       'name' => 'Pattern',
-      'desc' => 'Ex: every other week',
+      'desc' => 'Lowercase.  Parentheses will be added. Ex: every other week',
       'id'   => 'pattern',
       'type' => 'text',
   ) );
@@ -184,7 +185,7 @@ function metaboxes( array $meta_boxes ) {
   $pricing_group_id = $pricing_group->add_field( array(
     'id'          => $prefix . 'pricing_group',
     'type'        => 'group',
-    'description' => __( 'Note that you must switch Text mode and refresh to reorder the days', 'cmb2' ),
+    'description' => __( 'List of services and pricing for this person.', 'cmb2' ),
     'options'     => array(
         'group_title'   => __( 'Service {#}', 'cmb2' ),
         'add_button'    => __( 'Add Another Service', 'cmb2' ),
@@ -203,13 +204,13 @@ function metaboxes( array $meta_boxes ) {
     'name'     => 'Price',
     'id'       => 'price',
     'type'     => 'text',
-    'desc'     => 'Include the dollar sign ($) if needed',
+    'desc'     => 'Include the dollar sign ($) if needed.',
   ) );
 
   $pricing_group->add_group_field( $pricing_group_id, array(
     'name'     => 'Pricing details',
     'id'       => 'details',
-    'desc'     => 'Ex: free for returning customers',
+    'desc'     => 'Lowercase.  Parentheses will be added. Ex: "free for returning customers".',
     'type'     => 'text',
   ) );
 
@@ -226,7 +227,7 @@ function metaboxes( array $meta_boxes ) {
   $lookbook_group_id = $lookbook_group->add_field( array(
     'id'          => $prefix . 'lookbook_group',
     'type'        => 'group',
-    'description' => __( 'Social media links' ),
+    'description' => __( 'List of social media links for this person.' ),
     'options'     => array(
         'group_title'   => __( 'Link {#}', 'cmb2' ),
         'add_button'    => __( 'Add Another Link', 'cmb2' ),
@@ -255,6 +256,20 @@ function metaboxes( array $meta_boxes ) {
 }
 add_filter( 'cmb2_meta_boxes', __NAMESPACE__ . '\metaboxes' );
 
+/**
+ * Add descriptions to featured images in social impact galleries
+ */
+add_filter( 'admin_post_thumbnail_html', __NAMESPACE__ . '\add_featured_image_instruction');
+function add_featured_image_instruction( $content ) {
+
+  // Possible image instructions
+   $desc = '<p>(Untreated. 800px width advised. Will be cropped 1:1 square [top-weighted])</p><p>Profile picture of this person to be used wherever they appear on the site and within their bio popups.</p>';
+
+  if( get_current_screen()->id != 'si-gallery') return $content; // This function is only concerned with pages.
+
+  return $content .= $desc;
+
+}
 
 /**
  * Shorten a full name to a first name
