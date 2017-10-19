@@ -45,7 +45,6 @@
 }
 
 .user-content {
-  // @include clearfix();
 
   h1 {
     @include user-content-h1;
@@ -58,8 +57,6 @@
   h3 {
     @include user-content-h3;
   }
-
-
 
   p {
     margin: 0 0 1em;
@@ -87,16 +84,6 @@
     }
   }
 
-  // ol,
-  // ul {
-  //   li {
-  //     ol,
-  //     ul {
-
-  //     }
-  //   }
-  // }
-
   hr {
     height: 0;
     border: 0;
@@ -114,12 +101,31 @@
     font-weight: bold;
   }
 
+  img {
+    width: 100%;
+    max-width: 500px;
+    margin-left: -$padding;
+    margin-top: $padding/2;
+    border-bottom: 2px solid $orange;
+
+    @include media-md {
+      margin-left: -$padding-md;
+      margin-top: $padding-md/2;
+    }
+
+    @include media-lg {
+      margin-left: -$padding-lg;
+      margin-top: $padding-lg/2;
+    }
+  }
+
     // Image Layout Classes
   .image-layout {
+
     img {
-      width: 100%;
+      margin: 0;
+      max-width: none;
       vertical-align: top;
-      border-bottom: 2px solid $orange;
     }
 
     &.-two-image {
