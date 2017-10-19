@@ -265,7 +265,7 @@ function metaboxes( array $meta_boxes ) {
   $salon_cut_group = new_cmb2_box( array(
     'id'            => $prefix . 'salon_cut_box',
     'title'         => __( 'Salon Cut Services/Pricing', 'cmb2' ),
-    'priority'      => 'default',
+    'priority'      => 'low',
     'object_types'  => array( 'location', ), // Post type
   ) );
 
@@ -317,7 +317,7 @@ function metaboxes( array $meta_boxes ) {
   $salon_color_group = new_cmb2_box( array(
     'id'           => $prefix . 'salon_color_box',
     'title'        => __( 'Salon Color Services/Pricing', 'cmb2' ),
-    'priority'      => 'default',
+    'priority'      => 'low',
     'object_types'  => array( 'location', ), // Post type
   ) );
 
@@ -380,7 +380,7 @@ function metaboxes( array $meta_boxes ) {
   $barbershop_services_group = new_cmb2_box( array(
     'id'           => $prefix . 'barbershop_services_box',
     'title'        => __( 'Barbershop Services/Pricing', 'cmb2' ),
-    'priority'      => 'default',
+    'priority'      => 'low',
     'object_types'  => array( 'location', ), // Post type
   ) );
 
@@ -424,12 +424,61 @@ function metaboxes( array $meta_boxes ) {
   ) );
 
   /**
+   * Formal Styling Services/Pricing
+   */
+  $formal_styling_group = new_cmb2_box( array(
+    'id'           => $prefix . 'formal_styling_box',
+    'title'        => __( 'Formal Styling Services/Pricing', 'cmb2' ),
+    'priority'      => 'low',
+    'object_types'  => array( 'location', ), // Post type
+  ) );
+
+  $formal_styling_group->add_field( array(
+    'id'          => $prefix . 'formal_styling_description',
+    'type'        => 'wysiwyg',
+    'name'        => 'Description',
+    'description' => __( '(Optional) Copy for Formal Styling section.', 'cmb2' ),
+  ) );
+
+  $formal_styling_group_id = $formal_styling_group->add_field( array(
+    'id'          => $prefix . 'formal_styling_group',
+    'type'        => 'group',
+    'description' => 'List of services to be included under Formal Styling for this location.  If no services are added, the Formal Styling section will be ommitted for this location.',
+    'options'     => array(
+        'group_title'   => __( 'Service {#}', 'cmb2' ),
+        'add_button'    => __( 'Add Another Service', 'cmb2' ),
+        'remove_button' => __( 'Remove Service', 'cmb2' ),
+        'sortable'      => true, // beta
+    ),
+  ) );
+
+  $formal_styling_group->add_group_field( $formal_styling_group_id, array(
+      'name' => 'Name',
+      'id'   => 'name',
+      'type' => 'text',
+  ) );
+
+  $formal_styling_group->add_group_field( $formal_styling_group_id, array(
+      'name' => 'Price',
+      'id'   => 'price',
+      'type' => 'text',
+      'desc' => 'Include "$"'
+  ) );
+
+  $formal_styling_group->add_group_field( $formal_styling_group_id, array(
+      'name' => 'Description (optional)',
+      'id'   => 'description',
+      'type' => 'textarea_small',
+      'desc' => 'The text hidden within the accordion (triangle icon).<br>If blank, this service will have no accordion.',
+  ) );
+
+  /**
    * Waxing Lounge Pricing
    */
   $waxing_lounge_group = new_cmb2_box( array(
     'id'           => $prefix . 'waxing_lounge_box',
     'title'        => __( 'Waxing Lounge Services/Pricing', 'cmb2' ),
-    'priority'      => 'default',
+    'priority'      => 'low',
     'object_types'  => array( 'location', ), // Post type
   ) );
 
@@ -471,7 +520,7 @@ function metaboxes( array $meta_boxes ) {
   $tanning_group = new_cmb2_box( array(
     'id'           => $prefix . 'tanning_box',
     'title'        => __( 'Tanning Services/Pricing', 'cmb2' ),
-    'priority'      => 'default',
+    'priority'      => 'low',
     'object_types'  => array( 'location', ), // Post type
   ) );
 
@@ -513,7 +562,7 @@ function metaboxes( array $meta_boxes ) {
   $bridal_suite_group = new_cmb2_box( array(
     'id'           => $prefix . 'bridal_suite_box',
     'title'        => __( 'Bridal Suite Services/Pricing', 'cmb2' ),
-    'priority'      => 'default',
+    'priority'      => 'low',
     'object_types'  => array( 'location', ), // Post type
   ) );
 
@@ -597,6 +646,9 @@ function get_service_section_nav($location) {
   $output .= get_post_meta($location_id,'_cmb2_barbershop_services_group',true) ?
   '<li class="subpage-section-list-item"><a href="#'.$slug.'-barbershop-services" class="smoothscroll">Barbershop Services</a></li>' : '';
 
+  $output .= get_post_meta($location_id,'_cmb2_formal_styling_group',true) ?
+  '<li class="subpage-section-list-item"><a href="#'.$slug.'-formal-styling" class="smoothscroll">Formal Styling</a></li>' : '';
+
   $output .= get_post_meta($location_id,'_cmb2_waxing_lounge_group',true) ?
   '<li class="subpage-section-list-item"><a href="#'.$slug.'-waxing-lounge" class="smoothscroll">Waxing Lounge</a></li>' : '';
 
@@ -635,6 +687,9 @@ function get_service_table($location) {
 
   $output .= get_post_meta($location_id,'_cmb2_barbershop_services_group',true) ?
   '<tr><td><a href="/services/#'.$slug.'-barbershop-services">Barbershop Services</td></tr>' : '';
+
+  $output .= get_post_meta($location_id,'_cmb2_formal_styling_group',true) ?
+  '<tr><td><a href="/services/#'.$slug.'-formal-styling">Formal Styling</td></tr>' : '';
 
   $output .= get_post_meta($location_id,'_cmb2_waxing_lounge_group',true) ?
   '<tr><td><a href="/services/#'.$slug.'-waxing-lounge">Waxing Lounge</td></tr>' : '';
@@ -760,6 +815,36 @@ function get_services_barbershop() {
   $slug = $post->post_name;
   $output .= '<section class="section linked-subpage-section" id="'.$slug.'-barbershop-services">';
   $output .= '<h2 class="experience-popup-location">Barbershop Services</h2>';
+
+  $output .= $barbershop_text;
+
+  ob_start();
+  include(locate_template('templates/pricing-table.php'));
+  $output .= ob_get_clean();
+
+  $output .= '</section>';
+  return $output;
+}
+
+/**
+ * Get Formal Styling Pricing Table
+ */
+function get_services_formal_styling() {
+
+  global $post;
+  $location_id = $post->ID;
+
+  $services = get_post_meta($location_id,'_cmb2_formal_styling_group',true);
+
+  if(!$services) { return false; }
+
+  $barbershop_text = apply_filters('the_content', get_post_meta($location_id,'_cmb2_formal_styling_description',true) );
+
+  $output = '';
+
+  $slug = $post->post_name;
+  $output .= '<section class="section linked-subpage-section" id="'.$slug.'-formal-styling">';
+  $output .= '<h2>Formal Styling</h2>';
 
   $output .= $barbershop_text;
 
