@@ -27,18 +27,20 @@ $name = get_the_title($post);
       <div class="header-content">
         <h4 class="stylist-name"><?= $name ?></h4>
         <p class="stylist-title"><?= $title ?></p>
-        <ul class="location-list semantic-only-list">
-          <?php
-            foreach ($location_terms as $location_term) {
-              $location = Location\get_location_from_term($location_term);
-              $location_title = $location->post_title;
-              $location_short_title = get_post_meta($location->ID,'_cmb2_short_title',true);
-              $location_url = Location\get_link_url($location);
-              $location_code = Location\get_code($location->ID);
-              echo '<li class="location-list-item"><a href="'.$location_url.'"><span class="long">'.$location_title.'</span><span class="short">'.$location_short_title.'</span> ('.$location_code.')</a></li>';
-            }
-          ?>
-        </p>
+        <?php if($location_terms) : ?>
+          <ul class="location-list semantic-only-list">
+            <?php
+              foreach ($location_terms as $location_term) {
+                $location = Location\get_location_from_term($location_term);
+                $location_title = $location->post_title;
+                $location_short_title = get_post_meta($location->ID,'_cmb2_short_title',true);
+                $location_url = Location\get_link_url($location);
+                $location_code = Location\get_code($location->ID);
+                echo '<li class="location-list-item"><a href="'.$location_url.'"><span class="long">'.$location_title.'</span><span class="short">'.$location_short_title.'</span> ('.$location_code.')</a></li>';
+              }
+            ?>
+          </ul>
+        <?php endif ?>
       </div>
     </div>
     <div class="content-wrap">
@@ -120,25 +122,27 @@ $name = get_the_title($post);
           </div>
         <?php endif; ?>
 
-        <div class="appointments block">
-          <h4>Book an appointment</h4>
-          <ul class='location-list semantic-only-list'>
-          <?php
-          foreach ($location_terms as $location_term) :
-            $location_post = Location\get_location_from_term($location_term);
-            $location_title = $location_post->post_title;
-            $location_url = Location\get_link_url($location_post);
-            $location_phone = get_post_meta($location_post->ID, '_cmb2_phone_number', true);
-            ?>
+        <?php if ($lookbook_group) : ?>
+          <div class="appointments block">
+            <h4>Book an appointment</h4>
+            <ul class='location-list semantic-only-list'>
+            <?php
+            foreach ($location_terms as $location_term) :
+              $location_post = Location\get_location_from_term($location_term);
+              $location_title = $location_post->post_title;
+              $location_url = Location\get_link_url($location_post);
+              $location_phone = get_post_meta($location_post->ID, '_cmb2_phone_number', true);
+              ?>
 
-            <li class="location-list-item">
-              <a href="<?= $location_url ?>" class="name"><?= $location_title ?></a>
-              <a href="tel:<?= $location_phone ?>" class="phone"><?= $location_phone ?></a>
-            </li>
+              <li class="location-list-item">
+                <a href="<?= $location_url ?>" class="name"><?= $location_title ?></a>
+                <a href="tel:<?= $location_phone ?>" class="phone"><?= $location_phone ?></a>
+              </li>
 
-          <?php endforeach ?>
-          </ul>
-        </div>
+            <?php endforeach ?>
+            </ul>
+          </div>
+        <?php endif ?>
 
 
         <?php if ($lookbook_group) : ?>
