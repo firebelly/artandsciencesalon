@@ -276,12 +276,13 @@ function add_featured_image_instruction( $content ) {
  */
 function get_short_name($person) {
 
-  $short_name = get_post_meta($person, '_cmb2_short_name', true);
+  $short_name = get_post_meta($person->ID, '_cmb2_short_name', true);
   if ($short_name) {
     return $short_name;
   }
   // If a short name is not provided, take first word of full name
   return explode(' ',trim($person->post_title))[0];
+
 }
 
 /**
