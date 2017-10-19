@@ -32,7 +32,15 @@ if(is_front_page()) {
       get_template_part('templates/header');
     ?>
     <div class="site-wrap" role="document">
-      <?php include(locate_template('templates/page-header.php')) ?>
+      <?php 
+      if (is_front_page()) { 
+        include(locate_template('templates/page-header-frontpage.php'));
+      } elseif (is_404()) {
+        include(locate_template('templates/page-header-404.php'));
+      } else {
+        include(locate_template('templates/page-header.php'));
+      }
+      ?>
       <main class="site-main" role="main">
         <?php include Wrapper\template_path(); ?>
       </main><!-- /.main -->
