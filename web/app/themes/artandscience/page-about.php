@@ -191,7 +191,7 @@
     );
     $educators = get_posts($people_args);
 
-    if (!empty($people)) :
+    if (!empty($educators)) :
     ?>
       <h3 class="user-content-h2"><?= $people_type->name ?></h3>
       <div class="person-type section">
