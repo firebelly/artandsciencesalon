@@ -25,9 +25,8 @@
   <div class="header-image-wrap">
     <div class="header-image lazy" data-src="<?= $header_image_url ?>" data-preload-src="<?= $header_image_preload_url ?>"></div>
   </div>
-  <?php if (!is_front_page()) :?>
     <div class="header-text user-content -indent-right-big">
+      <h2 class="user-content-h2">#404</h2>
       <?= $header_text ?>
     </div>
-  <?php endif; ?>
 </div>

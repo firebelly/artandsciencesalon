@@ -35,6 +35,8 @@ Clipping the overflow hides the bleed.
   z-index: -1;
   overflow: hidden;
   position: absolute;
+  backface-visibility: hidden;
+  
   &::before{
     content: '';
     top: 0;
