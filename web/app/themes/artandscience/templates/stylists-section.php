@@ -1,11 +1,11 @@
 <?php
 
+  // Get all person_type terms that are children of 'stylyist-type'
+  $stylist_type=get_term_by('slug', 'stylist-type', 'person_type');
   $people_types = get_terms([
     'taxonomy'=>'person_type',
-    'slug' => ['colorist', 'master-colorist', 'senior-colorist', 'director-colorist','stylist', 'master-stylist', 'senior-stylist', 'director-stylist','barber','aesthetician']
+    'parent' => $stylist_type->term_id,
   ]);
-
-
 
 ?>
 

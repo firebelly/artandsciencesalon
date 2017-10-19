@@ -164,75 +164,49 @@
     <?=  $educators ?>
   </div>
 
-  <?php
-  $stylist_educators = get_posts([
-    'numberposts' => -1,
-    'post_type' => 'person',
-    'orderby' => 'menu_order',
-    'tax_query' => [
-      'relation' => 'AND',
-      [
-        'taxonomy' => 'person_type',
-        'field' => 'slug',
-        'terms' => 'educator'
-      ],
-      [
-        'taxonomy' => 'person_type',
-        'field' => 'slug',
-        'terms' => ['stylist', 'master-stylist', 'senior-stylist', 'director-stylist']
-      ]
-    ]
-  ]);
 
-  if (!empty($stylist_educators)) :
-  ?>
-    <h3 class="user-content-h2">Stylists</h3>
-    <div class="person-type section">
-      <ul class="people-grid semantic-only-list">
-        <?php foreach ($stylist_educators as $person):
-          echo '<li class="people-grid-item">';
-          echo \Firebelly\PostTypes\People\get_person_markup($person);
-          echo '</li>';
-        endforeach; ?>
-      </ul>
-    </div>
-
-  <?php endif ?>
 
   <?php
-  $colorist_educators = get_posts([
-    'numberposts' => -1,
-    'post_type' => 'person',
-    'orderby' => 'menu_order',
-    'tax_query' => [
-      'relation' => 'AND',
-      [
-        'taxonomy' => 'person_type',
-        'field' => 'slug',
-        'terms' => 'educator'
-      ],
-      [
-        'taxonomy' => 'person_type',
-        'field' => 'slug',
-        'terms' => ['colorist', 'master-colorist', 'senior-colorist', 'director-colorist']
-      ]
-    ]
+
+  // Get all person_type terms that are children of 'stylyist-type'
+  $educator_type_term = get_term_by('slug', 'educator-type', 'person_type');
+  $people_types = get_terms([
+    'taxonomy'=>'person_type',
+    'parent' => $educator_type_term->term_id,
   ]);
 
-  if (!empty($colorist_educators)) :
-  ?>
-    <h3 class="user-content-h2">Colorists</h3>
-    <div class="person-type section">
-      <ul class="people-grid semantic-only-list">
-        <?php foreach ($colorist_educators as $person):
-          echo '<li class="people-grid-item">';
-          echo \Firebelly\PostTypes\People\get_person_markup($person);
-          echo '</li>';
-        endforeach; ?>
-      </ul>
-    </div>
+  foreach ($people_types as $people_type) :
 
-  <?php endif ?>
+    $people_args = array(
+      'numberposts' => -1,
+      'post_type' => 'person',
+      'orderby' => 'menu_order',
+      'tax_query' => array(
+        array(
+          'taxonomy' => 'person_type',
+          'field' => 'slug',
+          'terms' => $people_type
+        )
+      )
+    );
+    $educators = get_posts($people_args);
+
+    if (!empty($people)) :
+    ?>
+      <h3 class="user-content-h2"><?= $people_type->name ?></h3>
+      <div class="person-type section">
+        <ul class="people-grid semantic-only-list">
+          <?php foreach ($educators as $person):
+            echo '<li class="people-grid-item">';
+            echo \Firebelly\PostTypes\People\get_person_markup($person);
+            echo '</li>';
+          endforeach; ?>
+        </ul>
+      </div>
+
+  <?php endif; 
+  endforeach;
+  ?>
 
 
 </div>
