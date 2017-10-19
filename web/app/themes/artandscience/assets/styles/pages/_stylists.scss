@@ -262,6 +262,8 @@
     }
   }
 
+
+
   .header-content {
     margin-bottom: 0;
     padding: $padding 0;
@@ -284,10 +286,6 @@
     .stylist-title {
       @include font-h3;
       margin-bottom: 14px;
-    }
-
-    .stylist-quote {
-      display: none;
     }
 
     .location-list {
@@ -324,6 +322,10 @@
         @include font-caption-bold;
       }
     }
+  }
+
+  .stylist-quote {
+    display: none;
   }
 
   .bio {

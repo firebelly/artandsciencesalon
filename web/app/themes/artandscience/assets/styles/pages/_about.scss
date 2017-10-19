@@ -117,7 +117,10 @@
       }
     }
     .image {
+      margin-top: $padding;
+
       @include media-md {
+        margin-top: 0;
         width: 40%;
         float: left;
       }
