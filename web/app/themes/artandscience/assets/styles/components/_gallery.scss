@@ -115,6 +115,8 @@ body.single-lookbook, body.single-si-gallery {
     position: absolute;
     background-size: cover;
     background-position: top;
+    // will-change: transform;
+    // backface-visibility: hidden;
     transition: transform 5s;
 
     &::after{
