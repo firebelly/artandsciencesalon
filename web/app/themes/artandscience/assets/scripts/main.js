@@ -89,12 +89,12 @@ var FBSage = (function($) {
   function _pullInstagramPost() {
     if($('#instafeed').length) {
 
-      var clientId =  '87f02470c76449f187c33be623387c45', //'355f9b2e465040f3a9836df35c8a15b1',  
-      accessToken = '429658804.87f0247.f3373e9bfed947b3a66e22daaf826c15'; //'1602873229.355f9b2.02d386b0e8eb442fb2753c079ede0b50';
+      var clientId =  '87f02470c76449f187c33be623387c45', 
+      accessToken = '429658804.87f0247.f3373e9bfed947b3a66e22daaf826c15'; 
 
       var feed = new Instafeed({
           get: 'user',
-          userId: '429658804', //'1602873229',
+          userId: '429658804',
           clientId: clientId,
           accessToken: accessToken,
           limit: 1,
@@ -133,14 +133,14 @@ var FBSage = (function($) {
 
           // If target is a person, open the popup
           if($target.hasClass('person')){
-            _scrollBody($('body'),0,0,0);
+            // _scrollBody($('body'),0,0,0);
             setTimeout(function() {
               _openPersonPopup($target);
             },500);
 
           // Otherwise scroll to the target
           } else {
-            _scrollBody($('body'),0,0,0);
+            // _scrollBody($('body'),0,0,0);
             _scrollBody($target);
           }
         }
