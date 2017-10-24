@@ -128,7 +128,7 @@
         <div class="box">
           <div class="thumbnail lazy" data-src="<?= $services_image_url ?>" data-preload-src="<?= $services_image_preload_url ?>"></div>
           <h2 class="text-wrap">
-            <a  href="/careers" class="text-bottom font-h2">Services</a>
+            <a  href="/services" class="text-bottom font-h2">Services</a>
           </h2>
         </div>
       </div>
