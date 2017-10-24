@@ -471,47 +471,50 @@ var FBSage = (function($) {
       $bAModule.addClass('-button');
     }
 
-    // On scroll
-    $(window).scroll(function(e){
+    var $window = $(window);
+    var $this = $(this);
 
-      // Get scroll pos
-      var scrollTop = $(this).scrollTop();
+    // // On scroll
+    // $window.scroll(function(e){
 
-      // OK.  So we don't want the hiding and showing to respond RAPIDLY to scroll events
-      // We want to establish the user has scrolled enough to indicate intentional scrolling rather than a mouse jitter
-      // So we're going to keep score.
+    //   // Get scroll pos
+    //   var scrollTop = $this.scrollTop();
 
-      // If we scroll down add one point.  If we scroll up, subract 2.
-      scrollScore += (scrollTop > lastScrollTop) ? 1 : -2;
+    //   // OK.  So we don't want the hiding and showing to respond RAPIDLY to scroll events
+    //   // We want to establish the user has scrolled enough to indicate intentional scrolling rather than a mouse jitter
+    //   // So we're going to keep score.
 
-      // Limit score to range [-threshold, threshold]
-      scrollScore = Math.max(scrollScore, -threshold);
-      scrollScore = Math.min(scrollScore, threshold);
+    //   // If we scroll down add one point.  If we scroll up, subract 2.
+    //   scrollScore += (scrollTop > lastScrollTop) ? 1 : -2;
 
-      // The score is held at zero while the button is active
-      if ( $bAModule.is('.-active') ) {
-        scrollScore = 0;
-      }
+    //   // Limit score to range [-threshold, threshold]
+    //   scrollScore = Math.max(scrollScore, -threshold);
+    //   scrollScore = Math.min(scrollScore, threshold);
 
-      // If we hit -threshold it means we've been scrolling UP for a while
-      if ( scrollScore === -threshold ) {
-        $bAModule.removeClass('-hide');
-        $bAModule.addClass('-button');
-      }
+    //   // The score is held at zero while the button is active
+    //   if ( $bAModule.is('.-active') ) {
+    //     scrollScore = 0;
+    //   }
 
-      // If we hit +threshold it means we've been scrolling DOWN for a while
-      if ( scrollScore === threshold ) {
-        $bAModule.addClass('-hide');
-      }
+    //   // If we hit -threshold it means we've been scrolling UP for a while
+    //   if ( scrollScore === -threshold ) {
+    //     $bAModule.removeClass('-hide');
+    //     $bAModule.addClass('-button');
+    //   }
 
-      // Are we at the top of the page?
-      if (scrollTop < 30) {
-        $bAModule.removeClass('-button');
-      }
+    //   // If we hit +threshold it means we've been scrolling DOWN for a while
+    //   if ( scrollScore === threshold ) {
+    //     $bAModule.addClass('-hide');
+    //   }
 
-      // Save current scroll position to reference next event
-      lastScrollTop = scrollTop;
-    });
+    //   // Are we at the top of the page?
+    //   if (scrollTop < 30) {
+    //     $bAModule.removeClass('-button');
+    //   }
+
+    //   // Save current scroll position to reference next event
+    //   lastScrollTop = scrollTop;
+    // });
 
   }
 
