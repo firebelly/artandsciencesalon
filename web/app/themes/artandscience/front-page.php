@@ -21,6 +21,10 @@
   // Social Impact
   $social_impact = get_post_meta($post->ID,'_cmb2_social_impact',true);
 
+  // Instagram
+  $instagram_backup_image_url = Firebelly\Media\get_thumbnail_url(get_post_meta($post->ID,'_cmb2_instagram_backup_image_id',true),'gallery-thumb', false);  
+  $instagram_tag = get_post_meta($post->ID,'_cmb2_instagram_tag',true);
+
   // Get a random featured stylist
   $people = get_posts([
     'numberposts' => 1,
@@ -146,7 +150,7 @@
     <article id="behind-the-scenes" class="box-container right four aspect-ratio-box bigclicky">
       <div class="aspect-ratio">
         <div class="box">
-          <div id="instafeed"></div>
+          <div id="instafeed" data-tag="<?= $instagram_tag ?>" data-backup-url="<?= $instagram_backup_image_url ?>"></div>
           <h2 class="text-wrap">
               <a class="font-h3 diamond text-bottom" href="https://www.instagram.com/artandsciencesalon/" target="_blank"><div class="diamond-text">Behind<br>The Scenes</div></a>
             </div>

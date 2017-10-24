@@ -2,6 +2,7 @@
 
 .site-header {
   padding: 0;
+  backface-visibility: hidden;
 
   @include media-md {
     float: left;
@@ -12,20 +13,23 @@
 .site-banner {
   height: 60px;
   position: relative;
-  margin-left: $padding;
   @include ruler-edge;
+  margin-left: $padding;
+
   @include media-md {
     height: auto;
     margin-left: 0;
+
     &::after {
       display: none;
     }
   }
+  
   @include media-lg {
     &::before {
-      z-index: -1;
       top: 60px;
       left: 50%;
+      z-index: -1;
       content: '';
       width: 218px;
       height: 303px;
@@ -96,6 +100,7 @@
 .page-header {
   position: relative;
   padding-bottom: $padding*4;
+  backface-visibility: hidden;
 
   @include media-sm {
     padding-bottom: $padding*2;
@@ -142,13 +147,14 @@
   }
 
   .header-text {
-    bottom: 0;
     left: 0;
     right: 0;
+    bottom: 0;
     @include font-h1;
     background: $gold;
     color: $cream-dark;
     position: absolute;
+    backface-visibility: hidden;
     padding: ($padding - 6px) $padding ($padding - 8px); // (intended - correction)
 
     @include media-md {

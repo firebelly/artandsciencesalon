@@ -1,7 +1,6 @@
 // Subpage Nav
 
 .subpage-nav {
-
   @include media-md {
     margin-left: -20px;
     width: calc(100% + 20px);
@@ -92,6 +91,7 @@
     }
 
     .subpage-section-nav {
+      backface-visibility: hidden;
 
       a {
         padding: 6px 0;
@@ -191,6 +191,7 @@
 .subpage {
   display: none;
   transition: opacity 1s ease-out;
+  // backface-visibility: hidden;
 
   &.-active {
     display: block;

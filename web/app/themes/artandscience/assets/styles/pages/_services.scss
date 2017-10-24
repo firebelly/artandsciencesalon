@@ -4,6 +4,43 @@ $breakpoint-salon-cut-table-big: 900px;
 
 .page.services {
 
+  // Mobile
+  @include max-screen($breakpoint-medium - 1px){ 
+
+    .experience-popup {
+      top: 0;
+      left: 0;
+      right: 0;
+      padding-top: $padding*1.5;
+    }
+    
+    .to-top {
+      margin-top: $padding;
+    }
+
+    .main-content {
+      padding: 0;
+      margin-right: 0;
+
+      @include media-sm {
+        margin-right: $padding;
+      }
+    }
+
+    .section {
+      margin-top: 0;
+      padding: $padding*1.5 $padding 0;
+
+      &:nth-of-type(2n) {
+        background: $cream-dark;
+
+        .leader-text {
+          background: $cream-dark;
+        }
+      }
+    }
+  }
+
   .page-header {
     background: $cream-dark;
   }
@@ -12,6 +49,7 @@ $breakpoint-salon-cut-table-big: 900px;
     position: relative;
     padding-top: 20px;
   }
+
   .salon-cut-list {
     margin: 0;
     width: 260px;

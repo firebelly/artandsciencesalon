@@ -35,7 +35,7 @@ Clipping the overflow hides the bleed.
   z-index: -1;
   overflow: hidden;
   position: absolute;
-  backface-visibility: hidden;
+  // backface-visibility: hidden;
   
   &::before{
     content: '';
@@ -166,7 +166,6 @@ img {
 }
 
 // Graceful image loading;
-
 .lazy {
   overflow: hidden;
   .load-mask {
@@ -188,7 +187,66 @@ img {
   }
 }
 
-
 .thumbnail {
   background-color: $gray;
+}
+
+.to-top {
+  border: none;
+  outline: none;
+  color: $cream;
+  text-align: right;
+  background: $gray-lite;
+  margin-right: -$padding;
+  @include font-caption-thin;
+  transition: background 0.15s;
+  padding: 4px $padding/2 4px 0;
+  width: calc(100% + #{$padding});
+
+  .icon {
+    width: 10px;
+    fill: $cream;
+    height: 10px;
+    display: inline;
+    margin-left: 1ch;
+    transform: rotate(270deg);
+  }
+
+  &:hover {
+    background-color: $gold;
+  }
+
+  @include media-md {
+    top: 0;
+    right: 0;
+    margin: 0;
+    width: auto;
+    line-height: 0;
+    position: left;
+    position: absolute;
+    background: transparent;
+    padding: 24px 0 24px 24px;
+    .text {
+      display: none;
+    }
+    .icon {
+      width: 12px;
+      height: 12px;
+      fill: $gray-lite;
+      transition: fill 0.15s;
+    }
+    &:hover {
+      background: transparent;
+      .icon {
+        fill: $gold;
+      }
+    }
+  }
+  @include media-lg {
+    padding: 36px 0 36px 36px;
+  }
+}
+
+button {
+  user-select: none;
 }

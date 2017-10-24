@@ -51,6 +51,7 @@ var FBSage = (function($) {
     _initBigclicky();
     _breakupLongEmails();
     _pullInstagramPost();
+    _initToTopMobile();
 
     // Certain elements (e.g. popups) are hidden during load, remove the class hiding them...
     $('.hide-during-page-load').removeClass('hide-during-page-load');
@@ -86,20 +87,47 @@ var FBSage = (function($) {
 
   } // end init()
 
+  // Grab most recent Instagram post with tag "behindthechair"
   function _pullInstagramPost() {
     if($('#instafeed').length) {
 
+      // Creds;
       var clientId =  '87f02470c76449f187c33be623387c45', 
       accessToken = '429658804.87f0247.f3373e9bfed947b3a66e22daaf826c15'; 
 
+      // CMS
+      var instagramTag = $('#instafeed').data('tag');
+      var instagramBackupUrl = $('#instafeed').data('backup-url');
+
+      // Use this to indicate we found our image
+      var foundImage = false;
+
+      // Run instafeed
       var feed = new Instafeed({
-          get: 'user',
-          userId: '429658804',
-          clientId: clientId,
-          accessToken: accessToken,
-          limit: 1,
-          resolution: 'standard_resolution',
-          template: '<div class="thumbnail lazy" style="background-image: url(\'{{image}}\');"></div>',
+        get: 'user',
+        userId: '429658804',
+        clientId: clientId,
+        accessToken: accessToken,
+        resolution: 'standard_resolution',
+        template: '<div class="thumbnail lazy" style="background-image: url(\'{{image}}\');"></div>',
+        // You can only specify one field for 'get' so we use a filter function to detect if the tag is there
+        filter: function(image) {
+          if (image.tags.indexOf(instagramTag) >= 0 && !foundImage) { // If we haven't found a match and the tag is present
+            foundImage = true; // We found our match.  Don't accept any more.
+            return true;
+          }
+          return false;
+        },
+        // Use backup image if none found
+        after: function() {
+          if(!foundImage) {
+            $('<div class="thumbnail lazy" style="background-image: url(\''+instagramBackupUrl+'\');"></div>').prependTo('#instafeed');
+          }
+        },
+        // Or in case of error
+        error: function() {
+          $('<div class="thumbnail lazy" style="background-image: url(\''+instagramBackupUrl+'\');"></div>').prependTo('#instafeed');
+        },
       });
       feed.run();
     }
@@ -461,61 +489,42 @@ var FBSage = (function($) {
       }
     });
 
-    // Scroll variables
-    var lastScrollTop = 0; // Used to house last scroll point to calculate scroll direction
-    var scrollScore = 0; // Used to keep track of whether we've been scrolling in one direction for multiple scroll events
-    var threshold = 10; // If scrollScore hits threshold or -threshold we trigger DOWN and UP scroll behaviors
-
     // Are we starting past the top of the page.  If so, we want the button look
-    if ($(window).scrollTop() >= 30) {
+    if ($(window).scrollTop() > 10) {
       $bAModule.addClass('-button');
     }
 
-    var $window = $(window);
     var $this = $(this);
+    var count = 0;
+    var lastScrollTop = 0;
+    var direction = false;
 
-    // // On scroll
-    // $window.scroll(function(e){
+    // On scroll
+    $(window).scroll(function(e){
 
-    //   // Get scroll pos
-    //   var scrollTop = $this.scrollTop();
+      // Only check every 30 events
+      count += 1;
+      if (count % 30 === 0) {
 
-    //   // OK.  So we don't want the hiding and showing to respond RAPIDLY to scroll events
-    //   // We want to establish the user has scrolled enough to indicate intentional scrolling rather than a mouse jitter
-    //   // So we're going to keep score.
+        // Get scroll pos
+        var scrollTop = $this.scrollTop();
 
-    //   // If we scroll down add one point.  If we scroll up, subract 2.
-    //   scrollScore += (scrollTop > lastScrollTop) ? 1 : -2;
+        // If we just started going up...
+        if ( scrollTop < lastScrollTop && direction !== 'up' ) {
+          $bAModule.removeClass('-hide');
+          $bAModule.addClass('-button');
+          direction = 'up';
+        }
 
-    //   // Limit score to range [-threshold, threshold]
-    //   scrollScore = Math.max(scrollScore, -threshold);
-    //   scrollScore = Math.min(scrollScore, threshold);
+        // If we just started going down...
+        if ( scrollTop >= lastScrollTop && direction !== 'down' ) {
+          $bAModule.addClass('-hide');
+          direction = 'down';
+        }
 
-    //   // The score is held at zero while the button is active
-    //   if ( $bAModule.is('.-active') ) {
-    //     scrollScore = 0;
-    //   }
-
-    //   // If we hit -threshold it means we've been scrolling UP for a while
-    //   if ( scrollScore === -threshold ) {
-    //     $bAModule.removeClass('-hide');
-    //     $bAModule.addClass('-button');
-    //   }
-
-    //   // If we hit +threshold it means we've been scrolling DOWN for a while
-    //   if ( scrollScore === threshold ) {
-    //     $bAModule.addClass('-hide');
-    //   }
-
-    //   // Are we at the top of the page?
-    //   if (scrollTop < 30) {
-    //     $bAModule.removeClass('-button');
-    //   }
-
-    //   // Save current scroll position to reference next event
-    //   lastScrollTop = scrollTop;
-    // });
-
+        lastScrollTop = scrollTop;
+      }
+    });
   }
 
   function _initExperienceLevelsPopup() {
@@ -571,6 +580,19 @@ var FBSage = (function($) {
       });
 
     }
+  }
+
+  function _initToTopMobile() {
+
+    // Inject popup open/close buttons where appropriate
+    $('.to-top-location').each(function() {
+      $('<button class="to-top"><span class="text">Back To Top </span><svg class="icon icon-triangle"><use xlink:href="#icon-triangle"/></svg></button>').appendTo(this);
+    });
+
+    // Clicking open button...
+    $(document).on('click','.to-top', function() {
+      _scrollBody($('.site-main'));
+    });
   }
 
   function _initSubpageNav() {

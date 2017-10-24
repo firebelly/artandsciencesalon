@@ -36,7 +36,7 @@
     if (!empty($people)) :
     ?>
 
-      <section class="person-type section" id="<?= $location_section->post_name.'-'.$people_type->slug ?>">
+      <section class="person-type section to-top-location" id="<?= $location_section->post_name.'-'.$people_type->slug ?>">
 
         <h2 class="experience-popup-location"><?= $people_type->name ?>s</h2>
 

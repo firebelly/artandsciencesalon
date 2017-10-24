@@ -723,7 +723,7 @@ function get_services_salon_cut() {
 
   $slug = $post->post_name;
 
-  $output .= '<section class="section" id="'.$slug.'-salon-cut">';
+  $output .= '<section class="section to-top-location" id="'.$slug.'-salon-cut">';
 
   $output .= '<h2 class="experience-popup-location">Salon Cut</h2>';
   $output .= '<div class="salon-cut-wrap">';
@@ -784,7 +784,7 @@ function get_services_salon_color() {
   $output = '';
 
   $slug = $post->post_name;
-  $output .= '<section class="section linked-subpage-section" id="'.$slug.'-salon-color"">
+  $output .= '<section class="section linked-subpage-section to-top-location" id="'.$slug.'-salon-color"">
   ';
   $output .= '<h2 class="experience-popup-location">Salon Color</h2>';
 
@@ -813,7 +813,7 @@ function get_services_barbershop() {
   $output = '';
 
   $slug = $post->post_name;
-  $output .= '<section class="section linked-subpage-section" id="'.$slug.'-barbershop-services">';
+  $output .= '<section class="section linked-subpage-section to-top-location" id="'.$slug.'-barbershop-services">';
   $output .= '<h2 class="experience-popup-location">Barbershop Services</h2>';
 
   $output .= $barbershop_text;
@@ -843,7 +843,7 @@ function get_services_formal_styling() {
   $output = '';
 
   $slug = $post->post_name;
-  $output .= '<section class="section linked-subpage-section" id="'.$slug.'-formal-styling">';
+  $output .= '<section class="section linked-subpage-section to-top-location" id="'.$slug.'-formal-styling">';
   $output .= '<h2>Formal Styling</h2>';
 
   $output .= $barbershop_text;
@@ -871,7 +871,7 @@ function get_services_waxing() {
   $output = '';
 
   $slug = $post->post_name;
-  $output .= '<section class="section linked-subpage-section" id="'.$slug.'-waxing-lounge">';
+  $output .= '<section class="section linked-subpage-section to-top-location" id="'.$slug.'-waxing-lounge">';
   $output .= '<h2>Waxing Lounge</h2>';
 
   ob_start();
@@ -897,7 +897,7 @@ function get_services_tanning() {
   $output = '';
 
   $slug = $post->post_name;
-  $output .= '<section class="section linked-subpage-section" id="'.$slug.'-tanning">';
+  $output .= '<section class="section linked-subpage-section to-top-location" id="'.$slug.'-tanning">';
 
   $output .= '<h2>Tanning</h2>';
 
@@ -924,7 +924,7 @@ function get_services_bridal() {
   $output = '';
 
   $slug = $post->post_name;
-  $output .= '<section class="section linked-subpage-section" id="'.$slug.'-bridal">';
+  $output .= '<section class="section linked-subpage-section to-top-location" id="'.$slug.'-bridal">';
 
   $output .= '<h2>Bridal</h2>';
 

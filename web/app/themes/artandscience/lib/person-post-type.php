@@ -326,7 +326,7 @@ function get_people_section_nav($location) {
       ]);
 
       if (!empty($people)):
-        $output .= '<li class="subpage-section-list-item"><a href="#'.$slug.'-'.$people_type->slug.'" class="smoothscroll">'.$people_type->name.'</a></li>';
+        $output .= '<li class="subpage-section-list-item"><a href="#'.$slug.'-'.$people_type->slug.'" class="smoothscroll">'.$people_type->name.'s</a></li>';
       endif;
     endforeach;
 

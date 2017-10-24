@@ -84,7 +84,6 @@ function register_metaboxes() {
   );
   $home_careers -> add_field( array(
     'name'    => "Image",
-    'desc'    => 'This image MUST be PRE-TREATED.',
     'id'      => $prefix.'careers_image',
     'type'    => 'file',
     'options' => array(
@@ -135,7 +134,6 @@ function register_metaboxes() {
   );
   $home_services -> add_field( array(
     'name'    => "Image",
-    'desc'    => 'This image MUST be PRE-TREATED.',
     'id'      => $prefix.'services_image',
     'desc'    => '(PRE-TREATMENT REQUIRED. 800px width advised. Will be cropped to 3:4 aspect ratio [top-weighted].)<br><br>The image for the Services box.',
     'type'    => 'file',
@@ -170,6 +168,44 @@ function register_metaboxes() {
     'id'       => $prefix.'social_impact',
     'type'     => 'text',
     'desc'    => 'Text for the Social Impact box.',
+  ) );
+
+
+  /**
+   * Instagram
+   */
+  $home_instagram = new_cmb2_box( array(
+    'id'            => 'home_instagram_metabox',
+    'title'         => __( 'Instagram', 'sage' ),
+    'object_types'  => array( 'page', ), // Post type
+    'show_on'       => array( 'key' => 'slug', 'value' => 'home'),
+    'context'       => 'normal',
+    'priority'      => 'default',
+    'show_names'    => true,
+    )
+  );
+  $home_instagram -> add_field( array(
+    'name'     => 'Tag',
+    'id'       => $prefix.'instagram_tag',
+    'type'     => 'text',
+    'desc'    => 'The homepage will pull the most recent intagram post with THIS tag. Do not include hashtag (#).  The Instagram API can only search for the tag within 20 most recent posts.',
+  ) );
+  $home_instagram -> add_field( array(
+    'name'    => "Backup Image",
+    'id'      => $prefix.'instagram_backup_image',
+    'desc'    => '(Untreated). 800px width advised. Will be cropped to 1:1 aspect ratio [top-weighted].)<br><br>If instagram API fails to deliver a recent instagram post, this image will be displayed.',
+    'type'    => 'file',
+    'options' => array(
+      'url'   => false, // Hide the text input for the url
+    ),
+    'text'    => array(
+      'add_upload_file_text' => 'Add Image'
+    ),
+    // query_args are passed to wp.media's library query.
+    'query_args' => array(
+      'type'     => 'image',
+    ),
+    'preview_size' => 'gallery-thumb',
   ) );
 
 }
