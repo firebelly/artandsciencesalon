@@ -22,10 +22,12 @@
 
 .people-grid {
   margin-top: $padding;
+  display: flex;
+  flex-wrap: wrap;
 
   .people-grid-item {
     width: 100%;
-    margin-bottom: $padding*1.25;
+    padding-bottom: $padding*1;
 
     &::before {
       display: none;
@@ -36,8 +38,9 @@
     margin-right: -$padding-md;
 
     .people-grid-item {
-      float: left;
-      width: 33.33%;
+      float: left; // no-flex
+      width: 33.33%;  // no-flex
+      flex-basis: 33.33%;
       margin-bottom: 10px;
       padding-right: $padding-md;
     }
@@ -61,6 +64,7 @@
       background-size: cover;
       background-color: $gray;
       background-position: center top;
+      border-bottom: 2px solid transparent;
 
       &::after{
         top: 0;
