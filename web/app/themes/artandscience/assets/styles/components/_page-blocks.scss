@@ -182,8 +182,11 @@ $colors: (
   }
   .-text-#{$color-name} {
     color: $color-hex;
-    a {
-      border-bottom-color: $color-hex;
+
+    &, &.user-content, .user-content { // Aw yeah, gettin overly specific up in this B (seriously though should fix this later)
+      a:not(.non-user-content-link):not(:hover) {
+        border-bottom-color: $color-hex;
+      }
     }
   }
 }
