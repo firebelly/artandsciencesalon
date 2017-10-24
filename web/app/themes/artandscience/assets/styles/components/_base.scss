@@ -179,13 +179,11 @@ img {
     position: absolute;
     transform: scale(1.1);
     background-size: cover;
-    transition: opacity 0.15s, filter 0.2s 0s, visibility 0.2s 0s;
+    transition: opacity 0.15s;
   }
   &.-loaded {
     .load-mask {
       opacity: 0;
-      visibility: hidden;
-      filter: none;
     }
   }
 }
