@@ -33,6 +33,21 @@
       font-style: italic;
     }
 
+    .people-list {
+        display: inline;
+      .people-list-item {
+        display: inline;
+        &::after {
+          content: ', '
+        }
+        &:last-of-type {
+          &::after {
+            display: none;
+          }
+        }
+      }
+    }
+
     // At md, activate leader table styling
     @include media-md {
       @include leader-table;

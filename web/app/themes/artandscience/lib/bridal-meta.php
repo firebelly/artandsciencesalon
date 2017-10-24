@@ -39,47 +39,49 @@ function register_metaboxes() {
    */
   $salon_group = new_cmb2_box( array(
     'id'           => $prefix . 'contact_box',
-    'title'        => __( 'Contact Information (Under Construction)', 'cmb2' ),
+    'title'        => __( 'Contact Information', 'cmb2' ),
     'priority'      => 'default',
     'object_types'  => array( 'page', ), // Post type
     'show_on'       => array( 'key' => 'slug', 'value' => 'bridal'),
   ) );
 
-  // $salon_group_id = $salon_group->add_field( array(
-  //   'id'          => $prefix . 'salon_group',
-  //   'type'        => 'group',
-  //     'options'     => array(
-  //       'group_title'   => __( 'Salon {#}', 'cmb2' ),
-  //       'add_button'    => __( 'Add Another Salon', 'cmb2' ),
-  //       'remove_button' => __( 'Remove Salon', 'cmb2' ),
-  //       'sortable'      => true, // beta
-  //   ),
-  // ) );
+  $salon_group_id = $salon_group->add_field( array(
+    'id'          => $prefix . 'salon_group',
+    'type'        => 'group',
+      'options'     => array(
+        'group_title'   => __( 'Salon {#}', 'cmb2' ),
+        'add_button'    => __( 'Add Another Salon', 'cmb2' ),
+        'remove_button' => __( 'Remove Salon', 'cmb2' ),
+        'sortable'      => true, // beta
+    ),
+  ) );
 
-  // $salon_group->add_group_field( $salon_group_id, array(
-  //     'name' => 'Salon Name',
-  //     'id'   => 'name',
-  //     'type' => 'text',
-  // ) );
+  $salon_group->add_group_field( $salon_group_id, array(
+    'name'     => 'Location',
+    'id'       => 'location',
+    'type'     => 'select',
+    'show_option_none' => false,
+    'options'  => \Firebelly\CMB2\get_post_options(['post_type' => 'location', 'numberposts' => -1]),
+  ) );
 
-  // $salon_group->add_group_field( $salon_group_id, array(
-  //     'name' => 'Coordinator',
-  //     'id'   => 'coordinator',
-  //     'type' => 'text',
-  // ) );
+  $salon_group->add_group_field( $salon_group_id, array(
+      'name' => 'Name (if different)',
+      'id'   => 'name',
+      'type' => 'text',
+      'desc' => 'Provide if name should be different than the default name of this location. E.g. "West Loop Salon Bridal Suite" instead of "West Loop Salon".',
+  ) );
 
-  // $salon_group->add_group_field( $salon_group_id, array(
-  //     'name' => 'Coordinator Email',
-  //     'id'   => 'email',
-  //     'type' => 'text',
-  // ) );
+  $salon_group->add_group_field( $salon_group_id, array(
+      'name' => 'Coordinator',
+      'id'   => 'coordinator',
+      'type' => 'text',
+  ) );
 
-  // $salon_group->add_group_field( $salon_group_id, array(
-  //     'name' => 'Bridal Stylists',
-  //     'id'   => 'bridal_stylists',
-  //     'type' => 'text',
-  // ) );
-
+  $salon_group->add_group_field( $salon_group_id, array(
+      'name' => 'Coordinator Email',
+      'id'   => 'email',
+      'type' => 'text',
+  ) );
 
   /**
    * Pricing
@@ -152,21 +154,61 @@ add_action( 'cmb2_admin_init', __NAMESPACE__ . '\register_metaboxes', 10 );
 
 function get_salons() {
   $salons = get_post_meta(get_the_ID(),'_cmb2_salon_group',true);
+  
   $output = '';
 
   $output.= '<ul class="salons-list semantic-only-list">';
   foreach ($salons as $salon) {
 
     // Safely grab repeating group array values
+    $location = get_post($salon['location'] );
     $name = isset($salon['name']) ? $salon['name'] : '';
+    if(!$name) {
+      $name = $location->post_title;
+    }
     $coordinator = isset($salon['coordinator']) ? $salon['coordinator'] : '';
     $email = isset($salon['email']) ? $salon['email'] : '';
-    $bridal_stylists = isset($salon['bridal_stylists']) ? $salon['bridal_stylists'] : '';
 
     // Append Email link if applicable
     if ( $email ) {
       $coordinator = '<a href="mailto:'.$email.'">'.$coordinator.'</a>';
     }
+
+    // Get Bridal Stylists
+    $people_args = array(
+      'numberposts' => -1,
+      'post_type' => 'person',
+      'orderby' => 'menu_order',
+      'tax_query' => array(
+        'relation' => 'AND',
+        array(
+          'taxonomy' => 'locations',
+          'field' => 'slug',
+          'terms' => [$location->post_name]
+        ),
+        array(
+          'taxonomy' => 'person_type',
+          'field' => 'slug',
+          'terms' => 'bridal-stylist'
+        )
+      )
+    );
+
+    $bridal_stylists = '';
+    $people = get_posts($people_args);
+     if (!empty($people)) {
+
+      $bridal_stylists .= '<ul class="people-list semantic-only-list">';
+
+      foreach ($people as $person) :
+        $person_name = \Firebelly\PostTypes\People\get_short_name($person);
+        $bridal_stylists .= '<li class="people-list-item"><a href="/stylists/#'.$location->post_name.'-'.$person->post_name.'">'.$person_name.'</a></li>';
+       endforeach;
+
+      $bridal_stylists .= '</ul>';
+     }
+
+
 
     // Output markup
     $output .= <<<HTML
