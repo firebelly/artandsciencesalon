@@ -24,7 +24,7 @@
 
 <div id="<?= $post->post_name ?>" class="location" data-page-title="<?= $post->post_title ?>" data-page-url="<?= get_permalink($post) ?>">
   <div class="banner lazy" data-src="<?= $location_image_url ?>" data-preload-src="<?= $location_image_preload_url ?>">
-    <?= (!empty($virtual_tour_url))?'<a href="'.$virtual_tour_url.'">Take a virtual tour</a>':''; ?>
+    <?= (!empty($virtual_tour_url))?'<a href="'.$virtual_tour_url.'" target="_blank">Take a virtual tour</a>':''; ?>
   </div>
 
   <header class="page-block -bg-cream-dark location-header">
