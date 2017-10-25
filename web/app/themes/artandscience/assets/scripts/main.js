@@ -90,7 +90,7 @@ var FBSage = (function($) {
 
   function _initStickyNav() {
 
-    $nav = $('.site-header')
+    $nav = $('.site-header');
     $nav.addClass('-fixed');
 
     console.log($nav[0].getBoundingClientRect().height);
