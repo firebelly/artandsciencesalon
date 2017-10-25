@@ -51,8 +51,8 @@ var FBSage = (function($) {
     _initBigclicky();
     _breakupLongEmails();
     _pullInstagramPost();
-    _initToTopMobile();
-    _initScrollies();
+    _initToTop();
+    _initStickyNav();
 
     // Certain elements (e.g. popups) are hidden during load, remove the class hiding them...
     $('.hide-during-page-load').removeClass('hide-during-page-load');
@@ -87,6 +87,31 @@ var FBSage = (function($) {
     });
 
   } // end init()
+
+  function _initStickyNav() {
+
+    $nav = $('.site-header')
+    $nav.addClass('-fixed');
+
+    console.log($nav[0].getBoundingClientRect().height);
+
+    $('.site-top').waypoint({
+      handler: function(direction) {
+        if(direction==='up') {
+          $nav.addClass('-fixed');
+        }
+        if(direction==='down'){
+          $nav.removeClass('-fixed');
+        }
+      }, 
+      offset: function() {
+        var navHeight = $nav[0].getBoundingClientRect().height,
+          topHalfHeight = this.adapter.outerHeight();
+        return  navHeight - topHalfHeight;
+      }
+    });
+
+  }
 
   // Grab most recent Instagram post with tag "behindthechair"
   function _pullInstagramPost() {
@@ -179,7 +204,7 @@ var FBSage = (function($) {
 
   function _initLazyLoading() {
     $('.lazy').Lazy({
-        threshold: 2000,
+        threshold: 3000,
         afterLoad: function($element) {
           $element.addClass('-loaded');
 
@@ -270,9 +295,6 @@ var FBSage = (function($) {
           $popup.find('.content-wrap').velocity('slideDown',{duration: 300});
         }
       });
-
-    // After short delay, scroll to just above it
-    // _scrollBody($person, 500, 300, -50);
   }
 
   function _closePersonPopup() {
@@ -296,7 +318,7 @@ var FBSage = (function($) {
   }
 
   function _switchPersonPopup(nextOrPrev) {
-        // Find the open popup
+    // Find the open popup
     $popup = $('.person-popup.-open');
 
     // If it exists...
@@ -337,8 +359,6 @@ var FBSage = (function($) {
   }
 
   function _initImageViewerPopup() {
-
-    // for reference later re: lazy loading -- https://github.com/kenwheeler/slick/issues/248
 
     // Hide the popup
     $('.image-viewer-popup').velocity('fadeOut', {duration: 0});
@@ -489,7 +509,6 @@ var FBSage = (function($) {
       if ($bAModule.is('.-active')) {
         $bAModule.removeClass('-active');
         $locationList.velocity("slideUp", { duration: 200 });
-
       } else {
         $bAModule.addClass('-active');
         $locationList.velocity("slideDown", { duration: 200 });
@@ -500,23 +519,7 @@ var FBSage = (function($) {
     if ($(window).scrollTop() > 10) {
       $bAModule.filter('.-duplicate').addClass('-button');
     }
-  }
-
-  function _initScrollies() {
-
-    // Dowm Queries
-    var $bAModule = $('.book-appointment.-duplicate'),
-    $locationList = $bAModule.find('.location-list'),
-    $header = $('.site-header'),
-    $footer = $('.site-footer'),
-    $adminBar = $('#wpadminbar');
-
-    // Sizing Calculations
-    var headerHeight = $header.outerHeight(),
-    footerTop = $footer.offset().top,
-    adminBarHeight = $adminBar.length ? $adminBar.height() : 0,
-    stickyNavChangepoint = footerTop - ( headerHeight - adminBarHeight );
-
+ 
     // Scroll handling vars
     var lastKnownScrollPosition, scrollPosition;
     var ticking = false;
@@ -534,64 +537,50 @@ var FBSage = (function($) {
     });
 
     // Keep track of states of scrolly things
-    var BAHidden = false;
-    var navFixed = false;
+    var BAShowing = true;
 
-    // Do the throttled work
+    // The function that houses the checks (called from inside throttling function)
     function scrollyChecks() {
-      scrollPosition = window.scrollY;
 
-      // Scroll behaviors only happen on med
+      // Scroll behaviors only happen on md and above
       if(breakpoint_md) {
 
-        // Should BA change states to shown?
-        if ( scrollPosition < lastKnownScrollPosition && BAHidden ) {
-          $bAModule.removeClass('-hide');
-          $bAModule.addClass('-button');
-          BAHidden = false;
-          console.log('hide BA');
-        }
+        // Get scroll position
+        scrollPosition = window.scrollY;
 
-        // Should BA change states to hidden?
-        if ( scrollPosition >= lastKnownScrollPosition && !BAHidden ) {
-          $bAModule.addClass('-hide');
-          BAHidden = true;
+        // SCROLLING DOWN
+        if ( scrollPosition > lastKnownScrollPosition ) {
 
-          // Slide up on hide if appropriate
-          if ($bAModule.is('.-active')) {
-            $bAModule.removeClass('-active');
-            $locationList.velocity("slideUp", { duration: 200 });
+          // Hide BA
+          if(BAShowing) {
+            $bAModule.addClass('-hide');
+            BAShowing = false;
+
+            // Slide up on hide if appropriate
+            if ($bAModule.is('.-active')) {
+              $bAModule.removeClass('-active');
+              $locationList.velocity("slideUp", { duration: 200 });
+            }
           }
-          console.log('show BA');
         }
 
-        // Fix the nav?
-        if ( scrollPosition >= stickyNavChangepoint && navFixed ) {
-          $header.removeClass('-fixed');
-          navFixed = false;
-          console.log('unfix nav');
+        // SCROLLING UP
+        if ( scrollPosition < lastKnownScrollPosition ) {
+
+          // Show BA
+          if(!BAShowing) {
+            $bAModule.removeClass('-hide');
+            $bAModule.addClass('-button');
+            BAShowing = true;
+          }
         }
 
-        // Unfix the nav?
-        if ( scrollPosition < stickyNavChangepoint && !navFixed ) {
-          $header.addClass('-fixed');
-          navFixed = true;
-          console.log('fix nav');
-        }
+        lastKnownScrollPosition = scrollPosition;
       }
-
-      lastKnownScrollPosition = scrollPosition;
     }
-    scrollyChecks(); 
 
-    // Calculations must be redone on resize
-    window.addEventListener('resize', function(e) {
-      headerHeight = $header.outerHeight();
-      footerTop = $footer.offset().top;
-      adminBarHeight = $adminBar.length ? $adminBar.height() : 0;
-      stickyNavChangepoint = footerTop - ( headerHeight - adminBarHeight );
-      scrollyChecks(); 
-    });  
+    // Do the checks once at the outset
+    scrollyChecks(); 
   }
 
   function _initExperienceLevelsPopup() {
@@ -649,7 +638,7 @@ var FBSage = (function($) {
     }
   }
 
-  function _initToTopMobile() {
+  function _initToTop() {
 
     // Inject popup open/close buttons where appropriate
     $('.to-top-location').each(function() {

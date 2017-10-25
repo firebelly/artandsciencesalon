@@ -11,10 +11,10 @@
     position: absolute;
     padding-bottom: $padding-lg*1.5;
     &.-fixed {
-      backface-visibility: hidden;
       top: 0;
       bottom: auto;
       position: fixed;
+      backface-visibility: hidden;
     }
   }
 }
