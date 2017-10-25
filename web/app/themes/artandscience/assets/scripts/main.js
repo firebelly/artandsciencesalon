@@ -490,6 +490,9 @@ var FBSage = (function($) {
         $drawer.addClass('-active');
         $drawer.find('td').velocity({translateX: "20px", opacity: 0}, {duration: 0}).velocity({translateX: "0px", opacity: 1}, {duration: 300});
       }
+
+      // Refresh waypoints as we've shifted elements a bunch
+      Waypoint.refreshAll();
     });
 
   }
@@ -710,7 +713,7 @@ var FBSage = (function($) {
         $thisLink.next('.subpage-section-nav').velocity('slideDown', {duration: 300});
       }
 
-      // Refresh waypoints as we've shifted the DOM a bunch
+      // Refresh waypoints as we've shifted elements a bunch
       Waypoint.refreshAll();
     }
   }
