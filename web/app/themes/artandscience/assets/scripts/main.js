@@ -41,17 +41,18 @@ var FBSage = (function($) {
     _initLazyLoading();
     _initPersonPopup();
     _initImageViewerPopup();
-    _initBookAppointment();
     _initExperienceLevelsPopup();
     _initAccordianTable();
     _initStylistsSort();
     _initSubpageNav();
     _initNav();
+    _initBookAppointment();
     _injectSvgSprite();
     _initBigclicky();
     _breakupLongEmails();
     _pullInstagramPost();
     _initToTopMobile();
+    _initScrollies();
 
     // Certain elements (e.g. popups) are hidden during load, remove the class hiding them...
     $('.hide-during-page-load').removeClass('hide-during-page-load');
@@ -405,6 +406,12 @@ var FBSage = (function($) {
       .wrap('<div class="footer-menu"></div>')
       .attr('id','#menu-footer-nav-duplicated');
 
+    // Duplicate Book Appointment module
+    $('.book-appointment')
+      .clone()
+      .appendTo('body')
+      .addClass('-duplicate');
+
     // Add interactivity to menu-toggle button
     $(document).on('click','.menu-toggle',function(e) {
       _toggleMobileNav();
@@ -469,7 +476,7 @@ var FBSage = (function($) {
   function _initBookAppointment() {
 
     // JQuery selectors
-    var $bAModule = $('#book-appointment');
+    var $bAModule = $('.book-appointment');
     var $locationList = $bAModule.find('.location-list');
 
     // Close the accordian from the getgo
@@ -491,40 +498,100 @@ var FBSage = (function($) {
 
     // Are we starting past the top of the page.  If so, we want the button look
     if ($(window).scrollTop() > 10) {
-      $bAModule.addClass('-button');
+      $bAModule.filter('.-duplicate').addClass('-button');
     }
+  }
 
-    var $this = $(this);
-    var count = 0;
-    var lastScrollTop = 0;
-    var direction = false;
+  function _initScrollies() {
 
-    // On scroll
-    $(window).scroll(function(e){
+    // Dowm Queries
+    var $bAModule = $('.book-appointment.-duplicate'),
+    $locationList = $bAModule.find('.location-list'),
+    $header = $('.site-header'),
+    $footer = $('.site-footer'),
+    $adminBar = $('#wpadminbar');
 
-      // Only check every 30 events
-      count += 1;
-      if (count % 30 === 0) {
+    // Sizing Calculations
+    var headerHeight = $header.outerHeight(),
+    footerTop = $footer.offset().top,
+    adminBarHeight = $adminBar.length ? $adminBar.height() : 0,
+    stickyNavChangepoint = footerTop - ( headerHeight - adminBarHeight );
 
-        // Get scroll pos
-        var scrollTop = $this.scrollTop();
+    // Scroll handling vars
+    var lastKnownScrollPosition, scrollPosition;
+    var ticking = false;
 
-        // If we just started going up...
-        if ( scrollTop < lastScrollTop && direction !== 'up' ) {
-          $bAModule.removeClass('-hide');
-          $bAModule.addClass('-button');
-          direction = 'up';
-        }
+    // Throttle by animation frame
+    window.addEventListener('scroll', function(e) {
 
-        // If we just started going down...
-        if ( scrollTop >= lastScrollTop && direction !== 'down' ) {
-          $bAModule.addClass('-hide');
-          direction = 'down';
-        }
-
-        lastScrollTop = scrollTop;
+      if (!ticking) {
+        window.requestAnimationFrame(function() {
+          scrollyChecks();
+          ticking = false;
+        });
+        ticking = true;
       }
     });
+
+    // Keep track of states of scrolly things
+    var BAHidden = false;
+    var navFixed = false;
+
+    // Do the throttled work
+    function scrollyChecks() {
+      scrollPosition = window.scrollY;
+
+      // Scroll behaviors only happen on med
+      if(breakpoint_md) {
+
+        // Should BA change states to shown?
+        if ( scrollPosition < lastKnownScrollPosition && BAHidden ) {
+          $bAModule.removeClass('-hide');
+          $bAModule.addClass('-button');
+          BAHidden = false;
+          console.log('hide BA');
+        }
+
+        // Should BA change states to hidden?
+        if ( scrollPosition >= lastKnownScrollPosition && !BAHidden ) {
+          $bAModule.addClass('-hide');
+          BAHidden = true;
+
+          // Slide up on hide if appropriate
+          if ($bAModule.is('.-active')) {
+            $bAModule.removeClass('-active');
+            $locationList.velocity("slideUp", { duration: 200 });
+          }
+          console.log('show BA');
+        }
+
+        // Fix the nav?
+        if ( scrollPosition >= stickyNavChangepoint && navFixed ) {
+          $header.removeClass('-fixed');
+          navFixed = false;
+          console.log('unfix nav');
+        }
+
+        // Unfix the nav?
+        if ( scrollPosition < stickyNavChangepoint && !navFixed ) {
+          $header.addClass('-fixed');
+          navFixed = true;
+          console.log('fix nav');
+        }
+      }
+
+      lastKnownScrollPosition = scrollPosition;
+    }
+    scrollyChecks(); 
+
+    // Calculations must be redone on resize
+    window.addEventListener('resize', function(e) {
+      headerHeight = $header.outerHeight();
+      footerTop = $footer.offset().top;
+      adminBarHeight = $adminBar.length ? $adminBar.height() : 0;
+      stickyNavChangepoint = footerTop - ( headerHeight - adminBarHeight );
+      scrollyChecks(); 
+    });  
   }
 
   function _initExperienceLevelsPopup() {

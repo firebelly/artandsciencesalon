@@ -152,9 +152,12 @@ img {
 
 .site-wrap {
   @include media-md {
-    float: left;
-    width: 75%;
+    padding-left: 25%;
   }
+}
+
+.site-top {
+  position: relative;
 }
 
 // Compensate adminbar placement because we relatively positioned the body element

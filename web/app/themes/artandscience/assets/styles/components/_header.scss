@@ -2,11 +2,32 @@
 
 .site-header {
   padding: 0;
-  backface-visibility: hidden;
 
   @include media-md {
-    float: left;
+    left: 0;
+    bottom: 0;
     width: 25%;
+    float: left;
+    position: absolute;
+    padding-bottom: $padding-lg*1.5;
+    &.-fixed {
+      backface-visibility: hidden;
+      top: 0;
+      bottom: auto;
+      position: fixed;
+    }
+  }
+}
+
+// Acount for admin bar
+body.admin-bar {
+  .site-header {
+    @include media-md {
+      padding-top: $wp-admin-bar-height;
+    }
+    @include min-screen($breakpoint-wp-admin-bar-fixed) {
+      padding-top: $wp-admin-bar-height-big;
+    }
   }
 }
 
@@ -24,7 +45,7 @@
       display: none;
     }
   }
-  
+
   @include media-lg {
     &::before {
       top: 60px;
@@ -42,7 +63,6 @@
   .brand {
     margin: 0;
     line-height: 0; // Prevent wierd sizing of elements -- there's only an svg here
-
 
     a {
       top: 50%;

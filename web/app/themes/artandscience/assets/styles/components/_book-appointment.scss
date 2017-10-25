@@ -3,8 +3,7 @@ $appointment-padding: 19px 24px;
 // Book An Appointment Module
 .book-appointment {
   padding: 0 0 2em;
-  transition: opacity 0.3s 0.2s;
-  backface-visibility: hidden;
+  transition: opacity 0.2s;
 
   button {
     @include font-caption-bold;
@@ -18,24 +17,36 @@ $appointment-padding: 19px 24px;
     background: transparent;
   }
 
-  // Tablet and desktop this is a fixed position corner button
+  // The original (embedded in the nav) hides on desktop
   @include media-md {
-    top: 0;
-    z-index: 3;
-    right: 100px;
-    position: fixed;
+    display: none;
+  }
 
-    button {
-      color: $cream-dark;
-      padding: $appointment-padding;
-      transition: background-color 0.8s 0.2s;
+  // THe duplicate (appended to body) becomes a fixed button in the corner
+  &.-duplicate {
+    display: none;
+  
+    @include media-md {
+      top: 0;
+      z-index: 3;
+      right: 100px;
+      display: block;
+      position: fixed;
+      backface-visibility: hidden;
 
-      @include big-dash($orange,after) {
-        top: auto;
-        left: 50%;
-        bottom: 0;
-        transform: translateX(-50%);
-        transition: opacity 0.8s 0.2s;
+
+      button {
+        color: $cream-dark;
+        padding: $appointment-padding;
+        transition: background-color 0.2s;
+
+        @include big-dash($orange,after) {
+          top: auto;
+          left: 50%;
+          bottom: 0;
+          transform: translateX(-50%);
+          transition: opacity 0.2s;
+        }
       }
     }
   }

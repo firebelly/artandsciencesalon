@@ -7,6 +7,7 @@ $dash-distance-md: 40px;
 .site-main {
   z-index: 1;
   position: relative;
+  backface-visibility: hidden;
 }
 
 .site-footer {
