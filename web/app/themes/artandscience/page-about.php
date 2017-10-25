@@ -59,13 +59,13 @@
   </div>
 
   <?php
-  $pauls = get_posts([
+  $person = get_posts([
     'numberposts' => 1,
     'post_type' => 'person',
     'name' => 'paul-wilson',
-  ]);
+  ])[0];
 
-  foreach($pauls as $person) :
+  if ($person) :
     $id = $person->post_name;
     ?>
 
@@ -89,7 +89,7 @@
       </article>
     </div>
 
-  <?php endforeach; ?>
+  <?php endif; ?>
 
 </div>
 <div class="page-block -bg-cream-dark -indent-right management">

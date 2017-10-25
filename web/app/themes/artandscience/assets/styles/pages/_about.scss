@@ -84,6 +84,12 @@
           text-align: center;
         }
       }
+
+      // Don't have double border on hover
+      &.stylist .thumbnail-wrap .thumbnail::after {
+        border-bottom: none;
+      }
+
       .owner-name {
         color: $orange;
         display: inline;
