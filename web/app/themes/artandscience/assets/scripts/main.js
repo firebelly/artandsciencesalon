@@ -37,6 +37,7 @@ var FBSage = (function($) {
     // Fit them vids!
     // $('main').fitVids();
 
+    _initStickyNav();
     _hashHandling();
     _initLazyLoading();
     _initPersonPopup();
@@ -52,7 +53,6 @@ var FBSage = (function($) {
     _breakupLongEmails();
     _pullInstagramPost();
     _initToTop();
-    _initStickyNav();
 
     // Certain elements (e.g. popups) are hidden during load, remove the class hiding them...
     $('.hide-during-page-load').removeClass('hide-during-page-load');
@@ -242,7 +242,8 @@ var FBSage = (function($) {
       $('.person-popup').velocity('fadeOut',{duration: 0});
 
       // Open button handling
-      $('.open-person-popup').click(function () {
+      $('.open-person-popup').click(function (e) {
+        e.preventDefault();
         $person = $(this).closest('.person');
         _openPersonPopup($person);
       });
@@ -708,6 +709,9 @@ var FBSage = (function($) {
         // Show suppage section nav for this page;
         $thisLink.next('.subpage-section-nav').velocity('slideDown', {duration: 300});
       }
+
+      // Refresh waypoints as we've shifted the DOM a bunch
+      Waypoint.refreshAll();
     }
   }
 
