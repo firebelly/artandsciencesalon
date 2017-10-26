@@ -20,7 +20,6 @@ if(is_front_page()) {
   <body <?php body_class($classes); ?>>
     <div id="breakpoint-indicator"></div>
     <div class="site-background">
-      <div class="big-a-s"></div>
     </div>
     <!--[if lt IE 9]>
       <div class="alert alert-warning">

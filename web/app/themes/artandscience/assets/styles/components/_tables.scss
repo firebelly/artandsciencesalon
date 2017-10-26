@@ -45,8 +45,8 @@
     }
 
     .leader-text {
-      padding-right: 0.5ch;
       position: relative;
+      padding-right: 0.5ch;
     }
   }
 
@@ -65,15 +65,15 @@
 
     .leader-row {
       padding-top: 6px;
-      padding-bottom: 6px;
       position: relative;
+      padding-bottom: 6px;
     }
 
     .icon-triangle {
       top: 17px;
       width: 10px;
-      height: 10px;
       left: -10px;
+      height: 10px;
     }
   }
 }
@@ -81,6 +81,8 @@
 @mixin stripey-table {
   width: 100%;
   display: block;
+  backface-visibility: hidden;
+  will-change: transform;
 
   tbody {
     width: 100%;
@@ -138,25 +140,18 @@
     position: relative;
 
   .accordian-drawer {
-    display: none;
+
     background: $cream-lite;
     @include break-out-of-padding;
-    overflow: hidden;
+    // backface-visibility: hidden;
 
-    // td {
-    //   z-index: -1;
-    // }
-
-    &.-active {
-      display: block;
-    }
   }
 
   .icon-triangle {
     fill: $gray-lite;
     position: absolute;
     transform: translate(-50%,-50%);
-    // transition: transform 0.2s;
+    transition: transform 0.2s;
   }
 
   .accordian-toggle {

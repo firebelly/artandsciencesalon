@@ -464,6 +464,8 @@ var FBSage = (function($) {
     var $toggles = $('.accordian-table .accordian-toggle');
     var $drawers = $('.accordian-table .accordian-drawer');
 
+    $drawers.velocity('slideUp', { duration: 0 });
+
     // Inject open/close indicator icon
     $toggles.each(function() {
       $('<svg class="icon icon-triangle"><use xlink:href="#icon-triangle"/></svg>')
@@ -478,23 +480,23 @@ var FBSage = (function($) {
       // Toggle open or closed based on current state
       if ($toggle.is('.-active')) {
 
-        $drawer.find('td').velocity({opacity: 0}, {
+        console.log('close');
+        $toggle.removeClass('-active');
+        $drawer.velocity('slideUp', {
           duration: 200,
           complete: function () {
-            $toggle.removeClass('-active');
-            $drawer.removeClass('-active');
-            // Refresh waypoints as we've shifted elements a bunch
             Waypoint.refreshAll();
           }
         });
       } else {
+        console.log('open');
         $toggle.addClass('-active');
-        $drawer.addClass('-active');
-        $drawer.find('td')
-          .velocity({translateX: "20px", opacity: 0}, {duration: 0})
-          .velocity({translateX: "0px", opacity: 1}, {duration: 300});
-        // Refresh waypoints as we've shifted elements a bunch
-        Waypoint.refreshAll();
+        $drawer.velocity('slideDown', {
+          duration: 200,
+          complete: function () {
+            Waypoint.refreshAll();
+          }
+        });
       }
     });
   }
