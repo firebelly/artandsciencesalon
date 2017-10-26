@@ -14,6 +14,6 @@
   $location_posts = get_posts($args);
 
   foreach ( $location_posts as $post ):
-    include(locate_template('single-location.php'));
+    include(locate_template('templates/single-location.php'));
   endforeach;
 ?>
