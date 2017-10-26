@@ -371,7 +371,7 @@ function get_people_list($location, $slug_array) {
 
 
   foreach ($people as $person) :
-    $output .= '<li class="people-list-item"><a href="/stylists/#'.$location->post_name.'-'.$person->post_name.'">'.$person->post_title.'</a></li>';
+    $output .= '<li class="people-list-item"><a href="'.get_bloginfo('url').'/stylists/#'.$location->post_name.'-'.$person->post_name.'">'.$person->post_title.'</a></li>';
   endforeach;
 
   $output  .= '</ul>';
@@ -394,7 +394,7 @@ function get_person_markup($person,$formal=false,$popup=true,$location=false) {
   $thumb_preload_url = \Firebelly\Media\get_post_thumbnail_url($person->ID,'preload',true);
   $slug = $person->post_name;
   $id = ($location ? $location->post_name.'-' : '' ).$person->post_name;
-  $permalink = get_permalink($person);
+  $permalink = get_bloginfo('url').'/stylists/#'.$slug;
   $no_popup = $popup ? '' : 'no-popup';
   $title = get_post_meta($person->ID,'_cmb2_title',true);
 
@@ -408,7 +408,7 @@ HTML;
       <div class="thumbnail-wrap">
         <div data-src="{$thumb_url}" data-preload-src="{$thumb_preload_url}" class="thumbnail lazy"></div>
       </div>
-      <h4 class="stylist-name">{$name}</h4>
+      <h4 class="stylist-name"><a href="{$permalink}" class="non-user-content-link">{$name}</a></h4>
 HTML;
   
   $output .= $formal ? '<h4 class="stylist-title">'.$title.'</h4>' : '';

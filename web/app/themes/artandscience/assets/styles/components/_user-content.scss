@@ -62,8 +62,11 @@
     margin: 0 0 1em;
   }
 
-  a:not(.non-user-content-link) {
+  a {
     text-decoration: none;
+  }
+
+  a:not(.non-user-content-link) {
     border-bottom: $gray 1px solid;
 
     &:hover {
