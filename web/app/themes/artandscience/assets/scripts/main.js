@@ -483,18 +483,20 @@ var FBSage = (function($) {
           complete: function () {
             $toggle.removeClass('-active');
             $drawer.removeClass('-active');
+            // Refresh waypoints as we've shifted elements a bunch
+            Waypoint.refreshAll();
           }
         });
       } else {
         $toggle.addClass('-active');
         $drawer.addClass('-active');
-        $drawer.find('td').velocity({translateX: "20px", opacity: 0}, {duration: 0}).velocity({translateX: "0px", opacity: 1}, {duration: 300});
+        $drawer.find('td')
+          .velocity({translateX: "20px", opacity: 0}, {duration: 0})
+          .velocity({translateX: "0px", opacity: 1}, {duration: 300});
+        // Refresh waypoints as we've shifted elements a bunch
+        Waypoint.refreshAll();
       }
-
-      // Refresh waypoints as we've shifted elements a bunch
-      Waypoint.refreshAll();
     });
-
   }
 
   function _initBookAppointment() {
