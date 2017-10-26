@@ -18,15 +18,6 @@ body {
   @include font-paragraph;
 }
 
-/*
-The background is an enormous raster image of mediocre quality.
-At usable sizes, even the png has ugly scaling artifacts.
-My thought was to try to blur it out with css filters.  Looks a lot better.
-But you can't blur the body element--or the whole site will be blurry!
-So use a seperate element.
-Also the blur bleeds at the edges, so we use a slightly oversized psuedo element.
-Clipping the overflow hides the bleed.
-*/
 .site-background {
   top: 0;
   left: 0;
