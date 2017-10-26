@@ -9,12 +9,12 @@
     width: 25%;
     float: left;
     position: absolute;
+    backface-visibility: hidden;
     padding-bottom: $padding-lg*1.5;
     &.-fixed {
       top: 0;
       bottom: auto;
       position: fixed;
-      backface-visibility: hidden;
     }
   }
 }
@@ -50,7 +50,7 @@ body.admin-bar {
     &::before {
       top: 60px;
       left: 50%;
-      z-index: -1;
+      // z-index: -1;
       content: '';
       width: 218px;
       height: 303px;
@@ -62,7 +62,9 @@ body.admin-bar {
 
   .brand {
     margin: 0;
+    z-index: 1;
     line-height: 0; // Prevent wierd sizing of elements -- there's only an svg here
+    position: relative;
 
     a {
       top: 50%;
