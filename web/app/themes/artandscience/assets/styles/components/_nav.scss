@@ -87,12 +87,13 @@ $mobile-nav-width: 160px;
 }
 
 // Nav toggle button
-button.menu-toggle {
+.menu-toggle {
   left: 0;
   border: 0;
   z-index: 1;
   height: 60px;
   outline: none;
+  cursor: pointer;
   width: $padding;
   appearance: none;
   background: $gold;
@@ -147,7 +148,7 @@ button.menu-toggle {
     .site-header .site-nav {
       transform: none;
     }
-    button.menu-toggle {
+    .menu-toggle {
       height: 100%;
 
       .icon-nav {

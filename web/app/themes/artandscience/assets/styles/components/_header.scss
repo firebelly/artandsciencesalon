@@ -68,6 +68,7 @@ body.admin-bar {
   .brand {
     margin: 0;
     z-index: 1;
+    height: 100%;
     line-height: 0; // Prevent wierd sizing of elements -- there's only an svg here
     position: relative;
 

@@ -108,6 +108,12 @@ var FBSage = (function($) {
       }
     });
 
+    // Refresh Waypoints after browser resize:
+    $(window).resize(function(){
+        Waypoint.refreshAll();
+    });
+
+
     $nav.removeClass('-unloaded');
   }
 
@@ -229,9 +235,9 @@ var FBSage = (function($) {
   function _initPersonPopup() {
 
       // Add control buttons to popups
-      $('<button class="prev-person-popup arrow"><svg class="icon icon-triangle"><use xlink:href="#icon-triangle"/></svg></button><button class="next-person-popup arrow"><svg class="icon icon-triangle"><use xlink:href="#icon-triangle"/></svg></button>')
+      $('<div class="prev-person-popup arrow"><svg class="icon icon-triangle"><use xlink:href="#icon-triangle"/></svg></div><div class="next-person-popup arrow"><svg class="icon icon-triangle"><use xlink:href="#icon-triangle"/></svg></div>')
         .prependTo('.person-popup .controls-wrap');
-      $('<button class="close-person-popup"><span class="text">Close</span><svg class="icon icon-x"><use xlink:href="#icon-x"/></svg></button>')
+      $('<div class="close-person-popup"><span class="text">Close</span><svg class="icon icon-x"><use xlink:href="#icon-x"/></svg></div>')
         .prependTo('.person-popup');
        $('<div class="popup-mask"></div>')
         .prependTo('.site-main');
@@ -415,7 +421,7 @@ var FBSage = (function($) {
   // Init main nav interactivity
   function _initNav() {
     // Inject SEO-useless nav toggler
-    $('<button aria-hidden="true" class="menu-toggle"><svg class="icon icon-nav"><use xlink:href="#icon-nav"/></svg><svg class="icon icon-x"><use xlink:href="#icon-x"/></svg></button>')
+    $('<div aria-hidden="true" class="menu-toggle"><svg class="icon icon-nav"><use xlink:href="#icon-nav"/></svg><svg class="icon icon-x"><use xlink:href="#icon-x"/></svg></div>')
       .prependTo('body');
 
     // Duplicate Secondary nav and inject into footer

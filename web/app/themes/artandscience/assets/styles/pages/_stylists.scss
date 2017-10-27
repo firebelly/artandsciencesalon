@@ -154,12 +154,13 @@
   backface-visibility: hidden; // HA hack
 
   // Close button
-  button.close-person-popup {
+  .close-person-popup {
     right: 0;
     padding: 0;
     border: none;
+    cursor: pointer;
     bottom: calc(100% - #{$padding}*2);
-    
+
     outline: none;
     position: absolute;
     background: transparent;
@@ -239,10 +240,11 @@
   .header-wrap {
     position: relative;
 
-    button.arrow {
+    .arrow {
       border: none;
       height: 100%;
       outline: none;
+      cursor: pointer;
       width: $padding;
       background: $gold;
 
@@ -251,12 +253,6 @@
       }
       @include media-lg {
         width: $padding-lg;
-      }
-
-      .icon {
-        width: 12px;
-        height: 12px;
-        fill: $cream;
       }
 
       &:hover {
@@ -278,6 +274,16 @@
         top: 50%;
         position: absolute;
         transform: translateY(-50%);
+
+        .icon-triangle {
+          width: 12px;
+          height: 12px;
+          fill: $cream;
+          top: 50%; 
+          left: 50%;
+          transform: translate(-50%,-50%);
+          position: absolute;
+        }
       }
 
       .next-person-popup {
@@ -288,6 +294,7 @@
         right: 100%;
 
         .icon-triangle {
+          left: calc(50% - 6px); // Slight nudge
           transform: rotate(180deg);
         }
       }
