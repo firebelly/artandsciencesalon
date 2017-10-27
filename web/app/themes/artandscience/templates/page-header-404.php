@@ -26,7 +26,7 @@
     <div class="header-image lazy" data-src="<?= $header_image_url ?>" data-preload-src="<?= $header_image_preload_url ?>"></div>
   </div>
     <div class="header-text user-content -indent-right-big">
-      <h2 class="user-content-h2">#404</h2>
+      <h2 class="content-h2">#404</h2>
       <?= $header_text ?>
     </div>
 </div>

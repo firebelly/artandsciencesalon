@@ -1,0 +1,32 @@
+
+.site-background {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  position: fixed;
+  background-size: cover;
+  backface-visibility: hidden;
+  background-image: url('../images/blended-background.png');
+  
+  @include media-md {
+    @include ruler-edge;
+  }
+
+}
+
+.big-as {
+  top: 0;
+  left: 0;
+  content: '';
+  width: 100%;
+  height: 100%;
+  opacity: 0.3;
+  position: absolute;
+  background-size: 150%;
+  background-repeat: repeat-y;
+  backface-visibility: hidden;
+  background-position: 15px 0%;
+  background-image:  url('../images/a-s-large.svg');
+}

@@ -18,35 +18,6 @@ body {
   @include font-paragraph;
 }
 
-.site-background {
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: -1;
-  position: fixed;
-  background-size: cover;
-  backface-visibility: hidden;
-  background-image: url('../images/blended-background.png');
-  
-  @include media-md {
-    @include ruler-edge;
-  }
-
-  &::before {
-    top: 0;
-    left: 0;
-    content: '';
-    width: 100%;
-    height: 100%;
-    opacity: 0.3;
-    position: absolute;
-    background-size: 150%;
-    background-repeat: repeat-y;
-    background-position: 15px 0%;
-    background-image:  url('../images/a-s-large.svg');
-  }
-}
 
 a {
   text-decoration: none;
@@ -55,29 +26,6 @@ a {
 ul.semantic-only-list {
   list-style: none;
   padding-left: 0;
-}
-
-.details-link {
-  color: $gold;
-  border-bottom: none;
-  text-decoration: none;
-  @include font-caption-bold;
-
-  &::after {
-    top: -1px;
-    content: '>';
-    color: $orange;
-    margin-left: 1ch;
-    position: relative;
-  }
-
-  &:hover {
-    color: $orange;
-
-    &::after {
-      left: 3px;
-    }
-  }
 }
 
 p {
@@ -129,11 +77,6 @@ img {
   @include hidden;
 }
 
-::selection {
-  // color: $cream;
-  background: rgba($orange,0.5);
-}
-
 .site-wrap {
   @include media-md {
     padding-left: 25%;
@@ -152,86 +95,9 @@ img {
     }
 }
 
-// Graceful image loading;
-.lazy {
-  overflow: hidden;
-  .load-mask {
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    content: '';
-    filter: blur(20px);
-    position: absolute;
-    transform: scale(1.1);
-    background-size: cover;
-    transition: opacity 0.15s;
-  }
-  &.-loaded {
-    .load-mask {
-      opacity: 0;
-    }
-  }
-}
-
-.thumbnail {
-  background-color: $gray;
-}
-
-.to-top {
-  border: none;
-  outline: none;
-  color: $cream;
-  text-align: right;
-  background: $gray-lite;
-  margin-right: -$padding;
-  @include font-caption-thin;
-  transition: background 0.15s;
-  padding: 4px $padding/2 4px 0;
-  width: calc(100% + #{$padding});
-
-  .icon {
-    width: 10px;
-    fill: $cream;
-    height: 10px;
-    display: inline;
-    margin-left: 1ch;
-    transform: rotate(270deg);
-  }
-
-  &:hover {
-    background-color: $gold;
-  }
-
-  @include media-md {
-    top: 0;
-    right: 0;
-    margin: 0;
-    width: auto;
-    line-height: 0;
-    position: left;
-    position: absolute;
-    background: transparent;
-    padding: 24px 0 24px 24px;
-    .text {
-      display: none;
-    }
-    .icon {
-      width: 12px;
-      height: 12px;
-      fill: $gray-lite;
-      transition: fill 0.15s;
-    }
-    &:hover {
-      background: transparent;
-      .icon {
-        fill: $gold;
-      }
-    }
-  }
-  @include media-lg {
-    padding: 36px 0 36px 36px;
-  }
+::selection {
+  // color: $cream;
+  background: rgba($orange,0.5);
 }
 
 button {

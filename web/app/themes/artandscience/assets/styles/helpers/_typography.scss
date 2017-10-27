@@ -88,23 +88,6 @@ $glacial: 'GlacialIndifference', sans-serif;
   }
 }
 
-// I suspect this one was left in P styles in error and doesn't exist in the wild...
-// @mixin font-h4 {
-//   font-style: normal;
-//   font-weight: normal;
-//   font-family: $glacial;
-//   text-transform: uppercase;
-
-//   // Mobile
-//     font-size: 20px;
-//     letter-spacing: .2em;
-//     line-height: ( 30 / 20 );
-
-//   // Tablet -- No change
-
-//   // Desktop -- No change
-// }
-
 @mixin font-caption {
   font-style: normal;
   font-weight: normal;

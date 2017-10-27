@@ -41,14 +41,14 @@
         <div class="thumbnail lazy" data-src="<?= $philosophy_image_url ?>" data-preload-src="<?= $philosophy_image_preload_url ?>"></div>
       </div>
     </div>
-    <h2 class="user-content-h1">Philosophy</h2>
+    <h2 class="content-h1">Philosophy</h2>
     <div class="user-content">
       <?= $philosophy ?>
     </div>
   </div>
 </div>
 <div class="page-block -bg-gray-dark -text-cream -indent-right-big -top-overlap owners">
-  <h2 class="user-content-h1">Owners</h2>
+  <h2 class="content-h1">Owners</h2>
   <div class="owner">
     <div class="user-content owner-bio"><?= $david_bio ?></div>
     <div class="image">
@@ -93,7 +93,7 @@
 
 </div>
 <div class="page-block -bg-cream-dark -indent-right management">
-  <h2 class="user-content-h1">Managing Partners</h2>
+  <h2 class="content-h1">Managing Partners</h2>
   <div class="user-content">
     <?=  $managing_partners ?>
   </div>
@@ -126,7 +126,7 @@
 
   <?php endif ?>
 
-  <h2 class="user-content-h1">Managerial Staff</h2>
+  <h2 class="content-h1">Managerial Staff</h2>
 
   <?php
   $people = get_posts([
@@ -159,7 +159,7 @@
 
 </div>
 <div class="page-block -indent-right -bg-cream">
-  <h2 class="user-content-h1">Educators</h2>
+  <h2 class="content-h1">Educators</h2>
   <div class="user-content">
     <?=  $educators ?>
   </div>
@@ -193,7 +193,7 @@
 
     if (!empty($educators)) :
     ?>
-      <h3 class="user-content-h2"><?= $people_type->name ?></h3>
+      <h3 class="content-h2"><?= $people_type->name ?></h3>
       <div class="person-type section">
         <ul class="people-grid semantic-only-list">
           <?php foreach ($educators as $person):
@@ -211,7 +211,7 @@
 
 </div>
 <div class="page-block -bg-gray-dark -text-cream -border-bottom -indent-left-huge">
-  <h2 class="user-content-h1">Social Impact</h2>
+  <h2 class="content-h1">Social Impact</h2>
   <div class="user-content">
     <?=  $social_impact ?>
     <p><a href="/social-impact" class="details-link non-user-content-link">Learn More</a></p>
@@ -220,7 +220,7 @@
 <div class="page-block -bg-gold -text-cream -indent-right-big -indent-left-big barbershops">
 
   <div class="content">
-    <h2 class="user-content-h1">Barbershops</h2>
+    <h2 class="content-h1">Barbershops</h2>
     <div class="user-content">
       <?=  $barbershops ?>
       <p><a href="/services/#logan-square-barbershop-barbershop-services" class="details-link -text-gray-dark non-user-content-link">Learn More</a></p>

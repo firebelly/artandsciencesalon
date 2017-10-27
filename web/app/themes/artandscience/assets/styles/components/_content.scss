@@ -1,0 +1,64 @@
+
+@mixin content-h1 {
+  margin: 0;
+  @include font-h2;
+}
+
+@mixin h2-padding-top {
+  padding-top: (24px - 3px); // (intended - correction)
+  @include media-lg {
+    padding-top: (34px - 7px); // (intended - correction)
+  }
+}
+
+@mixin content-h2 {
+  @include font-h3;
+  position: relative;
+  @include h2-padding-top;
+  @include big-dash($brown-lite);
+  margin: $section-margin-top 0 (22px - 10px);  // (intended - correction)
+
+  &:first-child {
+    margin-top: 0;
+  }
+}
+
+@mixin content-h3 {
+  margin: (28px - 14px) 0 0;
+  @include font-caption-bold;
+}
+
+.content-h1 {
+  @include content-h1;
+}
+
+.content-h2 {
+  @include content-h2;
+}
+
+.content-h3 {
+  @include content-h3;
+}
+
+.details-link {
+  color: $gold;
+  border-bottom: none;
+  text-decoration: none;
+  @include font-caption-bold;
+
+  &::after {
+    top: -1px;
+    content: '>';
+    color: $orange;
+    margin-left: 1ch;
+    position: relative;
+  }
+
+  &:hover {
+    color: $orange;
+
+    &::after {
+      left: 3px;
+    }
+  }
+}

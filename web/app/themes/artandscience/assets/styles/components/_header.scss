@@ -2,6 +2,7 @@
 
 .site-header {
   padding: 0;
+  transition: opacity 0.3s;
 
   @include media-md {
     left: 0;
@@ -16,6 +17,10 @@
       bottom: auto;
       position: fixed;
     }
+  }
+
+  &.-unloaded {
+    opacity: 0;
   }
 }
 

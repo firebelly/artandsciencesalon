@@ -91,9 +91,6 @@ var FBSage = (function($) {
   function _initStickyNav() {
 
     $nav = $('.site-header');
-    $nav.addClass('-fixed');
-
-    console.log($nav[0].getBoundingClientRect().height);
 
     $('.site-top').waypoint({
       handler: function(direction) {
@@ -111,6 +108,7 @@ var FBSage = (function($) {
       }
     });
 
+    $nav.removeClass('-unloaded');
   }
 
   // Grab most recent Instagram post with tag "behindthechair"

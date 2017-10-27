@@ -1,0 +1,25 @@
+// Graceful image loading;
+.lazy {
+  overflow: hidden;
+  .load-mask {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    content: '';
+    filter: blur(20px);
+    position: absolute;
+    transform: scale(1.1);
+    background-size: cover;
+    transition: opacity 0.15s;
+  }
+  &.-loaded {
+    .load-mask {
+      opacity: 0;
+    }
+  }
+}
+
+.thumbnail {
+  background-color: $gray;
+}

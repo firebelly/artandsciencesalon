@@ -21,6 +21,7 @@
 
 // Components
 @import "components/base";
+@import "components/content";
 @import "components/user-content";
 @import "components/header";
 @import "components/nav";
@@ -34,6 +35,9 @@
 @import "components/experience-levels";
 @import "components/gallery";
 @import "components/livechat";
+@import "components/background";
+@import "components/to-top";
+@import "components/lazy-load";
 
 // Pages
 @import "pages/about";

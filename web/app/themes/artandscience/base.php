@@ -19,8 +19,8 @@ if(is_front_page()) {
   <?php get_template_part('templates/head'); ?>
   <body <?php body_class($classes); ?>>
     <div id="breakpoint-indicator"></div>
-    <div class="site-background">
-    </div>
+    <div class="site-background"></div>
+    <div class="big-as"></div>
     <!--[if lt IE 9]>
       <div class="alert alert-warning">
         <?php _e('You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.', 'sage'); ?>
