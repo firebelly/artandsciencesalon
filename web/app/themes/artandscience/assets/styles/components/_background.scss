@@ -7,7 +7,7 @@
   z-index: -1;
   position: fixed;
   background-size: cover;
-  backface-visibility: hidden;
+  transform: translateZ(0);
   background-image: url('../images/blended-background.png');
   
   @include media-md {
@@ -24,7 +24,7 @@
   opacity: 0.3;
   position: fixed;
   background-size: 150%;
-  backface-visibility: hidden;
+  transform: translateZ(0);
   background-repeat: no-repeat;
   background-position: 15px 50%;
   background-image:  url('../images/a-s-large.svg');
