@@ -1,31 +1,33 @@
 
-.site-background {
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: -1;
-  position: fixed;
+body {
+  // Gradient pattern
   background-size: cover;
-  transform: translateZ(0);
+  background-attachment: fixed;
   background-image: url('../images/blended-background.png');
-  
+}
+
+.bg-elements {
+  // Letters
+  &::before {
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    content: '';
+    opacity: 0.3;
+    position: fixed;
+    background-size: 150%;
+    transform: translateZ(0);
+    background-repeat: no-repeat;
+    background-position: 15px 50%;
+    background-image:  url('../images/a-s-large.svg');
+  }
+
+  // Ruler
   @include media-md {
     @include ruler-edge;
   }
-}
-
-.big-as {
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  content: '';
-  opacity: 0.3;
-  position: fixed;
-  background-size: 150%;
-  transform: translateZ(0);
-  background-repeat: no-repeat;
-  background-position: 15px 50%;
-  background-image:  url('../images/a-s-large.svg');
+  &::after {
+    position: fixed;
+  }
 }
