@@ -35,7 +35,7 @@ var FBSage = (function($) {
     _resize();
 
     // Fit them vids!
-    // $('main').fitVids();
+    $('body').fitVids();
 
     _initStickyNav();
     _hashHandling();
