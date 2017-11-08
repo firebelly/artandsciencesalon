@@ -16,3 +16,10 @@
     @include font-caption-bold;
   }
 }
+
+// Single Gallery
+body.single-si-gallery {
+  .site-footer .footer-menu .menu-item-social-impact {
+    color: $orange;
+  }
+}
