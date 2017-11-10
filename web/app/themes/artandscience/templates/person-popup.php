@@ -122,7 +122,7 @@ $name = get_the_title($post);
           </div>
         <?php endif; ?>
 
-        <?php if ($lookbook_group) : ?>
+        <?php if ($location_terms) : ?>
           <div class="appointments block">
             <h4>Book an appointment</h4>
             <ul class='location-list semantic-only-list'>
