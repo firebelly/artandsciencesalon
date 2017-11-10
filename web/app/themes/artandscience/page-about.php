@@ -102,7 +102,8 @@
   $people = get_posts([
     'numberposts' => -1,
     'post_type' => 'person',
-    'orderby' => 'menu_order',
+    'orderby'=> 'title', 
+    'order' => 'ASC',
     'tax_query' => [
       [
         'taxonomy' => 'person_type',
@@ -132,7 +133,8 @@
   $people = get_posts([
     'numberposts' => -1,
     'post_type' => 'person',
-    'orderby' => 'menu_order',
+    'orderby'=> 'title', 
+    'order' => 'ASC',
     'tax_query' => [
       [
         'taxonomy' => 'person_type',
@@ -180,7 +182,8 @@
     $people_args = array(
       'numberposts' => -1,
       'post_type' => 'person',
-      'orderby' => 'menu_order',
+      'orderby'=> 'title', 
+      'order' => 'ASC',
       'tax_query' => array(
         array(
           'taxonomy' => 'person_type',

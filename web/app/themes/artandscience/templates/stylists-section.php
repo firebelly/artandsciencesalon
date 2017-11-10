@@ -16,7 +16,8 @@
     $people_args = array(
       'numberposts' => -1,
       'post_type' => 'person',
-      'orderby' => 'menu_order',
+      'orderby'=> 'title', 
+      'order' => 'ASC',
       'tax_query' => array(
         'relation' => 'AND',
         array(

@@ -309,7 +309,7 @@ function get_people_section_nav($location) {
       $people = get_posts([
         'numberposts' => -1,
         'post_type' => 'person',
-        'orderby' => 'menu_order',
+        'orderby'=> 'menu_order', 
         'tax_query' => array(
           'relation' => 'AND',
           array(
