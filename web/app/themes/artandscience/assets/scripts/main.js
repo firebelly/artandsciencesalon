@@ -37,7 +37,6 @@ var FBSage = (function($) {
     // Fit them vids!
     $('body').fitVids();
 
-    _initStickyNav();
     _hashHandling();
     _initLazyLoading();
     _initPersonPopup();
@@ -46,13 +45,14 @@ var FBSage = (function($) {
     _initAccordianTable();
     _initStylistsSort();
     _initSubpageNav();
-    _initNav();
-    _initBookAppointment();
     _injectSvgSprite();
     _initBigclicky();
     _breakupLongEmails();
     _pullInstagramPost();
     _initToTop();
+    _initNav();
+    _initBookAppointment();
+    _initStickyNav();
 
     // Certain elements (e.g. popups) are hidden during load, remove the class hiding them...
     $('.hide-during-page-load').removeClass('hide-during-page-load');
@@ -91,6 +91,7 @@ var FBSage = (function($) {
   function _initStickyNav() {
 
     $nav = $('.site-header');
+    $nav.addClass('-fixed'); // start fixed
 
     $('.site-top').waypoint({
       handler: function(direction) {
@@ -112,7 +113,6 @@ var FBSage = (function($) {
     $(window).resize(function(){
         Waypoint.refreshAll();
     });
-
 
     $nav.removeClass('-unloaded');
   }
@@ -242,6 +242,14 @@ var FBSage = (function($) {
        $('<div class="popup-mask"></div>')
         .prependTo('.site-main');
 
+
+      $('.person-popup').each(function() {
+        var $neighbors = _getPersonNeighbors($(this));
+        if(!$neighbors) {
+          $(this).find('.controls-wrap').addClass('-disable-arrows');
+        }
+      });
+
       // Hide popups
       $('.person-popup').velocity('fadeOut',{duration: 0});
 
@@ -322,6 +330,22 @@ var FBSage = (function($) {
     }
   }
 
+  function _getPersonNeighbors($popup) {
+          // Are we in a people-grid? If so, grab all the people in that grid,
+      // If not on a grid (like paul on "about" page) or if the only person in a people-grid, about
+      var $currentGrid = $popup.closest('.people-grid');
+      var $people;
+      if ($currentGrid.length) {
+        $people = $currentGrid.find('.person:not(.no-popup)');
+        if($people.length===1) {
+          return false;
+        } else {
+          return $people;
+        }
+      } 
+      return false;
+  }
+
   function _switchPersonPopup(nextOrPrev) {
     // Find the open popup
     $popup = $('.person-popup.-open');
@@ -332,15 +356,9 @@ var FBSage = (function($) {
       // Who am I?
       var $currentPerson = $popup.closest('.person');
 
-      // Are we on a subpage? If so, grab all the people on that subpage,
-      // If not on a subpage (like on "about"), grab everyone on the whole page
-      var $currentSubpage = $popup.closest('.subpage');
-      var $people;
-      if ($currentSubpage.length) {
-        $people = $currentSubpage.find('.person:not(.no-popup)');
-      } else {
-        $people = $('.person:not(.no-popup)');
-      }
+      // Who are my neightbors?
+      var $people = _getPersonNeighbors($popup);
+      if(!$people) { return false; }
 
       // Where am I in the list?
       var currentIndex = $people.index($currentPerson);
@@ -414,7 +432,10 @@ var FBSage = (function($) {
     $element.velocity("scroll", {
       duration: duration,
       delay: delay,
-      offset: -wpOffset + offset
+      offset: -wpOffset + offset,
+      complete: function() {
+        Waypoint.refreshAll();
+      }
     }, "easeOutSine");
   }
 

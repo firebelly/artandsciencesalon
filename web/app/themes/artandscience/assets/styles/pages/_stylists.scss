@@ -216,8 +216,6 @@
         width: $padding-lg;
       }
     }
-
-
   }
 
 
@@ -280,6 +278,13 @@
     // (the the thumb is wrapped directly by .controls-wrap)
     .controls-wrap {
       position: relative;
+
+      &.-disable-arrows {
+        .next-person-popup, .prev-person-popup {
+          opacity: 0.2;
+          pointer-events: none;
+        }
+      }
 
       .next-person-popup, .prev-person-popup {
         top: 50%;
