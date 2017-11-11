@@ -144,12 +144,13 @@
 .person-popup {
   top: 0;
   left: 0;
-  right: 0;
   bottom: 0;
   z-index: 2;
+  width: 100%;
   color: $cream;
   display: block;
   position: fixed;
+  min-width: 320px;
   overflow-y: scroll;
   backface-visibility: hidden; // HA hack
 
@@ -215,7 +216,10 @@
         width: $padding-lg;
       }
     }
+
+
   }
+
 
   // The container of everything in the popup
   .popup-wrap {
@@ -233,6 +237,13 @@
     @include media-lg {
       padding: 0 $padding-lg $padding-lg;
       margin-top: $padding-lg*2;
+    }
+
+    // Slight adjustment to leader table sizing
+    .leader-table {
+      .leader-left {
+        padding-right: 75px;
+      }
     }
   }
 
