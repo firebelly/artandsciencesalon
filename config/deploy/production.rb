@@ -1,5 +1,5 @@
 set :stage, :production
-set :login, 'artandscience'
+set :login, 'artscience'
 set :application, 'artandsciencesalon'
 
 
