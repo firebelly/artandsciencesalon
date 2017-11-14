@@ -1,5 +1,5 @@
 set :application, 'artandsciencesalon'
-set :domain, 'artscience.webfactional.com'
+set :domain, 'artandsciencesalon.com'
 set :theme, 'artandscience'
 set :login, 'firebelly'
 set :repo_url, 'git@github.com:firebelly/artandsciencesalon.git'
