@@ -29,12 +29,16 @@
 
   ul:not(.semantic-only-list) {
     list-style: none;
-    padding-left: 0;
+    padding-left: 2ch;
     margin: 0 0 1em;
     li {
+      margin-bottom: 1em;
+      position: relative;
       &::before {
         content: '+';
         margin-right: 1ch;
+        position: absolute;
+        right: 100%;
       }
     }
   }
