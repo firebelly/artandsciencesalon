@@ -154,10 +154,10 @@ $mobile-nav-width: 160px;
 
   // Nav closed is default state, below are styles for nav-open
   html.-nav-open {
-    overflow-y: hidden;
-    @include media-sm {
-      overflow-y: auto;
-    }
+    // overflow-y: hidden;
+    // @include media-sm {
+    //   overflow-y: auto;
+    // }
 
     .site-wrap, .site-background,.site-banner, .menu-toggle, .site-footer {
       transform: translateX($mobile-nav-width);
