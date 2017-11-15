@@ -20,6 +20,7 @@ $mobile-nav-width: 160px;
 .site-header .site-nav {
   top: 0;
   left: 0;
+  z-index: 3;
   height: 100vh;
   position: fixed;
   overflow-y: scroll;
@@ -149,27 +150,31 @@ $mobile-nav-width: 160px;
 
     .menu-toggle {
       transition: transform 0.3s 0.15s, height 0.15s; 
-      &::after {
-        opacity: 0;
-        transition: opacity 1s 1s;
-      }
     }
   }
 
 
   // Nav closed is default state, below are styles for nav-open
   html.-nav-open {
-    overflow-y: hidden;
+    overflow: hidden;
 
-    .site-wrap, .site-background,.site-banner, .menu-toggle, .site-footer {
+    .site-wrap, .site-banner, .menu-toggle, .site-footer {
       transform: translateX($mobile-nav-width);
     }
+
+    .site-wrap, .site-banner, .site-footer {
+      filter: blur(10px);
+    }
+
+
     #livechat-compact-container iframe {
       display: none!important;
     }
+
     .site-header .site-nav {
       transform: none;
     }
+
     .menu-toggle {
       height: 100%;
 
@@ -184,14 +189,11 @@ $mobile-nav-width: 160px;
       // Expand the button invisibly for a quick clickout overlay
       &::after {
         top: 0;
-        left: $padding;
+        left: 0;
         bottom: 0;
         content: '';
         width: 100vw;
         position: absolute;
-        background: $gray-dark;
-        opacity: 0.8;
-
       }
     }
   }
