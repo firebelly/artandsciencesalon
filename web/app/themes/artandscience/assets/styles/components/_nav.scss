@@ -11,7 +11,8 @@ $mobile-nav-width: 160px;
     left: 0;
     z-index: 3;
     width: 100%;
-    position: fixed;
+    // position: fixed;
+    // position: absolute;
     background: $gray-dark;
   }
 }
@@ -19,9 +20,9 @@ $mobile-nav-width: 160px;
 .site-header .site-nav {
   top: 0;
   left: 0;
-  height: 100%;
-  overflow-y: scroll;
+  height: 100vh;
   position: fixed;
+  overflow-y: scroll;
   background: $gray-dark;
   width: $mobile-nav-width;
   padding: ($padding - 10px) 0;

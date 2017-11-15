@@ -798,11 +798,10 @@ var FBSage = (function($) {
     breakpoint_xs = breakpointIndicatorString === 'xs' || breakpoint_sm;
 
     // If we've changed to/from md, close the nav on resize and prevent transitions
-    if(breakpoint_md!== previous_breakpoint_md) {
+    if(breakpoint_md !== previous_breakpoint_md) {
       _hideMobileNav();
       // Avoid unwanted CSS transitions that result from change from mobile nav CSS to desktop nav CSS
       $('html').removeClass('-nav-transition-permitted');
-
     }
   }
 
