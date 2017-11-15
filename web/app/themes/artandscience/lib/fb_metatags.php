@@ -78,8 +78,9 @@ function build_tags() {
   if (!is_front_page()) {
     // Find featured thumbnail of the current post/page
     if (function_exists('has_post_thumbnail') && has_post_thumbnail($post->ID)) {
-      $thumbnail_src = wp_get_attachment_image_src(get_post_thumbnail_id($post->ID), 'large');
-      $link = $thumbnail_src[0];
+      // $thumbnail_src = wp_get_attachment_image_src(get_post_thumbnail_id($post->ID), 'large');
+      // $link = $thumbnail_src[0];
+      $link = \Firebelly\Media\get_post_thumbnail_url($post->ID);
       if (! preg_match('/^https?:\/\//', $link)) {
         // Remove any starting slash with ltrim() and add one to the end of home_url()
         $link = home_url('/') . ltrim($link, '/');
