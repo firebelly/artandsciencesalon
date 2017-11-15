@@ -62,32 +62,32 @@ function add_featured_image_instruction( $content ) {
 /**
  * Hide editor and featured image on specific pages by slug.  Adapted from: https://gist.github.com/ramseyp/4060095
  */
-add_action( 'do_meta_boxes', __NAMESPACE__ . '\hide_editor' );
-function hide_editor() {
+// add_action( 'do_meta_boxes', __NAMESPACE__ . '\hide_editor' );
+// function hide_editor() {
 
-  if( get_current_screen()->id != 'page') return;
+//   if( get_current_screen()->id != 'page') return;
 
-  // Get the Post ID.
-  if ( isset( $_GET['post'] ) ) {
-      $post_id = $_GET['post'];
-  } elseif ( isset( $_POST['post_ID'] ) ) {
-      $post_id = $_POST['post_ID'];
-  }
-  if( !isset( $post_id ) ) return;
+//   // Get the Post ID.
+//   if ( isset( $_GET['post'] ) ) {
+//       $post_id = $_GET['post'];
+//   } elseif ( isset( $_POST['post_ID'] ) ) {
+//       $post_id = $_POST['post_ID'];
+//   }
+//   if( !isset( $post_id ) ) return;
 
-  // Get the slug
-  $slug = get_post($post_id)->post_name;
+//   // Get the slug
+//   $slug = get_post($post_id)->post_name;
 
-  // Hide editor on certain pages
-  if(in_array( $slug, ['home','about','locations','services','stylists','lookbooks','press'])){ 
-    remove_post_type_support('page', 'editor');
-  }
+//   // Hide editor on certain pages
+//   if(in_array( $slug, ['home','about','locations','services','stylists','lookbooks','press'])){ 
+//     remove_post_type_support('page', 'editor');
+//   }
 
-  // Hide featured image on certian pages
-  if(in_array( $slug, ['experience-levels','our-approach','benefits-compensation','models','education','career-path','administrative-jobs'])){ 
-    remove_meta_box( 'postimagediv','page','side' );
-  }
-}
+//   // Hide featured image on certian pages
+//   if(in_array( $slug, ['experience-levels','our-approach','benefits-compensation','models','education','career-path','administrative-jobs'])){ 
+//     remove_meta_box( 'postimagediv','page','side' );
+//   }
+// }
 
 /**
  * Remove page attributes site-wide
