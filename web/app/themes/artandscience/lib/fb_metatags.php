@@ -75,7 +75,7 @@ function build_tags() {
   $metatag_image_heights = array();
 
   // Only find images if it isn't the homepage and the fallback isn't being forced
-  if (!is_home()) {
+  // if (!is_home()) {
     // Find featured thumbnail of the current post/page
     if (function_exists('has_post_thumbnail') && has_post_thumbnail($post->ID)) {
       $thumbnail_src = wp_get_attachment_image_src(get_post_thumbnail_id($post->ID), 'large');
@@ -90,7 +90,7 @@ function build_tags() {
     if (find_images() !== false && is_singular()) { // Use our function to find post/page images
       $metatag_images = array_merge($metatag_images, find_images()); // Returns an array already, so merge into existing
     }
-  }
+  // }
 
   // Get default metatag image from site_options
   $default_metatag_image = \Firebelly\SiteOptions\get_option('default_metatag_image');
@@ -104,8 +104,10 @@ function build_tags() {
   // Make sure there were images passed as an array and loop through/output each
   if (!empty($metatag_images)) {
     $metatag_images = array_reverse($metatag_images); // Reverse images otherwise the default_metatag_image will get priority
+    $count = 0;
     foreach ($metatag_images as $image) {
-      echo '<meta property="og:image" content="' . esc_url(apply_filters('fb_metatag_image', $image)) . '"/>' . "\n";
+      echo '<meta property="og:image' . ( $count > 0 ? ':alt' : '' ) . '" content="' . esc_url(apply_filters('fb_metatag_image', $image)) . '"/>' . "\n";
+      $count++;
     }
   } else {
     // Placeholder tag for AJAX content
