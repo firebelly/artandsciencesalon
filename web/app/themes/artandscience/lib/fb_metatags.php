@@ -98,7 +98,7 @@ function build_tags() {
   // Add the fallback image to the images array
   if ($default_metatag_image) {
     $metatag_images[] = $default_metatag_image;
-    // $metatag_images = array_reverse($metatag_images);
+    $metatag_images = array_reverse($metatag_images);
   }
 
   // Make sure there were images passed as an array and loop through/output each
