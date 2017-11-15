@@ -7,10 +7,10 @@ $mobile-nav-width: 160px;
 
 .site-header {
   @include max-screen($breakpoint-medium - 1px) {
-    top: 0;
-    left: 0;
+    // top: 0;
+    // left: 0;
     z-index: 3;
-    width: 100%;
+    // width: 100%;
     // position: fixed;
     // position: absolute;
     // background: $gray-dark;
@@ -149,16 +149,17 @@ $mobile-nav-width: 160px;
 
     .menu-toggle {
       transition: transform 0.3s 0.15s, height 0.15s; 
+      &::after {
+        opacity: 0;
+        transition: opacity 1s 1s;
+      }
     }
   }
 
 
   // Nav closed is default state, below are styles for nav-open
   html.-nav-open {
-    // overflow-y: hidden;
-    // @include media-sm {
-    //   overflow-y: auto;
-    // }
+    overflow-y: hidden;
 
     .site-wrap, .site-background,.site-banner, .menu-toggle, .site-footer {
       transform: translateX($mobile-nav-width);
@@ -183,11 +184,14 @@ $mobile-nav-width: 160px;
       // Expand the button invisibly for a quick clickout overlay
       &::after {
         top: 0;
-        left: 0;
+        left: $padding;
         bottom: 0;
         content: '';
         width: 100vw;
         position: absolute;
+        background: $gray-dark;
+        opacity: 0.8;
+
       }
     }
   }
