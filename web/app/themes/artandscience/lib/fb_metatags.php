@@ -52,6 +52,9 @@ function build_tags() {
       $metatag_description = strip_tags(get_the_excerpt());
     } else {
       $metatag_description = str_replace("\r\n", ' ' , substr(strip_tags(strip_shortcodes($post->post_content)), 0, 160)).'...';
+      if ($metatag_description === '...' ) {
+        $metatag_description = get_bloginfo('description');
+      }
     }
   } else {
     $metatag_description = get_bloginfo('description');
