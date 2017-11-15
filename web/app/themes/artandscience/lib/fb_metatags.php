@@ -39,7 +39,7 @@ function build_tags() {
   if (is_home() || is_front_page()) {
     $metatag_title = get_bloginfo('name');
   } else {
-    $metatag_title = get_the_title();
+    $metatag_title = get_bloginfo('name').' - '.get_the_title();
   }
   echo '<meta property="og:title" content="' . esc_attr(apply_filters('fb_metatag_title', $metatag_title)) . '"/>' . "\n";
 
