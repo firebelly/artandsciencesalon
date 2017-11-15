@@ -20,7 +20,7 @@ $mobile-nav-width: 160px;
 .site-header .site-nav {
   top: 0;
   left: 0;
-  z-index: 3;
+  z-index: 10;
   height: 100vh;
   position: fixed;
   overflow-y: scroll;
@@ -106,7 +106,7 @@ $mobile-nav-width: 160px;
 .menu-toggle {
   left: 0;
   border: 0;
-  z-index: 4;
+  z-index: 3;
   height: 60px;
   outline: none;
   cursor: pointer;
@@ -162,8 +162,10 @@ $mobile-nav-width: 160px;
       transform: translateX($mobile-nav-width);
     }
 
-    .site-wrap, .site-banner, .site-footer {
-      filter: blur(10px);
+    .site-wrap, .site-banner, .site-footer, .bg-elements {
+      filter: blur(20px);
+      backface-visibility: hidden;
+      overflow: hidden !important;
     }
 
 
@@ -176,7 +178,7 @@ $mobile-nav-width: 160px;
     }
 
     .menu-toggle {
-      height: 100%;
+      height: 120%; // A little extra to cover the url bar in mobile (otherwise whenever the url bar toggles on/off, resulting in window height change, youll see the height animate)
 
       .icon-nav {
         opacity: 0;

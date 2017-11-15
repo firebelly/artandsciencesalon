@@ -145,7 +145,7 @@
   top: 0;
   left: 0;
   bottom: 0;
-  z-index: 2;
+  z-index: 5;
   width: 100%;
   color: $cream;
   display: block;
@@ -557,7 +557,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  z-index: 1;
+  z-index: 4;
   opacity: 0;
   position: fixed;
   visibility: hidden;
@@ -582,5 +582,8 @@ body.-person-popup-open {
     opacity: 1;
     visibility: visible;
     transition: visibility 0s, opacity 0.15s; // fade-in
+  }
+  .menu-toggle {
+    transform: translateX(-100%);
   }
 }
