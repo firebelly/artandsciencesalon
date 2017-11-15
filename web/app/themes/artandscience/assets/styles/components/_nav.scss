@@ -5,11 +5,24 @@ $mobile-nav-width: 160px;
 // wp admin bar push
 .admin-bar {}
 
+.site-header {
+  @include max-screen($breakpoint-medium - 1px) {
+    top: 0;
+    left: 0;
+    z-index: 3;
+    width: 100%;
+    position: fixed;
+    background: $gray-dark;
+  }
+}
+
 .site-header .site-nav {
   top: 0;
   left: 0;
   height: 100%;
-  position: absolute;
+  overflow-y: scroll;
+  position: fixed;
+  background: $gray-dark;
   width: $mobile-nav-width;
   padding: ($padding - 10px) 0;
   transform: translateX(-$mobile-nav-width);
@@ -20,6 +33,7 @@ $mobile-nav-width: 160px;
     transform: none;
     margin-top: 60px;
     position: relative;
+    background: transparent;
   }
 
   // Shared styles between primary and secondary menus
@@ -90,14 +104,14 @@ $mobile-nav-width: 160px;
 .menu-toggle {
   left: 0;
   border: 0;
-  z-index: 1;
+  z-index: 4;
   height: 60px;
   outline: none;
   cursor: pointer;
   width: $padding;
   appearance: none;
   background: $gold;
-  position: absolute;
+  position: fixed;
 
   .icon {
     top: 24px;
@@ -127,23 +141,29 @@ $mobile-nav-width: 160px;
   // Transitions can ONLY happen when the javascript has verified with this class that 
   // the change in CSS rules is a result of the user opening/closing the nav and not just 
   // resizing the screen
-  body.-nav-transition-permitted {
-    .site-wrap, .site-background, .site-banner, .site-header .site-nav, .site-footer {
+  html.-nav-transition-permitted {
+    .site-wrap, .site-banner, .site-header .site-nav, .site-footer {
       transition: transform 0.3s 0.15s;
     }
+
     .menu-toggle {
       transition: transform 0.3s 0.15s, height 0.15s; 
-    }
-    .site-background {
-      transform: none;
     }
   }
 
 
   // Nav closed is default state, below are styles for nav-open
-  body.-nav-open {
-    .site-wrap, .site-background, .site-banner, .menu-toggle, .site-footer {
+  html.-nav-open {
+    overflow-y: hidden;
+    @include media-sm {
+      overflow-y: auto;
+    }
+
+    .site-wrap, .site-background,.site-banner, .menu-toggle, .site-footer {
       transform: translateX($mobile-nav-width);
+    }
+    #livechat-compact-container iframe {
+      display: none!important;
     }
     .site-header .site-nav {
       transform: none;

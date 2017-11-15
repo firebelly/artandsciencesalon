@@ -231,7 +231,6 @@ var FBSage = (function($) {
     });
   }
 
-
   function _initPersonPopup() {
 
       // Add control buttons to popups
@@ -466,19 +465,19 @@ var FBSage = (function($) {
 
   // Nav behavior functions
   function _toggleMobileNav() {
-    if ( $('body').hasClass('-nav-open') ) {
+    if ( $('html').hasClass('-nav-open') ) {
       _hideMobileNav();
     } else {
       _showMobileNav();
     }
   }
   function _showMobileNav() {
-    $('body')
+    $('html')
       .addClass('-nav-open')
       .addClass('-nav-transition-permitted');// Allows CSS transitions on nav -- this is off by default to prevent unwanted transitions on screen resize
   }
   function _hideMobileNav() {
-    $('body')
+    $('html')
       .removeClass('-nav-open')
       .addClass('-nav-transition-permitted'); // Allows CSS transitions on nav -- this is off by default to prevent unwanted transitions on screen resize
   }
@@ -789,15 +788,22 @@ var FBSage = (function($) {
     ).getPropertyValue('content')
     .replace(/['"]+/g, '');
 
+    // Take note of previous state
+    previous_breakpoint_md = breakpoint_md;
+
+    // Determin current breakpoint
     breakpoint_lg = breakpointIndicatorString === 'lg';
     breakpoint_md = breakpointIndicatorString === 'md' || breakpoint_lg;
     breakpoint_sm = breakpointIndicatorString === 'sm' || breakpoint_md;
     breakpoint_xs = breakpointIndicatorString === 'xs' || breakpoint_sm;
 
-    // Close the nav on resize and prevent transitions
-    _hideMobileNav();
-    // Avoid unwanted CSS transitions that result from change from mobile nav CSS to desktop nav CSS
-    $('body').removeClass('-nav-transition-permitted');
+    // If we've changed to/from md, close the nav on resize and prevent transitions
+    if(breakpoint_md!== previous_breakpoint_md) {
+      _hideMobileNav();
+      // Avoid unwanted CSS transitions that result from change from mobile nav CSS to desktop nav CSS
+      $('html').removeClass('-nav-transition-permitted');
+
+    }
   }
 
   // Called on scroll
