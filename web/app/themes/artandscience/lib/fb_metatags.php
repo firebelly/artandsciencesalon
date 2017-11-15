@@ -104,10 +104,8 @@ function build_tags() {
   // Make sure there were images passed as an array and loop through/output each
   if (!empty($metatag_images)) {
     $metatag_images = array_reverse($metatag_images); // Reverse images otherwise the default_metatag_image will get priority
-    $count = 0;
     foreach ($metatag_images as $image) {
-      echo '<meta property="og:image' . ( $count > 0 ? ':alt' : '' ) . '" content="' . esc_url(apply_filters('fb_metatag_image', $image)) . '"/>' . "\n";
-      $count++;
+      echo '<meta property="og:image" content="' . esc_url(apply_filters('fb_metatag_image', $image)) . '"/>' . "\n";
     }
   } else {
     // Placeholder tag for AJAX content
