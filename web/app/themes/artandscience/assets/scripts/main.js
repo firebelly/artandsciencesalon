@@ -90,20 +90,6 @@ var FBSage = (function($) {
 
   } // end init()
 
-  // A simple throttling function -- Thanks https://jsfiddle.net/jonathansampson/m7G64/
-  function _throttle (callback, limit) {
-    var wait = false;                  // Initially, we're not waiting
-    return function () {               // We return a throttled function
-      if (!wait) {                     // If we're not waiting
-        callback.call();               // Execute users function
-        wait = true;                   // Prevent future invocations
-        setTimeout(function () {       // After a period of time
-          wait = false;                // And allow future invocations
-        }, limit);
-      }
-    };
-  }
-
   // Code for sticky nav
   function _initStickyNav() {
 
@@ -151,11 +137,18 @@ var FBSage = (function($) {
         me.refresh();
 
         // Scroll Handling
-        window.addEventListener("scroll", _throttle(function() {
+        var lastMove = 0;
+        var eventThrottle = 20;
+        window.addEventListener("scroll", function() {
           if(breakpoint_md) {
-            me.refresh();
+
+            var now = Date.now();
+            if (now > lastMove + eventThrottle) {
+            lastMove = now;
+              me.refresh();
+            }
           }
-        }, 20));
+        });
 
         // Resize Handling 
         $(window).resize(function () {
