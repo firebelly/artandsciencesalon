@@ -88,34 +88,88 @@ var FBSage = (function($) {
 
   } // end init()
 
+  // A simple throttling function -- Thanks https://jsfiddle.net/jonathansampson/m7G64/
+  function _throttle (callback, limit) {
+    var wait = false;                  // Initially, we're not waiting
+    return function () {               // We return a throttled function
+      if (!wait) {                     // If we're not waiting
+        callback.call();               // Execute users function
+        wait = true;                   // Prevent future invocations
+        setTimeout(function () {       // After a period of time
+            wait = false;              // And allow future invocations
+        }, limit);
+      }
+    };
+  }
+
+  // Code for sticky nav
   function _initStickyNav() {
 
-    $nav = $('.site-header');
-    $nav.addClass('-fixed'); // start fixed
+    // Make StickyNav class
+    function StickyNav() {
 
-    $('.site-top').waypoint({
-      handler: function(direction) {
-        if(direction==='up') {
+      // Cached jqueries
+      var $nav = $('.site-header');
+      var $siteTop = $('.site-top');
+
+      // The reason I did all this...
+      var turningPoint;
+
+      // Alias this
+      var me = this;
+
+      // Big measuments that only change on resize
+      this.getTurningPoint = function() {
+        var navHeight = $nav.outerHeight();
+        var siteBottom = $siteTop.outerHeight();
+        turningPoint = siteBottom - navHeight;
+      };
+
+      // Determine whether nav should be sticky and make it so
+      this.stickOrUnstick = function () {
+
+        var scrollTop = $(window).scrollTop();
+
+        if(scrollTop > turningPoint) {
+          $nav.removeClass('-fixed');
+        } else {
           $nav.addClass('-fixed');
         }
-        if(direction==='down'){
-          $nav.removeClass('-fixed');
-        }
-      }, 
-      offset: function() {
-        var navHeight = $nav[0].getBoundingClientRect().height,
-          topHalfHeight = this.adapter.outerHeight();
-        return  navHeight - topHalfHeight;
-      }
-    });
+      };
 
-    // Refresh Waypoints after browser resize:
-    $(window).resize(function(){
-        Waypoint.refreshAll();
-    });
+      // Init the stickinav and tie behavior to window events
+      this.init = function () {
 
-    $nav.removeClass('-unloaded');
+        // Get it 
+        me.getTurningPoint();
+        me.stickOrUnstick();
+
+        // Scroll Handling
+        window.addEventListener("scroll", _throttle(function() {
+          if(breakpoint_md) {
+            me.stickOrUnstick();
+          }
+        }, 20));
+
+        // Resize Handling 
+        $(window).resize(function () {
+          me.getTurningPoint();
+          me.stickOrUnstick();
+        });
+
+        // Tell CSS the nav is ready to reveal
+        $nav.removeClass('-unloaded');
+      };
+
+      // Fire away
+      this.init();
+    }
+
+    // Make the nav
+    var nav = new StickyNav();
   }
+
+
 
   // Grab most recent Instagram post with tag "behindthechair"
   function _pullInstagramPost() {
