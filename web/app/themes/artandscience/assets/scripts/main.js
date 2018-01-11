@@ -12,6 +12,7 @@ var FBSage = (function($) {
       $document,
       $sidebar,
       loadingTimer,
+      _stickyNav,
       page_at;
 
   // Inject lazy-loading masks
@@ -38,6 +39,7 @@ var FBSage = (function($) {
     $('body').fitVids();
 
     _hashHandling();
+    _initStickyNav();
     _initLazyLoading();
     _initPersonPopup();
     _initImageViewerPopup();
@@ -52,7 +54,7 @@ var FBSage = (function($) {
     _initToTop();
     _initNav();
     _initBookAppointment();
-    _initStickyNav();
+    _stickyNav.refresh();
 
     // Certain elements (e.g. popups) are hidden during load, remove the class hiding them...
     $('.hide-during-page-load').removeClass('hide-during-page-load');
@@ -96,7 +98,7 @@ var FBSage = (function($) {
         callback.call();               // Execute users function
         wait = true;                   // Prevent future invocations
         setTimeout(function () {       // After a period of time
-            wait = false;              // And allow future invocations
+          wait = false;                // And allow future invocations
         }, limit);
       }
     };
@@ -119,7 +121,7 @@ var FBSage = (function($) {
       var me = this;
 
       // Big measuments that only change on resize
-      this.getTurningPoint = function() {
+      this.updateTurningPoint = function() {
         var navHeight = $nav.outerHeight();
         var siteBottom = $siteTop.outerHeight();
         turningPoint = siteBottom - navHeight;
@@ -137,24 +139,27 @@ var FBSage = (function($) {
         }
       };
 
+      this.refresh = function () {
+        me.updateTurningPoint();
+        me.stickOrUnstick();
+      };
+
       // Init the stickinav and tie behavior to window events
       this.init = function () {
 
-        // Get it 
-        me.getTurningPoint();
-        me.stickOrUnstick();
+        // Start off in correct state 
+        me.refresh();
 
         // Scroll Handling
         window.addEventListener("scroll", _throttle(function() {
           if(breakpoint_md) {
-            me.stickOrUnstick();
+            me.refresh();
           }
         }, 20));
 
         // Resize Handling 
         $(window).resize(function () {
-          me.getTurningPoint();
-          me.stickOrUnstick();
+          me.refresh();
         });
 
         // Tell CSS the nav is ready to reveal
@@ -166,7 +171,7 @@ var FBSage = (function($) {
     }
 
     // Make the nav
-    var nav = new StickyNav();
+    _stickyNav = new StickyNav();
   }
 
 
@@ -487,7 +492,7 @@ var FBSage = (function($) {
       delay: delay,
       offset: -wpOffset + offset,
       complete: function() {
-        Waypoint.refreshAll();
+        _stickyNav.refresh();
       }
     }, "easeOutSine");
   }
@@ -542,7 +547,13 @@ var FBSage = (function($) {
     var $toggles = $('.accordian-table .accordian-toggle');
     var $drawers = $('.accordian-table .accordian-drawer');
 
-    $drawers.velocity('slideUp', { duration: 0 });
+    $drawers.velocity('slideUp', {
+      duration: 0,
+      complete: function () {
+        _stickyNav.refresh();
+      }
+    });
+
 
     // Inject open/close indicator icon
     $toggles.each(function() {
@@ -558,21 +569,19 @@ var FBSage = (function($) {
       // Toggle open or closed based on current state
       if ($toggle.is('.-active')) {
 
-        console.log('close');
         $toggle.removeClass('-active');
         $drawer.velocity('slideUp', {
           duration: 200,
           complete: function () {
-            Waypoint.refreshAll();
+            _stickyNav.refresh();
           }
         });
       } else {
-        console.log('open');
         $toggle.addClass('-active');
         $drawer.velocity('slideDown', {
           duration: 200,
           complete: function () {
-            Waypoint.refreshAll();
+            _stickyNav.refresh();
           }
         });
       }
@@ -756,7 +765,12 @@ var FBSage = (function($) {
       });
 
       // Hide the subpage section navs
-      $('.subpage-section-nav').velocity('slideUp', {duration: 0});
+      $('.subpage-section-nav').velocity('slideUp', {
+        duration: 0,
+        complete: function () {
+          _stickyNav.refresh();
+        }
+      });
 
       // Open first page (dont scroll there)
       _openSubpage($('.subpage:eq(0)'),false);
@@ -795,8 +809,8 @@ var FBSage = (function($) {
         $thisLink.next('.subpage-section-nav').velocity('slideDown', {duration: 300});
       }
 
-      // Refresh waypoints as we've shifted elements a bunch
-      Waypoint.refreshAll();
+      // Refresh stickynav as we've shifted elements a bunch
+      _stickyNav.refresh();
     }
   }
 
