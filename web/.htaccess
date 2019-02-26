@@ -1,0 +1,37 @@
+# Custom redirects
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /
+
+# Less-intensive 404s for missing assets
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule \.(jpg|jpeg|png|gif|ico|icns|bmp)$ - [NC,R=404,L]
+
+# Force single domain
+RewriteCond %{REQUEST_URI} !\.well-known
+RewriteCond %{HTTP_HOST} !^artandsciencesalon\.com [NC]
+RewriteCond %{HTTP_HOST} !^artandsciencesalon\.firebelly\.co [NC]
+RewriteCond %{HTTP_HOST} !^artandsciencesalon\.(localhost|sage) [NC]
+RewriteRule ^(.*)$ https://artandsciencesalon.com%{REQUEST_URI} [R=301,L]
+
+# Force HTTPS (uncomment once site is live and SSL cert is set up)
+RewriteCond %{REQUEST_URI} !\.well-known
+RewriteCond %{HTTP:X-Forwarded-SSL} !on
+RewriteCond %{HTTP_HOST} !^artandsciencesalon\.firebelly\.co [NC]
+RewriteCond %{HTTP_HOST} !^artandsciencesalon\.(localhost|sage) [NC]
+RewriteRule ^(.*)$ https://artandsciencesalon.com%{REQUEST_URI} [R=301,L]
+
+</IfModule>
+# END Custom redirects
+
+# BEGIN WordPress
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /
+RewriteRule ^index\.php$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.php [L]
+</IfModule>
+
+# END WordPress
