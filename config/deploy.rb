@@ -3,7 +3,7 @@ set :domain, 'artandsciencesalon.com'
 set :theme, 'artandscience'
 set :login, 'firebelly'
 set :repo_url, 'git@github.com:firebelly/artandsciencesalon.git'
-set :php, 'php70'
+set :php, 'php74'
 
 # Hardcodes branch to always be master
 # This could be overridden in a stage config file
