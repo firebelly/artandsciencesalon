@@ -1,6 +1,7 @@
 <?php
 
 namespace Firebelly\Init;
+use Roots\Sage\Assets;
 
 /**
  * Don't run wpautop before shortcodes are run! wtf Wordpress. from http://stackoverflow.com/a/14685465/1001675
@@ -74,7 +75,7 @@ add_filter('tiny_mce_before_init', __NAMESPACE__ . '\simplify_tinymce');
  */
 function clean_up_content($content) {
   // Convert <span class="details-link"><a></span> to <a class="details-link"> (can't just add class to element w/ tinymce style formats, has to have wrapper)
-  $content = preg_replace('/<span class=\\\"details-link\\\"><a(.*)<\/a><\/span>/', '<a class=\"details-link\"$1</a>', $content);
+  $content = preg_replace('/<span class=\\\"details\-link\\\"><a(.*)<\/a><\/span>/', '<a class=\"details-link\"$1</a>', $content);
   return $content;
 }
 add_filter('content_save_pre', __NAMESPACE__ . '\\clean_up_content', 10, 1);
