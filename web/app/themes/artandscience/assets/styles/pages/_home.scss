@@ -129,6 +129,17 @@
     }
   }
 
+  // Optional text box on homepage below mission statement
+  .homepage-notice.user-content {
+    margin-top: 24px;
+    a:not(.details-link) {
+      text-decoration: underline;
+      &:hover {
+        color: $orange;
+      }
+    }
+  }
+
   // Mobile Layout
   @include max-screen($breakpoint-medium - 1px) {
 
