@@ -60,13 +60,23 @@ function register_metaboxes() {
     'name'     => 'First Line',
     'id'       => $prefix.'mission1',
     'type'     => 'text',
-    'desc'    => 'Segment before dash in mission statement box.',
+    'desc'     => 'Segment before dash in mission statement box.',
   ) );
   $home_mission_statement -> add_field( array(
     'name'     => 'Second Line',
     'id'       => $prefix.'mission2',
     'type'     => 'text',
-    'desc'    => 'After dash.',
+    'desc'     => 'After dash.',
+  ) );
+  $home_mission_statement -> add_field( array(
+    'name'     => 'Homepage Notice',
+    'id'       => $prefix.'homepage_notice',
+    'type'     => 'wysiwyg',
+    'options'  => array(
+        'media_buttons' => false,
+        'textarea_rows' => 4,
+    ),
+    'desc'    => 'Optional text shown below mission statement.',
   ) );
 
   /**

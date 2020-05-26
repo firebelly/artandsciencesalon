@@ -3,26 +3,27 @@
     Template name: Front-page
   */
 
-  // Mission Statment
+  // Mission Statement
   $mission1 = get_post_meta($post->ID,'_cmb2_mission1',true);
   $mission2 = get_post_meta($post->ID,'_cmb2_mission2',true);
+  $homepage_notice = get_post_meta($post->ID,'_cmb2_homepage_notice',true);
 
   // Careers
-  $careers_image_url = Firebelly\Media\get_thumbnail_url(get_post_meta($post->ID,'_cmb2_careers_image_id',true),'gallery-thumb', false);  
+  $careers_image_url = Firebelly\Media\get_thumbnail_url(get_post_meta($post->ID,'_cmb2_careers_image_id',true),'gallery-thumb', false);
   $careers_image_preload_url = Firebelly\Media\get_thumbnail_url(get_post_meta($post->ID,'_cmb2_careers_image_id',true),'preload', false);
 
   // Press
   $press = get_post_meta($post->ID,'_cmb2_press',true);
 
   // Services
-  $services_image_url = Firebelly\Media\get_thumbnail_url(get_post_meta($post->ID,'_cmb2_services_image_id',true),'gallery-thumb', false);  
+  $services_image_url = Firebelly\Media\get_thumbnail_url(get_post_meta($post->ID,'_cmb2_services_image_id',true),'gallery-thumb', false);
   $services_image_preload_url = Firebelly\Media\get_thumbnail_url(get_post_meta($post->ID,'_cmb2_services_image_id',true),'preload', false);
 
   // Social Impact
   $social_impact = get_post_meta($post->ID,'_cmb2_social_impact',true);
 
   // Instagram
-  $instagram_backup_image_url = Firebelly\Media\get_thumbnail_url(get_post_meta($post->ID,'_cmb2_instagram_backup_image_id',true),'gallery-thumb', false);  
+  $instagram_backup_image_url = Firebelly\Media\get_thumbnail_url(get_post_meta($post->ID,'_cmb2_instagram_backup_image_id',true),'gallery-thumb', false);
   $instagram_tag = get_post_meta($post->ID,'_cmb2_instagram_tag',true);
 
   // Get a random featured stylist
@@ -76,6 +77,11 @@
           <span class="line-1"><?= $mission1 ?></span>
           <span class="line-2"><?= $mission2 ?></span>
         </h2>
+        <?php if (!empty($homepage_notice)): ?>
+          <div class="homepage-notice user-content">
+            <?= apply_filters('the_content', $homepage_notice) ?>
+          </div>
+        <?php endif ?>
       </div>
     </article>
 
