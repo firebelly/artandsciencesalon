@@ -74,7 +74,7 @@ function register_metaboxes() {
     'type'     => 'wysiwyg',
     'options'  => array(
         'media_buttons' => false,
-        'textarea_rows' => 4,
+        'textarea_rows' => 6,
     ),
     'desc'    => 'Optional text shown below mission statement.',
   ) );
