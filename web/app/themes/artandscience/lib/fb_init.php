@@ -54,9 +54,9 @@ function simplify_tinymce($settings) {
 
   $style_formats = array(
     array(
-      'title' => 'Details Link',
+      'title' => 'Arrow Link',
       'block' => 'span',
-      'classes' => 'details-link',
+      'classes' => 'arrow-link',
     ),
     array(
       'title' => 'Two Image Layout',
@@ -71,27 +71,8 @@ function simplify_tinymce($settings) {
 add_filter('tiny_mce_before_init', __NAMESPACE__ . '\simplify_tinymce');
 
 /**
- * Clean up content before saving post
- */
-function clean_up_content($content) {
-  // Convert <span class="details-link"><a></span> to <a class="details-link"> (can't just add class to element w/ tinymce style formats, has to have wrapper)
-  $content = preg_replace('/<span class=\\\"details\-link\\\"><a(.*)<\/a><\/span>/', '<a class=\"details-link\"$1</a>', $content);
-  return $content;
-}
-add_filter('content_save_pre', __NAMESPACE__ . '\\clean_up_content', 10, 1);
-//
-// ... and support for cmb2 wysiwyg fields:
-//
-function cmb2_sanitize_wysiwyg_callback($override_value, $content) {
-  $content = preg_replace('/<span class=\\\"button\\\"><a(.*)<\/a><\/span>/', '<a class=\"button\"$1</a>', $content);
-  return $content;
-}
-add_filter('cmb2_sanitize_wysiwyg', __NAMESPACE__ . '\\cmb2_sanitize_wysiwyg_callback', 10, 2);
-
-/**
  * Custom Admin styles + JS
  */
 add_action('admin_enqueue_scripts', function($hook){
   wp_enqueue_style('fb_wp_admin_css', Assets\asset_path('styles/admin.css'));
-  // wp_enqueue_script('fb_wp_admin_js', Assets\asset_path('scripts/admin.js'), ['jquery'], null, true);
 }, 100);

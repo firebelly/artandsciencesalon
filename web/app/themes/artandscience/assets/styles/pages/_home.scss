@@ -101,7 +101,8 @@
     }
 
     // Trigger details link hover state when hovering anywhere on box
-    .box, #social-impact .box {
+    .box,
+    #social-impact .box {
       &:hover {
         .details-link {
           color: $orange;
@@ -132,10 +133,15 @@
   // Optional text box on homepage below mission statement
   .homepage-notice.user-content {
     margin-top: 24px;
-    a:not(.details-link) {
+    a {
       text-decoration: underline;
       &:hover {
         color: $orange;
+      }
+    }
+    .arrow-link {
+      a {
+        text-decoration: none;
       }
     }
   }
