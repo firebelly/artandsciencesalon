@@ -10,12 +10,10 @@
     </div>
     <nav class="site-nav" role="navigation">
 
-
-
-      <div class="book-appointment hide-during-page-load">
+      <?php /* <div class="book-appointment hide-during-page-load">
         <button>Book an appointment</button>
         <ul class="location-list">
-          
+
           <?php
             $location_args = array(
               'numberposts' => -1,
@@ -33,7 +31,7 @@
           ?>
 
         </ul>
-      </div>
+      </div> */ ?>
 
       <?php
       if (has_nav_menu('primary_navigation')) :
@@ -47,5 +45,5 @@
       ?>
     </nav>
 
-  
+
 </header>
