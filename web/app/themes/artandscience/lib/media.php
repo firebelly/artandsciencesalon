@@ -6,7 +6,7 @@
 namespace Firebelly\Media;
 
 // Compress jpegs
-add_filter( 'jpeg_quality', create_function( '', 'return 80;' ) );
+add_filter( 'jpeg_quality', function(){ return '80'; });
 
 // Add image sizes
 add_image_size( 'preload', 50 );
@@ -40,8 +40,8 @@ function get_thumbnail_url($thumb_id, $size = 'gallery', $treated=true) {
 }
 
 /**
- * Get the file path (not URL) to a thumbnail of a particular size.  
- * (get_attached_file() only returns paths to full-sized thumbnails.)  
+ * Get the file path (not URL) to a thumbnail of a particular size.
+ * (get_attached_file() only returns paths to full-sized thumbnails.)
  * @param  int            $thumb_id - attachment id of thumbnail
  * @param  string|array   $size - thumbnail size string (e.g. 'full') or array [w,h]
  * @return path           file path to properly sized thumbnail
@@ -60,7 +60,7 @@ function get_thumbnail_size_path($thumb_id,$size) {
 
   // Replace the filename in our path with the filename of the properly sized image
   $exploded_path = explode ( '/' , $old_path );
-  $exploded_path[count($exploded_path)-1] = $filename; 
+  $exploded_path[count($exploded_path)-1] = $filename;
   $new_path = implode ( '/' , $exploded_path );
 
   return $new_path;
@@ -78,7 +78,7 @@ function get_treated_url($post_or_id, $size, $type='default') {
   if (is_object($post_or_id)) {
     if (has_post_thumbnail($post_or_id->ID)) {
       $thumb_id = get_post_thumbnail_id($post_or_id->ID);
-    } else { 
+    } else {
       return false;  //thumbnail not found
     }
   } else {
@@ -88,16 +88,16 @@ function get_treated_url($post_or_id, $size, $type='default') {
   $full_image = get_attached_file($thumb_id, true); //this only returns images of size 'full'
 
   // Do not proceed if full image not found
-  if (!file_exists($full_image)) { 
-    return false; 
-  } 
+  if (!file_exists($full_image)) {
+    return false;
+  }
 
   // Get the image of proper size
   $image_to_convert = get_thumbnail_size_path($thumb_id,$size);
 
   // Do not proceed if sized image not found
-  if (!file_exists($image_to_convert)) { 
-    return false; 
+  if (!file_exists($image_to_convert)) {
+    return false;
   }
 
   $upload_dir = wp_upload_dir();
@@ -118,7 +118,7 @@ function get_treated_url($post_or_id, $size, $type='default') {
     // Build the ImageMagick convert command and execute
     $convert_command = (WP_ENV==='development') ? '/usr/local/bin/convert' : '/usr/bin/convert';
     $full_command = '';
- 
+
     // GRAY TO TEST
     if ($type==='gray') {
       //convert keys.jpg -modulate 100,0 -size 256x1! gradient:#555555-#dddddd -clut keys-treated.jpg
