@@ -75,4 +75,5 @@ add_filter('tiny_mce_before_init', __NAMESPACE__ . '\simplify_tinymce');
  */
 add_action('admin_enqueue_scripts', function($hook){
   wp_enqueue_style('fb_wp_admin_css', Assets\asset_path('styles/admin.css'));
+  wp_enqueue_script('fb_wp_admin_js', Assets\asset_path('scripts/admin.js'), ['jquery'], null, true);
 }, 100);
