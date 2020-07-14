@@ -21,12 +21,12 @@
   }
 ?>
 
- <div class="page-header <?= $header_class ?>">
+<div class="page-header<?= !empty($header_class) ? ' '.$header_class : '' ?>">
   <div class="header-image-wrap">
     <div class="header-image lazy" data-src="<?= $header_image_url ?>" data-preload-src="<?= $header_image_preload_url ?>"></div>
   </div>
-    <div class="header-text user-content -indent-right-big">
-      <h2 class="content-h2">#404</h2>
-      <?= $header_text ?>
-    </div>
+  <div class="header-text user-content -indent-right-big">
+    <h2 class="content-h2">#404</h2>
+    <?= $header_text ?>
+  </div>
 </div>
