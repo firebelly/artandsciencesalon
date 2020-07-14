@@ -79,12 +79,12 @@ function hide_editor() {
   $slug = get_post($post_id)->post_name;
 
   // Hide editor on certain pages
-  if(in_array( $slug, ['home','about','locations','services','stylists','lookbooks','press'])){ 
+  if(in_array( $slug, ['home','about','locations','services','stylists','lookbooks','press'])){
     remove_post_type_support('page', 'editor');
   }
 
   // Hide featured image on certian pages
-  if(in_array( $slug, ['experience-levels','our-approach','benefits-compensation','models','education','career-path','administrative-jobs'])){ 
+  if(in_array( $slug, ['experience-levels','our-approach','benefits-compensation','models','education','career-path','administrative-jobs'])){
     remove_meta_box( 'postimagediv','page','side' );
   }
 }

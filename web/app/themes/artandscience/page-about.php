@@ -8,15 +8,8 @@
   $philosophy_image_url = Firebelly\Media\get_thumbnail_url(get_post_meta($post->ID,'_cmb2_philosophy_image_id',true),'gallery-thumb', false);
   $philosophy_image_preload_url = Firebelly\Media\get_thumbnail_url(get_post_meta($post->ID,'_cmb2_philosophy_image_id',true),'preload', false);
 
-  // David
-  $david_bio = apply_filters('the_content', '<h3 class="owner-name">David Raccuglia</h3>'.get_post_meta($post->ID,'_cmb2_david_bio',true) );
-  $david_image_url = Firebelly\Media\get_thumbnail_url(get_post_meta($post->ID,'_cmb2_david_image_id',true),'gallery-thumb', false);
-  $david_image_preload_url = Firebelly\Media\get_thumbnail_url(get_post_meta($post->ID,'_cmb2_david_image_id',true),'preload', false);
-
-  // Paul
-  $paul_bio = apply_filters('the_content', '<h3 class="owner-name">Paul Wilson</h3>'.get_post_meta($post->ID,'_cmb2_paul_bio',true) );
-  $paul_image_url = Firebelly\Media\get_thumbnail_url(get_post_meta($post->ID,'_cmb2_paul_image_id',true),'gallery-thumb', false);
-  $paul_image_preload_url = Firebelly\Media\get_thumbnail_url(get_post_meta($post->ID,'_cmb2_paul_image_id',true),'preload', false);
+  // Owners
+  $owners = get_post_meta($post->ID,'_cmb2_owners_group',true);
 
   // Management
   $managing_partners = apply_filters('the_content', get_post_meta($post->ID,'_cmb2_managing_partners',true) );
@@ -49,40 +42,45 @@
 </div>
 <div class="page-block -bg-gray-dark -text-cream -indent-right-big -top-overlap owners">
   <h2 class="content-h1">Owners</h2>
+
+  <?php foreach ($owners as $owner):
+
+    $owner_bio = apply_filters('the_content', '<h3 class="owner-name">'.$owner['name'].'</h3>'.$owner['bio']);
+    $owner_image_url = Firebelly\Media\get_thumbnail_url($owner['image_id'],'gallery-thumb', false);
+    $owner_image_preload_url = Firebelly\Media\get_thumbnail_url($owner['image_id'],'preload', false);
+
+    // Link to profile?
+    if (empty($owner['profile'])):
+ ?>
   <div class="owner">
-    <div class="user-content owner-bio"><?= $david_bio ?></div>
+    <div class="user-content owner-bio"><?= $owner_bio ?></div>
     <div class="image">
       <div class="thumbnail-wrap">
-        <div class="thumbnail lazy" data-src="<?= $david_image_url ?>" data-preload-src="<?= $david_image_preload_url ?>"></div>
+        <div class="thumbnail lazy" data-src="<?= $owner_image_url ?>" data-preload-src="<?= $owner_image_preload_url ?>"></div>
       </div>
     </div>
   </div>
 
   <?php
-  $person = get_posts([
-    'numberposts' => 1,
-    'post_type' => 'person',
-    'name' => 'paul-wilson',
-  ])[0];
-
-  if ($person) :
+  else:
+    $person = get_post($owner['profile']);
     $id = $person->post_name;
     ?>
 
     <div class="section">
       <article id="<?= $id ?>" class="stylist person owner" data-slug="<?= $person->post_name ?>" data-page-title="<?= $person->post_title ?>" data-page-url="<?= get_permalink($person) ?>">
 
-          
-          <?php $post = $person;  
+
+          <?php $post = $person;
           include(locate_template('templates/person-popup.php')); ?>
 
-          <div class="user-content owner-bio"><?= $paul_bio ?></div>
+          <div class="user-content owner-bio"><?= $owner_bio ?></div>
           <div class="image">
             <div class="open-person-popup">
               <div class="thumbnail-wrap">
-                <div class="thumbnail lazy" data-src="<?= $paul_image_url ?>" data-preload-src="<?= $paul_image_preload_url ?>"></div>
+                <div class="thumbnail lazy" data-src="<?= $owner_image_url ?>" data-preload-src="<?= $owner_image_preload_url ?>"></div>
               </div>
-              <p><a href="#" class="details-link non-user-content-link open-person-popup">Paul's Profile</a></p>
+              <p><a href="#" class="details-link non-user-content-link open-person-popup"><?= $owner['name'] ?>'s Profile</a></p>
             </div>
           </div>
 
@@ -90,6 +88,7 @@
     </div>
 
   <?php endif; ?>
+  <?php endforeach; ?>
 
 </div>
 <div class="page-block -bg-cream-dark -indent-right management">
@@ -102,7 +101,7 @@
   $people = get_posts([
     'numberposts' => -1,
     'post_type' => 'person',
-    'orderby'=> 'title', 
+    'orderby'=> 'title',
     'order' => 'ASC',
     'tax_query' => [
       [
@@ -133,7 +132,7 @@
   $people = get_posts([
     'numberposts' => -1,
     'post_type' => 'person',
-    'orderby'=> 'title', 
+    'orderby'=> 'title',
     'order' => 'ASC',
     'tax_query' => [
       [
@@ -182,7 +181,7 @@
     $people_args = array(
       'numberposts' => -1,
       'post_type' => 'person',
-      'orderby'=> 'title', 
+      'orderby'=> 'title',
       'order' => 'ASC',
       'tax_query' => array(
         array(
@@ -207,7 +206,7 @@
         </ul>
       </div>
 
-  <?php endif; 
+  <?php endif;
   endforeach;
   ?>
 

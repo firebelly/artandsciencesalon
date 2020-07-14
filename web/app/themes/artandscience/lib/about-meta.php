@@ -30,6 +30,7 @@ function register_metaboxes() {
     'type'     => 'wysiwyg',
     'options' => array(
       'media_buttons' => false,
+      'textarea_rows' => 8,
     ),
     'desc'    => 'Copy for Philosophy section.',
   ) );
@@ -55,31 +56,58 @@ function register_metaboxes() {
   /**
    * Owners
    */
-  $about_owners = new_cmb2_box( array(
-    'id'            => 'about_owners_metabox',
-    'title'         => __( 'Owners', 'sage' ),
-    'object_types'  => array( 'page', ), // Post type
-    'show_on'       => array( 'key' => 'slug', 'value' => 'about'),
-    'context'       => 'normal',
-    'priority'      => 'default',
-    'show_names'    => true,
-    )
-  );
-  $about_owners -> add_field( array(
-    'name'     => 'David Raccuglia...',
-    'id'       => $prefix.'david_bio',
-    'description' => 'Bio for David.<br><br>Continue the sentence starting with his name. E.g.: "is the original founder of..."',
-    'type'    => 'wysiwyg',
+  $owners_group = new_cmb2_box( array(
+    'id'           => $prefix . 'owners_box',
+    'title'        => __( 'Owners', 'cmb2' ),
+    'priority'     => 'default',
+    'context'      => 'normal',
+    'object_types' => array( 'page', ), // Post type
+    'show_on'      => array( 'key' => 'slug', 'value' => 'about'),
+  ) );
+
+  $owners_group_id = $owners_group->add_field( array(
+    'id'      => $prefix . 'owners_group',
+    'type'    => 'group',
     'options' => array(
-      'media_buttons' => false,
+        'group_title'   => __( 'Owner {#}', 'cmb2' ),
+        'add_button'    => __( 'Add Another Owner', 'cmb2' ),
+        'remove_button' => __( 'Remove Owner', 'cmb2' ),
+        'sortable'      => true,
     ),
   ) );
-  $about_owners -> add_field( array(
-    'name'    => "David Raccuglia's Image",
+
+  $owners_group->add_group_field( $owners_group_id, array(
+    'name'        => 'Name',
+    'id'          => 'name',
+    'type'        => 'text',
+  ) );
+
+  $owners_group->add_group_field( $owners_group_id, array(
+    'name'        => 'Bio',
+    'id'          => 'bio',
+    'description' => 'Continue the sentence starting with owner name. E.g.: "is the original founder of..."',
+    'type'        => 'wysiwyg',
+    'options'     => array(
+      'media_buttons' => false,
+      'textarea_rows' => 8,
+    ),
+  ) );
+
+  $owners_group->add_group_field( $owners_group_id, array(
+    'name'        => 'Profile',
+    'id'          => 'profile',
+    'type'     => 'select',
+    'show_option_none' => true,
+    'options'  => \Firebelly\CMB2\get_post_options(['post_type' => 'person', 'numberposts' => -1]),
+    'description' => 'Select profile to link to (optional)',
+  ) );
+
+  $owners_group->add_group_field( $owners_group_id, array(
+    'name'    => 'Image',
     'desc'    => 'Select/upload an image.  This image should be TREATED.',
-    'id'      => $prefix.'david_image',
+    'id'      => 'image',
     'type'    => 'file',
-    'desc'    => '(PRE-TREATMENT REQUIRED. 800px width advised. Will be cropped to 1:1 aspect ratio [top weighted].)<br><br>David\'s picture.',
+    'desc'    => '(PRE-TREATMENT REQUIRED. 800px width advised. Will be cropped to 1:1 aspect ratio [top weighted].)<br><br>If a profile is selected, this can and should be a different image than the popup bio picture--especially since it needs to be treated here whereas the image uploaded to the popup should NOT be treated.',
     'options' => array(
       'url'   => false, // Hide the text input for the url
     ),
@@ -87,32 +115,6 @@ function register_metaboxes() {
       'add_upload_file_text' => 'Add Image'
     ),
     // query_args are passed to wp.media's library query.
-    'query_args' => array(
-      'type'     => 'image',
-    ),
-    'preview_size' => 'gallery-thumb',
-  ) );
-  $about_owners -> add_field( array(
-    'name'        => 'Paul Wilson...',
-    'id'          => $prefix.'paul_bio',
-    'description' => 'Bio for Paul.<br><br>Continue the sentence starting with his name. E.g.: "is the original founder of..."',
-    'type'        => 'wysiwyg',
-    'options'     => array(
-      'media_buttons' => false,
-    ),
-  ) );
-  $about_owners -> add_field( array(
-    'name'    => "Paul Wilson's Image",
-    'desc'    => 'Select/upload an image.  This image should be TREATED.',
-    'id'      => $prefix.'paul_image',
-    'type'    => 'file',
-    'desc'    => '(PRE-TREATMENT REQUIRED. 800px width advised. Will be cropped to 1:1 aspect ratio [top weighted].)<br><br>Paul\'s picture.<br><br>This can and should be a different image than his popup bio picture--especially since it needs to be treated here whereas the image uploaded to the popup should NOT be treated.',
-    'options' => array(
-      'url'   => false, // Hide the text input for the url
-    ),
-    'text'    => array(
-      'add_upload_file_text' => 'Add Image'
-    ),
     'query_args' => array(
       'type'     => 'image',
     ),
@@ -139,6 +141,7 @@ function register_metaboxes() {
     'description' => 'Copy for Managing Partners section.<br><br>The partners and staff themselves will be added automatically.',
     'options'  => array(
       'media_buttons' => false,
+      'textarea_rows' => 8,
     ),
   ) );
 
@@ -162,6 +165,7 @@ function register_metaboxes() {
     'description' => 'Copy for Educators section.<br><br>The educators themselves will be added automatically.',
     'options'  => array(
       'media_buttons' => false,
+      'textarea_rows' => 8,
     ),
   ) );
 
@@ -185,6 +189,7 @@ function register_metaboxes() {
     'description' => 'Copy for Social Impact section',
     'options'  => array(
       'media_buttons' => false,
+      'textarea_rows' => 8,
     ),
   ) );
 
@@ -208,6 +213,7 @@ function register_metaboxes() {
     'description' => 'Copy for Barbershops section.',
     'options'  => array(
       'media_buttons' => false,
+      'textarea_rows' => 8,
     ),
   ) );
   $about_barbershops -> add_field( array(
