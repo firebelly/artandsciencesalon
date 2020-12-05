@@ -1,15 +1,15 @@
 set :application, 'artandsciencesalon'
 set :domain, 'artandsciencesalon.com'
 set :theme, 'artandscience'
-set :login, 'firebelly'
+set :login, 'artandscience'
 set :repo_url, 'git@github.com:firebelly/artandsciencesalon.git'
-set :php, 'php70'
+set :php, 'php74'
 
 # Hardcodes branch to always be master
 # This could be overridden in a stage config file
 set :branch, :master
 
-set :deploy_to, -> { "/home/#{fetch(:login)}/webapps/#{fetch(:application)}" }
+set :deploy_to, -> { "/home/#{fetch(:login)}/apps/#{fetch(:application)}" }
 
 set :tmp_dir, -> { "/home/#{fetch(:login)}/tmp" }
 
