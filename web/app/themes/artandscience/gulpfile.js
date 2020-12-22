@@ -98,15 +98,7 @@ var cssTasks = function(filename) {
       }));
     })
     .pipe(concat, filename)
-    .pipe(autoprefixer, {
-      browsers: [
-        'last 2 versions',
-        'ie 9',
-        'android 2.3',
-        'android 4',
-        'opera 12'
-      ]
-    })
+    .pipe(autoprefixer)
     .pipe(cssNano, {
       safe: true,
       autoprefixer: false
