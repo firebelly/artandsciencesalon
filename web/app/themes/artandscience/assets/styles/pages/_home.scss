@@ -228,7 +228,7 @@
       }
     }
 
-    #behind-the-scenes {
+    #lookbook-spotlight {
       z-index: 2;
       position: relative;
       margin-top: -$padding;
@@ -321,7 +321,7 @@
             }
           }
 
-          #lookbook-spotlight {
+          #behind-the-scenes {
             order: 0;
             width: 100%;
             float: right;
@@ -347,7 +347,7 @@
           float: left;
         }
 
-        #behind-the-scenes {
+        #lookbook-spotlight {
           float: right;
           .box {
             border-bottom: 2px solid $orange;
@@ -426,7 +426,7 @@
         color: $gray-dark;
         position: absolute;
         top: 50%; left: 50%;
-        transform: translate(-50%,-55%);
+        transform: translate(-50%, -50%);
       }
     }
   }

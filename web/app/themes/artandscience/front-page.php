@@ -4,27 +4,27 @@
   */
 
   // Mission Statement
-  $mission1 = get_post_meta($post->ID,'_cmb2_mission1',true);
-  $mission2 = get_post_meta($post->ID,'_cmb2_mission2',true);
-  $homepage_notice = get_post_meta($post->ID,'_cmb2_homepage_notice',true);
+  $mission1 = get_post_meta($post->ID, '_cmb2_mission1', true);
+  $mission2 = get_post_meta($post->ID, '_cmb2_mission2', true);
+  $homepage_notice = get_post_meta($post->ID, '_cmb2_homepage_notice', true);
 
   // Careers
-  $careers_image_url = Firebelly\Media\get_thumbnail_url(get_post_meta($post->ID,'_cmb2_careers_image_id',true),'gallery-thumb', false);
-  $careers_image_preload_url = Firebelly\Media\get_thumbnail_url(get_post_meta($post->ID,'_cmb2_careers_image_id',true),'preload', false);
+  $careers_image_url = Firebelly\Media\get_thumbnail_url(get_post_meta($post->ID, '_cmb2_careers_image_id', true), 'gallery-thumb', false);
+  $careers_image_preload_url = Firebelly\Media\get_thumbnail_url(get_post_meta($post->ID, '_cmb2_careers_image_id', true), 'preload', false);
 
   // Press
-  $press = get_post_meta($post->ID,'_cmb2_press',true);
+  $press = get_post_meta($post->ID, '_cmb2_press', true);
 
   // Services
   $services_image_url = Firebelly\Media\get_thumbnail_url(get_post_meta($post->ID,'_cmb2_services_image_id',true),'gallery-thumb', false);
   $services_image_preload_url = Firebelly\Media\get_thumbnail_url(get_post_meta($post->ID,'_cmb2_services_image_id',true),'preload', false);
 
   // Social Impact
-  $social_impact = get_post_meta($post->ID,'_cmb2_social_impact',true);
+  $social_impact = get_post_meta($post->ID, '_cmb2_social_impact', true);
 
   // Instagram
-  $instagram_backup_image_url = Firebelly\Media\get_thumbnail_url(get_post_meta($post->ID,'_cmb2_instagram_backup_image_id',true),'gallery-thumb', false);
-  $instagram_tag = get_post_meta($post->ID,'_cmb2_instagram_tag',true);
+  $instagram_backup_image_url = Firebelly\Media\get_thumbnail_url(get_post_meta($post->ID, '_cmb2_instagram_backup_image_id', true), 'gallery-thumb', false);
+  $instagram_tag = get_post_meta($post->ID, '_cmb2_instagram_tag', true);
 
   // Get a random featured stylist
   $people = get_posts([
@@ -42,8 +42,8 @@
   if($people) {
     $person = $people[0];
     $person_link_url = 'stylists/#'.$person->post_name;
-    $person_image_url = \Firebelly\Media\get_post_thumbnail_url($person->ID,'gallery-thumb',true);
-    $person_image_preload_url = \Firebelly\Media\get_post_thumbnail_url($person->ID,'preload',true);
+    $person_image_url = \Firebelly\Media\get_post_thumbnail_url($person->ID, 'gallery-thumb', false);
+    $person_image_preload_url = \Firebelly\Media\get_post_thumbnail_url($person->ID, 'preload', false);
   }
 
   // Get a random featured lookbook
@@ -62,8 +62,13 @@
   if($lookbooks) {
     $lookbook = $lookbooks[0];
     $lookbook_link_url = get_permalink($lookbook);
-    $lookbook_image_url = \Firebelly\Media\get_post_thumbnail_url($lookbook->ID,'gallery-thumb',true);
-    $lookbook_image_preload_url = \Firebelly\Media\get_post_thumbnail_url($lookbook->ID,'preload',true);
+    $lookbook_image_url = \Firebelly\Media\get_post_thumbnail_url($lookbook->ID, 'gallery-thumb', false);
+    $lookbook_image_preload_url = \Firebelly\Media\get_post_thumbnail_url($lookbook->ID, 'preload', false);
+    // print_r($lookbook);
+    // print_r(get_the_post_thumbnail($lookbook));
+    // echo "\nfoo\n";
+    // print_r($lookbook_image_url); exit;
+
   }
 
 ?>
@@ -119,12 +124,12 @@
         </div>
       </article>
 
-      <article id="lookbook-spotlight" class="box-container left two aspect-ratio-box bigclicky">
+      <article id="behind-the-scenes" class="box-container left two aspect-ratio-box bigclicky">
         <div class="aspect-ratio">
           <div class="box">
-            <div class="thumbnail lazy" data-src="<?= $lookbook_image_url ?>" data-preload-src="<?= $lookbook_image_preload_url ?>"></div>
+            <div id="instafeed" data-tag="<?= $instagram_tag ?>" data-backup-url="<?= $instagram_backup_image_url ?>"></div>
             <h2 class="text-wrap">
-              <a href="<?= $lookbook_link_url ?>" class="text-bottom font-h2">Lookbook <span class="spotlight font-h3">Spotlight</span></a>
+              <a class="font-h3 diamond text-bottom" href="https://www.instagram.com/artandsciencesalon/" target="_blank"><div class="diamond-text">Social</div></a>
             </h2>
           </div>
         </div>
@@ -138,7 +143,7 @@
         <div class="box">
           <div class="thumbnail lazy" data-src="<?= $services_image_url ?>" data-preload-src="<?= $services_image_preload_url ?>"></div>
           <h2 class="text-wrap">
-            <a  href="/services" class="text-bottom font-h2">Services</a>
+            <a href="/services" class="text-bottom font-h2">Services</a>
           </h2>
         </div>
       </div>
@@ -153,13 +158,12 @@
       </div>
     </article>
 
-    <article id="behind-the-scenes" class="box-container right four aspect-ratio-box bigclicky">
+    <article id="lookbook-spotlight" class="box-container right four aspect-ratio-box bigclicky">
       <div class="aspect-ratio">
         <div class="box">
-          <div id="instafeed" data-tag="<?= $instagram_tag ?>" data-backup-url="<?= $instagram_backup_image_url ?>"></div>
+          <div class="thumbnail lazy" data-src="<?= $lookbook_image_url ?>" data-preload-src="<?= $lookbook_image_preload_url ?>"></div>
           <h2 class="text-wrap">
-              <a class="font-h3 diamond text-bottom" href="https://www.instagram.com/artandsciencesalon/" target="_blank"><div class="diamond-text">Behind<br>The Scenes</div></a>
-            </div>
+            <a href="<?= $lookbook_link_url ?>" class="text-bottom font-h2">Lookbook <span class="spotlight font-h3">Spotlight</span></a>
           </h2>
         </div>
       </div>
