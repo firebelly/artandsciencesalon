@@ -147,7 +147,7 @@ $name = get_the_title($post);
 
         <?php if ($lookbook_group) : ?>
           <div class="lookbooks block">
-            <h4>Lookbooks</h4>
+            <h4>Social</h4>
             <ul class="lookbook-list semantic-only-list">
               <?php
                 foreach ($lookbook_group[0] as $lookbook) :
